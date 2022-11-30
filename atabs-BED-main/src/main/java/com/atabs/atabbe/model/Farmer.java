@@ -106,7 +106,7 @@ public class Farmer {
         this.status = status;
     }
 
-    public static Farmer from (FarmerEntity entity){
+    public static Farmer from(FarmerEntity entity) {
         Farmer farmer = new Farmer();
         farmer.Id = entity.getId();
         farmer.firstName = entity.getFirstName();

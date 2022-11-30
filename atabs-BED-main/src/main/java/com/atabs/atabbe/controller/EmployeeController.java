@@ -17,22 +17,22 @@ public class EmployeeController {
 
 
     @GetMapping("/search")
-    public ResponseEntity search(@RequestParam("name") String name){
+    public ResponseEntity search(@RequestParam("name") String name) {
         return new ResponseEntity(employeeService.searchEmployeeByName(name), HttpStatus.OK);
     }
 
     @GetMapping("/getEmployee/{id}")
-    public ResponseEntity getEmployeeByID(@PathVariable(value = "id") Long id){
+    public ResponseEntity getEmployeeByID(@PathVariable(value = "id") Long id) {
         return new ResponseEntity(employeeService.getEmployeeInfo(id), HttpStatus.OK);
     }
 
     @PostMapping("/addEmployee")
-    public ResponseEntity addEmployee(@RequestBody Employee employee, Account account){
+    public ResponseEntity addEmployee(@RequestBody Employee employee, Account account) {
         return new ResponseEntity(employeeService.addEmployee(employee, account), HttpStatus.CREATED);
     }
 
     @PutMapping("/updateEmployee")
-    public ResponseEntity updateEmployee (@RequestBody Employee employee){
+    public ResponseEntity updateEmployee(@RequestBody Employee employee) {
         return new ResponseEntity(employeeService.updateEmployee(employee), HttpStatus.OK);
     }
 }

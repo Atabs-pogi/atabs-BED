@@ -1,4 +1,5 @@
 package com.atabs.atabbe.model;
+
 import com.atabs.atabbe.entity.AccountEntity;
 
 public class Account {
@@ -48,7 +49,7 @@ public class Account {
         this.status = status;
     }
 
-    public static Account from (AccountEntity accountEntity){
+    public static Account from(AccountEntity accountEntity) {
         Account account = new Account();
         account.id = account.getId();
         account.username = accountEntity.getUsername();

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EmployeeDao extends JpaRepository<EmployeeEntity,Long> {
+public interface EmployeeDao extends JpaRepository<EmployeeEntity, Long> {
 
-    @Query(value = "Select * from Employees where emp_id =:emp_id",nativeQuery = true)
+    @Query(value = "Select * from Employees where emp_id =:emp_id", nativeQuery = true)
     EmployeeEntity getEmployeeInfo(Long emp_id);
 
     @Query(value = "Select COUNT(email) from Employees where email =:emp_email", nativeQuery = true)

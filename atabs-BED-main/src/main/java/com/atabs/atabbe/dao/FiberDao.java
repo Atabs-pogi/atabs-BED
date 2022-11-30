@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface FiberDao extends JpaRepository<FiberEntity, Long> {
 
-    @Query(value = "Select * from Fibers where fiber_id =:fiber_id", nativeQuery = true)
+    @Query(value = "Select * from fibers where fiber_id =:fiber_id", nativeQuery = true)
     FiberEntity getFiberInfo(Long fiber_id);
 //
 //    @Query(value = "Select COUNT(name) from Fibers where name =:fiber_nane", nativeQuery = true)

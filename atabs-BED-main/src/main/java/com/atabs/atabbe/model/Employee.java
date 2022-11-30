@@ -1,5 +1,7 @@
 package com.atabs.atabbe.model;
+
 import com.atabs.atabbe.entity.EmployeeEntity;
+
 import java.time.LocalDate;
 
 public class Employee {
@@ -71,6 +73,7 @@ public class Employee {
     public void setAge(int age) {
         this.age = age;
     }
+
     public String getMobileNumber() {
         return mobileNumber;
     }
@@ -95,7 +98,7 @@ public class Employee {
         this.sex = sex;
     }
 
-    public static Employee from (EmployeeEntity entity){
+    public static Employee from(EmployeeEntity entity) {
         Employee employee = new Employee();
         employee.id = entity.getId();
         employee.firstName = entity.getFirstName();

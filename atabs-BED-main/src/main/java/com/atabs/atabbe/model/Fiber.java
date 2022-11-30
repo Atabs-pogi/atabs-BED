@@ -50,7 +50,8 @@ public class Fiber {
     public void setStatus(int status) {
         this.status = status;
     }
-    public static Fiber from (FiberEntity entity){
+
+    public static Fiber from(FiberEntity entity) {
         Fiber fiber = new Fiber();
         fiber.Id = entity.getId();
         fiber.name = entity.getName();

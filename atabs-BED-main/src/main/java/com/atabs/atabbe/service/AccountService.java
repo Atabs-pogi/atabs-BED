@@ -15,25 +15,25 @@ public class AccountService {
     private AccountDao accountDao;
 
     public AccountEntity authenticate(Account account) {
-            String username = account.getUsername();
-            String secret = account.getPassword();
-            int result = accountDao.getUserLogin(username, secret);
-            if (result > 0){
-                System.out.println(result);
-                return getIdByUsername(username);
-            }else {
-                throw new IllegalStateException("Invalid User");
-            }
+        String username = account.getUsername();
+        String secret = account.getPassword();
+        int result = accountDao.getUserLogin(username, secret);
+        if (result > 0) {
+            System.out.println(result);
+            return getIdByUsername(username);
+        } else {
+            throw new IllegalStateException("Invalid User");
+        }
     }
 
-    public AccountEntity getIdByUsername(String username){
+    public AccountEntity getIdByUsername(String username) {
         return accountDao.findByUsername(username);
     }
 
-    public List<Account> searchAccountByUsername(String username){
+    public List<Account> searchAccountByUsername(String username) {
         List<AccountEntity> entityAccounts = (List<AccountEntity>) accountDao.searchAccountByUsername(username);
         List<Account> accounts = new ArrayList<>();
-        for (AccountEntity account: entityAccounts) {
+        for (AccountEntity account : entityAccounts) {
             accounts.add(Account.from(account));
             System.out.println(account.getAccountId());
         }
@@ -44,7 +44,7 @@ public class AccountService {
         return accountDao.getAccountInfo(acc_id);
     }
 
-    public String addAccount(Account account){
+    public String addAccount(Account account) {
         AccountEntity accountEntity = new AccountEntity();
         int accountExist = accountDao.findAccountByUsername(account.getUsername());
         if (accountExist > 0) {
@@ -65,7 +65,7 @@ public class AccountService {
             accountEntity.setRole(account.getRole());
             accountEntity.setStatus(account.getStatus());
             return account;
-        }else {
+        } else {
             throw new IllegalStateException("This ID cannot be found");
         }
     }

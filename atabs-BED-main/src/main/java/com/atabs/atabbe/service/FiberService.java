@@ -17,36 +17,37 @@ public class FiberService {
     @Autowired
     private FiberDao fiberDao;
 
-    public List<Fiber> searchFiberByName(String name){
+    public List<Fiber> searchFiberByName(String name) {
         List<FiberEntity> entityFibers = (List<FiberEntity>) fiberDao.searchFiberByName(name);
         List<Fiber> fibers = new ArrayList<>();
-        for (FiberEntity fiber: entityFibers) {
+        for (FiberEntity fiber : entityFibers) {
             fibers.add(Fiber.from(fiber));
             System.out.println(fiber.getId());
         }
         return fibers;
     }
-    public FiberEntity getFiberInfo(long fiber_id){
+
+    public FiberEntity getFiberInfo(long fiber_id) {
         return fiberDao.getFiberInfo(fiber_id);
     }
 
-    public String addFiber(Fiber fiber){
+    public String addFiber(Fiber fiber) {
 
         FiberEntity fiberEntity = new FiberEntity();
         try {
-            if(!fiber.getName().equals(null) || !fiber.getGrade().equals(null) || !String.valueOf(fiber.getPrice()).equals(null))
+            if (!fiber.getName().equals(null) || !fiber.getGrade().equals(null) || !String.valueOf(fiber.getPrice()).equals(null))
                 fiberEntity.setName(fiber.getName());
-                fiberEntity.setGrade(fiber.getGrade());
-                fiberEntity.setPrice(fiber.getPrice());
-                fiberDao.save(fiberEntity);
-                System.out.println(fiberEntity);
-                return "Successful";
-        }catch(Exception e){
+            fiberEntity.setGrade(fiber.getGrade());
+            fiberEntity.setPrice(fiber.getPrice());
+            fiberDao.save(fiberEntity);
+            System.out.println(fiberEntity);
+            return "Successful";
+        } catch (Exception e) {
             throw new IllegalStateException("Invalid Data");
         }
     }
 
-    public FiberEntity updateFiber(FiberEntity fiber){
+    public FiberEntity updateFiber(FiberEntity fiber) {
         FiberEntity fiberEntity = fiberDao.findById(fiber.getId()).orElse(null);
         if (fiberEntity != null) {
             fiberEntity.setName(fiber.getName());
@@ -54,7 +55,7 @@ public class FiberService {
             fiberEntity.setPrice(fiber.getPrice());
             fiberEntity.setStatus(fiber.getStatus());
             return fiberDao.save(fiberEntity);
-        }else {
+        } else {
             throw new IllegalStateException("This ID cannot be found");
         }
     }

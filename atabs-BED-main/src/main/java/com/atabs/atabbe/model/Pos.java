@@ -1,60 +1,121 @@
 package com.atabs.atabbe.model;
 
+import com.atabs.atabbe.entity.PosEntity;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 public class Pos {
 
-    private String name;
-    private String grade;
-    private double price;
-    private double kilogram;
-    private double total;
-    private int status;
 
-    public String getName() {
-        return name;
+    private List<Pos> bulkTransaction;
+    private long transactionsId;
+    private String plantName;
+    private String plantGrade;
+    private double plantPrice;
+    private double plantKilogram;
+    private double plantTotal;
+    private String farmerId;
+
+    private LocalDateTime transactionDate;
+    private LocalDateTime updateDate;
+
+    public List<Pos> getBulkTransaction() {
+        return bulkTransaction;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBulkTransaction(List<Pos> bulkTransaction) {
+        this.bulkTransaction = bulkTransaction;
     }
 
-    public String getGrade() {
-        return grade;
+    public long getTransactionsId() {
+        return transactionsId;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setTransactionsId(long transactionsId) {
+        this.transactionsId = transactionsId;
     }
 
-    public double getPrice() {
-        return price;
+    public String getPlantName() {
+        return plantName;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPlantName(String plantName) {
+        this.plantName = plantName;
     }
 
-    public double getKilogram() {
-        return kilogram;
+    public String getPlantGrade() {
+        return plantGrade;
     }
 
-    public void setKilogram(double kilogram) {
-        this.kilogram = kilogram;
+    public void setPlantGrade(String plantGrade) {
+        this.plantGrade = plantGrade;
     }
 
-    public double getTotal() {
-        return total;
+    public double getPlantPrice() {
+        return plantPrice;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setPlantPrice(double plantPrice) {
+        this.plantPrice = plantPrice;
     }
 
-    public int getStatus() {
-        return status;
+    public double getPlantKilogram() {
+        return plantKilogram;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setPlantKilogram(double plantKilogram) {
+        this.plantKilogram = plantKilogram;
     }
+
+    public double getPlantTotal() {
+        return plantTotal;
+    }
+
+    public void setPlantTotal(double plantTotal) {
+        this.plantTotal = plantTotal;
+    }
+
+    public String getFarmerId() {
+        return farmerId;
+    }
+
+    public void setFarmerId(String farmerId) {
+        this.farmerId = farmerId;
+    }
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+
+
+    public static Pos from(PosEntity entity) {
+        Pos pos = new Pos();
+        pos.transactionsId = entity.getTransactionsId();
+        pos.plantName = entity.getPlantName();
+        pos.plantGrade = entity.getPlantGrade();
+        pos.plantKilogram = entity.getPlantKilogram();
+        pos.plantPrice = entity.getPlantPrice();
+        pos.plantTotal = entity.getPlantTotal();
+        pos.farmerId = entity.getFarmerId();
+        pos.transactionDate = entity.getTransactionDate();
+        return pos;
+    }
+
+
+
 }
 

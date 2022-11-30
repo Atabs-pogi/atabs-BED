@@ -1,4 +1,5 @@
 package com.atabs.atabbe.entity;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +14,7 @@ public class AccountEntity {
     private String username;
     private String password;
     private String role;
-    @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 1")
+    @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
     private int status = 1;
 
     @OneToOne

@@ -15,8 +15,8 @@ public class FarmerEntity {
     @Column(name = "farmerId")
     private long farmerId;
     private String firstName;
-    private String  middleName;
-    private String  lastName;
+    private String middleName;
+    private String lastName;
     private LocalDate birthday;
     @Transient
     private int age;
@@ -24,7 +24,7 @@ public class FarmerEntity {
     private String email;
     private String address;
     private String sex;
-    @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 1")
+    @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
     private int status = 1;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;

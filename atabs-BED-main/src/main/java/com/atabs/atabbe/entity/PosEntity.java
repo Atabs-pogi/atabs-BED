@@ -1,72 +1,105 @@
 package com.atabs.atabbe.entity;
+
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transactions")
 public class PosEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "pos_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "pos_seq", sequenceName = "pos_sequence", initialValue = 101, allocationSize = 10000000)
     @Column(name = "transactionsId")
-    private Long transactionId;
-    private String name;
-    private String grade;
-    private double price;
-    private double kilogram;
-    private double total;
+    private long transactionsId;
+    private String plantName;
+    private String plantGrade;
+    private String farmerId;
+    private double plantPrice;
+    private double plantKilogram;
+    private double plantTotal;
     private LocalDateTime transactionDate;
+    private LocalDateTime updateDate;
 
     @PrePersist
     protected void onCreate() {
         transactionDate = LocalDateTime.now();
     }
 
-    public Long getId() {
-        return transactionId;
+    @PreUpdate
+    protected void onUpdate() {
+        updateDate = LocalDateTime.now();
     }
 
-    public void setId(Long id) {
-        this.transactionId = transactionId;
+    public long getTransactionsId() {
+        return transactionsId;
     }
 
-    public String getName() {
-        return name;
+    public void setTransactionsId(long transactionsId) {
+        this.transactionsId = transactionsId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPlantName() {
+        return plantName;
     }
 
-    public String getGrade() {
-        return grade;
+    public void setPlantName(String plantName) {
+        this.plantName = plantName;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public String getPlantGrade() {
+        return plantGrade;
     }
 
-    public double getPrice() {
-        return price;
+    public String getFarmerId() {
+        return farmerId;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setFarmerId(String farmerId) {
+        this.farmerId = farmerId;
     }
 
-    public double getKilogram() {
-        return kilogram;
+
+    public void setPlantGrade(String plantGrade) {
+        this.plantGrade = plantGrade;
     }
 
-    public void setKilogram(double kilogram) {
-        this.kilogram = kilogram;
+    public double getPlantPrice() {
+        return plantPrice;
     }
 
-    public double getTotal() {
-        return total;
+    public void setPlantPrice(double plantPrice) {
+        this.plantPrice = plantPrice;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public double getPlantKilogram() {
+        return plantKilogram;
+    }
+
+    public void setPlantKilogram(double plantKilogram) {
+        this.plantKilogram = plantKilogram;
+    }
+
+    public double getPlantTotal() {
+        return plantTotal;
+    }
+
+    public void setPlantTotal(double plantTotal) {
+        this.plantTotal = plantTotal;
+    }
+
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
     }
 }

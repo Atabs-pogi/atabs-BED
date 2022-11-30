@@ -17,10 +17,10 @@ public class EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
 
-    public List<Employee> searchEmployeeByName(String name){
+    public List<Employee> searchEmployeeByName(String name) {
         List<EmployeeEntity> entityEmployees = (List<EmployeeEntity>) employeeDao.searchEmployeeByName(name);
         List<Employee> employees = new ArrayList<>();
-        for (EmployeeEntity employee: entityEmployees) {
+        for (EmployeeEntity employee : entityEmployees) {
             employees.add(Employee.from(employee));
         }
         return employees;
@@ -30,7 +30,7 @@ public class EmployeeService {
         return employeeDao.getEmployeeInfo(emp_id);
     }
 
-    public String addEmployee(Employee employee, Account account){
+    public String addEmployee(Employee employee, Account account) {
         EmployeeEntity employeeEntity = new EmployeeEntity();
         int emailExist = employeeDao.findEmployeeByEmail(employee.getEmail());
         if (emailExist > 0) {
@@ -44,7 +44,7 @@ public class EmployeeService {
             employeeEntity.setMobileNumber(employee.getMobileNumber());
             employeeEntity.setEmail(employee.getEmail());
             if (employee.getAddress() != null)
-            employeeEntity.setAddress(employee.getAddress().toString());
+                employeeEntity.setAddress(employee.getAddress().toString());
             employeeEntity.setSex(employee.getSex());
             employeeDao.save(employeeEntity);
             return "Successful";
@@ -62,11 +62,11 @@ public class EmployeeService {
             employeeEntity.setMobileNumber(employee.getMobileNumber());
             employeeEntity.setEmail(employee.getEmail());
             if (employee.getAddress() != null)
-            employeeEntity.setAddress(employee.getAddress().toString());
+                employeeEntity.setAddress(employee.getAddress().toString());
             employeeEntity.setSex(employee.getSex());
             employeeDao.save(employeeEntity);
             return employee;
-        }else {
+        } else {
             throw new IllegalStateException("This ID cannot be found");
         }
     }

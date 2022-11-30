@@ -25,7 +25,7 @@ public class AccountController {
     }
 
     @GetMapping("/getAccount/{id}")
-    public ResponseEntity getAccountByID(@PathVariable(value = "id") Long id){
+    public ResponseEntity getAccountByID(@PathVariable(value = "id") Long id) {
         return new ResponseEntity(accountService.getAccountInfo(id), HttpStatus.OK);
     }
 
@@ -39,5 +39,3 @@ public class AccountController {
         return new ResponseEntity(accountService.updateAccount(account), HttpStatus.OK);
     }
 }
-
-//pogi vince

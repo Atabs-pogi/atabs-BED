@@ -13,8 +13,8 @@ public class EmployeeEntity {
     @Column(name = "empId")
     private long empId;
     private String firstName;
-    private String  middleName;
-    private String  lastName;
+    private String middleName;
+    private String lastName;
     private LocalDate birthday;
     @Transient
     private int age;

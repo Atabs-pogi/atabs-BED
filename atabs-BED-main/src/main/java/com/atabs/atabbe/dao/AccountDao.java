@@ -9,15 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AccountDao extends JpaRepository<AccountEntity,Long> {
+public interface AccountDao extends JpaRepository<AccountEntity, Long> {
 
-    @Query(value = "SELECT * FROM Accounts WHERE username =:username",nativeQuery = true)
+    @Query(value = "SELECT * FROM Accounts WHERE username =:username", nativeQuery = true)
     AccountEntity findByUsername(String username);
 
-    @Query(value = "SELECT COUNT(1) FROM Accounts WHERE username =:username AND password =:secret",nativeQuery = true)
+    @Query(value = "SELECT COUNT(1) FROM Accounts WHERE binary username =:username AND binary password =:secret", nativeQuery = true)
     int getUserLogin(String username, String secret);
 
-    @Query(value = "SELECT * FROM Accounts WHERE account_id =:acc_id",nativeQuery = true)
+    @Query(value = "SELECT * FROM Accounts WHERE account_id =:acc_id", nativeQuery = true)
     AccountEntity getAccountInfo(Long acc_id);
 
     @Query(value = "SELECT COUNT(username) FROM Accounts WHERE username =:username", nativeQuery = true)
