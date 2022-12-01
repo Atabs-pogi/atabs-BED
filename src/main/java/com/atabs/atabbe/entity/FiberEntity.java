@@ -16,21 +16,19 @@ public class FiberEntity {
     private String name;
     private String grade;
     private double price;
-    private String datePrice;
     @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 1")
     private int status = 1;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private LocalDateTime dateCreated;
+    private LocalDateTime lastUpdated;
 
     @PrePersist
     protected void onCreate() {
-        createDate = LocalDateTime.now();
-        datePrice = "PHP" + this.price + "/" + LocalDate.now();
+        dateCreated = LocalDateTime.now();
     }
 
     @PreUpdate
     protected void onUpdate(){
-        updateDate = LocalDateTime.now();
+        lastUpdated = LocalDateTime.now();
     }
 
     public long getId() {
@@ -65,14 +63,6 @@ public class FiberEntity {
         this.price = price;
     }
 
-    public String getDatePrice() {
-        return datePrice;
-    }
-
-    public void setDatePrice(String datePrice) {
-        this.datePrice = datePrice;
-    }
-
     public int getStatus() {
         return status;
     }
@@ -81,19 +71,19 @@ public class FiberEntity {
         this.status = status;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
     }
 
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

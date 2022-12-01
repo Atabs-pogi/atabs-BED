@@ -1,6 +1,5 @@
 package com.atabs.atabbe.dao;
 
-import com.atabs.atabbe.entity.FarmerEntity;
 import com.atabs.atabbe.entity.FiberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,13 +10,13 @@ import java.util.List;
 @Repository
 public interface FiberDao extends JpaRepository<FiberEntity, Long> {
 
-    @Query(value = "Select * from Fibers where fiber_id =:fiber_id", nativeQuery = true)
+    @Query(value = "SELECT * FROM fibers WHERE fiber_id =:fiber_id", nativeQuery = true)
     FiberEntity getFiberInfo(Long fiber_id);
-//
-//    @Query(value = "Select COUNT(name) from Fibers where name =:fiber_nane", nativeQuery = true)
-//    int findByName(String fiber_name);
-
-    @Query(value = "SELECT * FROM farmers WHERE first_name like %:match% OR middle_name like %:match% OR last_name like %:match%", nativeQuery = true)
+    @Query(value = "SELECT COUNT(1) FROM fibers WHERE name=:name AND grade=:grade", nativeQuery = true)
+    int findDuplicate(String name, String grade);
+    @Query(value = "SELECT price FROM fibers WHERE fiber_id =:id", nativeQuery = true)
+    double findOldPrice(long id);
+    @Query(value = "SELECT * FROM fibers WHERE name like %:match% OR price like %:match% OR grade like %:match%", nativeQuery = true)
     List<FiberEntity> searchFiberByName(String match);
 
 }
