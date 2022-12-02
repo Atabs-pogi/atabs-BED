@@ -38,4 +38,5 @@ public class AccountController {
     public ResponseEntity updateAccount (@RequestBody Account account){
         return new ResponseEntity(accountService.updateAccount(account), HttpStatus.OK);
     }
+
 }

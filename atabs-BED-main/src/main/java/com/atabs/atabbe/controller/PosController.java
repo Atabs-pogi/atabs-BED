@@ -47,5 +47,10 @@ public class PosController {
         return new ResponseEntity(posService.save(transactionEntity), HttpStatus.CREATED);
     }
 
+    @GetMapping("/save")
+    public ResponseEntity getAllBulk(@RequestBody TransactionEntity transactionEntity) {
+        return new ResponseEntity(posService.save(transactionEntity), HttpStatus.CREATED);
+    }
+
 
 }
