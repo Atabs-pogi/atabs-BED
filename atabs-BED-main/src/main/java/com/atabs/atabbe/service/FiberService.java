@@ -1,9 +1,7 @@
 package com.atabs.atabbe.service;
 
 import com.atabs.atabbe.dao.FiberDao;
-import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.entity.FiberEntity;
-import com.atabs.atabbe.model.Employee;
 import com.atabs.atabbe.model.Fiber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,13 +29,6 @@ public class FiberService {
         return fiberDao.getFiberInfo(fiber_id);
     }
 
-    public FiberEntity getFiberName(long fiber_id) {
-        return fiberDao.getFiberName(fiber_id);
-    }
-
-    public FiberEntity getFiberGrade(long fiber_id) {
-        return fiberDao.getFiberGrade(fiber_id);
-    }
 
     public String addFiber(Fiber fiber) {
 
@@ -66,4 +57,14 @@ public class FiberService {
             throw new IllegalStateException("This ID cannot be found");
         }
     }
+
+    public String getFiberGrade(String fName){
+        return fiberDao.getFiberGrade(fName);
+    }
+
+    public List<FiberEntity> getFibers(){
+        return fiberDao.findAll();
+    }
+
+
 }

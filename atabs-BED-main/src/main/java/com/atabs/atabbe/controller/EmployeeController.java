@@ -17,22 +17,22 @@ public class EmployeeController {
 
 
     @GetMapping("/search")
-    public ResponseEntity<java.util.List<Employee>> search(@RequestParam("name") String name) {
-        return new ResponseEntity<>(employeeService.searchEmployeeByName(name), HttpStatus.OK);
+    public ResponseEntity search(@RequestParam("name") String name) {
+        return new ResponseEntity(employeeService.searchEmployeeByName(name), HttpStatus.OK);
     }
 
     @GetMapping("/getEmployee/{id}")
-    public ResponseEntity<com.atabs.atabbe.entity.EmployeeEntity> getEmployeeByID(@PathVariable(value = "id") Long id) {
-        return new ResponseEntity<>(employeeService.getEmployeeInfo(id), HttpStatus.OK);
+    public ResponseEntity getEmployeeByID(@PathVariable(value = "id") Long id) {
+        return new ResponseEntity(employeeService.getEmployeeInfo(id), HttpStatus.OK);
     }
 
     @PostMapping("/addEmployee")
-    public ResponseEntity<String> addEmployee(@RequestBody Employee employee, Account account) {
-        return new ResponseEntity<>(employeeService.addEmployee(employee, account), HttpStatus.CREATED);
+    public ResponseEntity addEmployee(@RequestBody Employee employee, Account account) {
+        return new ResponseEntity(employeeService.addEmployee(employee, account), HttpStatus.CREATED);
     }
 
     @PutMapping("/updateEmployee")
-    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
-        return new ResponseEntity<>(employeeService.updateEmployee(employee), HttpStatus.OK);
+    public ResponseEntity updateEmployee(@RequestBody Employee employee) {
+        return new ResponseEntity(employeeService.updateEmployee(employee), HttpStatus.OK);
     }
 }

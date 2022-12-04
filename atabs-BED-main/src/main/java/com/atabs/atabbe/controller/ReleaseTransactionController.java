@@ -16,12 +16,12 @@ public class ReleaseTransactionController {
     private ReleaseTransactionService releaseTransactionService;
 
     @PostMapping("/addReleaseTransaction")
-    public ResponseEntity<String> addReleaseTransaction(@RequestBody ReleaseTransaction releaseTransaction) {
-        return new ResponseEntity<>(releaseTransactionService.addReleaseTransaction(releaseTransaction), HttpStatus.OK);
+    public ResponseEntity addReleaseTransaction(@RequestBody ReleaseTransaction releaseTransaction) {
+        return new ResponseEntity(releaseTransactionService.addReleaseTransaction(releaseTransaction), HttpStatus.OK);
     }
 
     @GetMapping("/getReleaseTransaction/{id}")
-    public ResponseEntity<com.atabs.atabbe.entity.ReleaseTransactionEntity> getAccountByID(@PathVariable(value = "id") Long id) {
-        return new ResponseEntity<>(releaseTransactionService.getReleaseInfo(id), HttpStatus.OK);
+    public ResponseEntity getAccountByID(@PathVariable(value = "id") Long id) {
+        return new ResponseEntity(releaseTransactionService.getReleaseInfo(id), HttpStatus.OK);
     }
 }

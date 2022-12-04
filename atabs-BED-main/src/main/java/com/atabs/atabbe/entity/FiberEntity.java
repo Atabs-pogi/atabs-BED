@@ -10,7 +10,7 @@ public class FiberEntity {
 
     @Id
     @GeneratedValue(generator = "fiber_seq", strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "fiber_seq", sequenceName = "fiber_sequence", initialValue = 101, allocationSize = 10000000)
+    @SequenceGenerator(name = "fiber_seq", sequenceName = "fiber_sequence", initialValue = 101,allocationSize = 50)
     @Column(name = "fiberId")
     private long fiberId;
     private String name;

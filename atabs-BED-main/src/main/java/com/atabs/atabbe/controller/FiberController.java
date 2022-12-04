@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("fiber")
 public class FiberController {
@@ -35,13 +37,14 @@ public class FiberController {
         return new ResponseEntity<>(fiberService.updateFiber(fiber), HttpStatus.OK);
     }
 
-    @GetMapping("/getFiberName/{id}")
-    public ResponseEntity<FiberEntity> getFiberByName(@PathVariable(value = "id") Long id) {
-        return new ResponseEntity<>(fiberService.getFiberName(id), HttpStatus.OK);
+    @GetMapping("/getFiberGrade/{name}")
+    public ResponseEntity<String> getFiberGrade(@PathVariable(value = "name") String name){
+        return new ResponseEntity<>(fiberService.getFiberGrade(name),HttpStatus.OK);
     }
 
-    @GetMapping("/getFiberGrade/{id}")
-    public ResponseEntity<FiberEntity> getFiberByGrade(@PathVariable(value = "id") Long id) {
-        return new ResponseEntity<>(fiberService.getFiberGrade(id), HttpStatus.OK);
+    @GetMapping("getAllFibers")
+    public List<FiberEntity> findAllFibers(){
+        return fiberService.getFibers();
     }
+
 }

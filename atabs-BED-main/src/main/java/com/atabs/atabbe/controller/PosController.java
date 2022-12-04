@@ -1,6 +1,7 @@
 package com.atabs.atabbe.controller;
 
 
+import com.atabs.atabbe.dao.TransactionDao;
 import com.atabs.atabbe.entity.TransactionEntity;
 import com.atabs.atabbe.model.Pos;
 import com.atabs.atabbe.service.PosService;
@@ -21,34 +22,34 @@ public class PosController {
 
 
     @PostMapping("/addPos")
-    public ResponseEntity<Object> addPosBulk(@RequestBody Pos pos) {
-        return new ResponseEntity<>(posService.bulkTransactionInsert(pos), HttpStatus.CREATED);
+    public ResponseEntity addPosBulk(@RequestBody Pos pos) {
+        return new ResponseEntity(posService.bulkTransactionInsert(pos), HttpStatus.CREATED);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<java.util.List<Pos>> search(@RequestParam("name") String name) {
-        return new ResponseEntity<>(posService.searchPosByName(name), HttpStatus.OK);
+    public ResponseEntity search(@RequestParam("name") String name) {
+        return new ResponseEntity(posService.searchPosByName(name), HttpStatus.OK);
     }
 
     @PutMapping("/updatePos")
-    public ResponseEntity<Pos> update(@RequestBody Pos pos) {
-        return new ResponseEntity<>(posService.updatePos(pos), HttpStatus.OK);
+    public ResponseEntity update(@RequestBody Pos pos) {
+        return new ResponseEntity(posService.updatePos(pos), HttpStatus.OK);
     }
 
     @GetMapping("/getPos/{id}")
-    public ResponseEntity<com.atabs.atabbe.entity.PosEntity> getAccountByID(@PathVariable(value = "id") Long id) {
-        return new ResponseEntity<>(posService.getPosInfo(id), HttpStatus.OK);
+    public ResponseEntity getAccountByID(@PathVariable(value = "id") Long id) {
+        return new ResponseEntity(posService.getPosInfo(id), HttpStatus.OK);
     }
 
 
     @PostMapping("/save")
-    public ResponseEntity<String> addPosBulk(@RequestBody TransactionEntity transactionEntity) {
-        return new ResponseEntity<>(posService.save(transactionEntity), HttpStatus.CREATED);
+    public ResponseEntity addPosBulk(@RequestBody TransactionEntity transactionEntity) {
+        return new ResponseEntity(posService.save(transactionEntity), HttpStatus.CREATED);
     }
 
     @GetMapping("/save")
-    public ResponseEntity<String> getAllBulk(@RequestBody TransactionEntity transactionEntity) {
-        return new ResponseEntity<>(posService.save(transactionEntity), HttpStatus.CREATED);
+    public ResponseEntity getAllBulk(@RequestBody TransactionEntity transactionEntity) {
+        return new ResponseEntity(posService.save(transactionEntity), HttpStatus.CREATED);
     }
 
 
