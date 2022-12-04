@@ -31,12 +31,19 @@ public class FiberService {
         return fiberDao.getFiberInfo(fiber_id);
     }
 
+    public FiberEntity getFiberName(long fiber_id) {
+        return fiberDao.getFiberName(fiber_id);
+    }
+
+    public FiberEntity getFiberGrade(long fiber_id) {
+        return fiberDao.getFiberGrade(fiber_id);
+    }
+
     public String addFiber(Fiber fiber) {
 
         FiberEntity fiberEntity = new FiberEntity();
         try {
-            if (!fiber.getName().equals(null) || !fiber.getGrade().equals(null) || !String.valueOf(fiber.getPrice()).equals(null))
-                fiberEntity.setName(fiber.getName());
+            fiberEntity.setName(fiber.getName());
             fiberEntity.setGrade(fiber.getGrade());
             fiberEntity.setPrice(fiber.getPrice());
             fiberDao.save(fiberEntity);

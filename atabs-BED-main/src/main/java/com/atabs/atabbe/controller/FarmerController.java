@@ -17,23 +17,23 @@ public class FarmerController {
     private FarmerService farmerService;
 
     @GetMapping("/search")
-    public ResponseEntity search(@RequestParam("name") String name) {
-        return new ResponseEntity(farmerService.searchFarmerByName(name), HttpStatus.OK);
+    public ResponseEntity<java.util.List<Farmer>> search(@RequestParam("name") String name) {
+        return new ResponseEntity<>(farmerService.searchFarmerByName(name), HttpStatus.OK);
     }
 
     @GetMapping("/getFarmer/{id}")
-    public ResponseEntity getFarmerByID(@PathVariable(value = "id") Long id) {
-        return new ResponseEntity(farmerService.getFarmerInfo(id), HttpStatus.OK);
+    public ResponseEntity<FarmerEntity> getFarmerByID(@PathVariable(value = "id") Long id) {
+        return new ResponseEntity<>(farmerService.getFarmerInfo(id), HttpStatus.OK);
     }
 
     @PostMapping("/addFarmer")
-    public ResponseEntity addFarmer(@RequestBody Farmer farmer) {
-        return new ResponseEntity(farmerService.addFarmer(farmer), HttpStatus.CREATED);
+    public ResponseEntity<String> addFarmer(@RequestBody Farmer farmer) {
+        return new ResponseEntity<>(farmerService.addFarmer(farmer), HttpStatus.CREATED);
     }
 
     @PutMapping("/updateFarmer")
-    public ResponseEntity updateFarmer(@RequestBody Farmer farmer) {
-        return new ResponseEntity(farmerService.updateFarmer(farmer), HttpStatus.OK);
+    public ResponseEntity<Farmer> updateFarmer(@RequestBody Farmer farmer) {
+        return new ResponseEntity<>(farmerService.updateFarmer(farmer), HttpStatus.OK);
     }
 
 //    @PutMapping("/updateFarmer/{id}")

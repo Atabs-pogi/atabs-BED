@@ -16,18 +16,18 @@ public class CashierController {
     private CashierService cashierService;
 
     @PostMapping("/addCashier")
-    public ResponseEntity addCashier(@RequestBody Cashier cashier) {
-        return new ResponseEntity(cashierService.addCashier(cashier), HttpStatus.OK);
+    public ResponseEntity<String> addCashier(@RequestBody Cashier cashier) {
+        return new ResponseEntity<>(cashierService.addCashier(cashier), HttpStatus.OK);
     }
 
     @GetMapping("/search")
-    public ResponseEntity search(@RequestParam("name") String name) {
-        return new ResponseEntity(cashierService.searchCashierByName(name), HttpStatus.OK);
+    public ResponseEntity<java.util.List<Cashier>> search(@RequestParam("name") String name) {
+        return new ResponseEntity<>(cashierService.searchCashierByName(name), HttpStatus.OK);
     }
 
     @GetMapping("/getCashier/{id}")
-    public ResponseEntity getAccountByID(@PathVariable(value = "id") Long id) {
-        return new ResponseEntity(cashierService.getCashierInfo(id), HttpStatus.OK);
+    public ResponseEntity<CashierEntity> getAccountByID(@PathVariable(value = "id") Long id) {
+        return new ResponseEntity<>(cashierService.getCashierInfo(id), HttpStatus.OK);
     }
 
 }

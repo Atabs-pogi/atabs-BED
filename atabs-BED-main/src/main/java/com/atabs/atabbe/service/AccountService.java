@@ -4,6 +4,7 @@ import com.atabs.atabbe.dao.AccountDao;
 import com.atabs.atabbe.entity.AccountEntity;
 import com.atabs.atabbe.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class AccountService {
         return accountDao.getAccountInfo(acc_id);
     }
 
-    public String addAccount(Account account) {
+    public String addAccount(Account account, HttpStatus created) {
         AccountEntity accountEntity = new AccountEntity();
         int accountExist = accountDao.findAccountByUsername(account.getUsername());
         if (accountExist > 0) {

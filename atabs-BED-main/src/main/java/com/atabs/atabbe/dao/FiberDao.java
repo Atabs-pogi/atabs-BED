@@ -20,4 +20,11 @@ public interface FiberDao extends JpaRepository<FiberEntity, Long> {
     @Query(value = "SELECT * FROM farmers WHERE first_name like %:match% OR middle_name like %:match% OR last_name like %:match%", nativeQuery = true)
     List<FiberEntity> searchFiberByName(String match);
 
+    @Query(value = "SELECT name FROM fibers where fiber_id=:fiber id", nativeQuery = true)
+    FiberEntity getFiberName(Long fiber_id);
+
+    @Query(value = "SELECT grade FROM fibers where fiber_id=:fiber id", nativeQuery = true)
+    FiberEntity getFiberGrade(Long fiber_id);
+
+
 }

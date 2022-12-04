@@ -1,7 +1,6 @@
 package com.atabs.atabbe.controller;
 
 
-import com.atabs.atabbe.dao.CreditDao;
 import com.atabs.atabbe.model.Credit;
 import com.atabs.atabbe.service.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +17,12 @@ public class CreditController {
     private CreditService creditService;
 
     @PostMapping("/addBal")
-    public ResponseEntity addBal(@RequestBody Credit credit) {
-        return new ResponseEntity(creditService.addBal(credit), HttpStatus.OK);
+    public ResponseEntity<String> addBal(@RequestBody Credit credit) {
+        return new ResponseEntity<>(creditService.addBal(credit), HttpStatus.OK);
     }
 
     @GetMapping("/search")
-    public ResponseEntity search(@RequestParam("name") String name) {
-        return new ResponseEntity(creditService.searchCreditByName(name), HttpStatus.OK);
+    public ResponseEntity<java.util.List<Credit>> search(@RequestParam("name") String name) {
+        return new ResponseEntity<>(creditService.searchCreditByName(name), HttpStatus.OK);
     }
 }
