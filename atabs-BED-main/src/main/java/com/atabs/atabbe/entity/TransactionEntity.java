@@ -20,8 +20,6 @@ public class TransactionEntity {
     private double plantTotal;
 
 
-
-//    @OneToMany(mappedBy="transactionEntity")
     @OneToMany(targetEntity = TransactionItemEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "transactionsId" ,referencedColumnName ="id" )
     private List<TransactionItemEntity> items;
