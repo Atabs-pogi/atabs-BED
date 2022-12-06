@@ -1,7 +1,5 @@
 package com.atabs.atabbe.entity;
-
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "accounts")
@@ -10,43 +8,20 @@ public class AccountEntity {
     @Id
     @GeneratedValue(generator = "account_seq", strategy = GenerationType.IDENTITY)
     @SequenceGenerator(name = "account_seq", sequenceName = "account_sequence", initialValue = 2022101, allocationSize = 10000000)
-    @Column(name = "accountId")
-    private long accountId;
+    @Column(name = "account_id")
+    private long id;
     private String username;
     private String password;
     private String role;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "account_images",
-            joinColumns = {
-                    @JoinColumn(name = "account_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "image_id")
-            })
-    private Set<ImageModelEntity> accountImages;
-
-    public Set<ImageModelEntity> getAccountImages() {
-        return accountImages;
-    }
-
-    public void setAccountImages(Set<ImageModelEntity> accountImages) {
-        this.accountImages = accountImages;
-    }
-
-    @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
+    @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 1")
     private int status = 1;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private EmployeeEntity employeeEntity;
-
-    public long getAccountId() {
-        return accountId;
+    public long getId() {
+        return id;
     }
 
-    public void setAccountId(long accountId) {
-        this.accountId = accountId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -79,13 +54,5 @@ public class AccountEntity {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public EmployeeEntity getEmployeeEntity() {
-        return employeeEntity;
-    }
-
-    public void setEmployeeEntity(EmployeeEntity employeeEntity) {
-        this.employeeEntity = employeeEntity;
     }
 }

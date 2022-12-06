@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface FarmerDao extends JpaRepository<FarmerEntity, Long> {
 
-    @Query(value = "Select * from farmers where farmer_id =:farm_id", nativeQuery = true)
+    @Query(value = "Select * from farmers where id =:farm_id", nativeQuery = true)
     FarmerEntity getFarmerInfo(Long farm_id);
 
     @Query(value = "Select COUNT(email) from farmers where email =:farm_email", nativeQuery = true)

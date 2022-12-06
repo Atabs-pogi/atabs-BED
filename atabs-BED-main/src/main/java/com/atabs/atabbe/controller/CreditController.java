@@ -1,7 +1,6 @@
 package com.atabs.atabbe.controller;
 
 
-import com.atabs.atabbe.dao.CreditDao;
 import com.atabs.atabbe.model.Credit;
 import com.atabs.atabbe.service.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,6 +4,7 @@ import com.atabs.atabbe.dao.PosDao;
 import com.atabs.atabbe.dao.TransactionDao;
 import com.atabs.atabbe.entity.PosEntity;
 import com.atabs.atabbe.entity.TransactionEntity;
+import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,11 @@ public class PosService {
         return pos;
     }
 
+    public ArrayList<TransactionEntity> getTransactionList(){
+        return (ArrayList<TransactionEntity>) transactionDao.findAll();
+    }
+
+
     public PosEntity getPosInfo(long transactions_id) {
         return posDao.getPosInfo(transactions_id);
     }
@@ -65,7 +71,6 @@ public class PosService {
             posEntity.setPlantKilogram(each.getPlantKilogram());
             posEntity.setPlantPrice(each.getPlantPrice());
             posEntity.setPlantTotal(each.getPlantTotal());
-
             bulkTransaction.add(posEntity);
         });
         posDao.saveAll(bulkTransaction);
@@ -73,14 +78,12 @@ public class PosService {
     }
 
 
-    public String save(TransactionEntity transactionEntity) {
-        try{
-            transactionDao.save(transactionEntity);
-            return "Success";
-        }catch (Exception e){
-            return "Exception "  + e.getMessage();
-        }
-
-
+    public String save(TransactionEntity transactionEntity) throws Exception{
+            int farmerIDExist = posDao.findFarmerId(transactionEntity.getFarmerId());
+            if(farmerIDExist > 0){
+                transactionDao.save(transactionEntity);
+                return "Success";
+            }
+            throw new NotFoundException("Farmer ID does not exist");
     }
 }

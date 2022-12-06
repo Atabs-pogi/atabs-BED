@@ -1,9 +1,5 @@
 package com.atabs.atabbe.model;
-
 import com.atabs.atabbe.entity.AccountEntity;
-import com.atabs.atabbe.entity.ImageModelEntity;
-
-import java.util.Set;
 
 public class Account {
     private long id;
@@ -11,15 +7,6 @@ public class Account {
     private String password;
     private String role;
     private int status;
-    private Set<ImageModelEntity> accountImages;
-
-    public Set<ImageModelEntity> getAccountImages() {
-        return accountImages;
-    }
-
-    public void setAccountImages(Set<ImageModelEntity> accountImages) {
-        this.accountImages = accountImages;
-    }
 
     public long getId() {
         return id;
@@ -61,11 +48,10 @@ public class Account {
         this.status = status;
     }
 
-    public static Account from(AccountEntity accountEntity) {
+    public static Account from (AccountEntity accountEntity){
         Account account = new Account();
-        account.id = account.getId();
+        account.id = accountEntity.getId();
         account.username = accountEntity.getUsername();
-        account.password = accountEntity.getPassword();
         account.role = accountEntity.getRole();
         account.status = accountEntity.getStatus();
         return account;

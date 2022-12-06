@@ -6,6 +6,7 @@ import com.atabs.atabbe.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,25 +19,23 @@ public class AccountService {
     public AccountEntity authenticate(Account account) {
         String username = account.getUsername();
         String secret = account.getPassword();
-        int result = accountDao.getUserLogin(username, secret);
-        if (result > 0) {
-            System.out.println(result);
-            return getIdByUsername(username);
-        } else {
-            throw new IllegalStateException("Invalid User");
+        AccountEntity result = accountDao.getUserLogin(username, secret);
+        if (result != null){
+            return result;
+        }else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST , "Invalid User");
         }
     }
 
-    public AccountEntity getIdByUsername(String username) {
+    public AccountEntity getIdByUsername(String username){
         return accountDao.findByUsername(username);
     }
 
-    public List<Account> searchAccountByUsername(String username) {
+    public List<Account> searchAccountByUsername(String username){
         List<AccountEntity> entityAccounts = (List<AccountEntity>) accountDao.searchAccountByUsername(username);
         List<Account> accounts = new ArrayList<>();
-        for (AccountEntity account : entityAccounts) {
+        for (AccountEntity account: entityAccounts) {
             accounts.add(Account.from(account));
-            System.out.println(account.getAccountId());
         }
         return accounts;
     }
@@ -45,7 +44,7 @@ public class AccountService {
         return accountDao.getAccountInfo(acc_id);
     }
 
-    public String addAccount(Account account, HttpStatus created) {
+    public String addAccount(Account account){
         AccountEntity accountEntity = new AccountEntity();
         int accountExist = accountDao.findAccountByUsername(account.getUsername());
         if (accountExist > 0) {
@@ -61,12 +60,16 @@ public class AccountService {
 
     public Account updateAccount(Account account) {
         AccountEntity accountEntity = accountDao.findById(account.getId()).orElse(null);
+        System.out.println(account.getRole());
         if (accountEntity != null) {
+            accountEntity.setId(account.getId());
+            accountEntity.setUsername(account.getUsername());
             accountEntity.setPassword(account.getPassword());
             accountEntity.setRole(account.getRole());
             accountEntity.setStatus(account.getStatus());
+            accountDao.save(accountEntity);
             return account;
-        } else {
+        }else {
             throw new IllegalStateException("This ID cannot be found");
         }
     }

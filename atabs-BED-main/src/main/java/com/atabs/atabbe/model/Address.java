@@ -6,7 +6,6 @@ public class Address {
     private String barangay;
     private String province;
     private String city;
-
     public String getHouseNo() {
         return houseNo;
     }
@@ -47,7 +46,7 @@ public class Address {
         this.city = city;
     }
 
-    public String toString() {
+    public String toString(){
         String[] wholeAddress = {
                 this.houseNo,
                 this.unit,
@@ -55,10 +54,10 @@ public class Address {
                 this.province,
                 this.city
         };
-        return String.join("/", wholeAddress);
+            return  String.join("/", wholeAddress);
     }
 
-    public static Address from(String addressStr) {
+    public static Address from (String addressStr){
         Address address = new Address();
         if (addressStr != null) {
             String[] parts = addressStr.split("/");
@@ -68,9 +67,9 @@ public class Address {
                 address.unit = parts[1];
             if (parts.length > 2)
                 if (parts.length > 4)
-                    address.barangay = parts[2];
+                address.barangay = parts[2];
             if (parts.length > 3)
-                address.province = parts[3];
+            address.province = parts[3];
             address.city = parts[4];
         }
         return address;

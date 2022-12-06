@@ -11,6 +11,15 @@ public class Fiber {
     private String datePrice;
     private int status;
 
+    public long getId() {
+        return Id;
+    }
+
+    public void setId(long id) {
+        Id = id;
+    }
+
+
     public String getName() {
         return name;
     }
@@ -50,14 +59,13 @@ public class Fiber {
     public void setStatus(int status) {
         this.status = status;
     }
-
-    public static Fiber from(FiberEntity entity) {
+    public static Fiber from (FiberEntity entity){
         Fiber fiber = new Fiber();
-//        fiber.Id = entity.getId();
-//        fiber.name = entity.getName();
-//        fiber.grade = entity.getGrade();
-//        fiber.price = entity.getPrice();
-//        fiber.datePrice = entity.getDatePrice();
+        fiber.Id = entity.getId();
+        fiber.name = entity.getName();
+        fiber.grade = entity.getGrade();
+        fiber.price = entity.getPrice();
+        fiber.datePrice = entity.getDatePrice();
         fiber.status = entity.getStatus();
         return fiber;
     }

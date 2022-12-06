@@ -1,8 +1,7 @@
 package com.atabs.atabbe.controller;
 
-
-import com.atabs.atabbe.dao.TransactionDao;
 import com.atabs.atabbe.entity.TransactionEntity;
+import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.Pos;
 import com.atabs.atabbe.service.PosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,6 @@ public class PosController {
 
     @Autowired
     private PosService posService;
-
-
 
 
     @PostMapping("/addPos")
@@ -41,16 +38,21 @@ public class PosController {
         return new ResponseEntity(posService.getPosInfo(id), HttpStatus.OK);
     }
 
-
     @PostMapping("/save")
     public ResponseEntity addPosBulk(@RequestBody TransactionEntity transactionEntity) {
-        return new ResponseEntity(posService.save(transactionEntity), HttpStatus.CREATED);
+        try{
+            posService.save(transactionEntity);
+        } catch(NotFoundException n) {
+            return new ResponseEntity(n.getMessage(), HttpStatus.NOT_FOUND);
+        } catch(Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity("success", HttpStatus.CREATED);
     }
 
-    @GetMapping("/save")
-    public ResponseEntity getAllBulk(@RequestBody TransactionEntity transactionEntity) {
-        return new ResponseEntity(posService.save(transactionEntity), HttpStatus.CREATED);
+    @GetMapping("/view")
+    public ResponseEntity getTransactionList() {
+        return new ResponseEntity(posService.getTransactionList(), HttpStatus.CREATED);
     }
-
 
 }
