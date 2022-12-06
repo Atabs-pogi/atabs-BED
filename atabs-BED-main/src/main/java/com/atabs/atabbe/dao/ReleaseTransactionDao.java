@@ -1,5 +1,6 @@
 package com.atabs.atabbe.dao;
 
+import com.atabs.atabbe.entity.PosEntity;
 import com.atabs.atabbe.entity.ReleaseTransactionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

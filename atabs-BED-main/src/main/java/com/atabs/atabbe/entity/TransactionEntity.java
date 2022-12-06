@@ -13,15 +13,13 @@ public class TransactionEntity {
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private long transactionsId;
 
     private String farmerId;
 
     private double plantTotal;
 
 
-
-//    @OneToMany(mappedBy="transactionEntity")
     @OneToMany(targetEntity = TransactionItemEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "transactionsId" ,referencedColumnName ="id" )
     private List<TransactionItemEntity> items;
@@ -45,12 +43,12 @@ public class TransactionEntity {
         updateDate = LocalDateTime.now();
     }
 
-    public long getId() {
-        return id;
+    public long getTransactionsId() {
+        return transactionsId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setTransactionsId(long transactionsId) {
+        this.transactionsId = transactionsId;
     }
 
     public String getFarmerId() {

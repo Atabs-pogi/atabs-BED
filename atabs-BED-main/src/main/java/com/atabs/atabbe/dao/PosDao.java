@@ -22,9 +22,6 @@ public interface PosDao extends JpaRepository<PosEntity, Long> {
             "OR plant_kilogram like %:match% OR plant_total like %:match%", nativeQuery = true)
     List<PosEntity> searchPosByName(String match);
 
-    @Query(value = "SELECT COUNT(1) FROM farmers WHERE id=:id", nativeQuery = true)
-    int findFarmerId(String id);
-
     @Transactional
     @Modifying
     @Query(value = "Update transactions set plant_kilogram=:plantKilogram,plant_total=:plantTotal where transactions_id=:transactionsId", nativeQuery = true)

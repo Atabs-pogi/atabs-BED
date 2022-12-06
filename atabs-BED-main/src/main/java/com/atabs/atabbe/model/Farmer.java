@@ -106,22 +106,19 @@ public class Farmer {
         this.status = status;
     }
 
-    public static Farmer from (FarmerEntity entity){
+    public static Farmer from(FarmerEntity entity) {
         Farmer farmer = new Farmer();
         farmer.Id = entity.getId();
         farmer.firstName = entity.getFirstName();
         farmer.middleName = entity.getMiddleName();
         farmer.lastName = entity.getLastName();
-        if (entity.getBirthday() != null)
-            farmer.birthday = entity.getBirthday();
-        if (entity.getMobileNumber() != null)
-            farmer.mobileNumber = entity.getMobileNumber();
+        farmer.birthday = entity.getBirthday();
+        farmer.age = entity.getAge();
+        farmer.mobileNumber = entity.getMobileNumber();
         farmer.email = entity.getEmail();
         farmer.sex = entity.getSex();
         farmer.status = entity.getStatus();
         farmer.address = Address.from(entity.getAddress());
-        System.out.println(farmer.getMobileNumber());
-        System.out.println(entity.getMobileNumber());
         return farmer;
     }
 }

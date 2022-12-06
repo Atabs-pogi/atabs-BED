@@ -10,33 +10,49 @@ import java.time.Period;
 public class EmployeeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    @Column(name = "empId")
+    private long empId;
     private String firstName;
-    private String  middleName;
-    private String  lastName;
+    private String middleName;
+    private String lastName;
     private LocalDate birthday;
     @Transient
-    private String role;
+    private int age;
     private String mobileNumber;
     private String email;
     private String address;
     private String sex;
-    @Column( columnDefinition="INT NOT NULL DEFAULT 1")
-    private int status = 1;
-
-    @Column( columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createDate;
-    @Column( columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime updateDate;
 
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private AccountEntity accountEntity;
+
+    public AccountEntity getAccountEntity() {
+        return accountEntity;
+    }
+
+    public void setAccountEntity(AccountEntity accountEntity) {
+        this.accountEntity = accountEntity;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createDate = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updateDate = LocalDateTime.now();
+    }
+
     public long getId() {
-        return id;
+        return empId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.empId = id;
     }
 
     public String getFirstName() {
@@ -75,13 +91,8 @@ public class EmployeeEntity {
         return Period.between(this.birthday, LocalDate.now()).getYears();
     }
 
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getMobileNumber() {
@@ -114,14 +125,6 @@ public class EmployeeEntity {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public LocalDateTime getCreateDate() {

@@ -1,4 +1,5 @@
 package com.atabs.atabbe.model;
+
 import com.atabs.atabbe.entity.EmployeeEntity;
 
 import java.time.LocalDate;
@@ -10,10 +11,9 @@ public class Employee {
     private String middleName;
     private String lastName;
     private LocalDate birthday;
-    private String role;
+    private int age;
     private String mobileNumber;
     private String email;
-
     private Address address;
 
     public Address getAddress() {
@@ -25,7 +25,6 @@ public class Employee {
     }
 
     private String sex;
-    private int status;
 
     public long getId() {
         return id;
@@ -67,14 +66,14 @@ public class Employee {
         this.birthday = birthday;
     }
 
-
-    public String getRole() {
-        return role;
+    public int getAge() {
+        return age;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setAge(int age) {
+        this.age = age;
     }
+
     public String getMobileNumber() {
         return mobileNumber;
     }
@@ -99,27 +98,17 @@ public class Employee {
         this.sex = sex;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public static Employee from (EmployeeEntity entity){
+    public static Employee from(EmployeeEntity entity) {
         Employee employee = new Employee();
         employee.id = entity.getId();
         employee.firstName = entity.getFirstName();
         employee.middleName = entity.getMiddleName();
         employee.lastName = entity.getLastName();
-        if (entity.getBirthday() != null)
-            employee.birthday = entity.getBirthday();
-        employee.role = entity.getRole();
+        employee.birthday = entity.getBirthday();
+        employee.age = entity.getAge();
         employee.mobileNumber = entity.getMobileNumber();
         employee.email = entity.getEmail();
         employee.sex = entity.getSex();
-        employee.status = entity.getStatus();
         employee.address = Address.from(entity.getAddress());
         return employee;
     }

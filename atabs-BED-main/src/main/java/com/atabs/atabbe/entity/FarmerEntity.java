@@ -10,33 +10,41 @@ import java.time.Period;
 public class FarmerEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
-
+    @GeneratedValue(generator = "farm_seq", strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "farm_seq", sequenceName = "farm_sequence", initialValue = 100001, allocationSize = 10000000)
+    @Column(name = "farmerId")
+    private long farmerId;
     private String firstName;
-    private String  middleName;
-    private String  lastName;
+    private String middleName;
+    private String lastName;
     private LocalDate birthday;
+    @Transient
+    private int age;
     private String mobileNumber;
     private String email;
     private String address;
     private String sex;
-    @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 1")
+    @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
     private int status = 1;
-
-    @Column( columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createDate;
-    @Column( columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime updateDate;
 
+    @PrePersist
+    protected void onCreate() {
+        createDate = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updateDate = LocalDateTime.now();
+    }
 
     public long getId() {
-        return id;
+        return farmerId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.farmerId = id;
     }
 
     public String getFirstName() {
@@ -69,6 +77,14 @@ public class FarmerEntity {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public int getAge() {
+        return Period.between(this.birthday, LocalDate.now()).getYears();
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getMobileNumber() {
