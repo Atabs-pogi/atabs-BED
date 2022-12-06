@@ -53,11 +53,11 @@ public class Fiber {
 
     public static Fiber from(FiberEntity entity) {
         Fiber fiber = new Fiber();
-        fiber.Id = entity.getId();
-        fiber.name = entity.getName();
-        fiber.grade = entity.getGrade();
-        fiber.price = entity.getPrice();
-        fiber.datePrice = entity.getDatePrice();
+//        fiber.Id = entity.getId();
+//        fiber.name = entity.getName();
+//        fiber.grade = entity.getGrade();
+//        fiber.price = entity.getPrice();
+//        fiber.datePrice = entity.getDatePrice();
         fiber.status = entity.getStatus();
         return fiber;
     }

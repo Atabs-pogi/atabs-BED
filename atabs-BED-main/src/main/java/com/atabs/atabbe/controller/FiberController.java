@@ -2,6 +2,7 @@ package com.atabs.atabbe.controller;
 
 import com.atabs.atabbe.entity.FiberEntity;
 import com.atabs.atabbe.model.Fiber;
+import com.atabs.atabbe.model.Response;
 import com.atabs.atabbe.service.FiberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,11 @@ public class FiberController {
     @PostMapping("/addFiber")
     public ResponseEntity<String> addFiber(@RequestBody Fiber fiber) {
         return new ResponseEntity<>(fiberService.addFiber(fiber), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/addFibers")
+    public ResponseEntity addFiber(@RequestBody FiberEntity fiberEntity) {
+        return new ResponseEntity<>(fiberService.addFiber(fiberEntity), HttpStatus.CREATED);
     }
 
     @PutMapping("/updateFiber")

@@ -2,7 +2,9 @@ package com.atabs.atabbe.service;
 
 import com.atabs.atabbe.dao.FiberDao;
 import com.atabs.atabbe.entity.FiberEntity;
+import com.atabs.atabbe.helper.Message;
 import com.atabs.atabbe.model.Fiber;
+import com.atabs.atabbe.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,7 @@ public class FiberService {
         List<Fiber> fibers = new ArrayList<>();
         for (FiberEntity fiber : entityFibers) {
             fibers.add(Fiber.from(fiber));
-            System.out.println(fiber.getId());
+//            System.out.println(fiber.getId());
         }
         return fibers;
     }
@@ -35,8 +37,8 @@ public class FiberService {
         FiberEntity fiberEntity = new FiberEntity();
         try {
             fiberEntity.setName(fiber.getName());
-            fiberEntity.setGrade(fiber.getGrade());
-            fiberEntity.setPrice(fiber.getPrice());
+//            fiberEntity.setGrade(fiber.getGrade());
+//            fiberEntity.setPrice(fiber.getPrice());
             fiberDao.save(fiberEntity);
             System.out.println(fiberEntity);
             return "Successful";
@@ -46,16 +48,17 @@ public class FiberService {
     }
 
     public FiberEntity updateFiber(FiberEntity fiber) {
-        FiberEntity fiberEntity = fiberDao.findById(fiber.getId()).orElse(null);
-        if (fiberEntity != null) {
-            fiberEntity.setName(fiber.getName());
-            fiberEntity.setGrade(fiber.getGrade());
-            fiberEntity.setPrice(fiber.getPrice());
-            fiberEntity.setStatus(fiber.getStatus());
-            return fiberDao.save(fiberEntity);
-        } else {
-            throw new IllegalStateException("This ID cannot be found");
-        }
+//        FiberEntity fiberEntity = fiberDao.findById(fiber.getId()).orElse(null);
+//        if (fiberEntity != null) {
+//            fiberEntity.setName(fiber.getName());
+//            fiberEntity.setGrade(fiber.getGrade());
+//            fiberEntity.setPrice(fiber.getPrice());
+//            fiberEntity.setStatus(fiber.getStatus());
+//            return fiberDao.save(fiberEntity);
+//        } else {
+//            throw new IllegalStateException("This ID cannot be found");
+//        }
+        return null;
     }
 
     public String getFiberGrade(String fName){
@@ -64,6 +67,17 @@ public class FiberService {
 
     public List<FiberEntity> getFibers(){
         return fiberDao.findAll();
+    }
+
+
+    public String addFiber(FiberEntity fiberEntity) {
+
+        try {
+            fiberDao.save(fiberEntity);
+            return Message.SUCCESS_MESSAGE.replace("<data>","Fiber");
+        } catch (Exception e) {
+            throw new IllegalStateException("Exception: " + e.getMessage());
+        }
     }
 
 
