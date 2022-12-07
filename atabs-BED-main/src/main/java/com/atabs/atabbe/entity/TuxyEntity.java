@@ -16,9 +16,16 @@ public class TuxyEntity {
     private String name;
 
 
-    @OneToMany(targetEntity = TuxyItemEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "tuxyId" ,referencedColumnName ="id" )
-    private List<TuxyItemEntity> items;
+
+    private double goodPrice;
+    private double discartePrice;
+    private double resecoPrice;
+
+
+
+//    @OneToMany(targetEntity = TuxyItemEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "tuxyId" ,referencedColumnName ="id" )
+//    private List<TuxyItemEntity> items;
 
 
     @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 1")
@@ -64,11 +71,28 @@ public class TuxyEntity {
     }
 
 
-    public List<TuxyItemEntity> getItems() {
-        return items;
+
+    public double getGoodPrice() {
+        return goodPrice;
     }
 
-    public void setItems(List<TuxyItemEntity> items) {
-        this.items = items;
+    public void setGoodPrice(double goodPrice) {
+        this.goodPrice = goodPrice;
+    }
+
+    public double getDiscartePrice() {
+        return discartePrice;
+    }
+
+    public void setDiscartePrice(double discartePrice) {
+        this.discartePrice = discartePrice;
+    }
+
+    public double getResecoPrice() {
+        return resecoPrice;
+    }
+
+    public void setResecoPrice(double resecoPrice) {
+        this.resecoPrice = resecoPrice;
     }
 }

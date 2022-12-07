@@ -4,6 +4,10 @@ import com.atabs.atabbe.entity.FarmerEntity;
 import com.atabs.atabbe.helper.FileCreated;
 import com.atabs.atabbe.model.Farmer;
 import com.atabs.atabbe.service.FarmerService;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,7 @@ import java.util.Objects;
 @RequestMapping("farmer")
 @CrossOrigin
 public class FarmerController {
+    Logger log = LoggerFactory.getLogger(FarmerController.class);
 
     @Autowired
     private FarmerService farmerService;
@@ -35,9 +40,14 @@ public class FarmerController {
     }
 
     @PostMapping("/addFarmer")
-    public ResponseEntity addFarmer(@RequestBody Farmer farmer, @RequestParam("img")MultipartFile file) {
+    public ResponseEntity addFarmer(@ModelAttribute("farmer") Farmer farmer, @RequestParam("img") MultipartFile file) {
+        Gson gson = new Gson();
+
+        log.info("applicantInfo: "+ gson.toJson(farmer));
+        log.info("key: "+ file);
+        System.out.println("img " +  file.getName());
         StringBuilder filenames= new StringBuilder();
-        String filename=farmer.getId()+ Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().length()-4);
+        String filename = farmer.getFirstName() + Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().length()-4);
         Path fileNameAndPath= Paths.get(FileCreated.uploadDirectory,filename);
         try {
             Files.write(fileNameAndPath,file.getBytes());
@@ -45,7 +55,9 @@ public class FarmerController {
             throw new RuntimeException(e);
         }
         farmer.setfPhoto(filename);
+
         return new ResponseEntity(farmerService.addFarmer(farmer), HttpStatus.CREATED);
+//        return new ResponseEntity("test", HttpStatus.CREATED);
     }
 
     @PutMapping("/updateFarmer")
