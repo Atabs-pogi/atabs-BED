@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.io.File;
 import java.util.Properties;
 
 
@@ -16,9 +17,10 @@ import java.util.Properties;
 @EnableScheduling
 public class AtabBeApplication {
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(AtabBeApplication.class, args);
-
+		new File(FileCreated.uploadDirectory).mkdir();
 	}
 
 //	@Scheduled(cron = "0 0 6 * * 7") // every 6am of sunday

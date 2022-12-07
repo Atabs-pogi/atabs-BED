@@ -16,6 +16,7 @@ public class EmployeeEntity {
     private String middleName;
     private String lastName;
     private LocalDate birthday;
+    private String ePhoto;
     @Transient
     private int age;
     private String mobileNumber;
@@ -24,6 +25,14 @@ public class EmployeeEntity {
     private String sex;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+    public String getePhoto() {
+        return ePhoto;
+    }
+
+    public void setePhoto(String ePhoto) {
+        this.ePhoto = ePhoto;
+    }
 
     @OneToOne
     @PrimaryKeyJoinColumn

@@ -12,7 +12,6 @@ public class FileCreated {
     @Autowired
     ServletContext context;
 
-
     public static String dbPathFile(){
         Date backupDate = new Date();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -26,6 +25,9 @@ public class FileCreated {
 
         return savePath;
     }
+
+    public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/imagedata";
+
 
 
 }

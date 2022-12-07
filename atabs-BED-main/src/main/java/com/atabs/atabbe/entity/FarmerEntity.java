@@ -18,16 +18,28 @@ public class FarmerEntity {
     private String middleName;
     private String lastName;
     private LocalDate birthday;
+    private String fPhoto;
     @Transient
     private int age;
     private String mobileNumber;
     private String email;
     private String address;
     private String sex;
+
+
     @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
     private int status = 1;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+
+    public String getfPhoto() {
+        return fPhoto;
+    }
+
+    public void setfPhoto(String fPhoto) {
+        this.fPhoto = fPhoto;
+    }
 
     @PrePersist
     protected void onCreate() {
