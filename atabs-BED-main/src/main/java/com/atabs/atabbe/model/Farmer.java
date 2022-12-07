@@ -18,6 +18,16 @@ public class Farmer {
     private int status;
     private Address address;
 
+    private String fPhoto;
+
+    public String getfPhoto() {
+        return fPhoto;
+    }
+
+    public void setfPhoto(String fPhoto) {
+        this.fPhoto = fPhoto;
+    }
+
     public long getId() {
         return Id;
     }

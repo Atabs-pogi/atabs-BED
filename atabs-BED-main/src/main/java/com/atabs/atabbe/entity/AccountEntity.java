@@ -16,24 +16,6 @@ public class AccountEntity {
     private String password;
     private String role;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "account_images",
-            joinColumns = {
-                    @JoinColumn(name = "account_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "image_id")
-            })
-    private Set<ImageModelEntity> accountImages;
-
-    public Set<ImageModelEntity> getAccountImages() {
-        return accountImages;
-    }
-
-    public void setAccountImages(Set<ImageModelEntity> accountImages) {
-        this.accountImages = accountImages;
-    }
-
     @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
     private int status = 1;
 

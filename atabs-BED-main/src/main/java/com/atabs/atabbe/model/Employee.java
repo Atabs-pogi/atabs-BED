@@ -15,6 +15,15 @@ public class Employee {
     private String mobileNumber;
     private String email;
     private Address address;
+    private String ePhoto;
+
+    public String getePhoto() {
+        return ePhoto;
+    }
+
+    public void setePhoto(String ePhoto) {
+        this.ePhoto = ePhoto;
+    }
 
     public Address getAddress() {
         return address;
