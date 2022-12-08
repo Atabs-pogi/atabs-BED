@@ -10,7 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,22 +42,7 @@ public class FarmerController {
     }
 
     @PostMapping("/addFarmer")
-    public ResponseEntity addFarmer(@ModelAttribute("farmer") Farmer farmer, @RequestParam("img") MultipartFile file) {
-        Gson gson = new Gson();
-
-        log.info("applicantInfo: "+ gson.toJson(farmer));
-        log.info("key: "+ file);
-        System.out.println("img " +  file.getName());
-        StringBuilder filenames= new StringBuilder();
-        String filename = farmer.getFirstName() + Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().length()-4);
-        Path fileNameAndPath= Paths.get(FileCreated.uploadDirectory,filename);
-        try {
-            Files.write(fileNameAndPath,file.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        farmer.setfPhoto(filename);
-
+    public ResponseEntity addFarmer(@RequestBody Farmer farmer) {
         return new ResponseEntity(farmerService.addFarmer(farmer), HttpStatus.CREATED);
 //        return new ResponseEntity("test", HttpStatus.CREATED);
     }

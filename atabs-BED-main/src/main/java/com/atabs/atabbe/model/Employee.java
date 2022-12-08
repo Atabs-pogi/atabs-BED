@@ -15,14 +15,15 @@ public class Employee {
     private String mobileNumber;
     private String email;
     private Address address;
-    private String ePhoto;
+    private String imageLocation;
 
-    public String getePhoto() {
-        return ePhoto;
+
+    public String getImageLocation() {
+        return imageLocation;
     }
 
-    public void setePhoto(String ePhoto) {
-        this.ePhoto = ePhoto;
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
     }
 
     public Address getAddress() {

@@ -20,7 +20,7 @@ public class AtabBeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AtabBeApplication.class, args);
-		new File(FileCreated.uploadDirectory).mkdir();
+		new File(FileCreated.UPLOADDIRECTORY).mkdir();
 	}
 
 //	@Scheduled(cron = "0 0 6 * * 7") // every 6am of sunday

@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FileCreated {
-
+    public static final String UPLOADDIRECTORY=System.getProperty("user.dir")+"/src/main/imagedata";
     @Autowired
     ServletContext context;
 
@@ -25,9 +25,4 @@ public class FileCreated {
 
         return savePath;
     }
-
-    public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/imagedata";
-
-
-
 }

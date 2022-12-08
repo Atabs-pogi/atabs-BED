@@ -43,6 +43,7 @@ public class EmployeeService {
             employeeEntity.setBirthday(employee.getBirthday());
             employeeEntity.setMobileNumber(employee.getMobileNumber());
             employeeEntity.setEmail(employee.getEmail());
+            employeeEntity.setImageLocation(employee.getImageLocation());
             if (employee.getAddress() != null)
                 employeeEntity.setAddress(employee.getAddress().toString());
             employeeEntity.setSex(employee.getSex());
@@ -61,6 +62,7 @@ public class EmployeeService {
             employeeEntity.setLastName(employee.getLastName());
             employeeEntity.setMobileNumber(employee.getMobileNumber());
             employeeEntity.setEmail(employee.getEmail());
+            employeeEntity.setImageLocation(employee.getImageLocation());
             if (employee.getAddress() != null)
                 employeeEntity.setAddress(employee.getAddress().toString());
             employeeEntity.setSex(employee.getSex());

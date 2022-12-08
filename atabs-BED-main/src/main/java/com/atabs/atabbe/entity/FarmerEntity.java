@@ -11,14 +11,14 @@ public class FarmerEntity {
 
     @Id
     @GeneratedValue(generator = "farm_seq", strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "farm_seq", sequenceName = "farm_sequence", initialValue = 100001, allocationSize = 10000000)
+    @SequenceGenerator(name = "farm_seq", sequenceName = "farm_sequence", initialValue = 100001, allocationSize = 50)
     @Column(name = "farmerId")
     private long farmerId;
     private String firstName;
     private String middleName;
     private String lastName;
     private LocalDate birthday;
-    private String fPhoto;
+    private String imageLocation;
     @Transient
     private int age;
     private String mobileNumber;
@@ -33,12 +33,12 @@ public class FarmerEntity {
     private LocalDateTime updateDate;
 
 
-    public String getfPhoto() {
-        return fPhoto;
+    public String getImageLocation() {
+        return imageLocation;
     }
 
-    public void setfPhoto(String fPhoto) {
-        this.fPhoto = fPhoto;
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
     }
 
     @PrePersist

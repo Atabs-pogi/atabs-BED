@@ -35,16 +35,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/addEmployee")
-    public ResponseEntity addEmployee(@RequestBody Employee employee, Account account, @RequestParam("img")MultipartFile file) {
-        StringBuilder filenames= new StringBuilder();
-        String filename=employee.getId()+ Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().length()-4);
-        Path fileNameAndPath= Paths.get(FileCreated.uploadDirectory,filename);
-        try {
-            Files.write(fileNameAndPath,file.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        employee.setePhoto(filename);
+    public ResponseEntity addEmployee(@RequestBody Employee employee, Account account) {
         return new ResponseEntity(employeeService.addEmployee(employee, account), HttpStatus.CREATED);
     }
 
