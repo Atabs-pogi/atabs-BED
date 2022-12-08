@@ -42,28 +42,7 @@ public class FarmerController {
     }
 
     @PostMapping("/addFarmer")
-<<<<<<< HEAD
-
-
     public ResponseEntity addFarmer(@RequestBody Farmer farmer) {
-=======
-    public ResponseEntity addFarmer(@ModelAttribute("farmer") Farmer farmer, @RequestParam("img") MultipartFile file) {
-        Gson gson = new Gson();
-
-        log.info("applicantInfo: "+ gson.toJson(farmer));
-        log.info("key: "+ file);
-        System.out.println("img " +  file.getName());
-        StringBuilder filenames= new StringBuilder();
-        String filename = farmer.getFirstName() + Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().length()-4);
-        Path fileNameAndPath= Paths.get(FileCreated.uploadDirectory,filename);
-        try {
-            Files.write(fileNameAndPath,file.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        farmer.setfPhoto(filename);
-
->>>>>>> 0b579bc6e52b06d4aca8f0401aec6f206966c27a
         return new ResponseEntity(farmerService.addFarmer(farmer), HttpStatus.CREATED);
 //        return new ResponseEntity("test", HttpStatus.CREATED);
     }
