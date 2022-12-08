@@ -50,9 +50,8 @@ public class Account {
 
     public static Account from (AccountEntity accountEntity){
         Account account = new Account();
-        account.id = account.getId();
+        account.id = accountEntity.getId();
         account.username = accountEntity.getUsername();
-        account.password = accountEntity.getPassword();
         account.role = accountEntity.getRole();
         account.status = accountEntity.getStatus();
         return account;

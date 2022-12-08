@@ -2,18 +2,14 @@ package com.atabs.atabbe.model;
 
 import com.atabs.atabbe.entity.FiberEntity;
 
-import java.time.LocalDateTime;
-
 public class Fiber {
 
     private long Id;
     private String name;
     private String grade;
     private double price;
+    private String datePrice;
     private int status;
-
-    private LocalDateTime dateCreated;
-    private LocalDateTime lastUpdated;
 
     public long getId() {
         return Id;
@@ -23,21 +19,6 @@ public class Fiber {
         Id = id;
     }
 
-    public LocalDateTime getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public LocalDateTime getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(LocalDateTime lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
 
     public String getName() {
         return name;
@@ -63,6 +44,14 @@ public class Fiber {
         this.price = price;
     }
 
+    public String getDatePrice() {
+        return datePrice;
+    }
+
+    public void setDatePrice(String datePrice) {
+        this.datePrice = datePrice;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -76,9 +65,8 @@ public class Fiber {
         fiber.name = entity.getName();
         fiber.grade = entity.getGrade();
         fiber.price = entity.getPrice();
+        fiber.datePrice = entity.getDatePrice();
         fiber.status = entity.getStatus();
-        fiber.dateCreated = entity.getDateCreated();
-        fiber.lastUpdated = entity.getLastUpdated();
         return fiber;
     }
 }

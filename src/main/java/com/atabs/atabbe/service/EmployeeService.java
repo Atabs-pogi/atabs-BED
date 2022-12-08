@@ -1,10 +1,7 @@
 package com.atabs.atabbe.service;
 
-import com.atabs.atabbe.dao.AccountDao;
 import com.atabs.atabbe.dao.EmployeeDao;
-import com.atabs.atabbe.entity.AccountEntity;
 import com.atabs.atabbe.entity.EmployeeEntity;
-import com.atabs.atabbe.model.Account;
 import com.atabs.atabbe.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +18,7 @@ public class EmployeeService {
         List<EmployeeEntity> entityEmployees = (List<EmployeeEntity>) employeeDao.searchEmployeeByName(name);
         List<Employee> employees = new ArrayList<>();
         for (EmployeeEntity employee: entityEmployees) {
+            System.out.println(employee.getId());
             employees.add(Employee.from(employee));
         }
         return employees;
@@ -30,24 +28,27 @@ public class EmployeeService {
         return employeeDao.getEmployeeInfo(emp_id);
     }
 
-    public String addEmployee(Employee employee, Account account){
+    public String addEmployee(Employee employee){
         EmployeeEntity employeeEntity = new EmployeeEntity();
         int emailExist = employeeDao.findEmployeeByEmail(employee.getEmail());
         if (emailExist > 0) {
             throw new IllegalStateException("email taken");
         } else {
-            employeeEntity.setId(employee.getId());
             employeeEntity.setFirstName(employee.getFirstName());
             employeeEntity.setMiddleName(employee.getMiddleName());
             employeeEntity.setLastName(employee.getLastName());
-            employeeEntity.setBirthday(employee.getBirthday());
+            if (employee.getBirthday() != null) {
+                employeeEntity.setBirthday(employee.getBirthday());
+            }
+            employeeEntity.setRole(employee.getRole());
             employeeEntity.setMobileNumber(employee.getMobileNumber());
             employeeEntity.setEmail(employee.getEmail());
             if (employee.getAddress() != null)
-            employeeEntity.setAddress(employee.getAddress().toString());
+                employeeEntity.setAddress(employee.getAddress().toString());
             employeeEntity.setSex(employee.getSex());
+            employeeEntity.setStatus(employeeEntity.getStatus());
             employeeDao.save(employeeEntity);
-            return "Successful";
+            return "";
         }
     }
 
@@ -57,13 +58,17 @@ public class EmployeeService {
             employeeEntity.setId(employee.getId());
             employeeEntity.setFirstName(employee.getFirstName());
             employeeEntity.setMiddleName(employee.getMiddleName());
-            employeeEntity.setBirthday(employee.getBirthday());
+            if (employee.getBirthday() != null) {
+                employeeEntity.setBirthday(employee.getBirthday());
+            }
             employeeEntity.setLastName(employee.getLastName());
+            employeeEntity.setRole(employee.getRole());
             employeeEntity.setMobileNumber(employee.getMobileNumber());
             employeeEntity.setEmail(employee.getEmail());
             if (employee.getAddress() != null)
             employeeEntity.setAddress(employee.getAddress().toString());
             employeeEntity.setSex(employee.getSex());
+            employeeEntity.setStatus(employee.getStatus());
             employeeDao.save(employeeEntity);
             return employee;
         }else {

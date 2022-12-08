@@ -1,6 +1,6 @@
 package com.atabs.atabbe.controller;
 
-import com.atabs.atabbe.model.Account;
+import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.model.Employee;
 import com.atabs.atabbe.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-
     @GetMapping("/search")
     public ResponseEntity search(@RequestParam("name") String name){
         return new ResponseEntity(employeeService.searchEmployeeByName(name), HttpStatus.OK);
@@ -27,8 +26,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/addEmployee")
-    public ResponseEntity addEmployee(@RequestBody Employee employee, Account account){
-        return new ResponseEntity(employeeService.addEmployee(employee, account), HttpStatus.CREATED);
+    public ResponseEntity addEmployee(@RequestBody Employee employee){
+        return new ResponseEntity(employeeService.addEmployee(employee), HttpStatus.CREATED);
     }
 
     @PutMapping("/updateEmployee")

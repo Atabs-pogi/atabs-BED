@@ -16,11 +16,11 @@ public class AccountController {
 
     @PostMapping("/authenticate")
     public ResponseEntity authenticate(@RequestBody Account account){
-        return new ResponseEntity(accountService.authenticate(account), HttpStatus.OK);
+        return new ResponseEntity(Account.from(accountService.authenticate(account)) , HttpStatus.OK);
     }
 
     @GetMapping("/search")
-    public ResponseEntity search(@RequestParam("username") String username){
+    public ResponseEntity search(@RequestParam("name") String username){
         return new ResponseEntity(accountService.searchAccountByUsername(username), HttpStatus.OK);
     }
 

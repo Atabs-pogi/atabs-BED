@@ -21,7 +21,6 @@ public class FarmerService {
         List<Farmer> farmers = new ArrayList<>();
         for (FarmerEntity farmer: entityFarmers) {
             farmers.add(Farmer.from(farmer));
-            System.out.println(farmer.getId());
         }
         return farmers;
     }
@@ -39,15 +38,18 @@ public class FarmerService {
             farmerEntity.setFirstName(farmer.getFirstName());
             farmerEntity.setMiddleName(farmer.getMiddleName());
             farmerEntity.setLastName(farmer.getLastName());
-            farmerEntity.setBirthday(farmer.getBirthday());
+            if (farmer.getBirthday() != null) {
+                farmerEntity.setBirthday(farmer.getBirthday());
+            }
             farmerEntity.setMobileNumber(farmer.getMobileNumber());
             farmerEntity.setEmail(farmer.getEmail());
-            if (farmer.getAddress() != null)
+            if (farmer.getAddress() != null) {
                 farmerEntity.setAddress(farmer.getAddress().toString());
+            }
             farmerEntity.setSex(farmer.getSex());
             farmerEntity.setStatus(farmerEntity.getStatus());
             farmerDao.save(farmerEntity);
-            return "Successful";
+            return "";
         }
     }
 
@@ -57,11 +59,14 @@ public class FarmerService {
             farmerEntity.setFirstName(farmer.getFirstName());
             farmerEntity.setMiddleName(farmer.getMiddleName());
             farmerEntity.setLastName(farmer.getLastName());
-            farmerEntity.setBirthday(farmer.getBirthday());
+            if (farmer.getBirthday() != null) {
+                farmerEntity.setBirthday(farmer.getBirthday());
+            }
             farmerEntity.setMobileNumber(farmer.getMobileNumber());
             farmerEntity.setEmail(farmer.getEmail());
-            if (farmer.getAddress() != null)
+            if (farmer.getAddress() != null){
             farmerEntity.setAddress(farmer.getAddress().toString());
+            }
             farmerEntity.setSex(farmer.getSex());
             farmerEntity.setStatus(farmer.getStatus());
             farmerDao.save(farmerEntity);
