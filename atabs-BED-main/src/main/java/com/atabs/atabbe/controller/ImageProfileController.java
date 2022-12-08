@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 public class ImageProfileController {
     @PostMapping("/addProfile")
     public ResponseEntity addProfile(@ModelAttribute("profile")String imageProfile, @ModelAttribute("type")String identity, @RequestParam("img")MultipartFile file){
-        String name=identity+"_"+imageProfile;
+        String name=identity+"_"+imageProfile+".png";
         Path fileNameAndPath= Paths.get(FileCreated.UPLOADDIRECTORY,name);
         System.out.println(fileNameAndPath);
         try {
