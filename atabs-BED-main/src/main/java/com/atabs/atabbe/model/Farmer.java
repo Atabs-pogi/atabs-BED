@@ -17,15 +17,15 @@ public class Farmer {
     private String sex;
     private int status;
     private Address address;
+    private String imageLocation;
 
-    private String fPhoto;
 
-    public String getfPhoto() {
-        return fPhoto;
+    public String getImageLocation() {
+        return imageLocation;
     }
 
-    public void setfPhoto(String fPhoto) {
-        this.fPhoto = fPhoto;
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
     }
 
     public long getId() {

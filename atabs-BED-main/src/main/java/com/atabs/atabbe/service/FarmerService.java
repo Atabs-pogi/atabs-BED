@@ -33,23 +33,26 @@ public class FarmerService {
 
     public String addFarmer(Farmer farmer) {
         FarmerEntity farmerEntity = new FarmerEntity();
-        int emailExist = farmerDao.findFarmerByEmail(farmer.getEmail());
-        if (emailExist > 0) {
-            return "This email is already taken";
-        } else {
-            farmerEntity.setFirstName(farmer.getFirstName());
-            farmerEntity.setMiddleName(farmer.getMiddleName());
-            farmerEntity.setLastName(farmer.getLastName());
-            farmerEntity.setBirthday(farmer.getBirthday());
-            farmerEntity.setMobileNumber(farmer.getMobileNumber());
-            farmerEntity.setEmail(farmer.getEmail());
-            if (farmer.getAddress() != null)
-                farmerEntity.setAddress(farmer.getAddress().toString());
-            farmerEntity.setSex(farmer.getSex());
-            farmerEntity.setStatus(farmerEntity.getStatus());
-            farmerDao.save(farmerEntity);
-            return "Successful";
-        }
+
+            int emailExist = farmerDao.findFarmerByEmail(farmer.getEmail());
+            if (emailExist > 0) {
+                return "This email is already taken";
+            } else {
+                farmerEntity.setFirstName(farmer.getFirstName());
+                farmerEntity.setMiddleName(farmer.getMiddleName());
+                farmerEntity.setLastName(farmer.getLastName());
+                farmerEntity.setBirthday(farmer.getBirthday());
+                farmerEntity.setMobileNumber(farmer.getMobileNumber());
+                farmerEntity.setEmail(farmer.getEmail());
+                farmerEntity.setImageLocation(farmer.getImageLocation());
+                if (farmer.getAddress() != null)
+                    farmerEntity.setAddress(farmer.getAddress().toString());
+                farmerEntity.setSex(farmer.getSex());
+                farmerEntity.setStatus(farmerEntity.getStatus());
+                farmerDao.save(farmerEntity);
+                return "Successful";
+            }
+
     }
 
     public Farmer updateFarmer(Farmer farmer) {
@@ -61,6 +64,7 @@ public class FarmerService {
             farmerEntity.setBirthday(farmer.getBirthday());
             farmerEntity.setMobileNumber(farmer.getMobileNumber());
             farmerEntity.setEmail(farmer.getEmail());
+
             if (farmer.getAddress() != null)
                 farmerEntity.setAddress(farmer.getAddress().toString());
             farmerEntity.setSex(farmer.getSex());

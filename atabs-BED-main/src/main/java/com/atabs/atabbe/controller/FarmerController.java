@@ -6,7 +6,9 @@ import com.atabs.atabbe.model.Farmer;
 import com.atabs.atabbe.service.FarmerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,16 +37,9 @@ public class FarmerController {
     }
 
     @PostMapping("/addFarmer")
-    public ResponseEntity addFarmer(@RequestBody Farmer farmer, @RequestParam("img")MultipartFile file) {
-        StringBuilder filenames= new StringBuilder();
-        String filename=farmer.getId()+ Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().length()-4);
-        Path fileNameAndPath= Paths.get(FileCreated.uploadDirectory,filename);
-        try {
-            Files.write(fileNameAndPath,file.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        farmer.setfPhoto(filename);
+
+
+    public ResponseEntity addFarmer(@RequestBody Farmer farmer) {
         return new ResponseEntity(farmerService.addFarmer(farmer), HttpStatus.CREATED);
     }
 
