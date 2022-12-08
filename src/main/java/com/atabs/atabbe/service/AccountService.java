@@ -4,7 +4,9 @@ import com.atabs.atabbe.dao.AccountDao;
 import com.atabs.atabbe.entity.AccountEntity;
 import com.atabs.atabbe.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +17,14 @@ public class AccountService {
     private AccountDao accountDao;
 
     public AccountEntity authenticate(Account account) {
-            String username = account.getUsername();
-            String secret = account.getPassword();
-            int result = accountDao.getUserLogin(username, secret);
-            if (result > 0){
-                System.out.println(result);
-                return getIdByUsername(username);
-            }else {
-                throw new IllegalStateException("Invalid User");
-            }
+        String username = account.getUsername();
+        String secret = account.getPassword();
+        AccountEntity result = accountDao.getUserLogin(username, secret);
+        if (result != null){
+            return result;
+        }else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST , "Invalid User");
+        }
     }
 
     public AccountEntity getIdByUsername(String username){
@@ -35,7 +36,6 @@ public class AccountService {
         List<Account> accounts = new ArrayList<>();
         for (AccountEntity account: entityAccounts) {
             accounts.add(Account.from(account));
-            System.out.println(account.getAccountId());
         }
         return accounts;
     }
@@ -60,10 +60,14 @@ public class AccountService {
 
     public Account updateAccount(Account account) {
         AccountEntity accountEntity = accountDao.findById(account.getId()).orElse(null);
+        System.out.println(account.getRole());
         if (accountEntity != null) {
+            accountEntity.setId(account.getId());
+            accountEntity.setUsername(account.getUsername());
             accountEntity.setPassword(account.getPassword());
             accountEntity.setRole(account.getRole());
             accountEntity.setStatus(account.getStatus());
+            accountDao.save(accountEntity);
             return account;
         }else {
             throw new IllegalStateException("This ID cannot be found");

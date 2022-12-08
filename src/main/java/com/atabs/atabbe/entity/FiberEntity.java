@@ -9,34 +9,29 @@ import java.time.LocalDateTime;
 public class FiberEntity {
 
     @Id
-    @GeneratedValue(generator = "fiber_seq", strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "fiber_seq", sequenceName = "fiber_sequence", initialValue = 101, allocationSize = 10000000)
-    @Column(name = "fiberId")
-    private long fiberId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
+
     private String name;
     private String grade;
     private double price;
+    private String datePrice;
     @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 1")
     private int status = 1;
-    private LocalDateTime dateCreated;
-    private LocalDateTime lastUpdated;
 
-    @PrePersist
-    protected void onCreate() {
-        dateCreated = LocalDateTime.now();
-    }
+    @Column( columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime createDate;
+    @Column( columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime updateDate;
 
-    @PreUpdate
-    protected void onUpdate(){
-        lastUpdated = LocalDateTime.now();
-    }
 
     public long getId() {
-        return fiberId;
+        return id;
     }
 
     public void setId(long id) {
-        this.fiberId = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -63,6 +58,14 @@ public class FiberEntity {
         this.price = price;
     }
 
+    public String getDatePrice() {
+        return datePrice;
+    }
+
+    public void setDatePrice(String datePrice) {
+        this.datePrice = datePrice;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -71,19 +74,19 @@ public class FiberEntity {
         this.status = status;
     }
 
-    public LocalDateTime getDateCreated() {
-        return dateCreated;
+    public LocalDateTime getCreateDate() {
+        return createDate;
     }
 
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
     }
 
-    public LocalDateTime getLastUpdated() {
-        return lastUpdated;
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
     }
 
-    public void setLastUpdated(LocalDateTime lastUpdated) {
-        this.lastUpdated = lastUpdated;
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
     }
 }
