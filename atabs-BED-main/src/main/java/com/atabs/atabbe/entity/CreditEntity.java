@@ -10,7 +10,7 @@ public class CreditEntity {
 
     @Id
     @GeneratedValue(generator = "credit_seq", strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "credit_seq", sequenceName = "credit_sequence", initialValue = 101, allocationSize = 10000000)
+    @SequenceGenerator(name = "credit_seq", sequenceName = "credit_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "balanceId")
     private long balanceId;
     private double balance;

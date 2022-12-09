@@ -38,29 +38,7 @@ public class AccountController {
     @PostMapping("/addAccount")
     public ResponseEntity<String> addAccount(@RequestBody Account account) {
         return new ResponseEntity<>(accountService.addAccount(account), HttpStatus.CREATED);
-//
-//        try{
-//            Set<ImageModelEntity> images = uploadImage(file);
-//            account.setAccountImages(images);
-//            accountService.addAccount(account,HttpStatus.CREATED);
-//        }catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//        return null;
-//    }
-//
-//    public Set<ImageModelEntity> uploadImage(MultipartFile[] multipartFiles) throws IOException {
-//        Set<ImageModelEntity> imageModelEntities = new HashSet<>();
-//
-//        for (MultipartFile file : multipartFiles) {
-//            ImageModelEntity imageModelEntity = new ImageModelEntity(
-//                    file.getOriginalFilename(),
-//                    file.getContentType(),
-//                    file.getBytes()
-//            );
-//            imageModelEntities.add(imageModelEntity);
-//        }
-//        return imageModelEntities;
+
     }
 
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class CashierEntity {
     @Id
     @GeneratedValue(generator = "cashier_seq", strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "cashier_seq", sequenceName = "cashier_sequence", initialValue = 101, allocationSize = 10000000)
+    @SequenceGenerator(name = "cashier_seq", sequenceName = "cashier_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "cashierId")
     private long cashierId;
     private long farmerId;
