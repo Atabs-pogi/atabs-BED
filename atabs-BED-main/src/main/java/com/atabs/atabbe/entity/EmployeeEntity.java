@@ -38,17 +38,6 @@ public class EmployeeEntity {
         this.imageLocation = imageLocation;
     }
 
-//    @OneToOne
-//    @PrimaryKeyJoinColumn
-//    private AccountEntity accountEntity;
-//
-//    public AccountEntity getAccountEntity() {
-//        return accountEntity;
-//    }
-//
-//    public void setAccountEntity(AccountEntity accountEntity) {
-//        this.accountEntity = accountEntity;
-//    }
 
     @PrePersist
     protected void onCreate() {
@@ -101,7 +90,8 @@ public class EmployeeEntity {
     }
 
     public int getAge() {
-        return Period.between(this.birthday, LocalDate.now()).getYears();
+//        return Period.between(this.birthday, LocalDate.now()).getYears();
+        return 0;
     }
 
     public void setAge(int age) {

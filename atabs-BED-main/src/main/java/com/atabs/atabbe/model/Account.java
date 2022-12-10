@@ -11,6 +11,17 @@ public class Account {
     private String role;
     private int status;
 
+    private long empId;
+
+
+    public long getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(long empId) {
+        this.empId = empId;
+    }
+
     public long getId() {
         return id;
     }

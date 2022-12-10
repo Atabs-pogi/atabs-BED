@@ -1,7 +1,9 @@
 package com.atabs.atabbe.service;
 
 import com.atabs.atabbe.dao.AccountDao;
+import com.atabs.atabbe.dao.EmployeeDao;
 import com.atabs.atabbe.entity.AccountEntity;
+import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import java.util.List;
 public class AccountService {
     @Autowired
     private AccountDao accountDao;
+    @Autowired
+    private EmployeeDao employeeDao;
 
     public AccountEntity authenticate(Account account) {
         String username = account.getUsername();
@@ -46,6 +50,8 @@ public class AccountService {
 
     public String addAccount(Account account) {
         AccountEntity accountEntity = new AccountEntity();
+        EmployeeEntity employeeEntity = new EmployeeEntity();
+        employeeEntity=employeeDao.getEmployeeInfo(account.getEmpId());
         int accountExist = accountDao.findAccountByUsername(account.getUsername());
         if (accountExist > 0) {
             throw new IllegalStateException("username taken");
@@ -53,6 +59,8 @@ public class AccountService {
             accountEntity.setUsername(account.getUsername());
             accountEntity.setPassword(account.getPassword());
             accountEntity.setRole(account.getRole());
+            accountEntity.setEmployeeEntity(employeeEntity);
+
             accountDao.save(accountEntity);
             return "Successful";
         }
