@@ -4,7 +4,9 @@ import com.atabs.atabbe.dao.PosDao;
 import com.atabs.atabbe.dao.TransactionDao;
 import com.atabs.atabbe.entity.PosEntity;
 import com.atabs.atabbe.entity.TransactionEntity;
+import com.atabs.atabbe.entity.TransactionItemEntity;
 import com.atabs.atabbe.model.Pos;
+import com.atabs.atabbe.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +21,6 @@ public class PosService {
 
     @Autowired
     private TransactionDao transactionDao;
-
-//    public String addPos(Pos pos) {
-//        PosEntity posEntity = new PosEntity();
-//        posEntity.setPlantName(pos.getPlantName());
-//        posEntity.setPlantGrade(pos.getPlantGrade());
-//        posEntity.setPlantKilogram(pos.getPlantKilogram());
-//        posEntity.setPlantPrice(pos.getPlantPrice());
-//        posEntity.setPlantTotal(pos.getPlantPrice() * pos.getPlantKilogram());
-//        posEntity.setFarmerId(pos.getFarmerId());
-//        posDao.save(posEntity);
-//        return "Successful";
-//    }
 
     public List<Pos> searchPosByName(String name) {
         List<PosEntity> entityPos = (List<PosEntity>) posDao.searchPosByName(name);
@@ -80,7 +70,42 @@ public class PosService {
         }catch (Exception e){
             return "Exception "  + e.getMessage();
         }
+    }
 
 
+    public String insertTransaction(ArrayList<Transaction> transactions) {
+        try{
+            TransactionEntity transactionEntity = new TransactionEntity();
+
+            transactionEntity.setFarmerId(transactions.get(0).getFarmerId());
+            transactionEntity.setTotalAmount(transactions.get(0).getTotalAmount());
+
+            ArrayList<TransactionItemEntity> transactionItemEntities = new ArrayList<>();
+            for(Transaction transaction : transactions){
+                TransactionItemEntity transactionItem = new TransactionItemEntity();
+                transactionItem.setTuxyId(transaction.getTuxyId());
+
+                transactionItem.setExcellentAmount(transaction.getGoodAmount());
+                transactionItem.setExcellentKilo(transaction.getGoodKg());
+
+                transactionItem.setDiscarteAmount(transaction.getDiscarteAmount());
+                transactionItem.setDiskarteKilo(transaction.getDiscarteKg());
+
+                transactionItem.setResecoKilo(transaction.getResecoKg());
+                transactionItem.setResecoAmount(transaction.getResecoAmount());
+
+                transactionItemEntities.add(transactionItem);
+
+            }
+
+
+            transactionEntity.setItems(transactionItemEntities);
+
+
+            transactionDao.save(transactionEntity);
+            return "Success";
+        }catch (Exception e){
+            return "Exception "  + e.getMessage();
+        }
     }
 }

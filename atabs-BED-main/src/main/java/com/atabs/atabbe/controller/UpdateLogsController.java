@@ -22,13 +22,13 @@ public class UpdateLogsController {
 
     @PostMapping("/add")
     public ResponseEntity addTuxy(@RequestBody UpdateTuxy updateTuxy) {
-        return new ResponseEntity(tuxyService.save(updateTuxy), HttpStatus.CREATED);
+        return new ResponseEntity(tuxyService.AddLogs(updateTuxy), HttpStatus.CREATED);
     }
 
-
-    @GetMapping("/get")
-    public ResponseEntity getTuxy() {
-        return new ResponseEntity(tuxyService.get(), HttpStatus.CREATED);
+    
+    @GetMapping("/search")
+    public ResponseEntity search(@RequestParam("name") String name) {
+        return new ResponseEntity(tuxyService.searchByName(name), HttpStatus.CREATED);
     }
 
 

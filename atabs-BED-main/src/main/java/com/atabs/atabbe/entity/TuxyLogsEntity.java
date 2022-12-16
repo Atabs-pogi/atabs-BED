@@ -19,6 +19,10 @@ public class TuxyLogsEntity {
 
 
 
+    private String tuxyName;
+
+
+
 //    @OneToOne(targetEntity = TuxyLogsEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn(name = "tuxy_id" ,referencedColumnName ="id" )
 //    private TuxyEntity tuxy;
@@ -85,13 +89,14 @@ public class TuxyLogsEntity {
     }
 
 
-//    public TuxyEntity getTuxy() {
-//        return tuxy;
-//    }
-//
-//    public void setTuxy(TuxyEntity tuxy) {
-//        this.tuxy = tuxy;
-//    }
+    public String getTuxyName() {
+        return tuxyName;
+    }
+
+    public void setTuxyName(String tuxyName) {
+        this.tuxyName = tuxyName;
+    }
+
 
 
 

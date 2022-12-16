@@ -12,22 +12,22 @@ public class TransactionItemEntity {
     @Column(name = "item_id")
     private long id;
 
-    private String plantName;
-
-    private String plantGrade;
-
-    private double plantPrice;
-
-    private double plantKilogram;
 
 
 
-//    @ManyToOne
-//    @JoinColumn(name="transactionsId", nullable=false)
-//    private TransactionEntity transactionEntity;
+    private long tuxyId;
 
+    private double excellentKilo;
 
+    private double excellentAmount;
 
+    private double diskarteKilo;
+
+    private double discarteAmount;
+
+    private double resecoKilo;
+
+    private double resecoAmount;
 
     public long getId() {
         return id;
@@ -37,44 +37,68 @@ public class TransactionItemEntity {
         this.id = id;
     }
 
-    public String getPlantName() {
-        return plantName;
+    public long getTuxyId() {
+        return tuxyId;
     }
 
-    public void setPlantName(String plantName) {
-        this.plantName = plantName;
-    }
-
-    public String getPlantGrade() {
-        return plantGrade;
-    }
-
-    public void setPlantGrade(String plantGrade) {
-        this.plantGrade = plantGrade;
-    }
-
-    public double getPlantPrice() {
-        return plantPrice;
-    }
-
-    public void setPlantPrice(double plantPrice) {
-        this.plantPrice = plantPrice;
-    }
-
-    public double getPlantKilogram() {
-        return plantKilogram;
-    }
-
-    public void setPlantKilogram(double plantKilogram) {
-        this.plantKilogram = plantKilogram;
+    public void setTuxyId(long tuxyId) {
+        this.tuxyId = tuxyId;
     }
 
 
-//    public TransactionEntity getTransactionEntity() {
-//        return transactionEntity;
-//    }
-//
-//    public void setTransactionEntity(TransactionEntity transactionEntity) {
-//        this.transactionEntity = transactionEntity;
-//    }
+
+    public double getExcellentKilo() {
+        return excellentKilo;
+    }
+
+    public void setExcellentKilo(double excellentKilo) {
+        this.excellentKilo = excellentKilo;
+    }
+
+    public double getExcellentAmount() {
+        return excellentAmount;
+    }
+
+    public void setExcellentAmount(double excellentAmount) {
+        this.excellentAmount = excellentAmount;
+    }
+
+    public double getDiskarteKilo() {
+        return diskarteKilo;
+    }
+
+    public void setDiskarteKilo(double diskarteKilo) {
+        this.diskarteKilo = diskarteKilo;
+    }
+
+    public double getDiscarteAmount() {
+        return discarteAmount;
+    }
+
+    public void setDiscarteAmount(double discarteAmount) {
+        this.discarteAmount = discarteAmount;
+    }
+
+    public double getResecoKilo() {
+        return resecoKilo;
+    }
+
+    public void setResecoKilo(double resecoKilo) {
+        this.resecoKilo = resecoKilo;
+    }
+
+    public double getResecoAmount() {
+        return resecoAmount;
+    }
+
+    public void setResecoAmount(double resecoAmount) {
+        this.resecoAmount = resecoAmount;
+    }
+//    @ManyToOne
+//    @JoinColumn(name="transactionsId", nullable=false)
+//    private TransactionEntity transactionEntity;
+
+
+
+
 }
