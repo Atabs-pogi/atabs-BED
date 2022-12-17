@@ -9,7 +9,7 @@ public class AccountEntity {
 
     @Id
     @GeneratedValue(generator = "account_seq", strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "account_seq", sequenceName = "account_sequence", initialValue = 2022101, allocationSize = 10000000)
+    @SequenceGenerator(name = "account_seq", sequenceName = "account_sequence", initialValue = 2022101, allocationSize = 50)
     @Column(name = "accountId")
     private long accountId;
     private String username;
@@ -19,8 +19,8 @@ public class AccountEntity {
     @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
     private int status = 1;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "emp_id",referencedColumnName = "empId")
     private EmployeeEntity employeeEntity;
 
     public long getAccountId() {

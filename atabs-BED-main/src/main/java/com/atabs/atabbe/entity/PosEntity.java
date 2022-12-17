@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class PosEntity {
     @Id
     @GeneratedValue(generator = "pos_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "pos_seq", sequenceName = "pos_sequence", initialValue = 101, allocationSize = 10000000)
+    @SequenceGenerator(name = "pos_seq", sequenceName = "pos_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "transactionsId")
     private long transactionsId;
     private String plantName;

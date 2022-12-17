@@ -10,6 +10,8 @@ import java.time.Period;
 public class EmployeeEntity {
 
     @Id
+    @GeneratedValue(generator = "emp_seq", strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "emp_seq", sequenceName = "employee_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "empId")
     private long empId;
     private String firstName;
@@ -36,17 +38,6 @@ public class EmployeeEntity {
         this.imageLocation = imageLocation;
     }
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private AccountEntity accountEntity;
-
-    public AccountEntity getAccountEntity() {
-        return accountEntity;
-    }
-
-    public void setAccountEntity(AccountEntity accountEntity) {
-        this.accountEntity = accountEntity;
-    }
 
     @PrePersist
     protected void onCreate() {
@@ -99,7 +90,8 @@ public class EmployeeEntity {
     }
 
     public int getAge() {
-        return Period.between(this.birthday, LocalDate.now()).getYears();
+//        return Period.between(this.birthday, LocalDate.now()).getYears();
+        return 0;
     }
 
     public void setAge(int age) {
