@@ -100,6 +100,14 @@ public class FarmerEntity {
         this.age = age;
     }
 
+//    public int getAge() {
+//        return Period.between(this.birthday, LocalDate.now()).getYears();
+//    }
+//
+//    public void setAge(int age) {
+//        this.age = age;
+//    }
+
     public String getMobileNumber() {
         return mobileNumber;
     }

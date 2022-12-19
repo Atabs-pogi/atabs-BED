@@ -1,13 +1,21 @@
 package com.atabs.atabbe.service;
 
+import com.atabs.atabbe.dao.FarmerDao;
 import com.atabs.atabbe.dao.PosDao;
 import com.atabs.atabbe.dao.TransactionDao;
+import com.atabs.atabbe.dao.TuxyDao;
 import com.atabs.atabbe.entity.PosEntity;
 import com.atabs.atabbe.entity.TransactionEntity;
 import com.atabs.atabbe.entity.TransactionItemEntity;
+import com.atabs.atabbe.entity.TuxyEntity;
+import com.atabs.atabbe.exception.NotFoundException;
+import com.atabs.atabbe.helper.LoggerHelper;
+import com.atabs.atabbe.helper.Message;
 import com.atabs.atabbe.model.Pos;
 import com.atabs.atabbe.model.Transaction;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,9 +26,15 @@ public class PosService {
     @Autowired
     private PosDao posDao;
 
+    @Autowired
+    private FarmerDao farmerDao;
 
     @Autowired
     private TransactionDao transactionDao;
+
+
+    @Autowired
+    private TuxyDao tuxyDao;
 
     public List<Pos> searchPosByName(String name) {
         List<PosEntity> entityPos = (List<PosEntity>) posDao.searchPosByName(name);
@@ -73,39 +87,84 @@ public class PosService {
     }
 
 
-    public String insertTransaction(ArrayList<Transaction> transactions) {
+    public String insertTransaction(Transaction transactions) throws Exception {
         try{
-            TransactionEntity transactionEntity = new TransactionEntity();
-
-            transactionEntity.setFarmerId(transactions.get(0).getFarmerId());
-            transactionEntity.setTotalAmount(transactions.get(0).getTotalAmount());
-
+            boolean isExist = farmerDao.existsById(transactions.getFarmerid());
+            Gson gson = new Gson();
             ArrayList<TransactionItemEntity> transactionItemEntities = new ArrayList<>();
-            for(Transaction transaction : transactions){
-                TransactionItemEntity transactionItem = new TransactionItemEntity();
-                transactionItem.setTuxyId(transaction.getTuxyId());
+            if(isExist){
+                double price = 0;
+                double totalAmount = 0;
+                for(Transaction.Items transaction_items : transactions.getItems()){
+                    LoggerHelper.info("POSSERVICE",gson.toJson(transaction_items.getTuxyId()));
 
-                transactionItem.setExcellentAmount(transaction.getGoodAmount());
-                transactionItem.setExcellentKilo(transaction.getGoodKg());
+                    boolean isTuxyExist = tuxyDao.existsById(transaction_items.getTuxyId());
 
-                transactionItem.setDiscarteAmount(transaction.getDiscarteAmount());
-                transactionItem.setDiskarteKilo(transaction.getDiscarteKg());
+                    if (isTuxyExist){
+                        TuxyEntity tuxyEntity =  tuxyDao.findById(transaction_items.getTuxyId()).get();
 
-                transactionItem.setResecoKilo(transaction.getResecoKg());
-                transactionItem.setResecoAmount(transaction.getResecoAmount());
+                        TransactionItemEntity transactionItem = new TransactionItemEntity();
+                        transactionItem.setTuxyId(transaction_items.getTuxyId());
+                        transactionItem.setType(transaction_items.getQuality());
+                        transactionItem.setQuantity(transaction_items.getQuantity());
 
-                transactionItemEntities.add(transactionItem);
+                        if(transaction_items.getQuality().equalsIgnoreCase("EXCELLENT")){
+                            price = tuxyEntity.getGoodPrice() * transaction_items.getQuantity();
+                            totalAmount += price;
+                            transactionItem.setValue(tuxyEntity.getGoodPrice());
+                            transactionItem.setPrice(price);
+                            transactionItemEntities.add(transactionItem);
+                        }else if(transaction_items.getQuality().equalsIgnoreCase("GOOD")){
+                            price = tuxyEntity.getDiscartePrice() * transaction_items.getQuantity();
+                            totalAmount += price;
+                            transactionItem.setValue(tuxyEntity.getDiscartePrice());
+                            transactionItem.setPrice(price);
+                            transactionItemEntities.add(transactionItem);
+                        }else if(transaction_items.getQuality().equalsIgnoreCase("RESECO")){
+                            price = tuxyEntity.getResecoPrice() * transaction_items.getQuantity();
+                            totalAmount += price;
+                            transactionItem.setValue(tuxyEntity.getResecoPrice());
+                            transactionItem.setPrice(price);
+                            transactionItemEntities.add(transactionItem);
+                        }
+
+
+                        LoggerHelper.info("POSSERVICE",gson.toJson(tuxyEntity));
+
+                    }else{
+                        throw new NotFoundException(Message.ERROR_MESSAGE_FOR_NOT_EXIST.replace("<object>","tuxy"));
+                    }
+                }
+
+                LoggerHelper.info("POSSERVICE",gson.toJson(transactionItemEntities));
+                TransactionEntity transaction = new TransactionEntity();
+                transaction.setFarmerId(transactions.getFarmerid());
+                transaction.setTotalAmount(totalAmount);
+                transaction.setItems(transactionItemEntities);
+                transactionDao.save(transaction);
+                transactionDao.flush();
+                return  String.valueOf(transaction.getTransactionsId()) ;
 
             }
-
-
-            transactionEntity.setItems(transactionItemEntities);
-
-
-            transactionDao.save(transactionEntity);
-            return "Success";
-        }catch (Exception e){
-            return "Exception "  + e.getMessage();
+            throw new NotFoundException(Message.ERROR_MESSAGE_FOR_NOT_EXIST.replace("<object>","farmer"));
+        } catch (NotFoundException e){
+            throw new NotFoundException(e.getMessage());
+        } catch (Exception e){
+            throw new Exception("Exception "  + e.getMessage());
         }
+
+    }
+
+
+
+
+    public ArrayList<TransactionEntity> getAll() throws Exception {
+        try{
+            return (ArrayList<TransactionEntity>) transactionDao.findAll();
+
+        } catch (Exception e){
+            throw new Exception("Exception "  + e.getMessage());
+        }
+
     }
 }
