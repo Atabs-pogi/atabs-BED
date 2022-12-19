@@ -1,94 +1,61 @@
 package com.atabs.atabbe.model;
 
 
-public class Transaction {
+import java.util.List;
 
+public  class Transaction {
+
+    private List<Items> items;
     private long farmerId;
-    private long tuxyId;
-    private double goodKg;
-    private double goodAmount;
-    private double discarteKg;
-    private double discarteAmount;
-    private double resecoKg;
-    private double resecoAmount;
 
+    public List<Items> getItems() {
+        return items;
+    }
 
+    public void setItems(List<Items> items) {
+        this.items = items;
+    }
 
-
-    private double totalAmount;
-
-    public long getFarmerId() {
+    public long getFarmerid() {
         return farmerId;
     }
 
-    public void setFarmerId(long farmerId) {
+    public void setFarmerid(long farmerId) {
         this.farmerId = farmerId;
     }
 
-    public long getTuxyId() {
-        return tuxyId;
+    public static class Items {
+        private double quantity;
+        private String quality;
+
+        private long tuxyId;
+
+        public long getTuxyId() {
+            return tuxyId;
+        }
+
+        public void setTuxyId(long tuxyId) {
+            this.tuxyId = tuxyId;
+        }
+
+
+
+        public double getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(double quantity) {
+            this.quantity = quantity;
+        }
+
+        public String getQuality() {
+            return quality;
+        }
+
+        public void setQuality(String quality) {
+            this.quality = quality;
+        }
+
+
     }
-
-    public void setTuxyId(long tuxyId) {
-        this.tuxyId = tuxyId;
-    }
-
-    public double getGoodKg() {
-        return goodKg;
-    }
-
-    public void setGoodKg(double goodKg) {
-        this.goodKg = goodKg;
-    }
-
-    public double getGoodAmount() {
-        return goodAmount;
-    }
-
-    public void setGoodAmount(double goodAmount) {
-        this.goodAmount = goodAmount;
-    }
-
-    public double getDiscarteKg() {
-        return discarteKg;
-    }
-
-    public void setDiscarteKg(double discarteKg) {
-        this.discarteKg = discarteKg;
-    }
-
-    public double getDiscarteAmount() {
-        return discarteAmount;
-    }
-
-    public void setDiscarteAmount(double discarteAmount) {
-        this.discarteAmount = discarteAmount;
-    }
-
-    public double getResecoKg() {
-        return resecoKg;
-    }
-
-    public void setResecoKg(double resecoKg) {
-        this.resecoKg = resecoKg;
-    }
-
-    public double getResecoAmount() {
-        return resecoAmount;
-    }
-
-    public void setResecoAmount(double resecoAmount) {
-        this.resecoAmount = resecoAmount;
-    }
-
-
-    public double getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-
 }

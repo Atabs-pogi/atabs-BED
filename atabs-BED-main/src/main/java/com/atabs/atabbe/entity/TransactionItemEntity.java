@@ -12,22 +12,15 @@ public class TransactionItemEntity {
     @Column(name = "item_id")
     private long id;
 
-
-
-
     private long tuxyId;
 
-    private double excellentKilo;
+    private String type;
 
-    private double excellentAmount;
+    private double quantity;
 
-    private double diskarteKilo;
+    private double value;
 
-    private double discarteAmount;
-
-    private double resecoKilo;
-
-    private double resecoAmount;
+    private double price;
 
     public long getId() {
         return id;
@@ -45,54 +38,36 @@ public class TransactionItemEntity {
         this.tuxyId = tuxyId;
     }
 
-
-
-    public double getExcellentKilo() {
-        return excellentKilo;
+    public String getType() {
+        return type;
     }
 
-    public void setExcellentKilo(double excellentKilo) {
-        this.excellentKilo = excellentKilo;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public double getExcellentAmount() {
-        return excellentAmount;
+    public double getQuantity() {
+        return quantity;
     }
 
-    public void setExcellentAmount(double excellentAmount) {
-        this.excellentAmount = excellentAmount;
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
     }
 
-    public double getDiskarteKilo() {
-        return diskarteKilo;
+    public double getValue() {
+        return value;
     }
 
-    public void setDiskarteKilo(double diskarteKilo) {
-        this.diskarteKilo = diskarteKilo;
+    public void setValue(double value) {
+        this.value = value;
     }
 
-    public double getDiscarteAmount() {
-        return discarteAmount;
+    public double getPrice() {
+        return price;
     }
 
-    public void setDiscarteAmount(double discarteAmount) {
-        this.discarteAmount = discarteAmount;
-    }
-
-    public double getResecoKilo() {
-        return resecoKilo;
-    }
-
-    public void setResecoKilo(double resecoKilo) {
-        this.resecoKilo = resecoKilo;
-    }
-
-    public double getResecoAmount() {
-        return resecoAmount;
-    }
-
-    public void setResecoAmount(double resecoAmount) {
-        this.resecoAmount = resecoAmount;
+    public void setPrice(double price) {
+        this.price = price;
     }
 //    @ManyToOne
 //    @JoinColumn(name="transactionsId", nullable=false)

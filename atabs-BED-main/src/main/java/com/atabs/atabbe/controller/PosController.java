@@ -3,6 +3,7 @@ package com.atabs.atabbe.controller;
 
 import com.atabs.atabbe.dao.TransactionDao;
 import com.atabs.atabbe.entity.TransactionEntity;
+import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.Pos;
 import com.atabs.atabbe.model.Transaction;
 import com.atabs.atabbe.service.PosService;
@@ -45,15 +46,29 @@ public class PosController {
     }
 
 
-    @PostMapping("/addPosBulk")
-    public ResponseEntity addPosBulk(@RequestBody ArrayList<Transaction> transactions) {
-        return new ResponseEntity(posService.insertTransaction(transactions), HttpStatus.CREATED);
+    @PostMapping("/save")
+    public ResponseEntity addPosBulk(@RequestBody Transaction transactions) {
+        try {
+            return new ResponseEntity(posService.insertTransaction(transactions), HttpStatus.CREATED);
+        } catch (NotFoundException n) {
+            return new ResponseEntity(n.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-//    @GetMapping("/save")
-//    public ResponseEntity getAllBulk(@RequestBody TransactionEntity transactionEntity) {
+    @GetMapping("/all")
+    public ResponseEntity getAllBulk() {
 //        return new ResponseEntity(posService.save(transactionEntity), HttpStatus.CREATED);
-//    }
+
+        try {
+            return new ResponseEntity(posService.getAll(), HttpStatus.CREATED);
+        } catch (NotFoundException n) {
+            return new ResponseEntity(n.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }

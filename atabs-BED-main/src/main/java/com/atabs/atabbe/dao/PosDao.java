@@ -27,4 +27,9 @@ public interface PosDao extends JpaRepository<PosEntity, Long> {
     @Query(value = "Update transactions set plant_kilogram=:plantKilogram,plant_total=:plantTotal where transactions_id=:transactionsId", nativeQuery = true)
     Integer updatePos(double plantKilogram, double plantTotal, long transactionsId);
 
+
+//    @Query(value = "SELECT * FROM transactions WHERE transactions_id=:transact_id", nativeQuery = true)
+//    PosEntity PosInfo(Long tuxyId);
+
+
 }
