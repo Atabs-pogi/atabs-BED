@@ -92,7 +92,8 @@ public class FarmerEntity {
     }
 
     public int getAge() {
-        return Period.between(this.birthday, LocalDate.now()).getYears();
+//        return Period.between(this.birthday, Date.now()).getYears();
+        return 0;
     }
 
     public void setAge(int age) {
