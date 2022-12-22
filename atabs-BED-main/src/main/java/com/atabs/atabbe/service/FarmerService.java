@@ -22,7 +22,7 @@ public class FarmerService {
 
     public List<Farmer> searchFarmerByName(String name) {
         List<FarmerEntity> entityFarmers = farmerDao.searchFarmerByName(name);
-        LoggerHelper.info("FarmerService",new Gson().toJson(entityFarmers));
+        LoggerHelper.info("FarmerService", new Gson().toJson(entityFarmers));
         List<Farmer> farmers = new ArrayList<>();
         for (FarmerEntity farmer : entityFarmers) {
             farmers.add(Farmer.from(farmer));
@@ -35,38 +35,12 @@ public class FarmerService {
         return farmerDao.getFarmerInfo(farmer_id);
     }
 
-//    public String addFarmer(Farmer farmer) {
-//        FarmerEntity farmerEntity = new FarmerEntity();
-//
-//            int emailExist = farmerDao.findFarmerByEmail(farmer.getEmail());
-//            if (emailExist > 0) {
-//                return "This email is already taken";
-//            } else {
-//                farmerEntity.setFirstName(farmer.getFirstName());
-//                farmerEntity.setMiddleName(farmer.getMiddleName());
-//                farmerEntity.setLastName(farmer.getLastName());
-//                farmerEntity.setBirthday(farmer.getBirthday());
-//                farmerEntity.setMobileNumber(farmer.getMobileNumber());
-//                farmerEntity.setEmail(farmer.getEmail());
-//                farmerEntity.setImageLocation(farmer.getImageLocation());
-//                if (farmer.getAddress() != null)
-//                    farmerEntity.setAddress(farmer.getAddress().toString());
-//                farmerEntity.setSex(farmer.getSex());
-//                farmerEntity.setStatus(farmerEntity.getStatus());
-//                farmerDao.save(farmerEntity);
-//                return "Successful";
-//            }
-//
-//    }
-
-
-
-    public String addFarmer(Farmer farmer){
+    public String addFarmer(Farmer farmer) {
         FarmerEntity farmerEntity = new FarmerEntity();
         int emailExist = farmerDao.findFarmerByEmail(farmer.getEmail());
         if (emailExist > 0) {
             return "This email is already taken";
-        }else{
+        } else {
             farmerEntity.setFirstName(farmer.getFirstName());
             farmerEntity.setMiddleName(farmer.getMiddleName());
             farmerEntity.setLastName(farmer.getLastName());
@@ -108,25 +82,4 @@ public class FarmerService {
             throw new IllegalStateException("This ID cannot be found");
         }
     }
-//    public Farmer updateFarmer(Farmer farmer) {
-//        FarmerEntity farmerEntity = farmerDao.findById(farmer.getId()).orElse(null);
-//        if (farmerEntity != null) {
-//            farmerEntity.setFirstName(farmer.getFirstName());
-//            farmerEntity.setMiddleName(farmer.getMiddleName());
-//            farmerEntity.setLastName(farmer.getLastName());
-//            farmerEntity.setBirthday(farmer.getBirthday());
-//            farmerEntity.setMobileNumber(farmer.getMobileNumber());
-//            farmerEntity.setEmail(farmer.getEmail());
-//
-//            if (farmer.getAddress() != null)
-//                farmerEntity.setAddress(farmer.getAddress().toString());
-//            farmerEntity.setSex(farmer.getSex());
-//            farmerEntity.setStatus(farmer.getStatus());
-//            farmerDao.save(farmerEntity);
-//            return farmer;
-//        } else {
-//            throw new IllegalStateException("This ID cannot be found");
-//        }
-//
-//    }
 }
