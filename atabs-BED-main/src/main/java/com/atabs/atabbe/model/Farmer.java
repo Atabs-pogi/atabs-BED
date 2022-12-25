@@ -124,7 +124,6 @@ public class Farmer {
         farmer.lastName = entity.getLastName();
         farmer.birthday = entity.getBirthday();
         farmer.imageLocation = entity.getImageLocation();
-//        farmer.age = entity.getAge();
         farmer.mobileNumber = entity.getMobileNumber();
         farmer.email = entity.getEmail();
         farmer.sex = entity.getSex();
