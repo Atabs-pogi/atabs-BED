@@ -13,11 +13,16 @@ import com.atabs.atabbe.helper.LoggerHelper;
 import com.atabs.atabbe.helper.Message;
 import com.atabs.atabbe.model.Pos;
 import com.atabs.atabbe.model.Transaction;
+import com.atabs.atabbe.model.TransactionResponse;
+import com.atabs.atabbe.model.UpdateTransaction;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,8 +94,10 @@ public class PosService {
 
     public String insertTransaction(Transaction transactions) throws Exception {
         try{
-            boolean isExist = farmerDao.existsById(transactions.getFarmerid());
             Gson gson = new Gson();
+            LoggerHelper.info("POSSERVICE",gson.toJson(transactions));
+            boolean isExist = farmerDao.existsById(transactions.getFarmerId());
+
             ArrayList<TransactionItemEntity> transactionItemEntities = new ArrayList<>();
             if(isExist){
                 double price = 0;
@@ -105,6 +112,7 @@ public class PosService {
 
                         TransactionItemEntity transactionItem = new TransactionItemEntity();
                         transactionItem.setTuxyId(transaction_items.getTuxyId());
+                        transactionItem.setTuxyName(tuxyEntity.getName());
                         transactionItem.setType(transaction_items.getQuality());
                         transactionItem.setQuantity(transaction_items.getQuantity());
 
@@ -138,15 +146,19 @@ public class PosService {
 
                 LoggerHelper.info("POSSERVICE",gson.toJson(transactionItemEntities));
                 TransactionEntity transaction = new TransactionEntity();
-                transaction.setFarmerId(transactions.getFarmerid());
+                transaction.setFarmerId(transactions.getFarmerId());
                 transaction.setTotalAmount(totalAmount);
                 transaction.setItems(transactionItemEntities);
                 transactionDao.save(transaction);
                 transactionDao.flush();
+                TransactionResponse transactionResponse = new TransactionResponse();
+                transactionResponse.setTransactionId(transaction.getTransactionsId());
+//                return  transactionResponse ;
                 return  String.valueOf(transaction.getTransactionsId()) ;
-
             }
             throw new NotFoundException(Message.ERROR_MESSAGE_FOR_NOT_EXIST.replace("<object>","farmer"));
+
+
         } catch (NotFoundException e){
             throw new NotFoundException(e.getMessage());
         } catch (Exception e){
@@ -158,9 +170,36 @@ public class PosService {
 
 
 
+    public ArrayList<TransactionEntity> getAll(int status) throws Exception {
+        try{
+            return (ArrayList<TransactionEntity>) transactionDao.transactionList(status);
+
+        } catch (Exception e){
+            throw new Exception("Exception "  + e.getMessage());
+        }
+
+    }
+
     public ArrayList<TransactionEntity> getAll() throws Exception {
         try{
             return (ArrayList<TransactionEntity>) transactionDao.findAll();
+
+        } catch (Exception e){
+            throw new Exception("Exception "  + e.getMessage());
+        }
+
+    }
+
+
+    public String updateTransaction(UpdateTransaction updateTransaction) throws Exception {
+        try{
+            int result =  transactionDao.updateTransaction(
+                    updateTransaction.getStatus(),
+                    updateTransaction.getMerchantPayment(),
+                    updateTransaction.getTransaction_id(),
+                    LocalDateTime.now()
+            );
+            return result == 1? "Successfully transaction" : "Failed transaction";
 
         } catch (Exception e){
             throw new Exception("Exception "  + e.getMessage());

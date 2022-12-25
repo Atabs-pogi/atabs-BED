@@ -1,5 +1,6 @@
 package com.atabs.atabbe.controller;
 
+import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.helper.FileCreated;
 import com.atabs.atabbe.model.Account;
 import com.atabs.atabbe.model.Employee;
@@ -35,8 +36,15 @@ public class EmployeeController {
     }
 
     @PostMapping("/addEmployee")
-    public ResponseEntity addEmployee(@RequestBody Employee employee, Account account) {
-        return new ResponseEntity(employeeService.addEmployee(employee, account), HttpStatus.CREATED);
+    public ResponseEntity addEmployee(@RequestBody Employee employee) {
+
+        try {
+            return new ResponseEntity(employeeService.addEmployee(employee), HttpStatus.CREATED);
+        } catch (NotFoundException n) {
+            return new ResponseEntity(n.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/updateEmployee")

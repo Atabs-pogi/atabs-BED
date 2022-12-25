@@ -6,6 +6,7 @@ import com.atabs.atabbe.entity.TransactionEntity;
 import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.Pos;
 import com.atabs.atabbe.model.Transaction;
+import com.atabs.atabbe.model.UpdateTransaction;
 import com.atabs.atabbe.service.PosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,12 +58,11 @@ public class PosController {
         }
     }
 
-    @GetMapping("/all")
-    public ResponseEntity getAllBulk() {
-//        return new ResponseEntity(posService.save(transactionEntity), HttpStatus.CREATED);
+    @GetMapping("/all/{status}")
+    public ResponseEntity getAllBulk(@PathVariable(value = "status") int status) {
 
         try {
-            return new ResponseEntity(posService.getAll(), HttpStatus.CREATED);
+            return new ResponseEntity(posService.getAll(status), HttpStatus.OK);
         } catch (NotFoundException n) {
             return new ResponseEntity(n.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
@@ -70,5 +70,29 @@ public class PosController {
         }
     }
 
+    @GetMapping("/all")
+    public ResponseEntity getAllBulk() {
+
+        try {
+            return new ResponseEntity(posService.getAll(), HttpStatus.OK);
+        } catch (NotFoundException n) {
+            return new ResponseEntity(n.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    /*
+    * @status 0 - DeActive | 1- Not Release payment | 2-Released payment
+    * */
+    @PutMapping("/update")
+    public ResponseEntity updateTransaction(@RequestBody UpdateTransaction updateTransaction) {
+        try {
+            return new ResponseEntity(posService.updateTransaction(updateTransaction), HttpStatus.OK);
+        } catch (NotFoundException n) {
+            return new ResponseEntity(n.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
