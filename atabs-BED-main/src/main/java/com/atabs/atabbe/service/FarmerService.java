@@ -1,14 +1,11 @@
 package com.atabs.atabbe.service;
 
 import com.atabs.atabbe.dao.FarmerDao;
-import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.entity.FarmerEntity;
 import com.atabs.atabbe.helper.LoggerHelper;
-import com.atabs.atabbe.model.Employee;
 import com.atabs.atabbe.model.Farmer;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +16,9 @@ public class FarmerService {
 
     @Autowired
     private FarmerDao farmerDao;
+
+//    @Autowired
+//    private FarmerTenDao farmerTenDao;
 
     public List<Farmer> searchFarmerByName(String name) {
         List<FarmerEntity> entityFarmers = farmerDao.searchFarmerByName(name);
@@ -82,4 +82,16 @@ public class FarmerService {
             throw new IllegalStateException("This ID cannot be found");
         }
     }
+
+    public int farmerCount() {
+        int  count = farmerDao.countFarmer(1);
+        return count;
+    }
+//    public TopTenFarmers test() {
+//        TopTenFarmers  count = farmerTenDao.test();
+//        return count;
+//    }
+
+
+
 }

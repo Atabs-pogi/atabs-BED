@@ -36,5 +36,10 @@ public class FarmerController {
         return new ResponseEntity(farmerService.updateFarmer(farmer), HttpStatus.OK);
     }
 
+    @GetMapping("/getFarmerCount")
+    public ResponseEntity getFarmerCount() {
+        return new ResponseEntity(farmerService.farmerCount(), HttpStatus.OK);
+    }
+
 
 }
