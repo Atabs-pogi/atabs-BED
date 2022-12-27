@@ -6,6 +6,15 @@ import java.util.List;
 public  class Transaction {
 
     private List<Items> items;
+
+    public long getFarmerId() {
+        return farmerId;
+    }
+
+    public void setFarmerId(long farmerId) {
+        this.farmerId = farmerId;
+    }
+
     private long farmerId;
 
     public List<Items> getItems() {
@@ -16,13 +25,6 @@ public  class Transaction {
         this.items = items;
     }
 
-    public long getFarmerid() {
-        return farmerId;
-    }
-
-    public void setFarmerid(long farmerId) {
-        this.farmerId = farmerId;
-    }
 
     public static class Items {
         private double quantity;

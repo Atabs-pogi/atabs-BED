@@ -19,4 +19,11 @@ public interface FarmerDao extends JpaRepository<FarmerEntity, Long> {
 
     @Query(value = "SELECT * FROM farmers WHERE first_name like %:match% OR middle_name like %:match% OR last_name like %:match%", nativeQuery = true)
     List<FarmerEntity> searchFarmerByName(String match);
+
+
+    @Query(value = "Select COUNT(*) from farmers where status =:status", nativeQuery = true)
+    int countFarmer(int status);
+
+    @Query(value = "Select farmer.address, farmer.first_name,farmer.image_location from coop.farmers  as farmer join coop.transactions as trans on farmer.farmer_id = trans.farmer_id", nativeQuery = true)
+    String test();
 }

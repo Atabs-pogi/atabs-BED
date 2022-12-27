@@ -20,6 +20,8 @@ public class TransactionEntity {
     private double totalAmount;
 
 
+    private double merchantPayment;
+
     @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 1")
     private int status = 1;
 
@@ -31,6 +33,10 @@ public class TransactionEntity {
 
 
     private LocalDateTime transactionDate;
+
+
+    private LocalDateTime releaseDate;
+
 
     @PrePersist
     protected void onCreate() {
@@ -84,5 +90,21 @@ public class TransactionEntity {
         this.status = status;
     }
 
+    public LocalDateTime getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(LocalDateTime releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+
+    public double getMerchantPayment() {
+        return merchantPayment;
+    }
+
+    public void setMerchantPayment(double merchantPayment) {
+        this.merchantPayment = merchantPayment;
+    }
 
 }
