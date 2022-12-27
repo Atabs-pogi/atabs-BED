@@ -1,11 +1,16 @@
 package com.atabs.atabbe.controller;
 
+import com.atabs.atabbe.entity.AccountEntity;
+import com.atabs.atabbe.entity.FarmerEntity;
+import com.atabs.atabbe.entity.MerchantProductEntity;
 import com.atabs.atabbe.model.Farmer;
 import com.atabs.atabbe.service.FarmerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("farmer")
@@ -31,7 +36,7 @@ public class FarmerController {
 //        return new ResponseEntity("test", HttpStatus.CREATED);
     }
 
-    @PutMapping("/updateFarmer")
+    @PostMapping("/updateFarmer")
     public ResponseEntity updateFarmer(@RequestBody Farmer farmer) {
         return new ResponseEntity(farmerService.updateFarmer(farmer), HttpStatus.OK);
     }
@@ -41,5 +46,8 @@ public class FarmerController {
         return new ResponseEntity(farmerService.farmerCount(), HttpStatus.OK);
     }
 
-
+    @GetMapping("/getAllFarmer")
+    public List<FarmerEntity> findAllFarmer(){
+        return farmerService.getFarmer();
+    }
 }

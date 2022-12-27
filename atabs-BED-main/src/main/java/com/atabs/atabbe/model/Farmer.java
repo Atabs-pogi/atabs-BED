@@ -11,8 +11,16 @@ public class Farmer {
     private String middleName;
     private String lastName;
     private LocalDate birthday;
+    private String estimatedAnnualIncome;
+    private String civilStatus;
+    private String spouse;
+    private String educationalAttainment;
+    private String noOfDependents;
+    private String affiliation;
     private int age;
     private String mobileNumber;
+    private String facebookAccount;
+    private String viberAccount;
     private String email;
     private String sex;
     private int status;
@@ -76,6 +84,54 @@ public class Farmer {
         this.birthday = birthday;
     }
 
+    public String getEstimatedAnnualIncome() {
+        return estimatedAnnualIncome;
+    }
+
+    public void setEstimatedAnnualIncome(String estimatedAnnualIncome) {
+        this.estimatedAnnualIncome = estimatedAnnualIncome;
+    }
+
+    public String getCivilStatus() {
+        return civilStatus;
+    }
+
+    public void setCivilStatus(String civilStatus) {
+        this.civilStatus = civilStatus;
+    }
+
+    public String getSpouse() {
+        return spouse;
+    }
+
+    public void setSpouse(String spouse) {
+        this.spouse = spouse;
+    }
+
+    public String getEducationalAttainment() {
+        return educationalAttainment;
+    }
+
+    public void setEducationalAttainment(String educationalAttainment) {
+        this.educationalAttainment = educationalAttainment;
+    }
+
+    public String getNoOfDependents() {
+        return noOfDependents;
+    }
+
+    public void setNoOfDependents(String noOfDependents) {
+        this.noOfDependents = noOfDependents;
+    }
+
+    public String getAffiliation() {
+        return affiliation;
+    }
+
+    public void setAffiliation(String affiliation) {
+        this.affiliation = affiliation;
+    }
+
     public int getAge() {
         return age;
     }
@@ -90,6 +146,22 @@ public class Farmer {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public String getFacebookAccount() {
+        return facebookAccount;
+    }
+
+    public void setFacebookAccount(String facebookAccount) {
+        this.facebookAccount = facebookAccount;
+    }
+
+    public String getViberAccount() {
+        return viberAccount;
+    }
+
+    public void setViberAccount(String viberAccount) {
+        this.viberAccount = viberAccount;
     }
 
     public String getEmail() {
