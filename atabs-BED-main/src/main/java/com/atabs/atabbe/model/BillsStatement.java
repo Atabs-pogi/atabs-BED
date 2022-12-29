@@ -1,5 +1,7 @@
 package com.atabs.atabbe.model;
 
+import com.atabs.atabbe.entity.BillsStatementEntity;
+
 import java.time.LocalDateTime;
 
 public class BillsStatement {
@@ -7,10 +9,19 @@ public class BillsStatement {
     private long id;
     private String type;
     private String name;
-    private String accountNo;
-    private String Amount;
     private String dueDate;
     private LocalDateTime importDate;
+
+    public static BillsStatement from(BillsStatementEntity billing) {
+        BillsStatement billsStatement = new BillsStatement();
+        billsStatement.id=billing.getId();
+        billsStatement.name=billing.getName();
+        billsStatement.type=billing.getType();
+        billsStatement.dueDate= billsStatement.getDueDate();
+        billsStatement.importDate=billing.getImportDate();
+        return billsStatement;
+
+    }
 
     public long getId() {
         return id;
@@ -34,22 +45,6 @@ public class BillsStatement {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getAccountNo() {
-        return accountNo;
-    }
-
-    public void setAccountNo(String accountNo) {
-        this.accountNo = accountNo;
-    }
-
-    public String getAmount() {
-        return Amount;
-    }
-
-    public void setAmount(String amount) {
-        Amount = amount;
     }
 
     public String getDueDate() {

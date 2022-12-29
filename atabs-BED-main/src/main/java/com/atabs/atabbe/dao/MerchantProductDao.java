@@ -12,9 +12,12 @@ import java.util.List;
 @Repository
 public interface MerchantProductDao extends JpaRepository<MerchantProductEntity, Long> {
 
-    @Query(value = "Select * from product_merchant where product_id =:mrc_id", nativeQuery = true)
+    @Query(value = "Select * from merchant_product where product_id =:mrc_id", nativeQuery = true)
     MerchantProductEntity getProductInfo(Long mrc_id);
 
-    @Query(value = "SELECT * FROM product_merchant WHERE item like %:match% OR price like %:match%", nativeQuery = true)
+    @Query(value = "SELECT COUNT(item) FROM merchant_product WHERE item =:item", nativeQuery = true)
+    int findProductByItem(String item);
+
+    @Query(value = "SELECT * FROM merchant_product WHERE item like %:match% OR price like %:match%", nativeQuery = true)
     List<MerchantProductEntity> searchProductByName(String match);
 }

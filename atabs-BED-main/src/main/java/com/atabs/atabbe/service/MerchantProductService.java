@@ -3,13 +3,9 @@ package com.atabs.atabbe.service;
 import com.atabs.atabbe.dao.MerchantProductDao;
 import com.atabs.atabbe.dao.MerchantTransactionProductDao;
 import com.atabs.atabbe.entity.*;
-import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.helper.LoggerHelper;
-import com.atabs.atabbe.helper.Message;
 import com.atabs.atabbe.model.MerchantProduct;
-import com.atabs.atabbe.model.Transaction;
 import com.atabs.atabbe.model.TransactionMerchant;
-import com.atabs.atabbe.model.TransactionResponse;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,10 +22,14 @@ public class MerchantProductService {
     private MerchantTransactionProductDao merchantTransactionProductDao;
 
 
+    public String addProduct(MerchantProduct merchantProduct) {
 
-    public String addProduct(MerchantProduct merchantProduct){
-        MerchantProductEntity merchantProductEntity= new MerchantProductEntity();
-        merchantProductEntity.setItem(merchantProduct.getItem());
+        MerchantProductEntity merchantProductEntity = new MerchantProductEntity();
+        int itemExist = merchantProductDao.findProductByItem(merchantProduct.getItem());
+        if (itemExist > 0){
+            throw new IllegalStateException("This item is already exist");
+        }
+            merchantProductEntity.setItem(merchantProduct.getItem());
         merchantProductEntity.setQuantity(merchantProduct.getQuantity());
         merchantProductEntity.setPrice(merchantProduct.getPrice());
         merchantProductDao.save(merchantProductEntity);
@@ -42,7 +42,7 @@ public class MerchantProductService {
     }
 
     public String updateProduct(MerchantProduct merchantProduct) {
-        MerchantProductEntity merchantProductEntity= merchantProductDao.findById(merchantProduct.getProductId()).orElse(null);
+        MerchantProductEntity merchantProductEntity = merchantProductDao.findById(merchantProduct.getProductId()).orElse(null);
         assert merchantProductEntity != null;
         merchantProductEntity.setItem(merchantProduct.getItem());
         merchantProductEntity.setQuantity(merchantProduct.getQuantity());
@@ -64,9 +64,9 @@ public class MerchantProductService {
 
 
     public TransactionMerchantEntity insertTransaction(TransactionMerchant transactions) throws Exception {
-        try{
+        try {
             Gson gson = new Gson();
-            LoggerHelper.info("insertTransaction",gson.toJson(transactions));
+            LoggerHelper.info("insertTransaction", gson.toJson(transactions));
 
             TransactionMerchantEntity transactionMerchantEntity = new TransactionMerchantEntity();
             transactionMerchantEntity.setTotalItem(transactions.getItems().size());
@@ -75,7 +75,7 @@ public class MerchantProductService {
 
             double totalAmount = 0;
             ArrayList<TransactionMerchantItemEntity> transactionMerchantItemEntities = new ArrayList<>();
-            for(TransactionMerchant.Items items : transactions.getItems()){
+            for (TransactionMerchant.Items items : transactions.getItems()) {
 
                 totalAmount += items.getSubAmount();
                 TransactionMerchantItemEntity transactionMerchantItemEntity = new TransactionMerchantItemEntity();
@@ -96,19 +96,18 @@ public class MerchantProductService {
             return transactionMerchantEntity;
 
 
-
-        } catch (Exception e){
-            throw new Exception("Exception "  + e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("Exception " + e.getMessage());
         }
 
     }
 
     public ArrayList<TransactionMerchantEntity> getAll() throws Exception {
-        try{
+        try {
             return (ArrayList<TransactionMerchantEntity>) merchantTransactionProductDao.findAll();
 
-        } catch (Exception e){
-            throw new Exception("Exception "  + e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("Exception " + e.getMessage());
         }
 
     }

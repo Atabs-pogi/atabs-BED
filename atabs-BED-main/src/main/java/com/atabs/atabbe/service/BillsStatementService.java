@@ -7,6 +7,7 @@ import com.atabs.atabbe.model.BillsStatement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,8 +20,6 @@ public class BillsStatementService {
         BillsStatementEntity billsStatementEntity= new BillsStatementEntity();
         billsStatementEntity.setName(billsStatement.getName());
         billsStatementEntity.setType(billsStatement.getType());
-        billsStatementEntity.setAccountNo(billsStatement.getAccountNo());
-        billsStatementEntity.setAmount(billsStatement.getAmount());
         billsStatementEntity.setDueDate(billsStatement.getDueDate());
         billsStatementDao.save(billsStatementEntity);
         return "Bills added successfully";
@@ -35,10 +34,18 @@ public class BillsStatementService {
         assert billsStatementEntity != null;
         billsStatementEntity.setName(billsStatement.getName());
         billsStatementEntity.setType(billsStatement.getType());
-        billsStatementEntity.setAccountNo(billsStatement.getAccountNo());
-        billsStatementEntity.setAmount(billsStatement.getAmount());
         billsStatementEntity.setDueDate(billsStatement.getDueDate());
         billsStatementDao.save(billsStatementEntity);
         return "Update Successfully";
+    }
+
+    public List<BillsStatement> searchBillsByName(String name) {
+        List<BillsStatementEntity> entityBills=billsStatementDao.searchBillsByName(name);
+        List<BillsStatement> bills= new ArrayList<>();
+        for(BillsStatementEntity billing:entityBills){
+            bills.add(BillsStatement.from(billing));
+        }
+        return bills;
+
     }
 }
