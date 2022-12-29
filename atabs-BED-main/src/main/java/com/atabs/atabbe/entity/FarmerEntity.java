@@ -11,17 +11,25 @@ public class FarmerEntity {
 
     @Id
     @GeneratedValue(generator = "farm_seq", strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "farm_seq", sequenceName = "farm_sequence", initialValue = 100001, allocationSize = 50)
+    @SequenceGenerator(name = "farm_seq", sequenceName = "farm_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "farmerId")
     private long farmerId;
     private String firstName;
     private String middleName;
     private String lastName;
     private LocalDate birthday;
+    private String estimatedAnnualIncome;
+    private String civilStatus;
+    private String spouse;
+    private String educationalAttainment;
+    private String noOfDependents;
+    private String affiliation;
     private String imageLocation;
     @Transient
     private int age;
     private String mobileNumber;
+    private String facebookAccount;
+    private String viberAccount;
     private String email;
     private String address;
     private String sex;
@@ -87,6 +95,62 @@ public class FarmerEntity {
         return birthday;
     }
 
+    public long getFarmerId() {
+        return farmerId;
+    }
+
+    public void setFarmerId(long farmerId) {
+        this.farmerId = farmerId;
+    }
+
+    public String getEstimatedAnnualIncome() {
+        return estimatedAnnualIncome;
+    }
+
+    public void setEstimatedAnnualIncome(String estimatedAnnualIncome) {
+        this.estimatedAnnualIncome = estimatedAnnualIncome;
+    }
+
+    public String getCivilStatus() {
+        return civilStatus;
+    }
+
+    public void setCivilStatus(String civilStatus) {
+        this.civilStatus = civilStatus;
+    }
+
+    public String getSpouse() {
+        return spouse;
+    }
+
+    public void setSpouse(String spouse) {
+        this.spouse = spouse;
+    }
+
+    public String getEducationalAttainment() {
+        return educationalAttainment;
+    }
+
+    public void setEducationalAttainment(String educationalAttainment) {
+        this.educationalAttainment = educationalAttainment;
+    }
+
+    public String getNoOfDependents() {
+        return noOfDependents;
+    }
+
+    public void setNoOfDependents(String noOfDependents) {
+        this.noOfDependents = noOfDependents;
+    }
+
+    public String getAffiliation() {
+        return affiliation;
+    }
+
+    public void setAffiliation(String affiliation) {
+        this.affiliation = affiliation;
+    }
+
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
@@ -96,9 +160,9 @@ public class FarmerEntity {
         return 0;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+//    public void setAge(int age) {
+//        this.age = age;
+//    }
 
 //    public int getAge() {
 //        return Period.between(this.birthday, LocalDate.now()).getYears();
@@ -114,6 +178,22 @@ public class FarmerEntity {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public String getFacebookAccount() {
+        return facebookAccount;
+    }
+
+    public void setFacebookAccount(String facebookAccount) {
+        this.facebookAccount = facebookAccount;
+    }
+
+    public String getViberAccount() {
+        return viberAccount;
+    }
+
+    public void setViberAccount(String viberAccount) {
+        this.viberAccount = viberAccount;
     }
 
     public String getEmail() {

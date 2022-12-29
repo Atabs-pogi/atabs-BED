@@ -43,7 +43,6 @@ public class MerchantProductController {
         return new ResponseEntity(merchantProductService.searchProductByName(name), HttpStatus.OK);
     }
 
-
     @PostMapping("/saveTransaction")
     public ResponseEntity addPosBulk(@RequestBody TransactionMerchant transactions) {
         try {

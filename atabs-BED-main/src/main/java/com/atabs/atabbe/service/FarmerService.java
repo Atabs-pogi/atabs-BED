@@ -1,6 +1,7 @@
 package com.atabs.atabbe.service;
 
 import com.atabs.atabbe.dao.FarmerDao;
+import com.atabs.atabbe.entity.AccountEntity;
 import com.atabs.atabbe.entity.FarmerEntity;
 import com.atabs.atabbe.helper.LoggerHelper;
 import com.atabs.atabbe.model.Farmer;
@@ -22,7 +23,7 @@ public class FarmerService {
 
     public List<Farmer> searchFarmerByName(String name) {
         List<FarmerEntity> entityFarmers = farmerDao.searchFarmerByName(name);
-        LoggerHelper.info("FarmerService", new Gson().toJson(entityFarmers));
+//        LoggerHelper.info("FarmerService", new Gson().toJson(entityFarmers));
         List<Farmer> farmers = new ArrayList<>();
         for (FarmerEntity farmer : entityFarmers) {
             farmers.add(Farmer.from(farmer));
@@ -47,7 +48,15 @@ public class FarmerService {
             if (farmer.getBirthday() != null) {
                 farmerEntity.setBirthday(farmer.getBirthday());
             }
+            farmerEntity.setEstimatedAnnualIncome(farmer.getEstimatedAnnualIncome());
+            farmerEntity.setCivilStatus(farmer.getCivilStatus());
+            farmerEntity.setSpouse(farmer.getSpouse());
+            farmerEntity.setEducationalAttainment(farmer.getEducationalAttainment());
+            farmerEntity.setNoOfDependents(farmer.getNoOfDependents());
+            farmerEntity.setAffiliation(farmer.getAffiliation());
             farmerEntity.setMobileNumber(farmer.getMobileNumber());
+            farmerEntity.setFacebookAccount(farmer.getFacebookAccount());
+            farmerEntity.setViberAccount(farmer.getViberAccount());
             farmerEntity.setEmail(farmer.getEmail());
             if (farmer.getAddress() != null) {
                 farmerEntity.setAddress(farmer.getAddress().toString());
@@ -56,7 +65,7 @@ public class FarmerService {
             farmerEntity.setSex(farmer.getSex());
             farmerEntity.setStatus(farmerEntity.getStatus());
             farmerDao.save(farmerEntity);
-            return "";
+            return "Farmer added Successfully";
         }
     }
 
@@ -69,7 +78,15 @@ public class FarmerService {
             if (farmer.getBirthday() != null) {
                 farmerEntity.setBirthday(farmer.getBirthday());
             }
+            farmerEntity.setEstimatedAnnualIncome(farmer.getEstimatedAnnualIncome());
+            farmerEntity.setCivilStatus(farmer.getCivilStatus());
+            farmerEntity.setSpouse(farmer.getSpouse());
+            farmerEntity.setEducationalAttainment(farmer.getEducationalAttainment());
+            farmerEntity.setNoOfDependents(farmer.getNoOfDependents());
+            farmerEntity.setAffiliation(farmer.getAffiliation());
             farmerEntity.setMobileNumber(farmer.getMobileNumber());
+            farmerEntity.setFacebookAccount(farmer.getFacebookAccount());
+            farmerEntity.setViberAccount(farmer.getViberAccount());
             farmerEntity.setEmail(farmer.getEmail());
             if (farmer.getAddress() != null) {
                 farmerEntity.setAddress(farmer.getAddress().toString());
@@ -86,6 +103,10 @@ public class FarmerService {
     public int farmerCount() {
         int  count = farmerDao.countFarmer(1);
         return count;
+    }
+
+    public List<FarmerEntity> getFarmer() {
+        return farmerDao.findAll();
     }
 //    public TopTenFarmers test() {
 //        TopTenFarmers  count = farmerTenDao.test();
