@@ -21,6 +21,7 @@ public class BillsStatementService {
         billsStatementEntity.setType(billsStatement.getType());
         billsStatementEntity.setAccountNo(billsStatement.getAccountNo());
         billsStatementEntity.setAmount(billsStatement.getAmount());
+        billsStatementEntity.setDueDate(billsStatement.getDueDate());
         billsStatementDao.save(billsStatementEntity);
         return "Bills added successfully";
     }
@@ -36,6 +37,7 @@ public class BillsStatementService {
         billsStatementEntity.setType(billsStatement.getType());
         billsStatementEntity.setAccountNo(billsStatement.getAccountNo());
         billsStatementEntity.setAmount(billsStatement.getAmount());
+        billsStatementEntity.setDueDate(billsStatement.getDueDate());
         billsStatementDao.save(billsStatementEntity);
         return "Update Successfully";
     }
