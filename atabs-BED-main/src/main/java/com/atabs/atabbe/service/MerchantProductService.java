@@ -53,7 +53,7 @@ public class MerchantProductService {
 
     public List<MerchantProduct> searchProductByName(String name) {
         List<MerchantProductEntity> entityProducts = merchantProductDao.searchProductByName(name);
-        LoggerHelper.info("MerchantService", new Gson().toJson(entityProducts));
+//        LoggerHelper.info("MerchantService", new Gson().toJson(entityProducts));
         List<MerchantProduct> products = new ArrayList<>();
         for (MerchantProductEntity product : entityProducts) {
             products.add(MerchantProduct.from(product));

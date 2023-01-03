@@ -23,7 +23,7 @@ public class FarmerService {
 
     public List<Farmer> searchFarmerByName(String name) {
         List<FarmerEntity> entityFarmers = farmerDao.searchFarmerByName(name);
-        LoggerHelper.info("FarmerService", new Gson().toJson(entityFarmers));
+//        LoggerHelper.info("FarmerService", new Gson().toJson(entityFarmers));
         List<Farmer> farmers = new ArrayList<>();
         for (FarmerEntity farmer : entityFarmers) {
             farmers.add(Farmer.from(farmer));

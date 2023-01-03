@@ -36,7 +36,7 @@ public class FarmerController {
 //        return new ResponseEntity("test", HttpStatus.CREATED);
     }
 
-    @PostMapping("/updateFarmer")
+    @PutMapping("/updateFarmer")
     public ResponseEntity updateFarmer(@RequestBody Farmer farmer) {
         return new ResponseEntity(farmerService.updateFarmer(farmer), HttpStatus.OK);
     }

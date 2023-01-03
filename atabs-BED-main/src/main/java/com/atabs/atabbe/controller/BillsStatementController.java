@@ -28,8 +28,8 @@ public class BillsStatementController {
         return billsStatementService.getBills();
     }
 
-    @PostMapping("/updateBills")
-    public ResponseEntity updateBills(@RequestBody BillsStatement billsStatement){
+    @PutMapping("/updateBills")
+    public ResponseEntity updateProduct(@RequestBody BillsStatement billsStatement){
         return new ResponseEntity(billsStatementService.updateBills(billsStatement), HttpStatus.OK);
     }
 
