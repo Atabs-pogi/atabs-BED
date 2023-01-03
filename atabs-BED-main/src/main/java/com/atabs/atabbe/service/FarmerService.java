@@ -87,6 +87,7 @@ public class FarmerService {
             farmerEntity.setMobileNumber(farmer.getMobileNumber());
             farmerEntity.setFacebookAccount(farmer.getFacebookAccount());
             farmerEntity.setViberAccount(farmer.getViberAccount());
+            farmerEntity.setImageLocation(farmer.getImageLocation());
             farmerEntity.setEmail(farmer.getEmail());
             if (farmer.getAddress() != null) {
                 farmerEntity.setAddress(farmer.getAddress().toString());
