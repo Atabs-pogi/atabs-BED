@@ -195,6 +195,14 @@ public class Farmer {
         farmer.middleName = entity.getMiddleName();
         farmer.lastName = entity.getLastName();
         farmer.birthday = entity.getBirthday();
+        farmer.affiliation= entity.getAffiliation();
+        farmer.civilStatus = entity.getCivilStatus();
+        farmer.educationalAttainment= entity.getEducationalAttainment();
+        farmer.estimatedAnnualIncome= entity.getEstimatedAnnualIncome();
+        farmer.facebookAccount= entity.getFacebookAccount();
+        farmer.noOfDependents = entity.getNoOfDependents();
+        farmer.spouse=entity.getSpouse();
+        farmer.viberAccount= entity.getViberAccount();
         farmer.imageLocation = entity.getImageLocation();
         farmer.mobileNumber = entity.getMobileNumber();
         farmer.email = entity.getEmail();
