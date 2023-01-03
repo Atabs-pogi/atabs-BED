@@ -70,7 +70,7 @@ public class FarmerService {
     }
 
     public Farmer updateFarmer(Farmer farmer) {
-        FarmerEntity farmerEntity = farmerDao.findById(farmer.getId()).orElse(null);
+        FarmerEntity farmerEntity = farmerDao.findById(farmer.getFarmerId()).orElse(null);
         if (farmerEntity != null) {
             farmerEntity.setFirstName(farmer.getFirstName());
             farmerEntity.setMiddleName(farmer.getMiddleName());

@@ -40,5 +40,7 @@ public class ReportController {
         }
     }
 
+    private class JRException extends Exception {
+    }
 }
 

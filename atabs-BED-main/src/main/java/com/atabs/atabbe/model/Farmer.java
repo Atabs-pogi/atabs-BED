@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Farmer {
 
-    private long Id;
+    private long farmerId;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -36,12 +36,12 @@ public class Farmer {
         this.imageLocation = imageLocation;
     }
 
-    public long getId() {
-        return Id;
+    public long getFarmerId() {
+        return farmerId;
     }
 
-    public void setId(long id) {
-        Id = id;
+    public void setFarmerId(long farmerId) {
+        this.farmerId = farmerId;
     }
 
     public Address getAddress() {
@@ -190,7 +190,7 @@ public class Farmer {
 
     public static Farmer from(FarmerEntity entity) {
         Farmer farmer = new Farmer();
-        farmer.Id = entity.getId();
+        farmer.farmerId = entity.getFarmerId();
         farmer.firstName = entity.getFirstName();
         farmer.middleName = entity.getMiddleName();
         farmer.lastName = entity.getLastName();
