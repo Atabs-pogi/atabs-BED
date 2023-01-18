@@ -9,7 +9,7 @@ public class MerchantProduct {
     private long productId;
     private String item;
     private String quantity;
-    private String price;
+    private double price;
     private String status;
 
     private String originalPrice;
@@ -40,11 +40,11 @@ public class MerchantProduct {
         this.quantity = quantity;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

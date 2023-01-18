@@ -11,7 +11,8 @@ public class TransactionMerchantItemEntity {
     @Column(name = "item_id")
     private long id;
 
-    private long merchantId;
+
+    private long productId;
 
     private String  name;
 
@@ -20,12 +21,13 @@ public class TransactionMerchantItemEntity {
     private double price;
     private double subAmount;
 
-    public long getMerchantId() {
-        return merchantId;
+
+    public long getProductId() {
+        return productId;
     }
 
-    public void setMerchantId(long merchantId) {
-        this.merchantId = merchantId;
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
     public String getName() {

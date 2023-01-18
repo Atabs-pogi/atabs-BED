@@ -10,6 +10,8 @@ public class TransactionMerchant {
     private long cashierId;
     private double totalItem;
     private double totalAmount;
+
+
     private double payment;
     private double changed;
 
@@ -69,7 +71,7 @@ public class TransactionMerchant {
         return payment;
     }
 
-    public void setPayment(double paid) {
+    public void setPayment(double payment) {
         this.payment = payment;
     }
 
@@ -83,7 +85,9 @@ public class TransactionMerchant {
 
     public static class Items {
         private long id;
-        private long merchantId;
+
+
+        private long productId;
         private String  name;
         private double quantity;
         private double price;
@@ -97,13 +101,14 @@ public class TransactionMerchant {
             this.id = id;
         }
 
-        public long getMerchantId() {
-            return merchantId;
+        public long getProductId() {
+            return productId;
         }
 
-        public void setMerchantId(long merchantId) {
-            this.merchantId = merchantId;
+        public void setProductId(long productId) {
+            this.productId = productId;
         }
+
 
         public String getName() {
             return name;

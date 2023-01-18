@@ -10,6 +10,6 @@ import java.util.List;
 public interface TuxyLogsDao extends JpaRepository<TuxyLogsEntity,Long> {
 
 
-    @Query(value = "SELECT * FROM tuxy_log WHERE tuxy_name like %:match%", nativeQuery = true)
+    @Query(value = "SELECT * FROM tuxy_log WHERE tuxy_name like %:match% OR create_date like %:match%" , nativeQuery = true)
     List<TuxyLogsEntity> searchByName(String match);
 }
