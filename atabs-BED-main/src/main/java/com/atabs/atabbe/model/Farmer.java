@@ -26,6 +26,7 @@ public class Farmer {
     private int status;
     private Address address;
     private String imageLocation;
+    private long postalCode;
 
 
     public String getImageLocation() {
@@ -188,6 +189,14 @@ public class Farmer {
         this.status = status;
     }
 
+    public long getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(long postalCode) {
+        this.postalCode = postalCode;
+    }
+
     public static Farmer from(FarmerEntity entity) {
         Farmer farmer = new Farmer();
         farmer.farmerId = entity.getFarmerId();
@@ -209,6 +218,7 @@ public class Farmer {
         farmer.sex = entity.getSex();
         farmer.status = entity.getStatus();
         farmer.address = Address.from(entity.getAddress());
+        farmer.postalCode= entity.getPostalCode();
         return farmer;
     }
 }

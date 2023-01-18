@@ -34,6 +34,8 @@ public class FarmerEntity {
     private String address;
     private String sex;
 
+    private long postalCode;
+
 
     @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
     private int status = 1;
@@ -156,21 +158,9 @@ public class FarmerEntity {
     }
 
     public int getAge() {
-//        return Period.between(this.birthday, Date.now()).getYears();
         return 0;
     }
 
-//    public void setAge(int age) {
-//        this.age = age;
-//    }
-
-//    public int getAge() {
-//        return Period.between(this.birthday, LocalDate.now()).getYears();
-//    }
-//
-//    public void setAge(int age) {
-//        this.age = age;
-//    }
 
     public String getMobileNumber() {
         return mobileNumber;
@@ -242,5 +232,13 @@ public class FarmerEntity {
 
     public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public long getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(long postalCode) {
+        this.postalCode = postalCode;
     }
 }

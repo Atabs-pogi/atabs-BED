@@ -16,6 +16,7 @@ public class Employee {
     private String email;
     private Address address;
     private String imageLocation;
+    private long postalCode;
 
 
     public String getImageLocation() {
@@ -76,13 +77,13 @@ public class Employee {
         this.birthday = birthday;
     }
 
-//    public int getAge() {
-//        return age;
-//    }
-//
-//    public void setAge(int age) {
-//        this.age = age;
-//    }
+    public long getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(long postalCode) {
+        this.postalCode = postalCode;
+    }
 
     public String getMobileNumber() {
         return mobileNumber;
@@ -119,6 +120,7 @@ public class Employee {
         employee.mobileNumber = entity.getMobileNumber();
         employee.email = entity.getEmail();
         employee.sex = entity.getSex();
+        employee.postalCode= entity.getPostalCode();
         employee.address = Address.from(entity.getAddress());
         return employee;
     }

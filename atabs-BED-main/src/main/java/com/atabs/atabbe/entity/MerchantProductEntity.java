@@ -15,6 +15,7 @@ public class MerchantProductEntity {
     private String item;
     private String quantity;
     private String price;
+    private String originalPrice;
 
     private LocalDateTime importDate;
 
@@ -57,6 +58,14 @@ public class MerchantProductEntity {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(String originalPrice) {
+        this.originalPrice = originalPrice;
     }
 
     public int getStatus() {

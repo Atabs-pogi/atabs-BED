@@ -12,6 +12,8 @@ public class MerchantProduct {
     private String price;
     private String status;
 
+    private String originalPrice;
+
     private LocalDateTime importDate;
 
     public long getProductId() {
@@ -46,6 +48,14 @@ public class MerchantProduct {
         this.price = price;
     }
 
+    public String getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(String originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -70,6 +80,7 @@ public class MerchantProduct {
         merchantProduct.price = entity.getPrice();
         merchantProduct.quantity = entity.getQuantity();
         merchantProduct.status = String.valueOf(entity.getStatus());
+        merchantProduct.originalPrice= entity.getOriginalPrice();
         return merchantProduct;
     }
 }

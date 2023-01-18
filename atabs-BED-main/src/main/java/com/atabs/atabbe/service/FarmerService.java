@@ -64,6 +64,7 @@ public class FarmerService {
             farmerEntity.setImageLocation(farmer.getImageLocation());
             farmerEntity.setSex(farmer.getSex());
             farmerEntity.setStatus(farmerEntity.getStatus());
+            farmerEntity.setPostalCode(farmer.getPostalCode());
             farmerDao.save(farmerEntity);
             return "Farmer added Successfully";
         }
@@ -94,6 +95,7 @@ public class FarmerService {
             }
             farmerEntity.setSex(farmer.getSex());
             farmerEntity.setStatus(farmer.getStatus());
+            farmerEntity.setPostalCode(farmer.getPostalCode());
             farmerDao.save(farmerEntity);
             return farmer;
         } else {
@@ -109,11 +111,5 @@ public class FarmerService {
     public List<FarmerEntity> getFarmer() {
         return farmerDao.findAll();
     }
-//    public TopTenFarmers test() {
-//        TopTenFarmers  count = farmerTenDao.test();
-//        return count;
-//    }
-
-
 
 }

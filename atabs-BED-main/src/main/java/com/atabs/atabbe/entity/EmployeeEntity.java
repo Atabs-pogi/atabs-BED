@@ -28,6 +28,7 @@ public class EmployeeEntity {
     private LocalDateTime updateDate;
 
     private String imageLocation;
+    private long postalCode;
 
 
     public String getImageLocation() {
@@ -90,7 +91,6 @@ public class EmployeeEntity {
     }
 
     public int getAge() {
-//        return Period.between(this.birthday, LocalDate.now()).getYears();
         return 0;
     }
 
@@ -140,6 +140,14 @@ public class EmployeeEntity {
 
     public LocalDateTime getUpdateDate() {
         return updateDate;
+    }
+
+    public long getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(long postalCode) {
+        this.postalCode = postalCode;
     }
 
     public void setUpdateDate(LocalDateTime updateDate) {

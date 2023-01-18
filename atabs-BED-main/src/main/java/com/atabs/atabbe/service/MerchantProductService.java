@@ -32,6 +32,7 @@ public class MerchantProductService {
             merchantProductEntity.setItem(merchantProduct.getItem());
         merchantProductEntity.setQuantity(merchantProduct.getQuantity());
         merchantProductEntity.setPrice(merchantProduct.getPrice());
+        merchantProductEntity.setOriginalPrice(merchantProduct.getOriginalPrice());
         merchantProductDao.save(merchantProductEntity);
         return "Product added successfully";
     }
@@ -47,13 +48,13 @@ public class MerchantProductService {
         merchantProductEntity.setItem(merchantProduct.getItem());
         merchantProductEntity.setQuantity(merchantProduct.getQuantity());
         merchantProductEntity.setPrice(merchantProduct.getPrice());
+        merchantProductEntity.setOriginalPrice(merchantProduct.getOriginalPrice());
         merchantProductDao.save(merchantProductEntity);
         return "Update Successfully";
     }
 
     public List<MerchantProduct> searchProductByName(String name) {
         List<MerchantProductEntity> entityProducts = merchantProductDao.searchProductByName(name);
-//        LoggerHelper.info("MerchantService", new Gson().toJson(entityProducts));
         List<MerchantProduct> products = new ArrayList<>();
         for (MerchantProductEntity product : entityProducts) {
             products.add(MerchantProduct.from(product));
