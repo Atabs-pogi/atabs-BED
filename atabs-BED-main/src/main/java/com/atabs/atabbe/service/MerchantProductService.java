@@ -71,20 +71,27 @@ public class MerchantProductService {
             TransactionMerchantEntity transactionMerchantEntity = new TransactionMerchantEntity();
             transactionMerchantEntity.setTotalItem(transactions.getItems().size());
 
-            transactionMerchantEntity.setTotalItem(transactions.getItems().size());
 
             double totalAmount = 0;
             ArrayList<TransactionMerchantItemEntity> transactionMerchantItemEntities = new ArrayList<>();
             for(TransactionMerchant.Items items : transactions.getItems()){
+                LoggerHelper.info("insertTransaction",gson.toJson(items));
+                boolean isExist = merchantProductDao.existsById(items.getProductId());
+                if(isExist){
+                    MerchantProductEntity merchantProductEntity = merchantProductDao.findById(items.getProductId()).get();
+                    double subAmount  = (merchantProductEntity.getPrice() * items.getQuantity());
+                    totalAmount += subAmount;
+                    TransactionMerchantItemEntity transactionMerchantItemEntity = new TransactionMerchantItemEntity();
+                    transactionMerchantItemEntity.setProductId(items.getProductId());
+                    transactionMerchantItemEntity.setName(merchantProductEntity.getItem());
+                    transactionMerchantItemEntity.setQuantity(items.getQuantity());
+                    transactionMerchantItemEntity.setPrice(merchantProductEntity.getPrice());
+                    transactionMerchantItemEntity.setSubAmount(subAmount);
+                    transactionMerchantItemEntities.add(transactionMerchantItemEntity);
+                }else{
+                    throw new NotFoundException(Message.ERROR_MESSAGE_FOR_NOT_EXIST.replace("<object>","product id"));
+                }
 
-                totalAmount += items.getSubAmount();
-                TransactionMerchantItemEntity transactionMerchantItemEntity = new TransactionMerchantItemEntity();
-                transactionMerchantItemEntity.setMerchantId(items.getMerchantId());
-                transactionMerchantItemEntity.setName(items.getName());
-                transactionMerchantItemEntity.setQuantity(items.getQuantity());
-                transactionMerchantItemEntity.setPrice(items.getPrice());
-                transactionMerchantItemEntity.setSubAmount(items.getSubAmount());
-                transactionMerchantItemEntities.add(transactionMerchantItemEntity);
             }
 
             transactionMerchantEntity.setTotalAmount(totalAmount);
@@ -97,6 +104,8 @@ public class MerchantProductService {
 
 
 
+        }catch (NotFoundException e){
+            throw new NotFoundException(e.getMessage());
         } catch (Exception e){
             throw new Exception("Exception "  + e.getMessage());
         }

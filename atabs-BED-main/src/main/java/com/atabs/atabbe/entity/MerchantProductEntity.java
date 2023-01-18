@@ -14,7 +14,7 @@ public class MerchantProductEntity {
     private long productId;
     private String item;
     private String quantity;
-    private String price;
+    private double price;
 
     private LocalDateTime importDate;
 
@@ -51,11 +51,11 @@ public class MerchantProductEntity {
         this.quantity = quantity;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
