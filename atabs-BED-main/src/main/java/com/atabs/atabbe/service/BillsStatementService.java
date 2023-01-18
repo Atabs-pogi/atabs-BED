@@ -1,9 +1,10 @@
 package com.atabs.atabbe.service;
 
+import com.atabs.atabbe.dao.BillTransactionDao;
 import com.atabs.atabbe.dao.BillsStatementDao;
-import com.atabs.atabbe.entity.BillsStatementEntity;
-import com.atabs.atabbe.entity.MerchantProductEntity;
+import com.atabs.atabbe.entity.*;
 import com.atabs.atabbe.model.BillsStatement;
+import com.atabs.atabbe.model.ReleaseTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ public class BillsStatementService {
 
     @Autowired
     private BillsStatementDao billsStatementDao;
+    @Autowired
+    private BillTransactionDao billTransactionDao;
 
     public String addBills(BillsStatement billsStatement) {
         BillsStatementEntity billsStatementEntity= new BillsStatementEntity();
@@ -46,6 +49,27 @@ public class BillsStatementService {
             bills.add(BillsStatement.from(billing));
         }
         return bills;
+
+    }
+    public List<String> getListName() {
+        List<String> entityBills = billsStatementDao.listName();
+        return entityBills;
+
+    }
+
+
+    public String addReleaseTransaction(BillsTransaction billsTransaction) {
+        billTransactionDao.save(billsTransaction);
+        return "Successful";
+    }
+
+    public ArrayList<BillsTransaction> getAll() throws Exception {
+        try{
+            return (ArrayList<BillsTransaction>) billTransactionDao.findAll();
+
+        } catch (Exception e){
+            throw new Exception("Exception "  + e.getMessage());
+        }
 
     }
 }

@@ -15,4 +15,8 @@ public interface BillsStatementDao extends JpaRepository<BillsStatementEntity, L
     BillsStatementEntity getBillsInfo(Long bills_id);
     @Query(value = "SELECT * FROM bills WHERE name like %:match% OR type like %:match% ", nativeQuery = true)
     List<BillsStatementEntity> searchBillsByName(String match);
+
+
+    @Query(value = "SELECT name FROM bills order by name asc", nativeQuery = true)
+    List<String> listName();
 }
