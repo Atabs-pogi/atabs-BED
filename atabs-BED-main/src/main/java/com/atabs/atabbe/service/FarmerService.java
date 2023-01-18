@@ -23,7 +23,7 @@ public class FarmerService {
 
     public List<Farmer> searchFarmerByName(String name) {
         List<FarmerEntity> entityFarmers = farmerDao.searchFarmerByName(name);
-        LoggerHelper.info("FarmerService", new Gson().toJson(entityFarmers));
+//        LoggerHelper.info("FarmerService", new Gson().toJson(entityFarmers));
         List<Farmer> farmers = new ArrayList<>();
         for (FarmerEntity farmer : entityFarmers) {
             farmers.add(Farmer.from(farmer));
@@ -70,7 +70,7 @@ public class FarmerService {
     }
 
     public Farmer updateFarmer(Farmer farmer) {
-        FarmerEntity farmerEntity = farmerDao.findById(farmer.getId()).orElse(null);
+        FarmerEntity farmerEntity = farmerDao.findById(farmer.getFarmerId()).orElse(null);
         if (farmerEntity != null) {
             farmerEntity.setFirstName(farmer.getFirstName());
             farmerEntity.setMiddleName(farmer.getMiddleName());
@@ -87,6 +87,7 @@ public class FarmerService {
             farmerEntity.setMobileNumber(farmer.getMobileNumber());
             farmerEntity.setFacebookAccount(farmer.getFacebookAccount());
             farmerEntity.setViberAccount(farmer.getViberAccount());
+            farmerEntity.setImageLocation(farmer.getImageLocation());
             farmerEntity.setEmail(farmer.getEmail());
             if (farmer.getAddress() != null) {
                 farmerEntity.setAddress(farmer.getAddress().toString());

@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface BackupDao extends JpaRepository<DatabaseEntity, Long> {
 
-    @Query(value = "SELECT * FROM backup GROUP BY location",nativeQuery = true)
+    @Query(value = "SELECT * FROM coop.backup",nativeQuery = true)
     List<DatabaseEntity> getDBList();
 }

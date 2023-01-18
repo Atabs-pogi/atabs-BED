@@ -28,8 +28,13 @@ public class BillsStatementController {
         return billsStatementService.getBills();
     }
 
-    @PostMapping("/updateBills")
+    @PutMapping("/updateBills")
     public ResponseEntity updateProduct(@RequestBody BillsStatement billsStatement){
         return new ResponseEntity(billsStatementService.updateBills(billsStatement), HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity search(@RequestParam("name") String name) {
+        return new ResponseEntity(billsStatementService.searchBillsByName(name), HttpStatus.OK);
     }
 }

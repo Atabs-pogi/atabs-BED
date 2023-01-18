@@ -7,9 +7,7 @@ import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.helper.LoggerHelper;
 import com.atabs.atabbe.helper.Message;
 import com.atabs.atabbe.model.MerchantProduct;
-import com.atabs.atabbe.model.Transaction;
 import com.atabs.atabbe.model.TransactionMerchant;
-import com.atabs.atabbe.model.TransactionResponse;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,10 +24,14 @@ public class MerchantProductService {
     private MerchantTransactionProductDao merchantTransactionProductDao;
 
 
+    public String addProduct(MerchantProduct merchantProduct) {
 
-    public String addProduct(MerchantProduct merchantProduct){
-        MerchantProductEntity merchantProductEntity= new MerchantProductEntity();
-        merchantProductEntity.setItem(merchantProduct.getItem());
+        MerchantProductEntity merchantProductEntity = new MerchantProductEntity();
+        int itemExist = merchantProductDao.findProductByItem(merchantProduct.getItem());
+        if (itemExist > 0){
+            throw new IllegalStateException("This item is already exist");
+        }
+            merchantProductEntity.setItem(merchantProduct.getItem());
         merchantProductEntity.setQuantity(merchantProduct.getQuantity());
         merchantProductEntity.setPrice(merchantProduct.getPrice());
         merchantProductDao.save(merchantProductEntity);
@@ -42,7 +44,7 @@ public class MerchantProductService {
     }
 
     public String updateProduct(MerchantProduct merchantProduct) {
-        MerchantProductEntity merchantProductEntity= merchantProductDao.findById(merchantProduct.getProductId()).orElse(null);
+        MerchantProductEntity merchantProductEntity = merchantProductDao.findById(merchantProduct.getProductId()).orElse(null);
         assert merchantProductEntity != null;
         merchantProductEntity.setItem(merchantProduct.getItem());
         merchantProductEntity.setQuantity(merchantProduct.getQuantity());
@@ -53,7 +55,7 @@ public class MerchantProductService {
 
     public List<MerchantProduct> searchProductByName(String name) {
         List<MerchantProductEntity> entityProducts = merchantProductDao.searchProductByName(name);
-        LoggerHelper.info("MerchantService", new Gson().toJson(entityProducts));
+//        LoggerHelper.info("MerchantService", new Gson().toJson(entityProducts));
         List<MerchantProduct> products = new ArrayList<>();
         for (MerchantProductEntity product : entityProducts) {
             products.add(MerchantProduct.from(product));
@@ -64,9 +66,9 @@ public class MerchantProductService {
 
 
     public TransactionMerchantEntity insertTransaction(TransactionMerchant transactions) throws Exception {
-        try{
+        try {
             Gson gson = new Gson();
-            LoggerHelper.info("insertTransaction",gson.toJson(transactions));
+            LoggerHelper.info("insertTransaction", gson.toJson(transactions));
 
             TransactionMerchantEntity transactionMerchantEntity = new TransactionMerchantEntity();
             transactionMerchantEntity.setTotalItem(transactions.getItems().size());
@@ -74,6 +76,7 @@ public class MerchantProductService {
 
             double totalAmount = 0;
             ArrayList<TransactionMerchantItemEntity> transactionMerchantItemEntities = new ArrayList<>();
+
             for(TransactionMerchant.Items items : transactions.getItems()){
                 LoggerHelper.info("insertTransaction",gson.toJson(items));
                 boolean isExist = merchantProductDao.existsById(items.getProductId());
@@ -104,6 +107,7 @@ public class MerchantProductService {
 
 
 
+
         }catch (NotFoundException e){
             throw new NotFoundException(e.getMessage());
         } catch (Exception e){
@@ -113,11 +117,11 @@ public class MerchantProductService {
     }
 
     public ArrayList<TransactionMerchantEntity> getAll() throws Exception {
-        try{
+        try {
             return (ArrayList<TransactionMerchantEntity>) merchantTransactionProductDao.findAll();
 
-        } catch (Exception e){
-            throw new Exception("Exception "  + e.getMessage());
+        } catch (Exception e) {
+            throw new Exception("Exception " + e.getMessage());
         }
 
     }

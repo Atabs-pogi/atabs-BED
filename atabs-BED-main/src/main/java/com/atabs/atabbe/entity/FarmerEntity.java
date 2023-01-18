@@ -155,6 +155,23 @@ public class FarmerEntity {
         this.birthday = birthday;
     }
 
+    public int getAge() {
+//        return Period.between(this.birthday, Date.now()).getYears();
+        return 0;
+    }
+
+//    public void setAge(int age) {
+//        this.age = age;
+//    }
+
+//    public int getAge() {
+//        return Period.between(this.birthday, LocalDate.now()).getYears();
+//    }
+//
+//    public void setAge(int age) {
+//        this.age = age;
+//    }
+
     public String getMobileNumber() {
         return mobileNumber;
     }

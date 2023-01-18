@@ -14,8 +14,7 @@ public class BillsStatementEntity {
     private long id;
     private String type;
     private String name;
-    private String accountNo;
-    private String Amount;
+    private String dueDate;
     private LocalDateTime importDate;
 
     @PrePersist
@@ -47,20 +46,13 @@ public class BillsStatementEntity {
         this.name = name;
     }
 
-    public String getAccountNo() {
-        return accountNo;
+
+    public String getDueDate() {
+        return dueDate;
     }
 
-    public void setAccountNo(String accountNo) {
-        this.accountNo = accountNo;
-    }
-
-    public String getAmount() {
-        return Amount;
-    }
-
-    public void setAmount(String amount) {
-        Amount = amount;
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 
     public LocalDateTime getImportDate() {

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Farmer {
 
-    private long Id;
+    private long farmerId;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -36,12 +36,12 @@ public class Farmer {
         this.imageLocation = imageLocation;
     }
 
-    public long getId() {
-        return Id;
+    public long getFarmerId() {
+        return farmerId;
     }
 
-    public void setId(long id) {
-        Id = id;
+    public void setFarmerId(long farmerId) {
+        this.farmerId = farmerId;
     }
 
     public Address getAddress() {
@@ -190,11 +190,19 @@ public class Farmer {
 
     public static Farmer from(FarmerEntity entity) {
         Farmer farmer = new Farmer();
-        farmer.Id = entity.getId();
+        farmer.farmerId = entity.getFarmerId();
         farmer.firstName = entity.getFirstName();
         farmer.middleName = entity.getMiddleName();
         farmer.lastName = entity.getLastName();
         farmer.birthday = entity.getBirthday();
+        farmer.affiliation=entity.getAffiliation();
+        farmer.civilStatus= entity.getCivilStatus();
+        farmer.educationalAttainment= entity.getEducationalAttainment();
+        farmer.estimatedAnnualIncome= entity.getEstimatedAnnualIncome();
+        farmer.facebookAccount= entity.getFacebookAccount();
+        farmer.noOfDependents= entity.getNoOfDependents();
+        farmer.spouse=entity.getSpouse();
+        farmer.viberAccount= entity.getViberAccount();
         farmer.imageLocation = entity.getImageLocation();
         farmer.mobileNumber = entity.getMobileNumber();
         farmer.email = entity.getEmail();

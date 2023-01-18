@@ -33,7 +33,7 @@ public class MerchantProductController {
         return merchantProductService.getProduct();
     }
 
-    @PostMapping("/updateProduct")
+    @PutMapping("/updateProduct")
     public ResponseEntity updateProduct(@RequestBody MerchantProduct merchantProduct){
         return new ResponseEntity(merchantProductService.updateProduct(merchantProduct), HttpStatus.OK);
     }
@@ -42,7 +42,6 @@ public class MerchantProductController {
     public ResponseEntity search(@RequestParam("name") String name) {
         return new ResponseEntity(merchantProductService.searchProductByName(name), HttpStatus.OK);
     }
-
 
     @PostMapping("/saveTransaction")
     public ResponseEntity addPosBulk(@RequestBody TransactionMerchant transactions) {
