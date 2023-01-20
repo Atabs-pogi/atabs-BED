@@ -15,7 +15,7 @@ public class MerchantProductEntity {
     private String item;
     private String quantity;
 //    private String price;
-    private String originalPrice;
+    private double originalPrice;
     private double price;
 
 
@@ -62,11 +62,11 @@ public class MerchantProductEntity {
         this.price = price;
     }
 
-    public String getOriginalPrice() {
+    public double getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(String originalPrice) {
+    public void setOriginalPrice(double originalPrice) {
         this.originalPrice = originalPrice;
     }
 

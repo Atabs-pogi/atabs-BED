@@ -12,7 +12,7 @@ public class MerchantProduct {
     private double price;
     private String status;
 
-    private String originalPrice;
+    private double originalPrice;
 
     private LocalDateTime importDate;
 
@@ -48,11 +48,11 @@ public class MerchantProduct {
         this.price = price;
     }
 
-    public String getOriginalPrice() {
+    public double getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(String originalPrice) {
+    public void setOriginalPrice(double originalPrice) {
         this.originalPrice = originalPrice;
     }
 
