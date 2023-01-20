@@ -4,6 +4,7 @@ import com.atabs.atabbe.dao.AccountDao;
 import com.atabs.atabbe.dao.EmployeeDao;
 import com.atabs.atabbe.entity.AccountEntity;
 import com.atabs.atabbe.entity.EmployeeEntity;
+import com.atabs.atabbe.entity.FarmerEntity;
 import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.helper.Message;
 import com.atabs.atabbe.model.Account;
@@ -26,6 +27,10 @@ public class EmployeeService {
             employees.add(Employee.from(employee));
         }
         return employees;
+    }
+
+    public List<EmployeeEntity> getEmployee() {
+        return employeeDao.findAll();
     }
 
     public EmployeeEntity getEmployeeInfo(long emp_id) {
