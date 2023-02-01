@@ -5,7 +5,7 @@ import com.atabs.atabbe.entity.AccountEntity;
 import java.util.Set;
 
 public class Account {
-    private long id;
+    private long accountId;
     private String username;
     private String password;
     private String role;
@@ -22,12 +22,12 @@ public class Account {
         this.empId = empId;
     }
 
-    public long getId() {
-        return id;
+    public long getAccountId() {
+        return accountId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 
     public String getUsername() {
@@ -64,11 +64,12 @@ public class Account {
 
     public static Account from(AccountEntity accountEntity) {
         Account account = new Account();
-        account.id = account.getId();
+        account.accountId= accountEntity.getAccountId();
         account.username = accountEntity.getUsername();
         account.password = accountEntity.getPassword();
         account.role = accountEntity.getRole();
         account.status = accountEntity.getStatus();
+        account.empId= account.getEmpId();
         return account;
     }
 }
