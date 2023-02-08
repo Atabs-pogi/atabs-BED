@@ -15,10 +15,10 @@ public class MerchantProductEntity {
     private String item;
     private String quantity;
 
-
-    private String originalPrice;
-
+//    private String price;
+    private double originalPrice;
     private double price;
+
 
     private LocalDateTime importDate;
 
@@ -63,11 +63,11 @@ public class MerchantProductEntity {
         this.price = price;
     }
 
-    public String getOriginalPrice() {
+    public double getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(String originalPrice) {
+    public void setOriginalPrice(double originalPrice) {
         this.originalPrice = originalPrice;
     }
 

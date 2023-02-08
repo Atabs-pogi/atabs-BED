@@ -1,11 +1,15 @@
 package com.atabs.atabbe.controller;
 
+import com.atabs.atabbe.entity.AccountEntity;
+import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.model.Account;
 import com.atabs.atabbe.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("login")
@@ -39,6 +43,11 @@ public class AccountController {
     public ResponseEntity<String> addAccount(@RequestBody Account account) {
         return new ResponseEntity<>(accountService.addAccount(account), HttpStatus.CREATED);
 
+    }
+
+    @GetMapping("/getAllAccount")
+    public List<AccountEntity> findAllAccount(){
+        return accountService.getAccount();
     }
 
 }

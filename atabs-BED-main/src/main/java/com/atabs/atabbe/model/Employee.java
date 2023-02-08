@@ -122,6 +122,7 @@ public class Employee {
         employee.sex = entity.getSex();
         employee.postalCode= entity.getPostalCode();
         employee.address = Address.from(entity.getAddress());
+        employee.imageLocation= entity.getImageLocation();
         return employee;
     }
 
