@@ -18,6 +18,7 @@ import com.atabs.atabbe.model.UpdateTransaction;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.Clock;
@@ -182,7 +183,7 @@ public class PosService {
 
     public ArrayList<TransactionEntity> getAll() throws Exception {
         try{
-            return (ArrayList<TransactionEntity>) transactionDao.findAll();
+            return (ArrayList<TransactionEntity>) transactionDao.findAll(Sort.by(Sort.Direction.DESC, "transactionDate"));
 
         } catch (Exception e){
             throw new Exception("Exception "  + e.getMessage());

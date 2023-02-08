@@ -14,12 +14,11 @@ public class MerchantProductEntity {
     private long productId;
     private String item;
     private String quantity;
-<<<<<<< HEAD
-    private String price;
+
+
     private String originalPrice;
-=======
+
     private double price;
->>>>>>> 2ad10690f1773f9fd224ab7731fd2cf5ef3cf7e0
 
     private LocalDateTime importDate;
 

@@ -26,7 +26,7 @@ public interface TransactionDao extends JpaRepository<TransactionEntity, Long> {
 
 
 
-    @Query(value = "Select * from transactions where status=:status", nativeQuery = true)
+    @Query(value = "Select * from transactions where status=:status order by transactionDate DESC", nativeQuery = true)
     ArrayList<TransactionEntity> transactionList(int status);
 
 

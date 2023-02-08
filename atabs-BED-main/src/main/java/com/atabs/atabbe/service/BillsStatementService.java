@@ -6,6 +6,7 @@ import com.atabs.atabbe.entity.*;
 import com.atabs.atabbe.model.BillsStatement;
 import com.atabs.atabbe.model.ReleaseTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class BillsStatementService {
 
     public ArrayList<BillsTransaction> getAll() throws Exception {
         try{
-            return (ArrayList<BillsTransaction>) billTransactionDao.findAll();
+            return (ArrayList<BillsTransaction>) billTransactionDao.findAll(Sort.by(Sort.Direction.DESC, "dateTime"));
 
         } catch (Exception e){
             throw new Exception("Exception "  + e.getMessage());

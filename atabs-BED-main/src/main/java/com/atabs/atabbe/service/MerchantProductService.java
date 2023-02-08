@@ -10,6 +10,7 @@ import com.atabs.atabbe.model.MerchantProduct;
 import com.atabs.atabbe.model.TransactionMerchant;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -81,6 +82,7 @@ public class MerchantProductService {
             for(TransactionMerchant.Items items : transactions.getItems()){
                 LoggerHelper.info("insertTransaction",gson.toJson(items));
                 boolean isExist = merchantProductDao.existsById(items.getProductId());
+
                 if(isExist){
                     MerchantProductEntity merchantProductEntity = merchantProductDao.findById(items.getProductId()).get();
                     double subAmount  = (merchantProductEntity.getPrice() * items.getQuantity());
@@ -103,7 +105,12 @@ public class MerchantProductService {
             transactionMerchantEntity.setChanged(transactions.getPayment() - totalAmount);
             transactionMerchantEntity.setItems(transactionMerchantItemEntities);
             merchantTransactionProductDao.save(transactionMerchantEntity);
+            LoggerHelper.info("insertTransaction", gson.toJson( updateTransactionQTY(transactions)));
+
             merchantTransactionProductDao.flush();
+//            updateTransactionQTY(transactions);
+//            LoggerHelper.info("insertTransaction", gson.toJson( updateTransactionQTY(transactions)));
+
             return transactionMerchantEntity;
 
 
@@ -117,10 +124,58 @@ public class MerchantProductService {
 
     }
 
+
+    public TransactionMerchantEntity updateTransactionQTY(TransactionMerchant transactions) throws Exception {
+        try {
+            Gson gson = new Gson();
+            LoggerHelper.info("updateTransactionQTY", gson.toJson(transactions));
+
+            TransactionMerchantEntity transactionMerchantEntity = new TransactionMerchantEntity();
+            transactionMerchantEntity.setTotalItem(transactions.getItems().size());
+
+
+            double totalAmount = 0;
+            ArrayList<MerchantProductEntity> transactionMerchantItemEntities = new ArrayList<>();
+
+            for(TransactionMerchant.Items items : transactions.getItems()){
+                LoggerHelper.info("TransactionMerchant for loop",gson.toJson(items));
+                boolean isExist = merchantProductDao.existsById(items.getProductId());
+
+                if(isExist){
+                    MerchantProductEntity merchantProductEntity = merchantProductDao.findById(items.getProductId()).get();
+                    merchantProductEntity.setQuantity(String.valueOf((Double.valueOf(merchantProductEntity.getQuantity() )- items.getQuantity())));
+                    LoggerHelper.info("TransactionMerchant is exist", gson.toJson( merchantProductEntity));
+
+                    transactionMerchantItemEntities.add(merchantProductEntity);
+                }else{
+                    throw new NotFoundException(Message.ERROR_MESSAGE_FOR_NOT_EXIST.replace("<object>","product id"));
+                }
+
+            }
+
+
+            merchantProductDao.saveAll(transactionMerchantItemEntities);
+            merchantProductDao.flush();
+
+
+            return transactionMerchantEntity;
+
+
+
+
+        }catch (NotFoundException e){
+            throw new NotFoundException(e.getMessage());
+        } catch (Exception e){
+            throw new Exception("Exception "  + e.getMessage());
+        }
+
+    }
+
+
     public ArrayList<TransactionMerchantEntity> getAll() throws Exception {
         try {
-            return (ArrayList<TransactionMerchantEntity>) merchantTransactionProductDao.findAll();
-
+            return (ArrayList<TransactionMerchantEntity>) merchantTransactionProductDao.findAll(Sort.by(Sort.Direction.DESC, "transMerchantId"));
+//            return (ArrayList<TransactionMerchantEntity>) merchantTransactionProductDao.findAll(Sort.by(Sort.Direction.ASC, "seatNumber"));
         } catch (Exception e) {
             throw new Exception("Exception " + e.getMessage());
         }
