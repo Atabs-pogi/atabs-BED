@@ -15,17 +15,11 @@ public class TuxyEntity {
 
     private String name;
 
-
-
     private double goodPrice;
     private double discartePrice;
     private double resecoPrice;
 
 
-
-//    @OneToMany(targetEntity = TuxyItemEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "tuxyId" ,referencedColumnName ="id" )
-//    private List<TuxyItemEntity> items;
 
 
     @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 1")

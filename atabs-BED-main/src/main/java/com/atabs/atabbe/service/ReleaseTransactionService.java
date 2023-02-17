@@ -27,4 +27,6 @@ public class ReleaseTransactionService {
     public ReleaseTransactionEntity getReleaseInfo(long transactions_id) {
         return releaseTransactionDao.getReleaseInfo(transactions_id);
     }
+
+
 }

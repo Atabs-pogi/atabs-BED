@@ -1,10 +1,11 @@
 package com.atabs.atabbe.service;
 
 import com.atabs.atabbe.dao.FarmerDao;
-import com.atabs.atabbe.entity.EmployeeEntity;
+import com.atabs.atabbe.entity.AccountEntity;
 import com.atabs.atabbe.entity.FarmerEntity;
-import com.atabs.atabbe.model.Employee;
+import com.atabs.atabbe.helper.LoggerHelper;
 import com.atabs.atabbe.model.Farmer;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,12 @@ public class FarmerService {
     @Autowired
     private FarmerDao farmerDao;
 
+//    @Autowired
+//    private FarmerTenDao farmerTenDao;
+
     public List<Farmer> searchFarmerByName(String name) {
-        List<FarmerEntity> entityFarmers = (List<FarmerEntity>) farmerDao.searchFarmerByName(name);
+        List<FarmerEntity> entityFarmers = farmerDao.searchFarmerByName(name);
+//        LoggerHelper.info("FarmerService", new Gson().toJson(entityFarmers));
         List<Farmer> farmers = new ArrayList<>();
         for (FarmerEntity farmer : entityFarmers) {
             farmers.add(Farmer.from(farmer));
@@ -33,47 +38,78 @@ public class FarmerService {
 
     public String addFarmer(Farmer farmer) {
         FarmerEntity farmerEntity = new FarmerEntity();
-
-            int emailExist = farmerDao.findFarmerByEmail(farmer.getEmail());
-            if (emailExist > 0) {
-                return "This email is already taken";
-            } else {
-                farmerEntity.setFirstName(farmer.getFirstName());
-                farmerEntity.setMiddleName(farmer.getMiddleName());
-                farmerEntity.setLastName(farmer.getLastName());
+        int emailExist = farmerDao.findFarmerByEmail(farmer.getEmail());
+        if (emailExist > 0) {
+            return "This email is already taken";
+        } else {
+            farmerEntity.setFirstName(farmer.getFirstName());
+            farmerEntity.setMiddleName(farmer.getMiddleName());
+            farmerEntity.setLastName(farmer.getLastName());
+            if (farmer.getBirthday() != null) {
                 farmerEntity.setBirthday(farmer.getBirthday());
-                farmerEntity.setMobileNumber(farmer.getMobileNumber());
-                farmerEntity.setEmail(farmer.getEmail());
-                farmerEntity.setImageLocation(farmer.getImageLocation());
-                if (farmer.getAddress() != null)
-                    farmerEntity.setAddress(farmer.getAddress().toString());
-                farmerEntity.setSex(farmer.getSex());
-                farmerEntity.setStatus(farmerEntity.getStatus());
-                farmerDao.save(farmerEntity);
-                return "Successful";
             }
-
+            farmerEntity.setEstimatedAnnualIncome(farmer.getEstimatedAnnualIncome());
+            farmerEntity.setCivilStatus(farmer.getCivilStatus());
+            farmerEntity.setSpouse(farmer.getSpouse());
+            farmerEntity.setEducationalAttainment(farmer.getEducationalAttainment());
+            farmerEntity.setNoOfDependents(farmer.getNoOfDependents());
+            farmerEntity.setAffiliation(farmer.getAffiliation());
+            farmerEntity.setMobileNumber(farmer.getMobileNumber());
+            farmerEntity.setFacebookAccount(farmer.getFacebookAccount());
+            farmerEntity.setViberAccount(farmer.getViberAccount());
+            farmerEntity.setEmail(farmer.getEmail());
+            if (farmer.getAddress() != null) {
+                farmerEntity.setAddress(farmer.getAddress().toString());
+            }
+            farmerEntity.setImageLocation(farmer.getImageLocation());
+            farmerEntity.setSex(farmer.getSex());
+            farmerEntity.setStatus(farmerEntity.getStatus());
+            farmerEntity.setPostalCode(farmer.getPostalCode());
+            farmerDao.save(farmerEntity);
+            return "Farmer added Successfully";
+        }
     }
 
     public Farmer updateFarmer(Farmer farmer) {
-        FarmerEntity farmerEntity = farmerDao.findById(farmer.getId()).orElse(null);
+        FarmerEntity farmerEntity = farmerDao.findById(farmer.getFarmerId()).orElse(null);
         if (farmerEntity != null) {
             farmerEntity.setFirstName(farmer.getFirstName());
             farmerEntity.setMiddleName(farmer.getMiddleName());
             farmerEntity.setLastName(farmer.getLastName());
-            farmerEntity.setBirthday(farmer.getBirthday());
+            if (farmer.getBirthday() != null) {
+                farmerEntity.setBirthday(farmer.getBirthday());
+            }
+            farmerEntity.setEstimatedAnnualIncome(farmer.getEstimatedAnnualIncome());
+            farmerEntity.setCivilStatus(farmer.getCivilStatus());
+            farmerEntity.setSpouse(farmer.getSpouse());
+            farmerEntity.setEducationalAttainment(farmer.getEducationalAttainment());
+            farmerEntity.setNoOfDependents(farmer.getNoOfDependents());
+            farmerEntity.setAffiliation(farmer.getAffiliation());
             farmerEntity.setMobileNumber(farmer.getMobileNumber());
+            farmerEntity.setFacebookAccount(farmer.getFacebookAccount());
+            farmerEntity.setViberAccount(farmer.getViberAccount());
+            farmerEntity.setImageLocation(farmer.getImageLocation());
             farmerEntity.setEmail(farmer.getEmail());
-
-            if (farmer.getAddress() != null)
+            if (farmer.getAddress() != null) {
                 farmerEntity.setAddress(farmer.getAddress().toString());
+            }
             farmerEntity.setSex(farmer.getSex());
             farmerEntity.setStatus(farmer.getStatus());
+            farmerEntity.setPostalCode(farmer.getPostalCode());
             farmerDao.save(farmerEntity);
             return farmer;
         } else {
             throw new IllegalStateException("This ID cannot be found");
         }
-
     }
+
+    public int farmerCount() {
+        int  count = farmerDao.countFarmer(1);
+        return count;
+    }
+
+    public List<FarmerEntity> getFarmer() {
+        return farmerDao.findAll();
+    }
+
 }

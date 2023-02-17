@@ -3,6 +3,7 @@ package com.atabs.atabbe.controller;
 import com.atabs.atabbe.entity.FiberEntity;
 import com.atabs.atabbe.model.Fiber;
 import com.atabs.atabbe.model.Response;
+import com.atabs.atabbe.model.UpdateTuxy;
 import com.atabs.atabbe.service.FiberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,8 +40,8 @@ public class FiberController {
     }
 
     @PutMapping("/updateFiber")
-    public ResponseEntity<FiberEntity> updateFiber(@RequestBody FiberEntity fiber) {
-        return new ResponseEntity<>(fiberService.updateFiber(fiber), HttpStatus.OK);
+    public ResponseEntity updateFiber(@RequestBody UpdateTuxy updateTuxy) {
+        return new ResponseEntity<>(fiberService.updateFiber(updateTuxy), HttpStatus.OK);
     }
 
     @GetMapping("/getFiberGrade/{name}")

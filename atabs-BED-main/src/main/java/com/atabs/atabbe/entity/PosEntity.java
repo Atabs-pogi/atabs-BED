@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "transactions")
+@Table(name = "transactionss")
 public class PosEntity {
     @Id
     @GeneratedValue(generator = "pos_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "pos_seq", sequenceName = "pos_sequence", initialValue = 101, allocationSize = 10000000)
+    @SequenceGenerator(name = "pos_seq", sequenceName = "pos_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "transactionsId")
     private long transactionsId;
     private String plantName;

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class ReleaseTransactionEntity {
     @Id
     @GeneratedValue(generator = "release_seq", strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "release_seq", sequenceName = "release_transaction_sequence", initialValue = 101, allocationSize = 10000000)
+    @SequenceGenerator(name = "release_seq", sequenceName = "release_transaction_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "release_transaction_id")
 
     private long releaseTransactionId;

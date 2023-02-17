@@ -1,5 +1,8 @@
 package com.atabs.atabbe.controller;
 
+import com.atabs.atabbe.entity.EmployeeEntity;
+import com.atabs.atabbe.entity.FarmerEntity;
+import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.helper.FileCreated;
 import com.atabs.atabbe.model.Account;
 import com.atabs.atabbe.model.Employee;
@@ -14,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -35,8 +39,15 @@ public class EmployeeController {
     }
 
     @PostMapping("/addEmployee")
-    public ResponseEntity addEmployee(@RequestBody Employee employee, Account account) {
-        return new ResponseEntity(employeeService.addEmployee(employee, account), HttpStatus.CREATED);
+    public ResponseEntity addEmployee(@RequestBody Employee employee) {
+
+        try {
+            return new ResponseEntity(employeeService.addEmployee(employee), HttpStatus.CREATED);
+        } catch (NotFoundException n) {
+            return new ResponseEntity(n.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/updateEmployee")
@@ -46,5 +57,10 @@ public class EmployeeController {
     @GetMapping("/getEmployeeCount")
     public ResponseEntity getEmployeeCount() {
         return new ResponseEntity(employeeService.employeeCount(), HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllEmployee")
+    public List<EmployeeEntity> findAllEmployee(){
+        return employeeService.getEmployee();
     }
 }

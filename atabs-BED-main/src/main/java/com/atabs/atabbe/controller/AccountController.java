@@ -1,11 +1,15 @@
 package com.atabs.atabbe.controller;
 
+import com.atabs.atabbe.entity.AccountEntity;
+import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.model.Account;
 import com.atabs.atabbe.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("login")
@@ -38,29 +42,12 @@ public class AccountController {
     @PostMapping("/addAccount")
     public ResponseEntity<String> addAccount(@RequestBody Account account) {
         return new ResponseEntity<>(accountService.addAccount(account), HttpStatus.CREATED);
-//
-//        try{
-//            Set<ImageModelEntity> images = uploadImage(file);
-//            account.setAccountImages(images);
-//            accountService.addAccount(account,HttpStatus.CREATED);
-//        }catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//        return null;
-//    }
-//
-//    public Set<ImageModelEntity> uploadImage(MultipartFile[] multipartFiles) throws IOException {
-//        Set<ImageModelEntity> imageModelEntities = new HashSet<>();
-//
-//        for (MultipartFile file : multipartFiles) {
-//            ImageModelEntity imageModelEntity = new ImageModelEntity(
-//                    file.getOriginalFilename(),
-//                    file.getContentType(),
-//                    file.getBytes()
-//            );
-//            imageModelEntities.add(imageModelEntity);
-//        }
-//        return imageModelEntities;
+
+    }
+
+    @GetMapping("/getAllAccount")
+    public List<AccountEntity> findAllAccount(){
+        return accountService.getAccount();
     }
 
 }

@@ -6,18 +6,27 @@ import java.time.LocalDate;
 
 public class Farmer {
 
-    private long Id;
+    private long farmerId;
     private String firstName;
     private String middleName;
     private String lastName;
     private LocalDate birthday;
+    private String estimatedAnnualIncome;
+    private String civilStatus;
+    private String spouse;
+    private String educationalAttainment;
+    private String noOfDependents;
+    private String affiliation;
     private int age;
     private String mobileNumber;
+    private String facebookAccount;
+    private String viberAccount;
     private String email;
     private String sex;
     private int status;
     private Address address;
     private String imageLocation;
+    private long postalCode;
 
 
     public String getImageLocation() {
@@ -28,12 +37,12 @@ public class Farmer {
         this.imageLocation = imageLocation;
     }
 
-    public long getId() {
-        return Id;
+    public long getFarmerId() {
+        return farmerId;
     }
 
-    public void setId(long id) {
-        Id = id;
+    public void setFarmerId(long farmerId) {
+        this.farmerId = farmerId;
     }
 
     public Address getAddress() {
@@ -76,6 +85,54 @@ public class Farmer {
         this.birthday = birthday;
     }
 
+    public String getEstimatedAnnualIncome() {
+        return estimatedAnnualIncome;
+    }
+
+    public void setEstimatedAnnualIncome(String estimatedAnnualIncome) {
+        this.estimatedAnnualIncome = estimatedAnnualIncome;
+    }
+
+    public String getCivilStatus() {
+        return civilStatus;
+    }
+
+    public void setCivilStatus(String civilStatus) {
+        this.civilStatus = civilStatus;
+    }
+
+    public String getSpouse() {
+        return spouse;
+    }
+
+    public void setSpouse(String spouse) {
+        this.spouse = spouse;
+    }
+
+    public String getEducationalAttainment() {
+        return educationalAttainment;
+    }
+
+    public void setEducationalAttainment(String educationalAttainment) {
+        this.educationalAttainment = educationalAttainment;
+    }
+
+    public String getNoOfDependents() {
+        return noOfDependents;
+    }
+
+    public void setNoOfDependents(String noOfDependents) {
+        this.noOfDependents = noOfDependents;
+    }
+
+    public String getAffiliation() {
+        return affiliation;
+    }
+
+    public void setAffiliation(String affiliation) {
+        this.affiliation = affiliation;
+    }
+
     public int getAge() {
         return age;
     }
@@ -90,6 +147,22 @@ public class Farmer {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public String getFacebookAccount() {
+        return facebookAccount;
+    }
+
+    public void setFacebookAccount(String facebookAccount) {
+        this.facebookAccount = facebookAccount;
+    }
+
+    public String getViberAccount() {
+        return viberAccount;
+    }
+
+    public void setViberAccount(String viberAccount) {
+        this.viberAccount = viberAccount;
     }
 
     public String getEmail() {
@@ -116,19 +189,36 @@ public class Farmer {
         this.status = status;
     }
 
+    public long getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(long postalCode) {
+        this.postalCode = postalCode;
+    }
+
     public static Farmer from(FarmerEntity entity) {
         Farmer farmer = new Farmer();
-        farmer.Id = entity.getId();
+        farmer.farmerId = entity.getFarmerId();
         farmer.firstName = entity.getFirstName();
         farmer.middleName = entity.getMiddleName();
         farmer.lastName = entity.getLastName();
         farmer.birthday = entity.getBirthday();
-        farmer.age = entity.getAge();
+        farmer.affiliation=entity.getAffiliation();
+        farmer.civilStatus= entity.getCivilStatus();
+        farmer.educationalAttainment= entity.getEducationalAttainment();
+        farmer.estimatedAnnualIncome= entity.getEstimatedAnnualIncome();
+        farmer.facebookAccount= entity.getFacebookAccount();
+        farmer.noOfDependents= entity.getNoOfDependents();
+        farmer.spouse=entity.getSpouse();
+        farmer.viberAccount= entity.getViberAccount();
+        farmer.imageLocation = entity.getImageLocation();
         farmer.mobileNumber = entity.getMobileNumber();
         farmer.email = entity.getEmail();
         farmer.sex = entity.getSex();
         farmer.status = entity.getStatus();
         farmer.address = Address.from(entity.getAddress());
+        farmer.postalCode= entity.getPostalCode();
         return farmer;
     }
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "transactionss")
+@Table(name = "transactions")
 public class TransactionEntity {
 
 
@@ -15,34 +15,33 @@ public class TransactionEntity {
     @Column(name = "id")
     private long transactionsId;
 
-    private String farmerId;
+    private long farmerId;
 
-    private double plantTotal;
+    private double totalAmount;
+
+
+    private double merchantPayment;
+
+    @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 1")
+    private int status = 1;
+
 
 
     @OneToMany(targetEntity = TransactionItemEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "transactionsId" ,referencedColumnName ="id" )
     private List<TransactionItemEntity> items;
 
-//    @OneToMany(targetEntity = Contact.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "transactionsId" ,referencedColumnName ="id" )
-//    private List<TransactionItemEntity> contacts;
 
     private LocalDateTime transactionDate;
-    private LocalDateTime updateDate;
 
+
+    private LocalDateTime releaseDate;
 
 
     @PrePersist
     protected void onCreate() {
         transactionDate = LocalDateTime.now();
     }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updateDate = LocalDateTime.now();
-    }
-
     public long getTransactionsId() {
         return transactionsId;
     }
@@ -51,20 +50,28 @@ public class TransactionEntity {
         this.transactionsId = transactionsId;
     }
 
-    public String getFarmerId() {
+    public long getFarmerId() {
         return farmerId;
     }
 
-    public void setFarmerId(String farmerId) {
+    public void setFarmerId(long farmerId) {
         this.farmerId = farmerId;
     }
 
-    public double getPlantTotal() {
-        return plantTotal;
+    public double getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setPlantTotal(double plantTotal) {
-        this.plantTotal = plantTotal;
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public List<TransactionItemEntity> getItems() {
+        return items;
+    }
+
+    public void setItems(List<TransactionItemEntity> items) {
+        this.items = items;
     }
 
     public LocalDateTime getTransactionDate() {
@@ -75,19 +82,29 @@ public class TransactionEntity {
         this.transactionDate = transactionDate;
     }
 
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
+    public int getStatus() {
+        return status;
     }
 
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public List<TransactionItemEntity> getItems() {
-        return items;
+    public LocalDateTime getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setItems(ArrayList<TransactionItemEntity> items) {
-        this.items = items;
+    public void setReleaseDate(LocalDateTime releaseDate) {
+        this.releaseDate = releaseDate;
     }
+
+
+    public double getMerchantPayment() {
+        return merchantPayment;
+    }
+
+    public void setMerchantPayment(double merchantPayment) {
+        this.merchantPayment = merchantPayment;
+    }
+
 }

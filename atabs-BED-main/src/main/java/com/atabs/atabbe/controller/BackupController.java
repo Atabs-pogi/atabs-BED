@@ -17,15 +17,15 @@ public class BackupController {
     private BackupService backupService;
 
 
-    @GetMapping("/save")
-    public ResponseEntity backupDB() {
-        return new ResponseEntity<>(backupService.backUp(), HttpStatus.OK);
-    }
+//    @GetMapping("/save")
+//    public ResponseEntity backupDB() {
+//        return new ResponseEntity<>(backupService.backUp(), HttpStatus.OK);
+//    }
 
 
-    @GetMapping("/list")
-    public ResponseEntity getList() {
-        return new ResponseEntity<>(backupService.getBackUpDB(), HttpStatus.OK);
-    }
+//    @GetMapping("/list")
+//    public ResponseEntity getList() {
+//        return new ResponseEntity<>(backupService.getBackUpDB(), HttpStatus.OK);
+//    }
 
 }

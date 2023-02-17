@@ -41,15 +41,15 @@ public class BackUpDatabase {
 
 
     public static boolean backUp(String path,String username,String password,String dbname){
-        Date backupDate = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        String backupDateStr = format.format(backupDate);
-        String fileName = "Daily_DB_Backup"; // default file name
-        String folderPath = "C:\\Users\\Lester\\Documents\\demo\\backup";
-        File f1 = new File(folderPath);
-        f1.mkdir(); // create folder if not exist
-        String saveFileName = fileName + "_" + backupDateStr + ".sql";
-        String savePath = folderPath + File.separator + saveFileName;
+//        Date backupDate = new Date();
+//        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+//        String backupDateStr = format.format(backupDate);
+//        String fileName = "Daily_DB_Backup"; // default file name
+//        String folderPath = "C:\\Users\\Lester\\Documents\\demo\\backup";
+//        File f1 = new File(folderPath);
+//        f1.mkdir(); // create folder if not exist
+//        String saveFileName = fileName + "_" + backupDateStr + ".sql";
+//        String savePath = folderPath + File.separator + saveFileName;
 
 
         String executeCmd = "C://Program Files//MySQL//MySQL Server 8.0/bin/mysqldump -u" + username + " -p" + password
