@@ -43,4 +43,8 @@ public class EmployeeController {
     public ResponseEntity updateEmployee(@RequestBody Employee employee) {
         return new ResponseEntity(employeeService.updateEmployee(employee), HttpStatus.OK);
     }
+    @GetMapping("/getEmployeeCount")
+    public ResponseEntity getEmployeeCount() {
+        return new ResponseEntity(employeeService.employeeCount(), HttpStatus.OK);
+    }
 }

@@ -1,7 +1,9 @@
 package com.atabs.atabbe.service;
 
 import com.atabs.atabbe.dao.AccountDao;
+import com.atabs.atabbe.dao.EmployeeDao;
 import com.atabs.atabbe.entity.AccountEntity;
+import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import java.util.List;
 public class AccountService {
     @Autowired
     private AccountDao accountDao;
+    @Autowired
+    private EmployeeDao employeeDao;
 
     public AccountEntity authenticate(Account account) {
         String username = account.getUsername();
@@ -46,27 +50,38 @@ public class AccountService {
 
     public String addAccount(Account account) {
         AccountEntity accountEntity = new AccountEntity();
+        EmployeeEntity employeeEntity = new EmployeeEntity();
+        employeeEntity = employeeDao.getEmployeeInfo(account.getEmpId());
         int accountExist = accountDao.findAccountByUsername(account.getUsername());
         if (accountExist > 0) {
             throw new IllegalStateException("username taken");
         } else {
+
             accountEntity.setUsername(account.getUsername());
             accountEntity.setPassword(account.getPassword());
             accountEntity.setRole(account.getRole());
+            accountEntity.setEmployeeEntity(employeeEntity);
             accountDao.save(accountEntity);
             return "Successful";
         }
     }
 
     public Account updateAccount(Account account) {
-        AccountEntity accountEntity = accountDao.findById(account.getId()).orElse(null);
+        AccountEntity accountEntity = accountDao.findById(account.getAccountId()).orElse(null);
+        EmployeeEntity employeeEntity1 = new EmployeeEntity();
+        employeeEntity1 = employeeDao.getEmployeeInfo(account.getEmpId());
         if (accountEntity != null) {
             accountEntity.setPassword(account.getPassword());
             accountEntity.setRole(account.getRole());
             accountEntity.setStatus(account.getStatus());
+            accountEntity.setEmployeeEntity(employeeEntity1);
             return account;
         } else {
             throw new IllegalStateException("This ID cannot be found");
         }
+    }
+
+    public List<AccountEntity> getAccount() {
+        return accountDao.findAll();
     }
 }

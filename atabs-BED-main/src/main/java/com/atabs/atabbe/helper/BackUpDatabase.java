@@ -19,7 +19,7 @@ public class BackUpDatabase {
         String dbNameList = "portal";
 
         String fileName = "Daily_DB_Backup"; // default file name
-        String folderPath = "C:\\Users\\Lester\\Documents\\demo\\backup";
+        String folderPath = "D:\\Users\\Matthew\\Documents\\demo\\backup";
         File f1 = new File(folderPath);
         f1.mkdir(); // create folder if not exist
 

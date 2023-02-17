@@ -72,4 +72,9 @@ public class EmployeeService {
             throw new IllegalStateException("This ID cannot be found");
         }
     }
+
+    public int employeeCount() {
+        int  count = employeeDao.countEmployee(1);
+        return count;
+    }
 }
