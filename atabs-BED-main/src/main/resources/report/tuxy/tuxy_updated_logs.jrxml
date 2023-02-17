@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tuxy_updated_logs" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b483ee89-70db-4471-b2e0-fbb72bd1249b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="COOP CONNECTION"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="TUXY-UPDATED-LOGS_COOP" uuid="e0f19cf4-ccd6-4852-a9fe-d53db22b254c">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="COOP CONNECTION"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT * FROM tuxy_log]]>
+		</queryString>
+		<field name="id" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="id"/>
+			<property name="com.jaspersoft.studio.field.label" value="id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+		</field>
+		<field name="action" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="action"/>
+			<property name="com.jaspersoft.studio.field.label" value="action"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+		</field>
+		<field name="create_date" class="java.time.LocalDateTime">
+			<property name="com.jaspersoft.studio.field.name" value="create_date"/>
+			<property name="com.jaspersoft.studio.field.label" value="create_date"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+		</field>
+		<field name="status" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="status"/>
+			<property name="com.jaspersoft.studio.field.label" value="status"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+		</field>
+		<field name="tuxy_id" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="tuxy_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="tuxy_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+		</field>
+		<field name="tuxy_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="tuxy_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="tuxy_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+		</field>
+		<field name="updated_by" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="updated_by"/>
+			<property name="com.jaspersoft.studio.field.label" value="updated_by"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+		</field>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM tuxy_log]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+	</field>
+	<field name="action" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="action"/>
+		<property name="com.jaspersoft.studio.field.label" value="action"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+	</field>
+	<field name="create_date" class="java.time.LocalDateTime">
+		<property name="com.jaspersoft.studio.field.name" value="create_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="create_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+	</field>
+	<field name="status" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="status"/>
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+	</field>
+	<field name="tuxy_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="tuxy_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="tuxy_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+	</field>
+	<field name="tuxy_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tuxy_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="tuxy_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+	</field>
+	<field name="updated_by" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="updated_by"/>
+		<property name="com.jaspersoft.studio.field.label" value="updated_by"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="250" y="30" width="330" height="20" uuid="70b5b8c9-b279-4a46-826c-8d85aef07cb9"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARAMORAN ABACA FARMERS - PRODUCERS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="50" width="250" height="15" uuid="d0e92399-8ea4-4212-a27a-e6a284dad727"/>
+				<text><![CDATA[ABACA TUXY BUYING SPECIAL PROJECT (ATBSP)]]></text>
+			</staticText>
+			<image>
+				<reportElement x="170" y="6" width="70" height="69" uuid="86123b86-e35f-48a4-8841-3edfc3d79b08"/>
+				<imageExpression><![CDATA["C:/Users/Mark/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="335" y="8" width="133" height="18" uuid="98325d48-156f-4606-b241-4fa3d07ae4df"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TUXY UPDATED LOGS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<summary>
+		<band height="260" splitType="Stretch">
+			<componentElement>
+				<reportElement x="104" y="20" width="594" height="200" uuid="6ed19daf-e7ff-4a0e-a691-9305ba9476a1">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="TUXY-UPDATED-LOGS_COOP" uuid="5b9ab5e3-b977-4fd6-a03b-740bd4cffc65">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="50" uuid="b0565e79-e0ae-4ad7-ab56-c32fc385b10b">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="037a6f98-0c16-4f66-bb3c-9e668b6654d5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="cee36318-2fb8-4d66-a4ae-ba09eafb00b8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="140" uuid="8a240ddc-fdbf-47f9-b259-3323f1b18776">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="140" height="30" uuid="d6a2ff7b-47e6-4a32-8fba-487f36428e86"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ACTION]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="140" height="30" uuid="5586ef48-3bfe-42a4-849d-899d44f70151"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{action}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="73bcf559-c65a-428f-8ff2-ce755aa77213">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="30" uuid="61988515-8b84-46c7-ad11-159bab9f7310"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[CREATE DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="110" height="30" uuid="86cb94f1-7310-4513-bd69-c344dad6d61b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{create_date}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="2a1d7d2c-319e-4eaf-ad45-688ddb995e34">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="f214ee7b-57b2-4152-9c65-10d941b286f7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[STATUS]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="810b4c35-463f-4fde-a483-24e9f38e6660"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="9478d262-a50b-45b8-abad-7fcdd3c970e1">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="b2e69714-c5a7-4fe1-91dd-14880888a62b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TUXY ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="30" uuid="4000629b-c496-4b73-857a-b4ca7fcf395b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tuxy_id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="2f98b9df-6c11-415b-8a7a-95d31ea83fa1">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="30" uuid="07c1776e-53fe-4ca0-980e-e72940d4e6ac"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TUXY NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="6514eae0-c859-4ea5-8c66-3e6d327f72fe"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tuxy_name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="f3087fd5-4cff-4e2a-9300-429a26784e08">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="c24cbce0-0041-42a7-a0e8-1084b8928a8d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[UPDATED BY]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="86bda0f3-429b-4d4e-bff7-868efd2b3124"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{updated_by}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
