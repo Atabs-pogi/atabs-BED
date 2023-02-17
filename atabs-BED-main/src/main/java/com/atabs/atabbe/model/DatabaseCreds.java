@@ -15,7 +15,7 @@ public class DatabaseCreds {
 
     private String username;
 
-    private String password;
+//    private String password;
     private String dbName = "coop";
 
     public String getUsername() {
@@ -26,13 +26,13 @@ public class DatabaseCreds {
         this.username =  springProperties.getProperty("spring.datasource.username");
     }
 
-    public String getPassword() {
-        return password;
-    }
-    @Value("${spring.datasource.password}")
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
+//    @Value("${spring.datasource.password}")
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     public String getDbName() {
         return dbName;

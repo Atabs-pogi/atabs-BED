@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="employees_info" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="ccf67f20-38fd-4c19-a712-4e83a2fe03d4">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="COOP CONNECTION"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="employees" uuid="284d56c8-99c3-445e-a0e7-a45ca9fc74df">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="COOP CONNECTION"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT * FROM employees]]>
+		</queryString>
+		<field name="emp_id" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="emp_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="emp_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="address" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="address"/>
+			<property name="com.jaspersoft.studio.field.label" value="address"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="birthday" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="birthday"/>
+			<property name="com.jaspersoft.studio.field.label" value="birthday"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="age" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="age"/>
+			<property name="com.jaspersoft.studio.field.label" value="age"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="create_date" class="java.time.LocalDateTime">
+			<property name="com.jaspersoft.studio.field.name" value="create_date"/>
+			<property name="com.jaspersoft.studio.field.label" value="create_date"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="email" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="email"/>
+			<property name="com.jaspersoft.studio.field.label" value="email"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="first_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="first_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="first_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="last_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="last_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="last_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="middle_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="middle_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="middle_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="mobile_number" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="mobile_number"/>
+			<property name="com.jaspersoft.studio.field.label" value="mobile_number"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="postal_code" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="postal_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="postal_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="sex" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sex"/>
+			<property name="com.jaspersoft.studio.field.label" value="sex"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="update_date" class="java.time.LocalDateTime">
+			<property name="com.jaspersoft.studio.field.name" value="update_date"/>
+			<property name="com.jaspersoft.studio.field.label" value="update_date"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+	</subDataset>
+	<subDataset name="new_Employees" uuid="715c666b-b42b-4e82-ac4f-66e588e679f6">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="COOP CONNECTION"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT * FROM employees]]>
+		</queryString>
+		<field name="emp_id" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="emp_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="emp_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="address" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="address"/>
+			<property name="com.jaspersoft.studio.field.label" value="address"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="birthday" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="birthday"/>
+			<property name="com.jaspersoft.studio.field.label" value="birthday"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="age" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="age"/>
+			<property name="com.jaspersoft.studio.field.label" value="age"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="create_date" class="java.time.LocalDateTime">
+			<property name="com.jaspersoft.studio.field.name" value="create_date"/>
+			<property name="com.jaspersoft.studio.field.label" value="create_date"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="email" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="email"/>
+			<property name="com.jaspersoft.studio.field.label" value="email"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="first_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="first_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="first_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="last_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="last_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="last_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="middle_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="middle_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="middle_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="mobile_number" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="mobile_number"/>
+			<property name="com.jaspersoft.studio.field.label" value="mobile_number"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="postal_code" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="postal_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="postal_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="sex" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sex"/>
+			<property name="com.jaspersoft.studio.field.label" value="sex"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+		<field name="update_date" class="java.time.LocalDateTime">
+			<property name="com.jaspersoft.studio.field.name" value="update_date"/>
+			<property name="com.jaspersoft.studio.field.label" value="update_date"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+		</field>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM employees]]>
+	</queryString>
+	<field name="emp_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="emp_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="emp_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="address" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="address"/>
+		<property name="com.jaspersoft.studio.field.label" value="address"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="birthday" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="birthday"/>
+		<property name="com.jaspersoft.studio.field.label" value="birthday"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="age" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="age"/>
+		<property name="com.jaspersoft.studio.field.label" value="age"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="create_date" class="java.time.LocalDateTime">
+		<property name="com.jaspersoft.studio.field.name" value="create_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="create_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="first_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="first_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="first_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="last_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="last_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="last_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="middle_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="middle_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="middle_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="mobile_number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="mobile_number"/>
+		<property name="com.jaspersoft.studio.field.label" value="mobile_number"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="postal_code" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="postal_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="postal_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="sex" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sex"/>
+		<property name="com.jaspersoft.studio.field.label" value="sex"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<field name="update_date" class="java.time.LocalDateTime">
+		<property name="com.jaspersoft.studio.field.name" value="update_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="update_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement x="250" y="30" width="320" height="20" uuid="c5d662af-8e23-4d38-9422-ec5a12551862"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARAMORAN ABACA FARMERS -PRODUCERS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="50" width="250" height="15" uuid="b1f6c1a9-3094-4790-b0dd-d6041da45c78"/>
+				<text><![CDATA[ABACA TUXY BUYING SPECIAL PROJECT (ATBSP)]]></text>
+			</staticText>
+			<image>
+				<reportElement x="170" y="6" width="80" height="69" uuid="055037bf-8371-44dc-a55c-82d0ba021fe2"/>
+				<imageExpression><![CDATA["C:/Users/Mark/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="316" y="10" width="170" height="18" uuid="ba8b9c04-fd6d-4f7c-a214-47c26eb3d9c4"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMPLOYEES INFORMATION]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<summary>
+		<band height="264" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="10" width="799" height="200" uuid="0a1b46ae-d121-46ee-8d9f-350d642a067b">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="new_Employees" uuid="e331d69a-bc77-44fc-b346-cf445b48a3fb">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="50" uuid="b17db34e-ee26-4d4f-bc7a-e57c57b819bb">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="65c67423-82c7-42a2-a401-dfd33fe9c949"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[EMPLOYEE ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="50" height="30" uuid="6e802729-aad0-4b04-b8d7-ce0f06e21b00"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{emp_id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="86ebc065-b86a-46b4-b021-cf5dff4dda83">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="30" uuid="f5fd6259-3cff-43ea-b14c-a3eb11b59e37"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ADDRESS]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="110" height="30" uuid="759b19b4-f816-4770-bf62-75b146710f42"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="fb139a48-7521-4f26-ad8f-52ab70dfcf5c">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="bf69e379-e785-40bc-89e5-0cb5941a43f8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[BIRTHDAY]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="0e1db59d-1055-48d5-b6b6-f985f300c542"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{birthday}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="30" uuid="8e386a60-3af7-4fe7-a882-dbbca847bf27">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="30" uuid="b1714b3d-ea12-4f14-9408-0f44a5a67817"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[AGE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="30" height="30" uuid="9c0353fc-8b57-4a6d-8bc4-944e3b5c3bdb"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="818381f8-ab55-49ab-a05d-28713c7790a2">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="a16ff81f-139e-49ac-8581-b3fe881c5e85"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[CREATE DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="30" uuid="79885bb1-5f98-4b2f-8232-c7a2f9f864bc"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{create_date}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="701bf42d-c1f9-4feb-a9fd-aaa06d105e56">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="b94ccf3b-4682-4b68-b662-353f599c3b6b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[EMAIL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="9be5f241-1a7b-4492-a542-fa7dcaa41f28"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="7c3fb1aa-2900-425f-adc4-36f8d93d3219">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="f3182b09-738d-42b2-85d9-93228793092a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[FIRST NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="6856670e-6d28-4d8b-87e7-4d5203c87c22"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="3e8f5fa4-ed40-49b6-bdc4-c45ca220e296">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="a6652f98-3262-4eaf-953b-8ee8d6956054"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[LAST NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="39c6e23c-a7cd-4fa3-85c8-0d65d13c88c8"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{last_name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="9bc0aa46-9c2c-40d9-b603-19d1df48d00e">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="30" uuid="afe4fd54-9849-41ba-9300-c03cdb95cb75"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[MIDDLE NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="69259318-163b-47f3-a63d-994d6600c65f"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{middle_name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="c75ba1ba-f2ba-465e-abff-59179bd1bb86">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="30" uuid="a40aad19-d59d-42ba-a9de-1f794e7118c7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[MOBILE NUMBER]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="c97478a8-19d0-48e4-b897-f6fdf106ebbc"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{mobile_number}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="a9f50d8a-5f4c-4efa-ae0b-7a4f910f0982">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="e0802eb3-0812-47e3-af6e-79b14790938b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[POSTAL CODE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="b22edeb3-20c9-4dd0-956b-775036dd22c6"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{postal_code}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="dccbb89a-8ca5-40b5-a250-c6ed010ee8c1">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="28e0cb80-6986-4e5f-8165-215db3787f8e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[SEX]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="30" uuid="93f9bc0c-50c2-4d15-8f89-0a312206a3fa"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{sex}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="59" uuid="f0a8bcec-9bc8-45ac-a44e-46b18c389087">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="59" height="30" uuid="d82ea0e7-4522-4599-ae85-d81af7dd890c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7" isBold="true"/>
+								</textElement>
+								<text><![CDATA[UPDATE DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="59" height="30" uuid="2216915e-d127-491c-bfe1-3831933133d8"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{update_date}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

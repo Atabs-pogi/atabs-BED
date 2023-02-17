@@ -62,9 +62,11 @@ public class ReportService {
     @SuppressWarnings("rawtypes")
     private JRAbstractExporter getExporter(String reportFormat) {
         switch (reportFormat) {
+            case "docx":
             case "doc": {
                 return new JRDocxExporter();
             }
+            case "xls" :
             case "xlsx": {
                 return new JRXlsxExporter();
             }
