@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("fiber")
+@CrossOrigin
 public class FiberController {
 
     @Autowired
