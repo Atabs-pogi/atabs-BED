@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/atabs-BED-main/atab-be.iml" filepath="$PROJECT_DIR$/atabs-BED-main/atab-be.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/atabs-BED.iml" filepath="$PROJECT_DIR$/.idea/atabs-BED.iml" />
+    </modules>
+  </component>
+</project>

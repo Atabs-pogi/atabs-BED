@@ -18,7 +18,6 @@ public class Employee {
     private String imageLocation;
     private long postalCode;
 
-
     public String getImageLocation() {
         return imageLocation;
     }
