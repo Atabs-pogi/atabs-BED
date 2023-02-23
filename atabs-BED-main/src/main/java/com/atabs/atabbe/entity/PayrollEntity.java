@@ -17,6 +17,8 @@ public class PayrollEntity {
     private float baseSalary;
     private LocalDate periodStart;
     private LocalDate periodEnd;
+    @Transient
+    private float netPay;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_id", nullable = false)
     private EmployeeEntity employee;
@@ -35,6 +37,14 @@ public class PayrollEntity {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public float getNetPay() {
+        return netPay;
+    }
+
+    public void setNetPay(float netPay) {
+        this.netPay = netPay;
     }
 
     public float getBaseSalary() {

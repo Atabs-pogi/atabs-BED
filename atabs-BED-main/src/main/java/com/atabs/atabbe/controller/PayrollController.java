@@ -44,6 +44,15 @@ public class PayrollController {
         return new ResponseEntity<>(service.getEmployeePayrollStatus(convertToLocalDate(new Date())), HttpStatus.OK);
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<PayrollEntity>> getEmployeePayrollByPeriod(
+            @RequestParam("empId") Long empId,
+            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd)
+    {
+        return new ResponseEntity<>(service.getEmployeePayrollByPeriod(empId, periodStart, periodEnd), HttpStatus.OK);
+    }
+
     @PostMapping("/")
     public ResponseEntity<Payroll> saveEmployeePayroll(@RequestBody Payroll payroll) throws NotFoundException {
         return new ResponseEntity<>(service.saveEmployeePayroll(payroll), HttpStatus.OK);

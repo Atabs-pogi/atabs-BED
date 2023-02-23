@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -40,10 +42,21 @@ public class PayrollService {
         return payrollDao.getPayrollByPeriod(periodStart, periodEnd);
     }
 
+    public  List<PayrollEntity> getEmployeePayrollByPeriod(Long empId, LocalDate periodStart, LocalDate periodEnd) {
+        List<PayrollEntity> payrolls = payrollDao.getEmployeePayroll(empId, periodStart, periodEnd);
+        float grossPay = 0;
+        float netPay = 0;
+        for (PayrollEntity payroll : payrolls) {
+            grossPay = getGrossPay(payroll.getId(), periodStart, periodEnd);
+            netPay = getNetPay(payroll.getId()) - grossPay;
+        }
+        return payrolls; //Mamaya na
+    }
+
     public List<EmployeeEntity> getEmployeePayrollStatus(LocalDate period){
         List<EmployeeEntity> employees = employeeDao.findAll();
         List<PayrollEntity> payrolls = payrollDao.findAll();
-        List<Long>ids = payrollDao.getEmployeesPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
+        payrollDao.getEmployeesPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
         for (EmployeeEntity employee : employees) {
             for (PayrollEntity payroll: payrolls) {
                 if (payroll.getEmployee().getId() == employee.getId()){
@@ -76,7 +89,7 @@ public class PayrollService {
         //Save items (payroll details)
         List<PayrollDetails> items = payroll.getItems();
         for (PayrollDetails item: items) {
-            PayrollDetailEntity detailEntity = payrollDetailDao.getByPeriod(entity.getId(), item.getDate());
+            PayrollDetailEntity detailEntity = payrollDetailDao.getByDate(entity.getId(), item.getDate());
             //check existing
             if(detailEntity == null){
                 detailEntity = new PayrollDetailEntity();
@@ -103,10 +116,34 @@ public class PayrollService {
             deductibleEntity.setDescription(deductible.getDescription());
             deductibleEntity.setValue(deductible.getValue());
             payrollDeductibleDao.save(deductibleEntity);
+
+
             deductible.setId(deductibleEntity.getId());
             deductible.setPayrollId(entity.getId());
         }
         return payroll;
+    }
+
+    private float getGrossPay(long payrollId, LocalDate start, LocalDate end){  //walang kaltas
+        float grossPay = 0;
+        List<PayrollDetailEntity> payrollDetailsEntities = payrollDetailDao.getByPeriod(payrollId, start, end);
+        for (PayrollDetailEntity payrollDetail: payrollDetailsEntities) {
+            grossPay += payrollDetail.getRegular()*//HourlyBasicSalary;
+            grossPay += payrollDetail.getOt()*//(HourlyBasicSalary * OtRate);
+            grossPay -= payrollDetail.getTardiness()*//TardinessRate;
+            grossPay += payrollDetail.getVacation()*//DailyBasicSalary (depends on the company rate);
+            grossPay += payrollDetail.getSick()*//DailyBasicSalary (depends on the company rate);
+        }
+        return grossPay;
+    }
+
+    private float getNetPay(Long payrollId){ //may kaltas
+        float netPay = 0;
+        List<PayrollDeductibleEntity>deductibleEntities = payrollDeductibleDao.getExistingDeductible(payrollId);
+        for (PayrollDeductibleEntity deduct: deductibleEntities) {
+            netPay -= deduct.getValue();
+        }
+        return netPay;
     }
 
     private LocalDate getPeriodStart(LocalDate period) {
