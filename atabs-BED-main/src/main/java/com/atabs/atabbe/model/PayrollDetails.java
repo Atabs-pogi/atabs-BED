@@ -6,11 +6,11 @@ public class PayrollDetails {
 
     private long id;
     private LocalDate date;
-    private float regular;
-    private float ot;
-    private float tardiness;
-    private float vacation;
-    private float sick;
+    private double regular;
+    private double ot;
+    private double tardiness;
+    private double vacation;
+    private double sick;
     private long payrollId;
 
     public long getId() {
@@ -29,43 +29,43 @@ public class PayrollDetails {
         this.date = date;
     }
 
-    public float getRegular() {
+    public double getRegular() {
         return regular;
     }
 
-    public void setRegular(float regular) {
+    public void setRegular(double regular) {
         this.regular = regular;
     }
 
-    public float getOt() {
+    public double getOt() {
         return ot;
     }
 
-    public void setOt(float ot) {
+    public void setOt(double ot) {
         this.ot = ot;
     }
 
-    public float getTardiness() {
+    public double getTardiness() {
         return tardiness;
     }
 
-    public void setTardiness(float tardiness) {
+    public void setTardiness(double tardiness) {
         this.tardiness = tardiness;
     }
 
-    public float getVacation() {
+    public double getVacation() {
         return vacation;
     }
 
-    public void setVacation(float vacation) {
+    public void setVacation(double vacation) {
         this.vacation = vacation;
     }
 
-    public float getSick() {
+    public double getSick() {
         return sick;
     }
 
-    public void setSick(float sick) {
+    public void setSick(double sick) {
         this.sick = sick;
     }
 

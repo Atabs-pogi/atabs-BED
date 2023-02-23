@@ -4,7 +4,7 @@ public class PayrollDeductible {
 
     private long id;
     private String description;
-    private float value;
+    private double value;
     private long payrollId;
 
     public long getId() {
@@ -23,11 +23,11 @@ public class PayrollDeductible {
         this.description = description;
     }
 
-    public float getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.value = value;
     }
 

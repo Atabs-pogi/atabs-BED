@@ -1,10 +1,7 @@
 package com.atabs.atabbe.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "payroll")
@@ -14,11 +11,23 @@ public class PayrollEntity {
     @SequenceGenerator(name = "payroll_seq", sequenceName = "payroll_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "payrollId")
     private long id;
-    private float baseSalary;
+    private double baseSalary;
     private LocalDate periodStart;
     private LocalDate periodEnd;
     @Transient
-    private float netPay;
+    private  double regularPay;
+    @Transient
+    private double overTimePay;
+    @Transient
+    private double tardinessDeduction;
+    @Transient
+    private  double vacationPay;
+    @Transient
+    private  double sickPay;
+    @Transient
+    private double grossPay;
+    @Transient
+    private double netPay;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_id", nullable = false)
     private EmployeeEntity employee;
@@ -39,20 +48,28 @@ public class PayrollEntity {
         this.id = id;
     }
 
-    public float getNetPay() {
-        return netPay;
-    }
-
-    public void setNetPay(float netPay) {
-        this.netPay = netPay;
-    }
-
-    public float getBaseSalary() {
+    public double getBaseSalary() {
         return baseSalary;
     }
 
-    public void setBaseSalary(float baseSalary) {
+    public void setBaseSalary(double baseSalary) {
         this.baseSalary = baseSalary;
+    }
+
+    public double getGrossPay() {
+        return grossPay;
+    }
+
+    public void setGrossPay(double grossPay) {
+        this.grossPay = grossPay;
+    }
+
+    public double getNetPay() {
+        return netPay;
+    }
+
+    public void setNetPay(double netPay) {
+        this.netPay = netPay;
     }
 
     public LocalDate getPeriodStart() {
@@ -71,4 +88,43 @@ public class PayrollEntity {
         this.periodEnd = periodEnd;
     }
 
+    public double getRegularPay() {
+        return regularPay;
+    }
+
+    public void setRegularPay(double regularPay) {
+        this.regularPay = regularPay;
+    }
+
+    public double getOverTimePay() {
+        return overTimePay;
+    }
+
+    public void setOverTimePay(double overTimePay) {
+        this.overTimePay = overTimePay;
+    }
+
+    public double getTardinessDeduction() {
+        return tardinessDeduction;
+    }
+
+    public void setTardinessDeduction(double tardinessDeduction) {
+        this.tardinessDeduction = tardinessDeduction;
+    }
+
+    public double getVacationPay() {
+        return vacationPay;
+    }
+
+    public void setVacationPay(double vacationPay) {
+        this.vacationPay = vacationPay;
+    }
+
+    public double getSickPay() {
+        return sickPay;
+    }
+
+    public void setSickPay(double sickPay) {
+        this.sickPay = sickPay;
+    }
 }

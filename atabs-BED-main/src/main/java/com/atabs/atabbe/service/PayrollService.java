@@ -4,10 +4,7 @@ import com.atabs.atabbe.dao.PayrollDeductibleDao;
 import com.atabs.atabbe.dao.EmployeeDao;
 import com.atabs.atabbe.dao.PayrollDao;
 import com.atabs.atabbe.dao.PayrollDetailDao;
-import com.atabs.atabbe.entity.PayrollDeductibleEntity;
-import com.atabs.atabbe.entity.EmployeeEntity;
-import com.atabs.atabbe.entity.PayrollDetailEntity;
-import com.atabs.atabbe.entity.PayrollEntity;
+import com.atabs.atabbe.entity.*;
 import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.PayrollDeductible;
 import com.atabs.atabbe.model.Payroll;
@@ -15,11 +12,12 @@ import com.atabs.atabbe.model.PayrollDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Transient;
 import javax.transaction.Transactional;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -44,13 +42,17 @@ public class PayrollService {
 
     public  List<PayrollEntity> getEmployeePayrollByPeriod(Long empId, LocalDate periodStart, LocalDate periodEnd) {
         List<PayrollEntity> payrolls = payrollDao.getEmployeePayroll(empId, periodStart, periodEnd);
-        float grossPay = 0;
-        float netPay = 0;
+        double grossPay = 0;
+        double netPay = 0;
+        List<PayrollEntity> payrollsEntity = new ArrayList<>();
         for (PayrollEntity payroll : payrolls) {
-            grossPay = getGrossPay(payroll.getId(), periodStart, periodEnd);
-            netPay = getNetPay(payroll.getId()) - grossPay;
+            grossPay = getGrossPay(payroll, periodStart, periodEnd);
+            payroll.setGrossPay(formatDecimal(grossPay));
+            netPay = getNetPay(payroll.getId(), grossPay);
+            payroll.setNetPay(formatDecimal(netPay));
+            payrollsEntity.add(payroll);
         }
-        return payrolls; //Mamaya na
+        return payrollsEntity;
     }
 
     public List<EmployeeEntity> getEmployeePayrollStatus(LocalDate period){
@@ -116,34 +118,58 @@ public class PayrollService {
             deductibleEntity.setDescription(deductible.getDescription());
             deductibleEntity.setValue(deductible.getValue());
             payrollDeductibleDao.save(deductibleEntity);
-
-
             deductible.setId(deductibleEntity.getId());
             deductible.setPayrollId(entity.getId());
         }
         return payroll;
     }
 
-    private float getGrossPay(long payrollId, LocalDate start, LocalDate end){  //walang kaltas
-        float grossPay = 0;
-        List<PayrollDetailEntity> payrollDetailsEntities = payrollDetailDao.getByPeriod(payrollId, start, end);
+    private double getGrossPay(PayrollEntity payroll, LocalDate start, LocalDate end){
+        int daysOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth()).getDayOfMonth();
+        double regularPay = 0,
+                overTimePay = 0,
+                tardinessDeduction = 0,
+                vacationPay = 0,
+                sickPay = 0,
+                grossPay = 0,
+                netPay = 0;
+        //Rates
+        double hourlyRate  = payroll.getBaseSalary() / 160;
+        double dailyRate = hourlyRate * 8;
+        double overTimeRate = hourlyRate * 1.25; // ( +25% )
+        double tardinessRate = 0.1;
+        double vacationRate = .08;
+        // ( Formulas )
+        List<PayrollDetailEntity> payrollDetailsEntities = payrollDetailDao.getByPeriod(payroll.getId(), start, end);
         for (PayrollDetailEntity payrollDetail: payrollDetailsEntities) {
-            grossPay += payrollDetail.getRegular()*//HourlyBasicSalary;
-            grossPay += payrollDetail.getOt()*//(HourlyBasicSalary * OtRate);
-            grossPay -= payrollDetail.getTardiness()*//TardinessRate;
-            grossPay += payrollDetail.getVacation()*//DailyBasicSalary (depends on the company rate);
-            grossPay += payrollDetail.getSick()*//DailyBasicSalary (depends on the company rate);
+            regularPay += payrollDetail.getRegular() * hourlyRate;
+            overTimePay += payrollDetail.getOt() * overTimeRate;
+            tardinessDeduction += hourlyRate * tardinessRate * payrollDetail.getTardiness();
+            vacationPay += payroll.getBaseSalary() * vacationRate * (payrollDetail.getVacation() / daysOfMonth);
+            sickPay += dailyRate * payrollDetail.getSick();
         }
+        payroll.setRegularPay(formatDecimal(regularPay));
+        payroll.setOverTimePay(formatDecimal(overTimePay));
+        payroll.setTardinessDeduction(formatDecimal(tardinessDeduction));
+        payroll.setVacationPay(formatDecimal(vacationPay));
+        payroll.setSickPay(formatDecimal(sickPay));
+        grossPay = regularPay + overTimePay + vacationPay + sickPay - tardinessDeduction;
         return grossPay;
     }
 
-    private float getNetPay(Long payrollId){ //may kaltas
-        float netPay = 0;
+    private double getNetPay(Long payrollId, double grossPray){
+        double netPay = 0;
         List<PayrollDeductibleEntity>deductibleEntities = payrollDeductibleDao.getExistingDeductible(payrollId);
         for (PayrollDeductibleEntity deduct: deductibleEntities) {
-            netPay -= deduct.getValue();
+            netPay = grossPray - deduct.getValue();
         }
         return netPay;
+    }
+
+    private double formatDecimal(double value) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        String formattedValue = df.format(value);
+        return Double.parseDouble(formattedValue);
     }
 
     private LocalDate getPeriodStart(LocalDate period) {

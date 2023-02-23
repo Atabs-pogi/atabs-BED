@@ -4,7 +4,6 @@ package com.atabs.atabbe.controller;
 import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.entity.PayrollEntity;
 import com.atabs.atabbe.exception.NotFoundException;
-import com.atabs.atabbe.model.Employee;
 import com.atabs.atabbe.model.Payroll;
 import com.atabs.atabbe.service.PayrollService;
 import org.springframework.beans.factory.annotation.Autowired;

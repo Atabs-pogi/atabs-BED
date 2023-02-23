@@ -6,7 +6,7 @@ import java.util.List;
 public class Payroll {
 
     private long id;
-    private float baseSalary;
+    private double baseSalary;
     private LocalDate periodStart;
     private LocalDate periodEnd;
     private long employeeId;
@@ -21,11 +21,11 @@ public class Payroll {
         this.id = id;
     }
 
-    public float getBaseSalary() {
+    public double getBaseSalary() {
         return baseSalary;
     }
 
-    public void setBaseSalary(float baseSalary) {
+    public void setBaseSalary(double baseSalary) {
         this.baseSalary = baseSalary;
     }
 
