@@ -1,9 +1,6 @@
 package com.atabs.atabbe.service;
 
-import com.atabs.atabbe.dao.PayrollDeductibleDao;
-import com.atabs.atabbe.dao.EmployeeDao;
-import com.atabs.atabbe.dao.PayrollDao;
-import com.atabs.atabbe.dao.PayrollDetailDao;
+import com.atabs.atabbe.dao.*;
 import com.atabs.atabbe.entity.*;
 import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.PayrollDeductible;
@@ -31,6 +28,8 @@ public class PayrollService {
     private EmployeeDao employeeDao;
     @Autowired
     private PayrollDeductibleDao payrollDeductibleDao;
+    @Autowired
+    private BirTaxDao birTaxDao;
 
     public List<PayrollEntity> getAllByPeriod(LocalDate period){
         return payrollDao.getPayrollByPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
@@ -42,13 +41,25 @@ public class PayrollService {
 
     public  List<PayrollEntity> getEmployeePayrollByPeriod(Long empId, LocalDate periodStart, LocalDate periodEnd) {
         List<PayrollEntity> payrolls = payrollDao.getEmployeePayroll(empId, periodStart, periodEnd);
-        double grossPay = 0;
-        double netPay = 0;
+        double grossPay = 0,
+                totalDeductions = 0,
+                taxableIncome = 0,
+                withholdingTax = 0,
+                netPay = 0;
         List<PayrollEntity> payrollsEntity = new ArrayList<>();
         for (PayrollEntity payroll : payrolls) {
             grossPay = getGrossPay(payroll, periodStart, periodEnd);
             payroll.setGrossPay(formatDecimal(grossPay));
-            netPay = getNetPay(payroll.getId(), grossPay);
+            totalDeductions = getTotalDeductions(payroll.getId());
+            payroll.setTotalDeductions(formatDecimal(totalDeductions));
+            taxableIncome = grossPay - totalDeductions;
+            payroll.setTaxableIncome(formatDecimal(taxableIncome));
+            BirTaxEntity range = birTaxDao.getTaxBySalaryRange(payroll.getGrossPay());
+            if (range != null) {
+                withholdingTax = range.getFixTax() + (taxableIncome * range.getTaxRateOnExcess());
+                payroll.setWithholdingTax(formatDecimal(withholdingTax));
+            }
+            netPay = taxableIncome - withholdingTax;
             payroll.setNetPay(formatDecimal(netPay));
             payrollsEntity.add(payroll);
         }
@@ -131,8 +142,7 @@ public class PayrollService {
                 tardinessDeduction = 0,
                 vacationPay = 0,
                 sickPay = 0,
-                grossPay = 0,
-                netPay = 0;
+                grossPay = 0;
         //Rates
         double hourlyRate  = payroll.getBaseSalary() / 160;
         double dailyRate = hourlyRate * 8;
@@ -147,6 +157,7 @@ public class PayrollService {
             tardinessDeduction += hourlyRate * tardinessRate * payrollDetail.getTardiness();
             vacationPay += payroll.getBaseSalary() * vacationRate * (payrollDetail.getVacation() / daysOfMonth);
             sickPay += dailyRate * payrollDetail.getSick();
+
         }
         payroll.setRegularPay(formatDecimal(regularPay));
         payroll.setOverTimePay(formatDecimal(overTimePay));
@@ -157,13 +168,13 @@ public class PayrollService {
         return grossPay;
     }
 
-    private double getNetPay(Long payrollId, double grossPray){
-        double netPay = 0;
+    private double getTotalDeductions(Long payrollId){
+        double totalDeductions = 0;
         List<PayrollDeductibleEntity>deductibleEntities = payrollDeductibleDao.getExistingDeductible(payrollId);
         for (PayrollDeductibleEntity deduct: deductibleEntities) {
-            netPay = grossPray - deduct.getValue();
+            totalDeductions += deduct.getValue();
         }
-        return netPay;
+        return totalDeductions;
     }
 
     private double formatDecimal(double value) {

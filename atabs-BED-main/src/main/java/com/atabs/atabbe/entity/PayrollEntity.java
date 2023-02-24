@@ -27,6 +27,12 @@ public class PayrollEntity {
     @Transient
     private double grossPay;
     @Transient
+    private double totalDeductions;
+    @Transient
+    private double taxableIncome;
+    @Transient
+    private double withholdingTax;
+    @Transient
     private double netPay;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_id", nullable = false)
@@ -126,5 +132,29 @@ public class PayrollEntity {
 
     public void setSickPay(double sickPay) {
         this.sickPay = sickPay;
+    }
+
+    public double getTotalDeductions() {
+        return totalDeductions;
+    }
+
+    public void setTotalDeductions(double totalDeductions) {
+        this.totalDeductions = totalDeductions;
+    }
+
+    public double getTaxableIncome() {
+        return taxableIncome;
+    }
+
+    public void setTaxableIncome(double taxableIncome) {
+        this.taxableIncome = taxableIncome;
+    }
+
+    public double getWithholdingTax() {
+        return withholdingTax;
+    }
+
+    public void setWithholdingTax(double withholdingTax) {
+        this.withholdingTax = withholdingTax;
     }
 }
