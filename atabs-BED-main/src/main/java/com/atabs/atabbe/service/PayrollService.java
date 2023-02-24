@@ -44,6 +44,7 @@ public class PayrollService {
         double grossPay = 0,
                 totalDeductions = 0,
                 taxableIncome = 0,
+                incomeExcess = 0,
                 withholdingTax = 0,
                 netPay = 0;
         List<PayrollEntity> payrollsEntity = new ArrayList<>();
@@ -56,7 +57,8 @@ public class PayrollService {
             payroll.setTaxableIncome(formatDecimal(taxableIncome));
             BirTaxEntity range = birTaxDao.getTaxBySalaryRange(payroll.getGrossPay());
             if (range != null) {
-                withholdingTax = range.getFixTax() + (taxableIncome * range.getTaxRateOnExcess());
+                incomeExcess = taxableIncome - range.getMinimum();
+                withholdingTax = range.getFixTax() + (incomeExcess * range.getTaxRateOnExcess());
                 payroll.setWithholdingTax(formatDecimal(withholdingTax));
             }
             netPay = taxableIncome - withholdingTax;
