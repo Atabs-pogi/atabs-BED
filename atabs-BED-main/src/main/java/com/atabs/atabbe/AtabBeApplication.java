@@ -1,6 +1,5 @@
 package com.atabs.atabbe;
 
-
 import com.atabs.atabbe.helper.BackUpDatabase;
 import com.atabs.atabbe.helper.FileCreated;
 import com.atabs.atabbe.model.DatabaseCreds;
@@ -8,10 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-
 import java.io.File;
 import java.util.Properties;
-
 
 @SpringBootApplication
 @EnableScheduling
@@ -29,11 +26,10 @@ public class AtabBeApplication {
 //		Properties springProperties = new Properties();
 //		springProperties.getProperty("spring.datasource.url");
 //		DatabaseCreds databaseCreds = new DatabaseCreds();
-//		System.out.println("Backup logs : " +springProperties.getProperty("spring.datasource.url"));
+//		System.out.println("Backup logs : " + springProperties.getProperty("spring.datasource.url"));
 //		System.out.println("Backup logs : " + databaseCreds.getPassword());
 //		System.out.println("Backup logs : " + databaseCreds.getDbName());
 //		boolean isSuccess = BackUpDatabase.backUp(FileCreated.dbPathFile(),"root","vince8516200","coop");
 //		System.out.println("Backup logs : " + isSuccess);
 //	}
-
 }

@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 public class Tuxy {
 
-
     private long tuxyId;
     private String name;
     private double goodPrice;

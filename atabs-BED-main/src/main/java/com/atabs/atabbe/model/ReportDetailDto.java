@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class ReportDetailDto {
 
-    private String format;
+            private String format;
 
             private String module;
 

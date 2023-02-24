@@ -14,4 +14,8 @@ public interface TuxyDao extends JpaRepository<TuxyEntity, Long> {
 
     @Query(value = "SELECT * FROM tuxy WHERE name like %:match%", nativeQuery = true)
     List<TuxyEntity> searchByName(String match);
+
+
+
+
 }
