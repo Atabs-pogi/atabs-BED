@@ -38,7 +38,7 @@ public class PayrollController {
         return new ResponseEntity<>(service.getAllByPeriodStartAndPeriodEnd(periodStart, periodEnd), HttpStatus.OK);
     }
 
-    @GetMapping("/employees")
+    @GetMapping("/review")
     public ResponseEntity<List<EmployeeEntity>> getEmployeePayrollStatus(){
         return new ResponseEntity<>(service.getEmployeePayrollStatus(convertToLocalDate(new Date())), HttpStatus.OK);
     }
