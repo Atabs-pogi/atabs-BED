@@ -35,43 +35,10 @@ public class PayrollService {
         return payrollDao.getPayrollByPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
     }
 
-    public  List<PayrollEntity> getAllByPeriodStartAndPeriodEnd(LocalDate periodStart, LocalDate periodEnd) {
-        return payrollDao.getPayrollByPeriod(periodStart, periodEnd);
-    }
-
-    public  List<PayrollEntity> getEmployeePayrollByPeriod(Long empId, LocalDate periodStart, LocalDate periodEnd) {
-        List<PayrollEntity> payrolls = payrollDao.getEmployeePayroll(empId, periodStart, periodEnd);
-        double grossPay = 0,
-                totalDeductions = 0,
-                taxableIncome = 0,
-                incomeExcess = 0,
-                withholdingTax = 0,
-                netPay = 0;
-        List<PayrollEntity> payrollsEntity = new ArrayList<>();
-        for (PayrollEntity payroll : payrolls) {
-            grossPay = getGrossPay(payroll, periodStart, periodEnd);
-            payroll.setGrossPay(formatDecimal(grossPay));
-            totalDeductions = getTotalDeductions(payroll.getId());
-            payroll.setTotalDeductions(formatDecimal(totalDeductions));
-            taxableIncome = grossPay - totalDeductions;
-            payroll.setTaxableIncome(formatDecimal(taxableIncome));
-            BirTaxEntity range = birTaxDao.getTaxBySalaryRange(payroll.getGrossPay());
-            if (range != null) {
-                incomeExcess = taxableIncome - range.getMinimum();
-                withholdingTax = range.getFixTax() + (incomeExcess * range.getTaxRateOnExcess());
-                payroll.setWithholdingTax(formatDecimal(withholdingTax));
-            }
-            netPay = taxableIncome - withholdingTax;
-            payroll.setNetPay(formatDecimal(netPay));
-            payrollsEntity.add(payroll);
-        }
-        return payrollsEntity;
-    }
-
     public List<EmployeeEntity> getEmployeePayrollStatus(LocalDate period){
         List<EmployeeEntity> employees = employeeDao.findAll();
         List<PayrollEntity> payrolls = payrollDao.findAll();
-        payrollDao.getEmployeesPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
+        //payrollDao.getEmployeesPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
         for (EmployeeEntity employee : employees) {
             for (PayrollEntity payroll: payrolls) {
                 if (payroll.getEmployee().getId() == employee.getId()){
@@ -136,6 +103,49 @@ public class PayrollService {
             deductible.setPayrollId(entity.getId());
         }
         return payroll;
+    }
+
+    public  List<PayrollEntity> getAllEmployeePayrollByPeriod(LocalDate periodStart, LocalDate periodEnd) {
+        long empId = 0;
+        return getPayroll(empId, periodStart, periodEnd);
+    }
+
+    public  List<PayrollEntity> getEmployeePayrollByPeriod(Long empId, LocalDate periodStart, LocalDate periodEnd) {
+        return getPayroll(empId, periodStart, periodEnd);
+    }
+
+    private List<PayrollEntity> getPayroll(Long empId, LocalDate periodStart, LocalDate periodEnd) {
+        List<PayrollEntity> payrolls;
+        if (empId == 0) {
+            payrolls = payrollDao.getPayrollByPeriod(periodStart, periodEnd);
+        }else {
+            payrolls = payrollDao.getEmployeePayroll(empId, periodStart, periodEnd);
+        }
+        double grossPay = 0,
+                totalDeductions = 0,
+                taxableIncome = 0,
+                incomeExcess = 0,
+                withholdingTax = 0,
+                netPay = 0;
+        List<PayrollEntity> payrollsEntity = new ArrayList<>();
+        for (PayrollEntity payroll : payrolls) {
+            grossPay = getGrossPay(payroll, periodStart, periodEnd);
+            payroll.setGrossPay(formatDecimal(grossPay));
+            totalDeductions = getTotalDeductions(payroll.getId());
+            payroll.setTotalDeductions(formatDecimal(totalDeductions));
+            taxableIncome = grossPay - totalDeductions;
+            payroll.setTaxableIncome(formatDecimal(taxableIncome));
+            BirTaxEntity range = birTaxDao.getTaxBySalaryRange(payroll.getGrossPay());
+            if (range != null) {
+                incomeExcess = taxableIncome - range.getMinimum();
+                withholdingTax = range.getFixTax() + (incomeExcess * range.getTaxRateOnExcess());
+                payroll.setWithholdingTax(formatDecimal(withholdingTax));
+            }
+            netPay = taxableIncome - withholdingTax;
+            payroll.setNetPay(formatDecimal(netPay));
+            payrollsEntity.add(payroll);
+        }
+        return payrolls;
     }
 
     private double getGrossPay(PayrollEntity payroll, LocalDate start, LocalDate end){
