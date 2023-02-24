@@ -2,6 +2,7 @@ package com.atabs.atabbe.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "tuxy_log")
@@ -96,8 +97,4 @@ public class TuxyLogsEntity {
     public void setTuxyName(String tuxyName) {
         this.tuxyName = tuxyName;
     }
-
-
-
-
 }
