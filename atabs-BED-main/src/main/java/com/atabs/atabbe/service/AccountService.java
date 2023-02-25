@@ -75,6 +75,7 @@ public class AccountService {
             accountEntity.setRole(account.getRole());
             accountEntity.setStatus(account.getStatus());
             accountEntity.setEmployeeEntity(employeeEntity1);
+            accountDao.save(accountEntity);
             return account;
         } else {
             throw new IllegalStateException("This ID cannot be found");

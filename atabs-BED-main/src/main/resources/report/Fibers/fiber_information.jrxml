@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fiber_information" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61d9f0e0-4d78-4f4d-a189-e27a5b5603bd">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="coop.jrdax"/>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="fiber" uuid="4d4f13a7-20f0-4661-b361-8ffafef45f91">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="COOP CONNECTION"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT fiber_items.fiber_item_id, fibers.name, fiber_items.create_date, fiber_items.grade, fiber_items.price, fiber_items.knife_used, fiber_items.status FROM fibers INNER JOIN fiber_items ON fiber_items.fiber_id = fibers.fiber_id]]>
+		</queryString>
+		<field name="fiber_item_id" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="fiber_item_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="fiber_item_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="fiber_items"/>
+		</field>
+		<field name="name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="name"/>
+			<property name="com.jaspersoft.studio.field.label" value="name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="fibers"/>
+		</field>
+		<field name="create_date" class="java.time.LocalDateTime">
+			<property name="com.jaspersoft.studio.field.name" value="create_date"/>
+			<property name="com.jaspersoft.studio.field.label" value="create_date"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="fiber_items"/>
+		</field>
+		<field name="grade" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="grade"/>
+			<property name="com.jaspersoft.studio.field.label" value="grade"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="fiber_items"/>
+		</field>
+		<field name="price" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="price"/>
+			<property name="com.jaspersoft.studio.field.label" value="price"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="fiber_items"/>
+		</field>
+		<field name="knife_used" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="knife_used"/>
+			<property name="com.jaspersoft.studio.field.label" value="knife_used"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="fiber_items"/>
+		</field>
+		<field name="status" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="status"/>
+			<property name="com.jaspersoft.studio.field.label" value="status"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="fiber_items"/>
+		</field>
+	</subDataset>
+	<subDataset name="Fibers" uuid="6863082d-9279-43f0-b322-acd067456379">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="coop.jrdax"/>
+		<queryString language="SQL">
+			<![CDATA[select * from fibers]]>
+		</queryString>
+		<field name="fiber_id" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="fiber_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="fiber_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="fibers"/>
+		</field>
+		<field name="create_date" class="java.time.LocalDateTime">
+			<property name="com.jaspersoft.studio.field.name" value="create_date"/>
+			<property name="com.jaspersoft.studio.field.label" value="create_date"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="fibers"/>
+		</field>
+		<field name="name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="name"/>
+			<property name="com.jaspersoft.studio.field.label" value="name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="fibers"/>
+		</field>
+		<field name="status" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="status"/>
+			<property name="com.jaspersoft.studio.field.label" value="status"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="fibers"/>
+		</field>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM fibers]]>
+	</queryString>
+	<field name="fiber_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="fiber_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="fiber_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibers"/>
+	</field>
+	<field name="create_date" class="java.time.LocalDateTime">
+		<property name="com.jaspersoft.studio.field.name" value="create_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="create_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibers"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibers"/>
+	</field>
+	<field name="status" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="status"/>
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibers"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="285" y="50" width="250" height="15" uuid="87736c3a-549a-4008-beff-db3e88e577e4"/>
+				<text><![CDATA[ABACA TUXY BUYING SPECIAL PROJECT (ATBSP)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="30" width="330" height="20" uuid="c4cfa9d1-6d1e-4fb4-8fc4-362e8b40b743"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARAMORAN ABACA FARMERS - PRODUCERS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="170" y="6" width="70" height="69" uuid="9f06fc84-4c4e-4f70-b16d-c1c8a67795a6"/>
+				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BE-master/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="334" y="8" width="134" height="18" uuid="7caac1e3-f95c-4b73-a47f-e79ae1266216"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIBERS INFORMATION]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="401">
+			<componentElement>
+				<reportElement x="131" y="30" width="540" height="200" uuid="fc1ced80-51a6-4550-a60d-9407e77fdb2d">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Fibers" uuid="64ad9321-659b-47e2-81dc-468156e199b4">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="130" uuid="9fea3f28-5cd0-4cc0-9a7e-332873a45d17">
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="130" height="30" backcolor="#16F54E" uuid="9d2abdcf-0672-4708-9163-ec85f78a56c4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[FIBER ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="130" height="30" uuid="efd2c652-0f56-4cda-99fb-f9fa48b1dd40"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fiber_id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="140" uuid="00a32971-4286-4cf9-adc6-743bc2cce2f0">
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="140" height="30" backcolor="#16F54E" uuid="c650dc12-3d1e-44c4-8532-ad1211d6ac49"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[CREATE DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="140" height="30" uuid="bec7e187-ff64-4b5d-9727-20970a6126a5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{create_date}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="120" uuid="9760cc84-ff05-4039-b1bd-14015531162b">
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="120" height="30" backcolor="#16F54E" uuid="c6587728-6164-47a7-927b-06502f285ae1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[NAME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="120" height="30" uuid="acdf61af-b20e-4e8e-9e33-67148db959a6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="150" uuid="9533f1e3-5173-49c8-b212-6a1e26ae561f">
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="150" height="30" backcolor="#16F54E" uuid="797a521f-f864-4b2b-ac27-156f5584d6d5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[STATUS]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="150" height="30" uuid="0322a6bc-82bf-4fe4-b002-cba9ed5795c0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="40">
+			<textField evaluationTime="Report">
+				<reportElement x="20" y="10" width="100" height="30" uuid="15db6c40-e04d-4d92-a5b7-bdd83a253e8b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="10" width="80" height="30" uuid="6b1328b2-a075-4985-916e-063f688de594"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="700" y="10" width="100" height="29" uuid="97f732c7-404a-48c4-a36d-8260c96bc50e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
