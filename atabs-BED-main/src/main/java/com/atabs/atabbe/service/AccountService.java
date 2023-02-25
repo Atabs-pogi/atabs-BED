@@ -68,13 +68,14 @@ public class AccountService {
 
     public Account updateAccount(Account account) {
         AccountEntity accountEntity = accountDao.findById(account.getAccountId()).orElse(null);
-        EmployeeEntity employeeEntity1 = new EmployeeEntity();
-        employeeEntity1 = employeeDao.getEmployeeInfo(account.getEmpId());
+        EmployeeEntity employeeEntity = new EmployeeEntity();
         if (accountEntity != null) {
+            employeeEntity= employeeDao.getEmployeeInfo(account.getEmpId());
             accountEntity.setPassword(account.getPassword());
             accountEntity.setRole(account.getRole());
             accountEntity.setStatus(account.getStatus());
-            accountEntity.setEmployeeEntity(employeeEntity1);
+            accountEntity.setEmployeeEntity(employeeEntity);
+            accountDao.save(accountEntity);
             return account;
         } else {
             throw new IllegalStateException("This ID cannot be found");
