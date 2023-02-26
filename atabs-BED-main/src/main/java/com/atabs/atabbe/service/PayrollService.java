@@ -32,7 +32,8 @@ public class PayrollService {
     private BirTaxDao birTaxDao;
 
     public List<PayrollEntity> getAllByPeriod(LocalDate period){
-        return payrollDao.getPayrollByPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
+        long empId = 0;
+        return getPayroll(empId, this.getPeriodStart(period), this.getPeriodEnd(period));
     }
 
     public List<EmployeeEntity> getEmployeePayrollStatus(LocalDate period){
@@ -66,7 +67,7 @@ public class PayrollService {
         entity.setPeriodStart(payroll.getPeriodStart());
         entity.setPeriodEnd(payroll.getPeriodEnd());
         entity.setEmployee(employee);
-        entity.setBaseSalary(payroll.getBaseSalary());
+        entity.setDailyBasic(payroll.getDailyBasic());
         payrollDao.save(entity);
         payroll.setId(entity.getId());
         //Save items (payroll details)
@@ -157,20 +158,17 @@ public class PayrollService {
                 sickPay = 0,
                 grossPay = 0;
         //Rates
-        double hourlyRate  = payroll.getBaseSalary() / 160;
-        double dailyRate = hourlyRate * 8;
+        double hourlyRate  = payroll.getDailyBasic() / 8;
         double overTimeRate = hourlyRate * 1.25; // ( +25% )
         double tardinessRate = 0.1;
-        double vacationRate = .08;
         // ( Formulas )
         List<PayrollDetailEntity> payrollDetailsEntities = payrollDetailDao.getByPeriod(payroll.getId(), start, end);
         for (PayrollDetailEntity payrollDetail: payrollDetailsEntities) {
             regularPay += payrollDetail.getRegular() * hourlyRate;
             overTimePay += payrollDetail.getOt() * overTimeRate;
             tardinessDeduction += hourlyRate * tardinessRate * payrollDetail.getTardiness();
-            vacationPay += payroll.getBaseSalary() * vacationRate * (payrollDetail.getVacation() / daysOfMonth);
-            sickPay += dailyRate * payrollDetail.getSick();
-
+            vacationPay += payroll.getDailyBasic() * payrollDetail.getVacation();
+            sickPay += payroll.getDailyBasic() * payrollDetail.getSick();
         }
         payroll.setRegularPay(formatDecimal(regularPay));
         payroll.setOverTimePay(formatDecimal(overTimePay));

@@ -11,7 +11,8 @@ public class PayrollEntity {
     @SequenceGenerator(name = "payroll_seq", sequenceName = "payroll_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "payrollId")
     private long id;
-    private double baseSalary;
+    private double dailyBasic; // For minimum wager
+    private double monthlyBasic; // For above minimum wager
     private LocalDate periodStart;
     private LocalDate periodEnd;
     @Transient
@@ -54,12 +55,20 @@ public class PayrollEntity {
         this.id = id;
     }
 
-    public double getBaseSalary() {
-        return baseSalary;
+    public double getDailyBasic() {
+        return dailyBasic;
     }
 
-    public void setBaseSalary(double baseSalary) {
-        this.baseSalary = baseSalary;
+    public void setDailyBasic(double dailyBasic) {
+        this.dailyBasic = dailyBasic;
+    }
+
+    public double getMonthlyBasic() {
+        return monthlyBasic;
+    }
+
+    public void setMonthlyBasic(double monthlyBasic) {
+        this.monthlyBasic = monthlyBasic;
     }
 
     public double getGrossPay() {

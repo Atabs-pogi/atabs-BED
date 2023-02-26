@@ -6,7 +6,8 @@ import java.util.List;
 public class Payroll {
 
     private long id;
-    private double baseSalary;
+    private double dailyBasic; // For minimum wager
+    private double monthlyBasic; // For above minimum wager
     private LocalDate periodStart;
     private LocalDate periodEnd;
     private long employeeId;
@@ -21,12 +22,20 @@ public class Payroll {
         this.id = id;
     }
 
-    public double getBaseSalary() {
-        return baseSalary;
+    public double getDailyBasic() {
+        return dailyBasic;
     }
 
-    public void setBaseSalary(double baseSalary) {
-        this.baseSalary = baseSalary;
+    public void setDailyBasic(double dailyBasic) {
+        this.dailyBasic = dailyBasic;
+    }
+
+    public double getMonthlyBasic() {
+        return monthlyBasic;
+    }
+
+    public void setMonthlyBasic(double monthlyBasic) {
+        this.monthlyBasic = monthlyBasic;
     }
 
     public LocalDate getPeriodStart() {
