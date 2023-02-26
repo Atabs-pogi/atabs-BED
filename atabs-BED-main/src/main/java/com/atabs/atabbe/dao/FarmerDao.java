@@ -26,4 +26,9 @@ public interface FarmerDao extends JpaRepository<FarmerEntity, Long> {
 
     @Query(value = "Select farmer.address, farmer.first_name,farmer.image_location from coop.farmers  as farmer join coop.transactions as trans on farmer.farmer_id = trans.farmer_id", nativeQuery = true)
     String test();
+
+
+    @Query(value = "SELECT * FROM farmers WHERE farmer_id =:farmer_id", nativeQuery = true)
+    List<FarmerEntity> getDetails(String farmer_id);
+
 }

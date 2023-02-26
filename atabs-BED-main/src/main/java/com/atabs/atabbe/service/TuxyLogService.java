@@ -86,7 +86,8 @@ public class TuxyLogService {
     }
 
     public byte[] generateReport(LocalDateTime startDate, LocalDateTime endDate, String format) throws JRException {
-        List<TuxyLogsEntity> coops = tuxyLogsDao.findByCreateDateBetween(startDate, endDate);
+//        List<TuxyLogsEntity> coops = tuxyLogsDao.findByCreateDateBetween(startDate, endDate);
+        List<TuxyLogsEntity> coops = tuxyLogsDao.getDetails(32L);
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(coops);
         InputStream inputStream = getClass().getResourceAsStream("classpath:/report/tuxy/TUXYLOGS.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);

@@ -16,7 +16,8 @@ public interface TuxyLogsDao extends JpaRepository<TuxyLogsEntity,Long> {
     List<TuxyLogsEntity> searchByName(String match);
 
     @Query(value = "SELECT * FROM tuxy_log WHERE create_date BETWEEN :startDate AND :endDate", nativeQuery = true)
-    List<TuxyLogsEntity> findByCreateDateBetween(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+    List<TuxyLogsEntity> findByCreateDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 
-
+    @Query(value = "SELECT * FROM tuxy_log WHERE id =:id", nativeQuery = true)
+    List<TuxyLogsEntity> getDetails(Long id);
 }

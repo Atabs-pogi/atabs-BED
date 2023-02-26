@@ -57,6 +57,7 @@
     <subDataset name="tableDataset" uuid="a4afd52f-4c9f-4172-9a78-94eeed461bf2">
         <property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
         <queryString language="SQL">
+<!--            <![CDATA[Select * from farmers where farmer_id = $P{ID}]]>-->
             <![CDATA[Select * from farmers]]>
         </queryString>
         <field name="farmer_id" class="java.lang.Long">

@@ -33,10 +33,14 @@
 	<subDataset name="tuxylogs" uuid="59dbe3dd-53da-4ea9-9580-1f720f2a073c">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="COOP CONNECTION"/>
+		<parameter name="ID" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[SELECT * FROM tuxy_log]]>
+			<![CDATA[select * from tuxy_log where id = $P{ID}]]>
 		</queryString>
-		<field name="id" class="java.lang.Long">
+<!--		<queryString language="SQL">-->
+<!--			<![CDATA[SELECT * FROM tuxy_log]]>-->
+<!--		</queryString>-->
+		<field name="id" class="java.lang.Integer">
 			<property name="com.jaspersoft.studio.field.name" value="id"/>
 			<property name="com.jaspersoft.studio.field.label" value="id"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
@@ -67,9 +71,13 @@
 			<property name="com.jaspersoft.studio.field.tree.path" value="tuxy_log"/>
 		</field>
 	</subDataset>
+	<parameter name="ID" class="java.lang.Integer"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT * FROM tuxy_log]]>
+		<![CDATA[select * from tuxy_log where id = $P{ID}]]>
 	</queryString>
+<!--	<queryString language="SQL">-->
+<!--		<![CDATA[SELECT * FROM tuxy_log]]>-->
+<!--	</queryString>-->
 	<field name="id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
@@ -110,10 +118,10 @@
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
-			<image>
-				<reportElement x="170" y="6" width="70" height="69" uuid="22c5ed7c-3822-43d4-9fcf-2f621381dbe2"/>
-				<imageExpression><![CDATA["C:/Users/Mark/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
-			</image>
+<!--			<image>-->
+<!--				<reportElement x="170" y="6" width="70" height="69" uuid="22c5ed7c-3822-43d4-9fcf-2f621381dbe2"/>-->
+<!--				<imageExpression><![CDATA["C:/Users/Mark/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>-->
+<!--			</image>-->
 			<staticText>
 				<reportElement x="250" y="30" width="330" height="20" uuid="d5ce07d3-c171-4fa7-a3f2-77a33aae1c34"/>
 				<textElement>
@@ -150,6 +158,10 @@
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="tuxylogs" uuid="0b3f924f-a12b-47d4-9d17-d5abf855e1cd">
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						<datasetParameter name="DATASET_PARAMETER">
+							<datasetParameterExpression><![CDATA[$P{MAIN_REPORT_PARAMETER}]]></datasetParameterExpression>
+						</datasetParameter>
+
 					</datasetRun>
 					<jr:column width="70" uuid="6ce7eff4-7041-4302-ad61-51016f2a3d9f">
 						<jr:columnHeader style="Table_CH" height="30">
