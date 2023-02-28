@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 public interface HolidayDao extends JpaRepository<HolidayEntity, Long> {
 
-
     @Query(value = "SELECT * FROM holiday WHERE date between :start AND :end", nativeQuery = true)
     public List<HolidayEntity>getHolidaysBetween(LocalDate start, LocalDate end);
 

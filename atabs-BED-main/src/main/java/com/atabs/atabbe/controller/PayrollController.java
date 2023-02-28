@@ -35,7 +35,7 @@ public class PayrollController {
             @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
             @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd)
     {
-        return new ResponseEntity<>(service.getAllEmployeePayrollByPeriod(periodStart, periodEnd), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAllEmployeesPayrollByPeriod(periodStart, periodEnd), HttpStatus.OK);
     }
 
     @GetMapping("/employees")

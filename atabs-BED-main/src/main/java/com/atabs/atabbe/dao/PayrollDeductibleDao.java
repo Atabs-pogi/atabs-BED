@@ -1,6 +1,7 @@
 package com.atabs.atabbe.dao;
 
 import com.atabs.atabbe.entity.PayrollDeductibleEntity;
+import com.atabs.atabbe.model.PayrollDeductible;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -32,8 +32,7 @@ public class PayrollService {
     private BirTaxDao birTaxDao;
 
     public List<PayrollEntity> getAllByPeriod(LocalDate period){
-        long empId = 0;
-        return getPayroll(empId, this.getPeriodStart(period), this.getPeriodEnd(period));
+        return payrollDao.getPayrollByPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
     }
 
     public List<EmployeeEntity> getEmployeePayrollStatus(LocalDate period){
@@ -52,7 +51,11 @@ public class PayrollService {
 
     @Transactional
     public Payroll saveEmployeePayroll(Payroll payroll) throws NotFoundException {
+        double withholdingTax = 0;
+        double incomeExcess = 0;
+        double netPay = 0;
         EmployeeEntity employee =  employeeDao.findById(payroll.getEmployeeId()).orElse(null);
+
         if(employee == null){
             throw new NotFoundException("Employee not found");
         }
@@ -64,17 +67,31 @@ public class PayrollService {
         if(entity == null) {
             entity = new PayrollEntity();
         }
+        BirTaxEntity taxes = birTaxDao.getTaxBySalaryRange(payroll.getGrossPay());
+        if(taxes == null){
+            throw new NotFoundException("Tax table not found");
+        } else {
+            incomeExcess = payroll.getTaxableIncome() - taxes.getMinimum();
+            withholdingTax = taxes.getFixTax() + (incomeExcess * taxes.getTaxRateOnExcess());
+        }
+        payroll.setWithholdingTax(withholdingTax);
+        if (withholdingTax == 0) {
+            netPay = payroll.getTaxableIncome();
+        } else {
+            netPay = payroll.getTaxableIncome() - payroll.getWithholdingTax();
+        }
+        payroll.setNetPay(netPay);
+        //Save payroll
         entity.setPeriodStart(payroll.getPeriodStart());
         entity.setPeriodEnd(payroll.getPeriodEnd());
         entity.setEmployee(employee);
         entity.setDailyBasic(payroll.getDailyBasic());
         payrollDao.save(entity);
         payroll.setId(entity.getId());
-        //Save items (payroll details)
+        //Save items
         List<PayrollDetails> items = payroll.getItems();
         for (PayrollDetails item: items) {
             PayrollDetailEntity detailEntity = payrollDetailDao.getByDate(entity.getId(), item.getDate());
-            //check existing
             if(detailEntity == null){
                 detailEntity = new PayrollDetailEntity();
                 detailEntity.setPayrollId(entity.getId());
@@ -89,7 +106,7 @@ public class PayrollService {
             item.setId(detailEntity.getId());
             item.setPayrollId(entity.getId());
         }
-        //Save deductibles (payroll deductibles)
+        //Save deductibles
         List<PayrollDeductible> deductibles = payroll.getDeductibles();
         for (PayrollDeductible deductible : deductibles) {
             PayrollDeductibleEntity deductibleEntity = payrollDeductibleDao.getExistingDeductible(entity.getId(),deductible.getDescription() );
@@ -106,7 +123,7 @@ public class PayrollService {
         return payroll;
     }
 
-    public  List<PayrollEntity> getAllEmployeePayrollByPeriod(LocalDate periodStart, LocalDate periodEnd) {
+    public  List<PayrollEntity> getAllEmployeesPayrollByPeriod(LocalDate periodStart, LocalDate periodEnd) {
         long empId = 0;
         return getPayroll(empId, periodStart, periodEnd);
     }
@@ -148,7 +165,6 @@ public class PayrollService {
         }
         return payrolls;
     }
-
     private double getGrossPay(PayrollEntity payroll, LocalDate start, LocalDate end){
         int daysOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth()).getDayOfMonth();
         double regularPay = 0,
@@ -178,7 +194,6 @@ public class PayrollService {
         grossPay = regularPay + overTimePay + vacationPay + sickPay - tardinessDeduction;
         return grossPay;
     }
-
     private double getTotalDeductions(Long payrollId){
         double totalDeductions = 0;
         List<PayrollDeductibleEntity>deductibleEntities = payrollDeductibleDao.getExistingDeductible(payrollId);
