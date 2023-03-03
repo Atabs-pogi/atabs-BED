@@ -11,30 +11,15 @@ public class PayrollEntity {
     @SequenceGenerator(name = "payroll_seq", sequenceName = "payroll_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "payrollId")
     private long id;
-    private double dailyBasic; // For minimum wager
-    private double monthlyBasic; // For above minimum wager
     private LocalDate periodStart;
     private LocalDate periodEnd;
-    @Transient
-    private  double regularPay;
-    @Transient
-    private double overTimePay;
-    @Transient
-    private double tardinessDeduction;
-    @Transient
-    private  double vacationPay;
-    @Transient
-    private  double sickPay;
-    @Transient
-    private double grossPay;
-    @Transient
+    private double totalGrossPay;
+    private double totalBenefitContributions;
     private double totalDeductions;
-    @Transient
-    private double taxableIncome;
-    @Transient
-    private double withholdingTax;
-    @Transient
     private double netPay;
+    private String paymentMethod; //  (e.g., direct deposit, check)
+    private LocalDate paymentDate;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_id", nullable = false)
     private EmployeeEntity employee;
@@ -55,38 +40,6 @@ public class PayrollEntity {
         this.id = id;
     }
 
-    public double getDailyBasic() {
-        return dailyBasic;
-    }
-
-    public void setDailyBasic(double dailyBasic) {
-        this.dailyBasic = dailyBasic;
-    }
-
-    public double getMonthlyBasic() {
-        return monthlyBasic;
-    }
-
-    public void setMonthlyBasic(double monthlyBasic) {
-        this.monthlyBasic = monthlyBasic;
-    }
-
-    public double getGrossPay() {
-        return grossPay;
-    }
-
-    public void setGrossPay(double grossPay) {
-        this.grossPay = grossPay;
-    }
-
-    public double getNetPay() {
-        return netPay;
-    }
-
-    public void setNetPay(double netPay) {
-        this.netPay = netPay;
-    }
-
     public LocalDate getPeriodStart() {
         return periodStart;
     }
@@ -103,44 +56,20 @@ public class PayrollEntity {
         this.periodEnd = periodEnd;
     }
 
-    public double getRegularPay() {
-        return regularPay;
+    public double getTotalGrossPay() {
+        return totalGrossPay;
     }
 
-    public void setRegularPay(double regularPay) {
-        this.regularPay = regularPay;
+    public void setTotalGrossPay(double totalGrossPay) {
+        this.totalGrossPay = totalGrossPay;
     }
 
-    public double getOverTimePay() {
-        return overTimePay;
+    public double getTotalBenefitContributions() {
+        return totalBenefitContributions;
     }
 
-    public void setOverTimePay(double overTimePay) {
-        this.overTimePay = overTimePay;
-    }
-
-    public double getTardinessDeduction() {
-        return tardinessDeduction;
-    }
-
-    public void setTardinessDeduction(double tardinessDeduction) {
-        this.tardinessDeduction = tardinessDeduction;
-    }
-
-    public double getVacationPay() {
-        return vacationPay;
-    }
-
-    public void setVacationPay(double vacationPay) {
-        this.vacationPay = vacationPay;
-    }
-
-    public double getSickPay() {
-        return sickPay;
-    }
-
-    public void setSickPay(double sickPay) {
-        this.sickPay = sickPay;
+    public void setTotalBenefitContributions(double totalBenefitContributions) {
+        this.totalBenefitContributions = totalBenefitContributions;
     }
 
     public double getTotalDeductions() {
@@ -151,19 +80,27 @@ public class PayrollEntity {
         this.totalDeductions = totalDeductions;
     }
 
-    public double getTaxableIncome() {
-        return taxableIncome;
+    public double getNetPay() {
+        return netPay;
     }
 
-    public void setTaxableIncome(double taxableIncome) {
-        this.taxableIncome = taxableIncome;
+    public void setNetPay(double netPay) {
+        this.netPay = netPay;
     }
 
-    public double getWithholdingTax() {
-        return withholdingTax;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setWithholdingTax(double withholdingTax) {
-        this.withholdingTax = withholdingTax;
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public LocalDate getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
     }
 }

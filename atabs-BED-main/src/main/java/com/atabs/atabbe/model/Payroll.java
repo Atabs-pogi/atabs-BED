@@ -14,6 +14,8 @@ public class Payroll {
     private double monthlyBasic; // For above minimum wager
     private LocalDate periodStart;
     private LocalDate periodEnd;
+    private String paymentMethod; //  (e.g., direct deposit, check)
+    private LocalDate paymentDate;
     private long employeeId;
     private  double regularPay;
     private double overTimePay;
@@ -21,12 +23,14 @@ public class Payroll {
     private  double vacationPay;
     private  double sickPay;
     private double grossPay;
-    private double totalDeductions;
+    private double totalBenefitContributions;
     private double taxableIncome;
+    private double totalDeductions;
     private double withholdingTax;
     private double netPay;
     private List<PayrollDetails> items;
-    private List<PayrollDeductible> payrollDeductibles;
+    private List<PayrollBenefit> benefits;
+    private List<PayrollDeductible> deductibles;
 
     public long getId() {
         return id;
@@ -66,6 +70,25 @@ public class Payroll {
 
     public void setPeriodEnd(LocalDate periodEnd) {
         this.periodEnd = periodEnd;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public LocalDate getPaymentDate() {
+        if (this.paymentDate == null) {
+            this.paymentDate = LocalDate.now();
+        }
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
     public long getEmployeeId() {
@@ -125,18 +148,26 @@ public class Payroll {
         return grossPay;
     }
 
-    public double getTotalDeductions() {
-        double totalDeductions = 0;
-        for (PayrollDeductible deductible: payrollDeductibles) {
-            totalDeductions += deductible.getValue();
+    public double getTotalBenefitContributions() {
+        double totalBenefitContributions = 0;
+        for (PayrollBenefit benefit: benefits) {
+            totalBenefitContributions += benefit.getContributionAmount();
         }
-        return totalDeductions;
+        return totalBenefitContributions;
     }
 
     public double getTaxableIncome() {
         double taxableIncome = 0;
-        taxableIncome = this.getGrossPay() - this.getTotalDeductions();
+        taxableIncome = this.getGrossPay() - this.getTotalBenefitContributions();
         return taxableIncome;
+    }
+
+    public double getTotalDeductions() {
+        double totalDeductions = 0;
+        for (PayrollDeductible deductible: deductibles) {
+            totalDeductions += deductible.getValue();
+        }
+        return totalDeductions;
     }
 
     public double getWithholdingTax() {
@@ -163,11 +194,19 @@ public class Payroll {
         this.items = items;
     }
 
-    public List<PayrollDeductible> getDeductibles() {
-        return payrollDeductibles;
+    public List<PayrollBenefit> getBenefits() {
+        return benefits;
     }
 
-    public void setDeductibles(List<PayrollDeductible> payrollDeductibles) {
-        this.payrollDeductibles = payrollDeductibles;
+    public void setBenefits(List<PayrollBenefit> benefits) {
+        this.benefits = benefits;
+    }
+
+    public List<PayrollDeductible> getDeductibles() {
+        return deductibles;
+    }
+
+    public void setDeductibles(List<PayrollDeductible> deductibles) {
+        this.deductibles = deductibles;
     }
 }

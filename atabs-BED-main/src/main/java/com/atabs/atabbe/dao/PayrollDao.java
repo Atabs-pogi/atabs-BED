@@ -3,10 +3,11 @@ package com.atabs.atabbe.dao;
 import com.atabs.atabbe.entity.PayrollEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@Repository
 public interface PayrollDao extends JpaRepository<PayrollEntity, Long> {
 
 

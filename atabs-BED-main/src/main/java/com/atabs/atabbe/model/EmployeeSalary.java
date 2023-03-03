@@ -1,14 +1,8 @@
-package com.atabs.atabbe.entity;
+package com.atabs.atabbe.model;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "employee_salary")
-public class EmployeeSalaryEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "salaryId")
+public class EmployeeSalary {
     private long id;
     private LocalDate effDate;
     private LocalDate expDate;
@@ -16,18 +10,7 @@ public class EmployeeSalaryEntity {
     private double monthlyBasic; // For above minimum wager
     private String bankAccountInfo; //  (e.g., account number, routing number) for direct deposit
     private String taxInfo; // (e.g., BIR account number, routing number) for direct deposit
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "emp_id", nullable = false)
-    private EmployeeEntity employee;
-
-    public EmployeeEntity getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(EmployeeEntity employee) {
-        this.employee = employee;
-    }
+    private long employeeId;
 
     public long getId() {
         return id;
@@ -83,5 +66,13 @@ public class EmployeeSalaryEntity {
 
     public void setTaxInfo(String taxInfo) {
         this.taxInfo = taxInfo;
+    }
+
+    public long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(long employeeId) {
+        this.employeeId = employeeId;
     }
 }
