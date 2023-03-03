@@ -26,7 +26,7 @@ public class BillsStatementService {
         billsStatementEntity.setName(billsStatement.getName());
         billsStatementEntity.setType(billsStatement.getType());
         billsStatementEntity.setDueDate(billsStatement.getDueDate());
-        billsStatementEntity.setPaymentDate(LocalDateTime.now().toString());
+        billsStatementEntity.setPaymentDate(billsStatement.getPaymentDate());
         billsStatementEntity.setReferenceCode(billsStatement.getReferenceCode());
         billsStatementDao.save(billsStatementEntity);
         return "Bills added successfully";
