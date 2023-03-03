@@ -13,7 +13,7 @@ public class PayrollEntity {
     private long id;
     private LocalDate periodStart;
     private LocalDate periodEnd;
-    private double totalGrossPay;
+    private double grossPay;
     private double totalBenefitContributions;
     private double totalDeductions;
     private double netPay;
@@ -56,12 +56,12 @@ public class PayrollEntity {
         this.periodEnd = periodEnd;
     }
 
-    public double getTotalGrossPay() {
-        return totalGrossPay;
+    public double getGrossPay() {
+        return grossPay;
     }
 
-    public void setTotalGrossPay(double totalGrossPay) {
-        this.totalGrossPay = totalGrossPay;
+    public void setGrossPay(double grossPay) {
+        this.grossPay = grossPay;
     }
 
     public double getTotalBenefitContributions() {

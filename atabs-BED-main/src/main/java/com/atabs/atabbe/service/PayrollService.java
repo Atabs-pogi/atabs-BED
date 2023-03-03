@@ -97,7 +97,7 @@ public class PayrollService {
         //Save payroll
         entity.setPeriodStart(payroll.getPeriodStart());
         entity.setPeriodEnd(payroll.getPeriodEnd());
-        entity.setTotalGrossPay(payroll.getGrossPay());
+        entity.setGrossPay(payroll.getGrossPay());
         entity.setTotalBenefitContributions(payroll.getTotalBenefitContributions());
         entity.setTotalDeductions(payroll.getTotalDeductions());
         entity.setNetPay(payroll.getNetPay());
