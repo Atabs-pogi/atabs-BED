@@ -2,7 +2,6 @@ package com.atabs.atabbe.controller;
 
 import com.atabs.atabbe.entity.FiberEntity;
 import com.atabs.atabbe.model.Fiber;
-import com.atabs.atabbe.model.Response;
 import com.atabs.atabbe.model.UpdateTuxy;
 import com.atabs.atabbe.service.FiberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("fiber")
 public class FiberController {
 

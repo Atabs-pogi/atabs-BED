@@ -1,8 +1,6 @@
 package com.atabs.atabbe.controller;
 
 
-import com.atabs.atabbe.dao.TransactionDao;
-import com.atabs.atabbe.entity.TransactionEntity;
 import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.Pos;
 import com.atabs.atabbe.model.Transaction;
@@ -13,9 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
-@RestController
 @RequestMapping("pos")
 @CrossOrigin
 public class PosController {

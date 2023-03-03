@@ -1,7 +1,6 @@
 package com.atabs.atabbe.controller;
 
 import com.atabs.atabbe.entity.AccountEntity;
-import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.model.Account;
 import com.atabs.atabbe.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("login")
 @CrossOrigin
 public class AccountController {

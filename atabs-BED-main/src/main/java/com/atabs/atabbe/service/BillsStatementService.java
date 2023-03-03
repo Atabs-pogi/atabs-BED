@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class BillsStatementService {
         billsStatementEntity.setName(billsStatement.getName());
         billsStatementEntity.setType(billsStatement.getType());
         billsStatementEntity.setDueDate(billsStatement.getDueDate());
+        billsStatementEntity.setPaymentDate(LocalDateTime.now().toString());
+        billsStatementEntity.setReferenceCode(billsStatement.getReferenceCode());
         billsStatementDao.save(billsStatementEntity);
         return "Bills added successfully";
     }
@@ -39,6 +42,7 @@ public class BillsStatementService {
         billsStatementEntity.setName(billsStatement.getName());
         billsStatementEntity.setType(billsStatement.getType());
         billsStatementEntity.setDueDate(billsStatement.getDueDate());
+        billsStatementEntity.setReferenceCode(billsStatement.getReferenceCode());
         billsStatementDao.save(billsStatementEntity);
         return "Update Successfully";
     }

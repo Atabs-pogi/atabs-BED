@@ -4,7 +4,6 @@ import com.atabs.atabbe.entity.BillsStatementEntity;
 import com.atabs.atabbe.entity.BillsTransaction;
 import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.BillsStatement;
-import com.atabs.atabbe.model.Transaction;
 import com.atabs.atabbe.service.BillsStatementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("bills")
 @CrossOrigin
 public class BillsStatementController {

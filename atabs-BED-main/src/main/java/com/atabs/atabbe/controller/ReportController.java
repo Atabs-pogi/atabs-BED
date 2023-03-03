@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 
-@RestController
 @RequestMapping("/report")
 public class ReportController {
     private @Inject ReportService reportService;

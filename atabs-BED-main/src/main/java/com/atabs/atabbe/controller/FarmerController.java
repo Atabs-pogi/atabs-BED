@@ -1,8 +1,6 @@
 package com.atabs.atabbe.controller;
 
-import com.atabs.atabbe.entity.AccountEntity;
 import com.atabs.atabbe.entity.FarmerEntity;
-import com.atabs.atabbe.entity.MerchantProductEntity;
 import com.atabs.atabbe.model.Farmer;
 import com.atabs.atabbe.service.FarmerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("farmer")
 @CrossOrigin
 public class FarmerController {

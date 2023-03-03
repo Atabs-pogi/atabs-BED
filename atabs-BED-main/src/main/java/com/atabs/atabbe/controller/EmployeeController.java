@@ -1,10 +1,7 @@
 package com.atabs.atabbe.controller;
 
 import com.atabs.atabbe.entity.EmployeeEntity;
-import com.atabs.atabbe.entity.FarmerEntity;
 import com.atabs.atabbe.exception.NotFoundException;
-import com.atabs.atabbe.helper.FileCreated;
-import com.atabs.atabbe.model.Account;
 import com.atabs.atabbe.model.Employee;
 import com.atabs.atabbe.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Objects;
 
-@RestController
 @RequestMapping("employee")
 @CrossOrigin
 public class EmployeeController {
