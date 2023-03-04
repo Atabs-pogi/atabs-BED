@@ -18,5 +18,4 @@ public interface EmployeeDao extends JpaRepository<EmployeeEntity, Long> {
 
     @Query(value = "SELECT * FROM employees WHERE first_name like %:match% OR middle_name like %:match% OR last_name like %:match%", nativeQuery = true)
     List<EmployeeEntity> searchEmployeeByName(String match);
-
 }
