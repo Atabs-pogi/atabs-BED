@@ -3,8 +3,10 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FarmersInformations" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4d42ccde-5c63-4703-9eb9-1c76941b07f5">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="coop.jrdax"/>
+	<parameter name="Date_From" class="java.lang.String"/>
+	<parameter name="Date_End" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[select * from farmers]]>
+		<![CDATA[select * from farmers WHERE Date(create_date) BETWEEN $P{Date_From} AND $P{Date_End}]]>
 	</queryString>
 	<field name="farmer_id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="farmer_id"/>
@@ -122,7 +124,7 @@
 			</staticText>
 			<image>
 				<reportElement x="60" y="10" width="70" height="69" uuid="a795b6e9-6e0a-4517-ab7e-e18aa17d6b2c"/>
-				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BE-master/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="140" y="34" width="330" height="20" uuid="b745d126-d1b9-4d47-9a42-b198c03d3f0f"/>
@@ -397,9 +399,10 @@
 				</textElement>
 				<text><![CDATA[CONTACT INFORMATION]]></text>
 			</staticText>
-			<rectangle>
-				<reportElement x="20" y="30" width="130" height="130" uuid="fd40859c-d02a-4484-864a-e11d41b2bc58"/>
-			</rectangle>
+			<image>
+				<reportElement x="20" y="30" width="130" height="130" uuid="38ed2964-006c-46b1-b4c1-da763752f064"/>
+				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/farmer.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 	<pageFooter>

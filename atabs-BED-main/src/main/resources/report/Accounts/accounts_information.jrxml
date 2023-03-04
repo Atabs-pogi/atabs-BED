@@ -154,12 +154,8 @@
 				<text><![CDATA[ABACA TUXY BUYING SPECIAL PROJECT (ATBSP)]]></text>
 			</staticText>
 			<image>
-				<reportElement x="170" y="6" width="70" height="69" uuid="f00a8509-0414-4389-a6d8-8a24e5de7d7c"/>
-				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BE-master/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
-			</image>
-			<image>
 				<reportElement x="170" y="6" width="70" height="69" uuid="2c97ae11-4d50-4c03-aa17-54715e3873b6"/>
-				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BE-master/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -177,7 +173,7 @@
 	<summary>
 		<band height="240" splitType="Stretch">
 			<componentElement>
-				<reportElement style="Table_TD" x="101" y="40" width="600" height="200" uuid="bf60a010-282d-4203-baec-48d7f23ed8a4">
+				<reportElement style="Table_TD" x="101" y="40" width="600" height="160" uuid="bf60a010-282d-4203-baec-48d7f23ed8a4">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
