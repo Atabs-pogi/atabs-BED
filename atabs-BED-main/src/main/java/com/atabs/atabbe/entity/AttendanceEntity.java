@@ -13,6 +13,7 @@ public class AttendanceEntity {
     private long id;
     private String regular;
     private String tardiness;
+    private String absent;
     private String sickLeave;
     private LocalDateTime timeIn;
     private LocalDateTime timeOut;
@@ -43,6 +44,14 @@ public class AttendanceEntity {
 
     public void setTardiness(String tardiness) {
         this.tardiness = tardiness;
+    }
+
+    public String getAbsent() {
+        return absent;
+    }
+
+    public void setAbsent(String absent) {
+        this.absent = absent;
     }
 
     public String getSickLeave() {
