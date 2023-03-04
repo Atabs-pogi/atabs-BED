@@ -30,22 +30,22 @@ public class PayrollController {
         return new ResponseEntity<>(service.getAllByPeriod(parseStringDate(period)), HttpStatus.OK);
     }
 
-//    @GetMapping("/period")
-//    public ResponseEntity<List<PayrollEntity>> getPayrollByPeriod(
-//            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
-//            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd)
-//    {
-//        return new ResponseEntity<>(service.getAllEmployeesPayrollByPeriod(periodStart, periodEnd), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/employee")
-//    public ResponseEntity<List<PayrollEntity>> getEmployeePayrollByPeriod(
-//            @RequestParam("empId") Long empId,
-//            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
-//            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd)
-//    {
-//        return new ResponseEntity<>(service.getEmployeePayrollByPeriod(empId, periodStart, periodEnd), HttpStatus.OK);
-//    }
+    @GetMapping("/period")
+    public ResponseEntity<List<PayrollEntity>> getPayrollByPeriod(
+            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd)
+    {
+        return new ResponseEntity<>(service.getAllEmployeesPayrollByPeriod(periodStart, periodEnd), HttpStatus.OK);
+    }
+
+    @GetMapping("/employee")
+    public ResponseEntity<List<PayrollEntity>> getEmployeePayrollByPeriod(
+            @RequestParam("empId") Long empId,
+            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd)
+    {
+        return new ResponseEntity<>(service.getEmployeePayrollByPeriod(empId, periodStart, periodEnd), HttpStatus.OK);
+    }
 
     @GetMapping("/employees")
     public ResponseEntity<List<EmployeeEntity>> getEmployeePayrollStatus(){

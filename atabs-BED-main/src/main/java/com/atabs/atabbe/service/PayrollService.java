@@ -155,84 +155,23 @@ public class PayrollService {
         return payroll;
     }
 
-//    public  List<PayrollEntity> getAllEmployeesPayrollByPeriod(LocalDate periodStart, LocalDate periodEnd) {
-//        long empId = 0;
-//        return getPayroll(empId, periodStart, periodEnd);
-//    }
-//
-//    public  List<PayrollEntity> getEmployeePayrollByPeriod(Long empId, LocalDate periodStart, LocalDate periodEnd) {
-//        return getPayroll(empId, periodStart, periodEnd);
-//    }
+    public  List<PayrollEntity> getAllEmployeesPayrollByPeriod(LocalDate periodStart, LocalDate periodEnd) {
+        long empId = 0;
+        return getPayroll(empId, periodStart, periodEnd);
+    }
 
-//    private List<PayrollEntity> getPayroll(Long empId, LocalDate periodStart, LocalDate periodEnd) {
-//        List<PayrollEntity> payrolls;
-//        if (empId == 0) {
-//            payrolls = payrollDao.getPayrollByPeriod(periodStart, periodEnd);
-//        }else {
-//            payrolls = payrollDao.getEmployeePayroll(empId, periodStart, periodEnd);
-//        }
-//        double grossPay = 0,
-//                totalDeductions = 0,
-//                taxableIncome = 0,
-//                incomeExcess = 0,
-//                withholdingTax = 0,
-//                netPay = 0;
-//        List<PayrollEntity> payrollsEntity = new ArrayList<>();
-//        for (PayrollEntity payroll : payrolls) {
-//            grossPay = getGrossPay(payroll, periodStart, periodEnd);
-//            payroll.setGrossPay(formatDecimal(grossPay));
-//            totalDeductions = getTotalDeductions(payroll.getId());
-//            payroll.setTotalDeductions(formatDecimal(totalDeductions));
-//            taxableIncome = grossPay - totalDeductions;
-//            payroll.setTaxableIncome(formatDecimal(taxableIncome));
-//            BirTaxEntity range = birTaxDao.getTaxBySalaryRange(payroll.getGrossPay());
-//            if (range != null) {
-//                incomeExcess = taxableIncome - range.getMinimum();
-//                withholdingTax = range.getFixTax() + (incomeExcess * range.getTaxRateOnExcess());
-//                payroll.setWithholdingTax(formatDecimal(withholdingTax));
-//            }
-//            netPay = taxableIncome - withholdingTax;
-//            payroll.setNetPay(formatDecimal(netPay));
-//            payrollsEntity.add(payroll);
-//        }
-//        return payrolls;
-//    }
-//    private double getGrossPay(PayrollEntity payroll, LocalDate start, LocalDate end){
-//        int daysOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth()).getDayOfMonth();
-//        double regularPay = 0,
-//                overTimePay = 0,
-//                tardinessDeduction = 0,
-//                vacationPay = 0,
-//                sickPay = 0,
-//                grossPay = 0;
-//        //Rates
-//        double hourlyRate  = payroll.getDailyBasic() / 8;
-//        double overTimeRate = hourlyRate * 1.25; // ( +25% )
-//        double tardinessRate = 0.1;
-//        // ( Formulas )
-//        List<PayrollDetailEntity> payrollDetailsEntities = payrollDetailDao.getByPeriod(payroll.getId(), start, end);
-//        for (PayrollDetailEntity payrollDetail: payrollDetailsEntities) {
-//            regularPay += payrollDetail.getRegular() * hourlyRate;
-//            overTimePay += payrollDetail.getOt() * overTimeRate;
-//            tardinessDeduction += hourlyRate * tardinessRate * payrollDetail.getTardiness();
-//            vacationPay += payroll.getDailyBasic() * payrollDetail.getVacation();
-//            sickPay += payroll.getDailyBasic() * payrollDetail.getSick();
-//        }
-//        payroll.setRegularPay(formatDecimal(regularPay));
-//        payroll.setOverTimePay(formatDecimal(overTimePay));
-//        payroll.setTardinessDeduction(formatDecimal(tardinessDeduction));
-//        payroll.setVacationPay(formatDecimal(vacationPay));
-//        payroll.setSickPay(formatDecimal(sickPay));
-//        grossPay = regularPay + overTimePay + vacationPay + sickPay - tardinessDeduction;
-//        return grossPay;
-//    }
-    private double getTotalDeductions(Long payrollId){
-        double totalDeductions = 0;
-        List<PayrollDeductibleEntity>deductibleEntities = payrollDeductibleDao.getAllDeductibles(payrollId);
-        for (PayrollDeductibleEntity deduct: deductibleEntities) {
-            totalDeductions += deduct.getValue();
+    public  List<PayrollEntity> getEmployeePayrollByPeriod(Long empId, LocalDate periodStart, LocalDate periodEnd) {
+        return getPayroll(empId, periodStart, periodEnd);
+    }
+
+    private List<PayrollEntity> getPayroll(Long empId, LocalDate periodStart, LocalDate periodEnd) {
+        List<PayrollEntity> payrolls;
+        if (empId == 0) {
+            payrolls = payrollDao.getPayrollByPeriod(periodStart, periodEnd);
+        }else {
+            payrolls = payrollDao.getEmployeePayroll(empId, periodStart, periodEnd);
         }
-        return totalDeductions;
+        return payrolls;
     }
 
     private double formatDecimal(double value) {
