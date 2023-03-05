@@ -86,5 +86,3 @@ public class AccountService {
         return accountDao.findAll();
     }
 }
-
-

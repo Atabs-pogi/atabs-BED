@@ -22,7 +22,7 @@ public interface FiberDao extends JpaRepository<FiberEntity, Long> {
 //    @Query(value = "Select COUNT(name) from Fibers where name =:fiber_nane", nativeQuery = true)
 //    int findByName(String fiber_name);
 
-    @Query(value = "SELECT * FROM fibers WHERE name like %:match% OR grade like %:match% OR price like %:match%", nativeQuery = true)
+    @Query(value = "SELECT * FROM fibers WHERE name like %:match%", nativeQuery = true)
     List<FiberEntity> searchFiberByName(String match);
 
     @Query(value = "SELECT grade from fibers where name=:fName",nativeQuery = true)
