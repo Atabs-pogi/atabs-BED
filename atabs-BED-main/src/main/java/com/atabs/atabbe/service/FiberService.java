@@ -19,11 +19,11 @@ public class FiberService {
     private FiberDao fiberDao;
 
     public List<Fiber> searchFiberByName(String name) {
-        List<FiberEntity> entityFibers = (List<FiberEntity>) fiberDao.searchFiberByName(name);
+        List<FiberEntity> entityFibers = fiberDao.searchFiberByName(name);
         List<Fiber> fibers = new ArrayList<>();
         for (FiberEntity fiber : entityFibers) {
             fibers.add(Fiber.from(fiber));
-//            System.out.println(fiber.getId());
+//            System.out.println(fiber);
         }
         return fibers;
     }

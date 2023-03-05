@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("login")
 @CrossOrigin
@@ -40,6 +41,7 @@ public class AccountController {
     @PostMapping("/addAccount")
     public ResponseEntity<String> addAccount(@RequestBody Account account) {
         return new ResponseEntity<>(accountService.addAccount(account), HttpStatus.CREATED);
+
     }
 
     @GetMapping("/getAllAccount")

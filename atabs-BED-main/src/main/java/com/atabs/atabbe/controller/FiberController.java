@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 @RequestMapping("fiber")
+@CrossOrigin
 public class FiberController {
 
     @Autowired

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("employee")
 @CrossOrigin
@@ -44,6 +45,10 @@ public class EmployeeController {
     @PutMapping("/updateEmployee")
     public ResponseEntity updateEmployee(@RequestBody Employee employee) {
         return new ResponseEntity(employeeService.updateEmployee(employee), HttpStatus.OK);
+    }
+    @GetMapping("/getEmployeeCount")
+    public ResponseEntity getEmployeeCount() {
+        return new ResponseEntity(employeeService.employeeCount(), HttpStatus.OK);
     }
 
     @GetMapping("/getAllEmployee")

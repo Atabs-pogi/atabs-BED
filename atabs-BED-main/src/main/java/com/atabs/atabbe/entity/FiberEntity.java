@@ -21,7 +21,7 @@ public class FiberEntity {
     private LocalDateTime createDate;
 
 
-    @OneToMany(targetEntity = FiberItemEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = FiberItemEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "fiberId" ,referencedColumnName ="fiberId" )
     private List<FiberItemEntity> items;
 
