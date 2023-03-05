@@ -40,6 +40,10 @@ public class EmployeeSalaryService {
         if(employee == null){
             throw new NotFoundException("Employee not found");
         }
+        EmployeeSalaryEntity salaryEntity = salaryDao.getSalaryByEmployeeId(salary.getEmployeeId());
+        if (salaryEntity != null) {
+            throw new NotFoundException("Employee Salary already exist");
+        }
         EmployeeSalaryEntity entity = new EmployeeSalaryEntity();
         entity.setEffDate(salary.getEffDate());
         entity.setExpDate(salary.getExpDate());
