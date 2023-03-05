@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 
+@RestController
 @RequestMapping("/report")
 @CrossOrigin
 public class ReportController {

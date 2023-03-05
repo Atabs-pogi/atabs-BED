@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@RestController
 @RequestMapping("image")
 @CrossOrigin
 public class ImageProfileController {

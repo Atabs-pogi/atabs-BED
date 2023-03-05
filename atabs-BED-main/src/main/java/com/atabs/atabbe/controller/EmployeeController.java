@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@RestController
 @RequestMapping("employee")
 @CrossOrigin
 public class EmployeeController {

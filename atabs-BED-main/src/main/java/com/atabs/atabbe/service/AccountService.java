@@ -82,6 +82,7 @@ public class AccountService {
         }
     }
 
+
     public List<AccountEntity> getAccount() {
         return accountDao.findAll();
     }
