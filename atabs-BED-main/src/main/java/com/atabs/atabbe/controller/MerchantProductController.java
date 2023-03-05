@@ -1,11 +1,8 @@
 package com.atabs.atabbe.controller;
 
-import com.atabs.atabbe.entity.FiberEntity;
 import com.atabs.atabbe.entity.MerchantProductEntity;
 import com.atabs.atabbe.exception.NotFoundException;
-import com.atabs.atabbe.model.Farmer;
 import com.atabs.atabbe.model.MerchantProduct;
-import com.atabs.atabbe.model.Transaction;
 import com.atabs.atabbe.model.TransactionMerchant;
 import com.atabs.atabbe.service.MerchantProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("merchant")
 @CrossOrigin
 public class MerchantProductController {

@@ -29,6 +29,16 @@ public class EmployeeEntity {
 
     private String imageLocation;
     private long postalCode;
+    @Transient
+    private boolean reviewed;
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
+    }
 
 
     public String getImageLocation() {
