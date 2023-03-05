@@ -13,8 +13,15 @@ public class PayrollEntity {
     private long id;
     private LocalDate periodStart;
     private LocalDate periodEnd;
+    private double overTimeRate;
+    private double totalWorkHours;
+    private double totalOtHours;
+    private  double regularPay;
+    private double overTimePay;
+    private double tardinessDeduction;
     private double grossPay;
     private double totalBenefitContributions;
+    private double otherDeductions;
     private double totalDeductions;
     private double netPay;
     private String paymentMethod; //  (e.g., direct deposit, check)
@@ -102,5 +109,61 @@ public class PayrollEntity {
 
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    public double getOverTimeRate() {
+        return overTimeRate;
+    }
+
+    public void setOverTimeRate(double overTimeRate) {
+        this.overTimeRate = overTimeRate;
+    }
+
+    public double getTotalWorkHours() {
+        return totalWorkHours;
+    }
+
+    public void setTotalWorkHours(double totalWorkHours) {
+        this.totalWorkHours = totalWorkHours;
+    }
+
+    public double getTotalOtHours() {
+        return totalOtHours;
+    }
+
+    public void setTotalOtHours(double totalOtHours) {
+        this.totalOtHours = totalOtHours;
+    }
+
+    public double getRegularPay() {
+        return regularPay;
+    }
+
+    public void setRegularPay(double regularPay) {
+        this.regularPay = regularPay;
+    }
+
+    public double getOverTimePay() {
+        return overTimePay;
+    }
+
+    public void setOverTimePay(double overTimePay) {
+        this.overTimePay = overTimePay;
+    }
+
+    public double getTardinessDeduction() {
+        return tardinessDeduction;
+    }
+
+    public void setTardinessDeduction(double tardinessDeduction) {
+        this.tardinessDeduction = tardinessDeduction;
+    }
+
+    public double getOtherDeductions() {
+        return otherDeductions;
+    }
+
+    public void setOtherDeductions(double otherDeductions) {
+        this.otherDeductions = otherDeductions;
     }
 }

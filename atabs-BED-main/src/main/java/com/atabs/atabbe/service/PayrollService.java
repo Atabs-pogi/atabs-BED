@@ -59,6 +59,13 @@ public class PayrollService {
         double withholdingTax = 0;
         double incomeExcess = 0;
         double netPay = 0;
+
+        double regularHours = 0;
+        double otHours = 0;
+        double totalTardiness = 0;
+        double vacationDays = 0;
+        double sickDays = 0;
+
         EmployeeEntity employee =  employeeDao.findById(payroll.getEmployeeId()).orElse(null);
         if(employee == null){
             throw new NotFoundException("Employee not found");
@@ -93,21 +100,37 @@ public class PayrollService {
         } else {
             netPay = (payroll.getTaxableIncome() - payroll.getWithholdingTax()) - payroll.getTotalDeductions();
         }
+        List<PayrollDetails> items = payroll.getItems();
+        for (PayrollDetails item: items) {
+            regularHours += item.getRegular();
+            otHours += item.getOt();
+            totalTardiness += item.getTardiness();
+            vacationDays += item.getVacation();
+            sickDays += item.getSick();
+        }
+
         payroll.setNetPay(formatDecimal(netPay));
         //Save payroll
         entity.setPeriodStart(payroll.getPeriodStart());
         entity.setPeriodEnd(payroll.getPeriodEnd());
-        entity.setGrossPay(payroll.getGrossPay());
-        entity.setTotalBenefitContributions(payroll.getTotalBenefitContributions());
-        entity.setTotalDeductions(payroll.getTotalDeductions());
-        entity.setNetPay(payroll.getNetPay());
+        entity.setOverTimeRate(formatDecimal((salary.getDailyBasic() / 8) * 1.25));
+        entity.setTotalWorkHours(formatDecimal(regularHours));
+        entity.setTotalOtHours(formatDecimal(otHours));
+        entity.setRegularPay(formatDecimal(payroll.getRegularPay()));
+        entity.setOverTimePay(formatDecimal(payroll.getOverTimePay()));
+        entity.setTardinessDeduction(formatDecimal(payroll.getTardinessDeduction()));
+        entity.setGrossPay(formatDecimal(payroll.getGrossPay()));
+        entity.setTotalBenefitContributions(formatDecimal(payroll.getTotalBenefitContributions()));
+        entity.setOtherDeductions(formatDecimal(payroll.getTotalDeductions()));
+        entity.setTotalDeductions(formatDecimal(payroll.getTotalDeductions() + payroll.getTardinessDeduction()));
+        entity.setNetPay(formatDecimal(payroll.getNetPay()));
         entity.setPaymentMethod(payroll.getPaymentMethod());
         entity.setPaymentDate(payroll.getPaymentDate());
         entity.setEmployee(employee);
         payrollDao.save(entity);
         payroll.setId(entity.getId());
         //Save items
-        List<PayrollDetails> items = payroll.getItems();
+        //List<PayrollDetails> items = payroll.getItems();
         for (PayrollDetails item: items) {
             PayrollDetailEntity detailEntity = payrollDetailDao.getByDate(entity.getId(), item.getDate());
             if(detailEntity == null){
