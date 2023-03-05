@@ -15,6 +15,8 @@ public class BillsStatementEntity {
     private String type;
     private String name;
     private String dueDate;
+    private String paymentDate;
+    private String referenceCode;
     private LocalDateTime importDate;
 
     @PrePersist
@@ -49,6 +51,22 @@ public class BillsStatementEntity {
 
     public String getDueDate() {
         return dueDate;
+    }
+
+    public String getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(String paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public String getReferenceCode() {
+        return referenceCode;
+    }
+
+    public void setReferenceCode(String referenceCode) {
+        this.referenceCode = referenceCode;
     }
 
     public void setDueDate(String dueDate) {

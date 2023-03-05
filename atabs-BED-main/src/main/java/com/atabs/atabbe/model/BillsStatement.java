@@ -10,6 +10,8 @@ public class BillsStatement {
     private String type;
     private String name;
     private String dueDate;
+    private String paymentDate;
+    private String referenceCode;
     private LocalDateTime importDate;
 
     public static BillsStatement from(BillsStatementEntity billing) {
@@ -19,6 +21,8 @@ public class BillsStatement {
         billsStatement.type=billing.getType();
         billsStatement.dueDate= billsStatement.getDueDate();
         billsStatement.importDate=billing.getImportDate();
+        billsStatement.paymentDate=billing.getPaymentDate();
+        billsStatement.referenceCode=billing.getReferenceCode();
         return billsStatement;
 
     }
@@ -53,6 +57,22 @@ public class BillsStatement {
 
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public String getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(String paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public String getReferenceCode() {
+        return referenceCode;
+    }
+
+    public void setReferenceCode(String referenceCode) {
+        this.referenceCode = referenceCode;
     }
 
     public LocalDateTime getImportDate() {
