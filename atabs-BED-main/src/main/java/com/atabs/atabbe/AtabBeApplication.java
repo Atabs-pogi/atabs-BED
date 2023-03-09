@@ -32,7 +32,7 @@ public class AtabBeApplication {
 //		System.out.println("Backup logs : " +springProperties.getProperty("spring.datasource.url"));
 //		System.out.println("Backup logs : " + databaseCreds.getPassword());
 //		System.out.println("Backup logs : " + databaseCreds.getDbName());
-//		boolean isSuccess = BackUpDatabase.backUp(FileCreated.dbPathFile(),"root","vince8516200","coop");
+//		boolean isSuccess = BackUpDatabase.backUp(FileCreated.dbPathFile(),"root","javaman007","coop");
 //		System.out.println("Backup logs : " + isSuccess);
 //	}
 

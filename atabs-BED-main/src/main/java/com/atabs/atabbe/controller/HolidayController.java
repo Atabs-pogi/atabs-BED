@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("holiday")
+@CrossOrigin
 public class HolidayController {
 
     @Autowired

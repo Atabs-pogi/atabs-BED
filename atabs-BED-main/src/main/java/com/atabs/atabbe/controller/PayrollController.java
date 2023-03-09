@@ -20,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("payroll")
+@CrossOrigin
 public class PayrollController {
 
     @Autowired
