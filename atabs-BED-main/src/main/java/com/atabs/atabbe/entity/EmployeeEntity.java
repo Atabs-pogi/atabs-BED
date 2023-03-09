@@ -3,7 +3,7 @@ package com.atabs.atabbe.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "employees")
@@ -110,8 +110,17 @@ public class EmployeeEntity {
         this.birthday = birthday;
     }
 
+//    public int getAge() {
+//        return (int) ChronoUnit.YEARS.between(this.birthday, LocalDate.now());
+//    }
+//
+//    public void setAge(int age) {
+//        this.age = age;
+//    }
+
+
     public int getAge() {
-        return 0;
+        return age;
     }
 
     public void setAge(int age) {
