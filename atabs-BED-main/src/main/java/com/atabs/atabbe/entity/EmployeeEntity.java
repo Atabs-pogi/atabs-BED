@@ -29,8 +29,18 @@ public class EmployeeEntity {
 
     private String imageLocation;
     private long postalCode;
+    @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
+    private int status = 1;
     @Transient
     private boolean reviewed;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public boolean isReviewed() {
         return reviewed;

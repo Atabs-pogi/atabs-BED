@@ -20,8 +20,8 @@ public class FiberController {
     private FiberService fiberService;
 
     @GetMapping("/search")
-    public ResponseEntity<java.util.List<Fiber>> search(@RequestParam("name") String name) {
-        return new ResponseEntity<>(fiberService.searchFiberByName(name), HttpStatus.OK);
+    public ResponseEntity<FiberEntity> search(@RequestParam("name") String name) {
+        return new ResponseEntity(fiberService.searchByName(name), HttpStatus.OK);
     }
 
     @GetMapping("/getFiber/{id}")

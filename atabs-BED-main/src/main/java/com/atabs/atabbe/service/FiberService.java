@@ -2,6 +2,7 @@ package com.atabs.atabbe.service;
 
 import com.atabs.atabbe.dao.FiberDao;
 import com.atabs.atabbe.entity.FiberEntity;
+import com.atabs.atabbe.entity.TuxyEntity;
 import com.atabs.atabbe.helper.Message;
 import com.atabs.atabbe.model.Fiber;
 import com.atabs.atabbe.model.Response;
@@ -18,14 +19,9 @@ public class FiberService {
     @Autowired
     private FiberDao fiberDao;
 
-    public List<Fiber> searchFiberByName(String name) {
-        List<FiberEntity> entityFibers = fiberDao.searchFiberByName(name);
-        List<Fiber> fibers = new ArrayList<>();
-        for (FiberEntity fiber : entityFibers) {
-            fibers.add(Fiber.from(fiber));
-//            System.out.println(fiber);
-        }
-        return fibers;
+    public List<FiberEntity> searchByName(String name) {
+        List<FiberEntity> entity =  fiberDao.searchByName(name);
+        return entity;
     }
 
     public FiberEntity getFiberInfo(long fiber_id) {
