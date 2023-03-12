@@ -109,6 +109,8 @@ public class PayrollService {
             sickDays += item.getSick();
         }
 
+        payroll.setTotalWorkHours(regularHours);
+        payroll.setTotalOTHours(otHours);
         payroll.setNetPay(formatDecimal(netPay));
         //Save payroll
         entity.setPeriodStart(payroll.getPeriodStart());

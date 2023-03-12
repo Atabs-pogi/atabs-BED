@@ -26,11 +26,29 @@ public class Payroll {
     private double totalBenefitContributions;
     private double taxableIncome;
     private double totalDeductions;
+    private double totalWorkHours;
+    private double totalOTHours;
     private double withholdingTax;
     private double netPay;
     private List<PayrollDetails> items;
     private List<PayrollBenefit> benefits;
     private List<PayrollDeductible> deductibles;
+
+    public double getTotalWorkHours() {
+        return totalWorkHours;
+    }
+
+    public void setTotalWorkHours(double totalWorkHours) {
+        this.totalWorkHours = totalWorkHours;
+    }
+
+    public double getTotalOTHours() {
+        return totalOTHours;
+    }
+
+    public void setTotalOTHours(double totalOTHours) {
+        this.totalOTHours = totalOTHours;
+    }
 
     public long getId() {
         return id;
