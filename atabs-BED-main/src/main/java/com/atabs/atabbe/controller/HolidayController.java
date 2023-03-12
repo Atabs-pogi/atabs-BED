@@ -29,8 +29,23 @@ public class HolidayController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<List<HolidayEntity>> save(@RequestBody List<HolidayEntity> holidays) {
-        return new ResponseEntity<>(holidayService.save(holidays), HttpStatus.CREATED);
+    public ResponseEntity<HolidayEntity> save(@RequestBody HolidayEntity holiday) {
+        return new ResponseEntity(holidayService.save(holiday), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<HolidayEntity> update(@RequestBody HolidayEntity holiday) {
+        return new ResponseEntity(holidayService.update(holiday), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HolidayEntity> delete(@PathVariable(name = "id")Long id) {
+        return new ResponseEntity(holidayService.delete(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/clear")
+    public ResponseEntity<HolidayEntity> clear() {
+        return new ResponseEntity(holidayService.clear(), HttpStatus.OK);
     }
 
     private LocalDate convertToLocalDate(Date dateToConvert) {

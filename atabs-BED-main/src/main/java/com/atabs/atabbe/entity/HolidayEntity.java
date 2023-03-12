@@ -7,17 +7,13 @@ import java.time.LocalDate;
 @Table(name = "holiday")
 public class HolidayEntity {
 
-    public enum Type{
-        REGULAR,
-        SPECIAL
-    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "holidayId")
     private long id;
     private LocalDate date;
-    @Enumerated(EnumType.ORDINAL)
-    private Type type;
+    private String type;
     private String description;
 
 
@@ -37,11 +33,11 @@ public class HolidayEntity {
         this.date = date;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 

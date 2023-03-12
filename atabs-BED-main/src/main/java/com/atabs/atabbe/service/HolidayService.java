@@ -28,8 +28,34 @@ public class HolidayService {
         return dao.getHolidaysBetween(nStart, nEnd);
     }
 
+    public String save(HolidayEntity holiday) {
+        HolidayEntity existing = dao.getByDescriptionAndDate(holiday.getDescription(), holiday.getDate());
+        if (existing != null) {
+            return "Holiday Already Exist";
+        }
+        dao.save(holiday);
+        return "Successful";
+    }
+
+    public String update(HolidayEntity holiday) {
+        if (holiday.getId() == 0) {
+            return "Id is missing";
+        }
+        dao.save(holiday);
+        return "Successful";
+    }
+
+    public String delete(Long id) {
+        HolidayEntity entity = dao.findById(id).orElse(null);
+        if (entity == null) {
+            return "Id does not exist";
+        }
+        dao.delete(entity);
+        return "Successful";
+    }
+
     @Transactional
-    public List<HolidayEntity> save(List<HolidayEntity> holidays) {
+    public String clear() {
         // Delete all holidays
         LocalDate start = LocalDate.now().withDayOfYear(1);
         LocalDate end = start.plusYears(1);
@@ -39,9 +65,6 @@ public class HolidayService {
             ids.add(holiday.getId());
         }
         dao.deleteAllByIdInBatch(ids);
-
-        // Add all holidays
-        dao.saveAll(holidays);
-        return this.getAll(start, end);
+        return "Successful";
     }
 }
