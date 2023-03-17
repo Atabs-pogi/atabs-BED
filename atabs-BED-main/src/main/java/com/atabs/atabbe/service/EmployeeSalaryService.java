@@ -24,7 +24,7 @@ public class EmployeeSalaryService {
     private EmployeeSalaryDao salaryDao;
 
     public List<EmployeeSalaryEntity> getAllSalary() {
-        return salaryDao.findAll();
+        return salaryDao.getAllSalary();
     }
 
     public EmployeeSalaryEntity getSalary(long empId) throws NotFoundException {
@@ -40,10 +40,10 @@ public class EmployeeSalaryService {
         if(employee == null){
             throw new NotFoundException("Employee not found");
         }
-        EmployeeSalaryEntity salaryEntity = salaryDao.getSalaryByEmployeeId(salary.getEmployeeId());
-        if (salaryEntity != null) {
-            throw new NotFoundException("Employee Salary already exist");
-        }
+//        EmployeeSalaryEntity salaryEntity = salaryDao.getSalaryByEmployeeId(salary.getEmployeeId());
+//        if (salaryEntity != null) {
+//            throw new NotFoundException("Employee Salary already exist");
+//        }
         EmployeeSalaryEntity entity = new EmployeeSalaryEntity();
         entity.setEffDate(salary.getEffDate());
         entity.setExpDate(salary.getExpDate());
@@ -61,11 +61,10 @@ public class EmployeeSalaryService {
         if(employee == null){
             throw new NotFoundException("Employee not found");
         }
-        EmployeeSalaryEntity salaryEntity = salaryDao.getSalaryByEmployeeId(salary.getEmployeeId());
-        if (salaryEntity == null) {
+        EmployeeSalaryEntity entity = salaryDao.getSalaryByEmployeeId(salary.getEmployeeId());
+        if (entity == null) {
             throw new NotFoundException("Employee Salary not found");
         }
-        EmployeeSalaryEntity entity = new EmployeeSalaryEntity();
         entity.setEffDate(salary.getEffDate());
         entity.setExpDate(salary.getExpDate());
         entity.setDailyBasic(salary.getDailyBasic());
