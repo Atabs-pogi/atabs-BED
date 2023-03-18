@@ -41,6 +41,7 @@ public class AccountService {
             accounts.add(Account.from(account));
             System.out.println(account.getAccountId());
         }
+
         return accounts;
     }
 

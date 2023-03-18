@@ -26,17 +26,19 @@ public class ImageProfileController {
     private String uploadPath;
 
     @PostMapping("/addProfile")
-    public ResponseEntity addProfile(@ModelAttribute("profile")String imageProfile, @ModelAttribute("type")String identity, @RequestParam("img")MultipartFile file){
-        String name=identity+"_"+imageProfile+".png";
-        Path fileNameAndPath= Paths.get(FileCreated.UPLOADDIRECTORY,name);
-        System.out.println(fileNameAndPath);
+    public ResponseEntity addProfile(@ModelAttribute("profile") String imageProfile,
+                                     @ModelAttribute("type") String identity,
+                                     @RequestParam("img") MultipartFile file) {
+        String name = identity + "_" + imageProfile + ".png";
+        Path fileNameAndPath = Paths.get(uploadPath, name);
         try {
-            Files.write(fileNameAndPath,file.getBytes());
+            Files.write(fileNameAndPath, file.getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return new ResponseEntity(name, HttpStatus.CREATED);
     }
+
 
     @GetMapping("/{name}")
     public ResponseEntity getImage(@PathVariable("name") String imageProfile) throws FileNotFoundException {
