@@ -5,6 +5,8 @@ import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.entity.PayrollEntity;
 import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.Payroll;
+import com.atabs.atabbe.model.PayrollBenefit;
+import com.atabs.atabbe.model.PayrollDeductible;
 import com.atabs.atabbe.service.PayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,18 +29,30 @@ public class PayrollController {
     @Autowired
     private PayrollService service;
 
-    @GetMapping("/{period}")
-    public ResponseEntity<List<PayrollEntity>> getAllByPeriod(@PathVariable(name = "period")String period){
-        return new ResponseEntity<>(service.getAllByPeriod(parseStringDate(period)), HttpStatus.OK);
+    @GetMapping("/review")
+    public ResponseEntity<List<EmployeeEntity>> getEmployeePayrollStatus(){
+        return new ResponseEntity<>(service.getEmployeePayrollStatus(convertToLocalDate(new Date())), HttpStatus.OK);
     }
 
-    @GetMapping("/period")
-    public ResponseEntity<List<PayrollEntity>> getPayrollByPeriod(
-            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
-            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd)
-    {
-        return new ResponseEntity<>(service.getAllEmployeesPayrollByPeriod(periodStart, periodEnd), HttpStatus.OK);
+    @PostMapping("/")
+    public ResponseEntity<PayrollEntity> createEmployeePayroll(@RequestBody Payroll payroll) throws NotFoundException {
+        return new ResponseEntity<>(service.createPayroll(payroll), HttpStatus.OK);
     }
+
+    @PostMapping("/benefit")
+    public ResponseEntity<PayrollEntity> saveBenefit(@RequestBody List<PayrollBenefit> benefits) throws NotFoundException {
+        return new ResponseEntity<>(service.saveBenefit(benefits), HttpStatus.OK);
+    }
+
+    @PostMapping("/deduction")
+    public ResponseEntity<PayrollEntity> saveDeductible(@RequestBody List<PayrollDeductible> deductibles) throws NotFoundException {
+        return new ResponseEntity<>(service.saveDeductible(deductibles), HttpStatus.OK);
+    }
+
+//    @GetMapping("/getPay/{payrollId}")
+//    public ResponseEntity<PayrollEntity> getPay(@PathVariable(value = "payrollId") Long payrollId) throws NotFoundException {
+//        return new ResponseEntity<>(service.calculatePays(payrollId), HttpStatus.OK);
+//    }
 
     @GetMapping("/employee")
     public ResponseEntity<List<PayrollEntity>> getEmployeePayrollByPeriod(
@@ -49,13 +64,16 @@ public class PayrollController {
     }
 
     @GetMapping("/employees")
-    public ResponseEntity<List<EmployeeEntity>> getEmployeePayrollStatus(){
-        return new ResponseEntity<>(service.getEmployeePayrollStatus(convertToLocalDate(new Date())), HttpStatus.OK);
+    public ResponseEntity<List<PayrollEntity>> getPayrollByPeriod(
+            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd)
+    {
+        return new ResponseEntity<>(service.getAllEmployeesPayrollByPeriod(periodStart, periodEnd), HttpStatus.OK);
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Payroll> saveEmployeePayroll(@RequestBody Payroll payroll) throws NotFoundException {
-        return new ResponseEntity<>(service.saveEmployeePayroll(payroll), HttpStatus.OK);
+    @GetMapping("/{period}")
+    public ResponseEntity<List<PayrollEntity>> getAllByPeriod(@PathVariable(name = "period")String period){
+        return new ResponseEntity<>(service.getAllByPeriod(parseStringDate(period)), HttpStatus.OK);
     }
 
     private LocalDate convertToLocalDate(Date dateToConvert) {

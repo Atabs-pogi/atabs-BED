@@ -13,20 +13,30 @@ public class PayrollEntity {
     private long id;
     private LocalDate periodStart;
     private LocalDate periodEnd;
-    private double overTimeRate;
-    private double totalWorkHours;
-    private double totalOtHours;
-    private  double regularPay;
-    private double overTimePay;
-    private double tardinessDeduction;
-    private double grossPay;
-    private double totalBenefitContributions;
-    private double otherDeductions;
-    private double totalDeductions;
-    private double netPay;
     private String paymentMethod; //  (e.g., direct deposit, check)
     private LocalDate paymentDate;
 
+    private double totalWorkHours;
+    private double overTimeRate;
+    private double totalOtHours;
+    private double totalTardinessHours;
+    private double totalVacationDays;
+    private double totalSickDays;
+
+    private  double regularPay;
+    private double overTimePay;
+    private double tardinessDeduction;
+    private double vacationPay;
+    private double sickPay;
+    private double grossPay;
+
+    private double totalBenefitContributions;
+    private double taxableIncome;
+    private double withholdingTax;
+
+    private double otherDeductions;
+    private double totalDeductions;
+    private double netPay;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_id", nullable = false)
     private EmployeeEntity employee;
@@ -63,38 +73,6 @@ public class PayrollEntity {
         this.periodEnd = periodEnd;
     }
 
-    public double getGrossPay() {
-        return grossPay;
-    }
-
-    public void setGrossPay(double grossPay) {
-        this.grossPay = grossPay;
-    }
-
-    public double getTotalBenefitContributions() {
-        return totalBenefitContributions;
-    }
-
-    public void setTotalBenefitContributions(double totalBenefitContributions) {
-        this.totalBenefitContributions = totalBenefitContributions;
-    }
-
-    public double getTotalDeductions() {
-        return totalDeductions;
-    }
-
-    public void setTotalDeductions(double totalDeductions) {
-        this.totalDeductions = totalDeductions;
-    }
-
-    public double getNetPay() {
-        return netPay;
-    }
-
-    public void setNetPay(double netPay) {
-        this.netPay = netPay;
-    }
-
     public String getPaymentMethod() {
         return paymentMethod;
     }
@@ -111,14 +89,6 @@ public class PayrollEntity {
         this.paymentDate = paymentDate;
     }
 
-    public double getOverTimeRate() {
-        return overTimeRate;
-    }
-
-    public void setOverTimeRate(double overTimeRate) {
-        this.overTimeRate = overTimeRate;
-    }
-
     public double getTotalWorkHours() {
         return totalWorkHours;
     }
@@ -127,12 +97,44 @@ public class PayrollEntity {
         this.totalWorkHours = totalWorkHours;
     }
 
+    public double getOverTimeRate() {
+        return overTimeRate;
+    }
+
+    public void setOverTimeRate(double overTimeRate) {
+        this.overTimeRate = overTimeRate;
+    }
+
     public double getTotalOtHours() {
         return totalOtHours;
     }
 
     public void setTotalOtHours(double totalOtHours) {
         this.totalOtHours = totalOtHours;
+    }
+
+    public double getTotalTardinessHours() {
+        return totalTardinessHours;
+    }
+
+    public void setTotalTardinessHours(double totalTardinessHours) {
+        this.totalTardinessHours = totalTardinessHours;
+    }
+
+    public double getTotalVacationDays() {
+        return totalVacationDays;
+    }
+
+    public void setTotalVacationDays(double totalVacationDays) {
+        this.totalVacationDays = totalVacationDays;
+    }
+
+    public double getTotalSickDays() {
+        return totalSickDays;
+    }
+
+    public void setTotalSickDays(double totalSickDays) {
+        this.totalSickDays = totalSickDays;
     }
 
     public double getRegularPay() {
@@ -159,11 +161,75 @@ public class PayrollEntity {
         this.tardinessDeduction = tardinessDeduction;
     }
 
+    public double getVacationPay() {
+        return vacationPay;
+    }
+
+    public void setVacationPay(double vacationPay) {
+        this.vacationPay = vacationPay;
+    }
+
+    public double getSickPay() {
+        return sickPay;
+    }
+
+    public void setSickPay(double sickPay) {
+        this.sickPay = sickPay;
+    }
+
+    public double getGrossPay() {
+        return grossPay;
+    }
+
+    public void setGrossPay(double grossPay) {
+        this.grossPay = grossPay;
+    }
+
+    public double getTotalBenefitContributions() {
+        return totalBenefitContributions;
+    }
+
+    public void setTotalBenefitContributions(double totalBenefitContributions) {
+        this.totalBenefitContributions = totalBenefitContributions;
+    }
+
+    public double getTaxableIncome() {
+        return taxableIncome;
+    }
+
+    public void setTaxableIncome(double taxableIncome) {
+        this.taxableIncome = taxableIncome;
+    }
+
+    public double getWithholdingTax() {
+        return withholdingTax;
+    }
+
+    public void setWithholdingTax(double withholdingTax) {
+        this.withholdingTax = withholdingTax;
+    }
+
     public double getOtherDeductions() {
         return otherDeductions;
     }
 
     public void setOtherDeductions(double otherDeductions) {
         this.otherDeductions = otherDeductions;
+    }
+
+    public double getTotalDeductions() {
+        return totalDeductions;
+    }
+
+    public void setTotalDeductions(double totalDeductions) {
+        this.totalDeductions = totalDeductions;
+    }
+
+    public double getNetPay() {
+        return netPay;
+    }
+
+    public void setNetPay(double netPay) {
+        this.netPay = netPay;
     }
 }
