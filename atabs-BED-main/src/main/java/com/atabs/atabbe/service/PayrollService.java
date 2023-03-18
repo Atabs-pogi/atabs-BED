@@ -37,15 +37,12 @@ public class PayrollService {
         return payrollDao.getPayrollByPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
     }
 
-    public List<EmployeeEntity> getEmployeePayrollStatus(LocalDate period){
+    public List<EmployeeEntity> getEmployeePayrollStatus(LocalDate periodStart, LocalDate periodEnd){
         List<EmployeeEntity> employees = employeeDao.findAll();
-        List<PayrollEntity> payrolls = payrollDao.findAll();
-        //payrollDao.getEmployeesPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
         for (EmployeeEntity employee : employees) {
-            for (PayrollEntity payroll: payrolls) {
-                if (payroll.getEmployee().getId() == employee.getId()){
-                    employee.setReviewed(true);
-                }
+            PayrollEntity payroll = payrollDao.getEmployeePayrollByPeriod(employee.getId(), periodStart, periodEnd);
+            if (payroll != null){
+                employee.setReviewed(true);
             }
         }
         return employees;

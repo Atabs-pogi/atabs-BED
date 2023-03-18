@@ -30,8 +30,10 @@ public class PayrollController {
     private PayrollService service;
 
     @GetMapping("/review")
-    public ResponseEntity<List<EmployeeEntity>> getEmployeePayrollStatus(){
-        return new ResponseEntity<>(service.getEmployeePayrollStatus(convertToLocalDate(new Date())), HttpStatus.OK);
+    public ResponseEntity<List<EmployeeEntity>> getEmployeePayrollStatus(
+            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd){
+        return new ResponseEntity<>(service.getEmployeePayrollStatus(periodStart, periodEnd), HttpStatus.OK);
     }
 
     @PostMapping("/")
@@ -64,7 +66,7 @@ public class PayrollController {
     }
 
     @GetMapping("/employees")
-    public ResponseEntity<List<PayrollEntity>> getPayrollByPeriod(
+    public ResponseEntity<List<PayrollEntity>> getAllEmployeesPayrollByPeriod(
             @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
             @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd)
     {
