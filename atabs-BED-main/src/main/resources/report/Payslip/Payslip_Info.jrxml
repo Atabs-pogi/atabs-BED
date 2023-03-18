@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PayslipPerFarmer" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61dd4e10-adab-4da4-bc45-db1a23bbd790">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Payslip_Info" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61dd4e10-adab-4da4-bc45-db1a23bbd790">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="coop.jrdax"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="id" class="java.lang.String"/>
+	<parameter name="Date_From" class="java.lang.String"/>
+	<parameter name="Date_End" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT *, CONCAT(first_name, ' ', LEFT(middle_name, 1), '. ', last_name) AS full_name FROM payroll as p, accounts as a, employees as e, coop.employee_salary as es WHERE p.emp_id=$P{id} AND p.emp_id=e.emp_id AND e.emp_id=es.emp_id AND e.emp_id=a.emp_id]]>
+		<![CDATA[SELECT p.*, CONCAT(e.first_name, ' ', LEFT(e.middle_name, 1), '. ', e.last_name) AS full_name, es.daily_basic, es.eff_date FROM payroll AS p JOIN employees AS e ON p.emp_id = e.emp_id JOIN (SELECT s1.* FROM coop.employee_salary s1 LEFT JOIN coop.employee_salary s2 ON s1.emp_id = s2.emp_id AND s1.eff_date < s2.eff_date WHERE s2.emp_id IS NULL) AS es ON p.emp_id = es.emp_id AND p.period_start BETWEEN $P{Date_From} AND $P{Date_End} AND p.emp_id=$P{id}]]>
 	</queryString>
 	<field name="payroll_id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="payroll_id"/>
@@ -20,41 +22,6 @@
 	<field name="net_pay" class="java.lang.Double">
 		<property name="com.jaspersoft.studio.field.name" value="net_pay"/>
 		<property name="com.jaspersoft.studio.field.label" value="net_pay"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
-	</field>
-	<field name="payment_date" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="payment_date"/>
-		<property name="com.jaspersoft.studio.field.label" value="payment_date"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
-	</field>
-	<field name="payment_method" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="payment_method"/>
-		<property name="com.jaspersoft.studio.field.label" value="payment_method"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
-	</field>
-	<field name="period_end" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="period_end"/>
-		<property name="com.jaspersoft.studio.field.label" value="period_end"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
-	</field>
-	<field name="period_start" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="period_start"/>
-		<property name="com.jaspersoft.studio.field.label" value="period_start"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
-	</field>
-	<field name="total_benefit_contributions" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.name" value="total_benefit_contributions"/>
-		<property name="com.jaspersoft.studio.field.label" value="total_benefit_contributions"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
-	</field>
-	<field name="total_deductions" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.name" value="total_deductions"/>
-		<property name="com.jaspersoft.studio.field.label" value="total_deductions"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
-	</field>
-	<field name="emp_id" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="emp_id"/>
-		<property name="com.jaspersoft.studio.field.label" value="emp_id"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
 	</field>
 	<field name="other_deductions" class="java.lang.Double">
@@ -72,6 +39,26 @@
 		<property name="com.jaspersoft.studio.field.label" value="over_time_rate"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
 	</field>
+	<field name="payment_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="payment_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="payment_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
+	</field>
+	<field name="payment_method" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="payment_method"/>
+		<property name="com.jaspersoft.studio.field.label" value="payment_method"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
+	</field>
+	<field name="period_end" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="period_end"/>
+		<property name="com.jaspersoft.studio.field.label" value="period_end"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
+	</field>
+	<field name="period_start" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="period_start"/>
+		<property name="com.jaspersoft.studio.field.label" value="period_start"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
+	</field>
 	<field name="regular_pay" class="java.lang.Double">
 		<property name="com.jaspersoft.studio.field.name" value="regular_pay"/>
 		<property name="com.jaspersoft.studio.field.label" value="regular_pay"/>
@@ -82,152 +69,45 @@
 		<property name="com.jaspersoft.studio.field.label" value="tardiness_deduction"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
 	</field>
-	<field name="total_ot_hours" class="java.lang.Integer">
+	<field name="total_benefit_contributions" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_benefit_contributions"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_benefit_contributions"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
+	</field>
+	<field name="total_deductions" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_deductions"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_deductions"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
+	</field>
+	<field name="total_ot_hours" class="java.lang.Double">
 		<property name="com.jaspersoft.studio.field.name" value="total_ot_hours"/>
 		<property name="com.jaspersoft.studio.field.label" value="total_ot_hours"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
 	</field>
-	<field name="total_work_hours" class="java.lang.Integer">
+	<field name="total_work_hours" class="java.lang.Double">
 		<property name="com.jaspersoft.studio.field.name" value="total_work_hours"/>
 		<property name="com.jaspersoft.studio.field.label" value="total_work_hours"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
 	</field>
-	<field name="account_id" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="account_id"/>
-		<property name="com.jaspersoft.studio.field.label" value="account_id"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="accounts"/>
-	</field>
-	<field name="password" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="password"/>
-		<property name="com.jaspersoft.studio.field.label" value="password"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="accounts"/>
-	</field>
-	<field name="role" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="role"/>
-		<property name="com.jaspersoft.studio.field.label" value="role"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="accounts"/>
-	</field>
-	<field name="status" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="status"/>
-		<property name="com.jaspersoft.studio.field.label" value="status"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="accounts"/>
-	</field>
-	<field name="username" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="username"/>
-		<property name="com.jaspersoft.studio.field.label" value="username"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="accounts"/>
-	</field>
-	<field name="COLUMN_23" class="java.lang.Long">
+	<field name="emp_id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="emp_id"/>
 		<property name="com.jaspersoft.studio.field.label" value="emp_id"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="accounts"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
 	</field>
-	<field name="COLUMN_24" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="emp_id"/>
-		<property name="com.jaspersoft.studio.field.label" value="emp_id"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="address" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="address"/>
-		<property name="com.jaspersoft.studio.field.label" value="address"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="birthday" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.name" value="birthday"/>
-		<property name="com.jaspersoft.studio.field.label" value="birthday"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="create_date" class="java.time.LocalDateTime">
-		<property name="com.jaspersoft.studio.field.name" value="create_date"/>
-		<property name="com.jaspersoft.studio.field.label" value="create_date"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="email" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="email"/>
-		<property name="com.jaspersoft.studio.field.label" value="email"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="first_name" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="first_name"/>
-		<property name="com.jaspersoft.studio.field.label" value="first_name"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="image_location" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="image_location"/>
-		<property name="com.jaspersoft.studio.field.label" value="image_location"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="last_name" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="last_name"/>
-		<property name="com.jaspersoft.studio.field.label" value="last_name"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="middle_name" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="middle_name"/>
-		<property name="com.jaspersoft.studio.field.label" value="middle_name"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="mobile_number" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="mobile_number"/>
-		<property name="com.jaspersoft.studio.field.label" value="mobile_number"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="postal_code" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="postal_code"/>
-		<property name="com.jaspersoft.studio.field.label" value="postal_code"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="sex" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="sex"/>
-		<property name="com.jaspersoft.studio.field.label" value="sex"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="update_date" class="java.time.LocalDateTime">
-		<property name="com.jaspersoft.studio.field.name" value="update_date"/>
-		<property name="com.jaspersoft.studio.field.label" value="update_date"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employees"/>
-	</field>
-	<field name="salary_id" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="salary_id"/>
-		<property name="com.jaspersoft.studio.field.label" value="salary_id"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employee_salary"/>
-	</field>
-	<field name="bank_account_info" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="bank_account_info"/>
-		<property name="com.jaspersoft.studio.field.label" value="bank_account_info"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employee_salary"/>
+	<field name="full_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="full_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="full_name"/>
 	</field>
 	<field name="daily_basic" class="java.lang.Double">
 		<property name="com.jaspersoft.studio.field.name" value="daily_basic"/>
 		<property name="com.jaspersoft.studio.field.label" value="daily_basic"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employee_salary"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="s1"/>
 	</field>
 	<field name="eff_date" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.name" value="eff_date"/>
 		<property name="com.jaspersoft.studio.field.label" value="eff_date"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employee_salary"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="s1"/>
 	</field>
-	<field name="exp_date" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.name" value="exp_date"/>
-		<property name="com.jaspersoft.studio.field.label" value="exp_date"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employee_salary"/>
-	</field>
-	<field name="monthly_basic" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.name" value="monthly_basic"/>
-		<property name="com.jaspersoft.studio.field.label" value="monthly_basic"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employee_salary"/>
-	</field>
-	<field name="tax_info" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="tax_info"/>
-		<property name="com.jaspersoft.studio.field.label" value="tax_info"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employee_salary"/>
-	</field>
-	<field name="COLUMN_44" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="emp_id"/>
-		<property name="com.jaspersoft.studio.field.label" value="emp_id"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="employee_salary"/>
-	</field>
-	<field name="full_name" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
