@@ -1,5 +1,6 @@
 package com.atabs.atabbe.controller;
 import com.atabs.atabbe.entity.HolidayEntity;
+import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.service.HolidayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,13 @@ public class HolidayController {
         @RequestParam(name = "end", required = false) Date end
     ){
         return new ResponseEntity<>(holidayService.getAll(convertToLocalDate(start), convertToLocalDate(end)), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<HolidayEntity>> getAll(
+            @PathVariable(name = "id", required = false) Long id
+    ) throws NotFoundException {
+        return new ResponseEntity(holidayService.getByID(id), HttpStatus.OK);
     }
 
     @PostMapping("/")

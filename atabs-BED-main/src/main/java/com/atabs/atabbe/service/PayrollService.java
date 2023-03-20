@@ -137,7 +137,7 @@ public class PayrollService {
         payroll.setTotalWorkHours(regularWorkHours);
         payroll.setOverTimeRate((salary.getDailyBasic() / regularHours) * overTimeRate);
         payroll.setTotalOtHours(otHours);
-        payroll.setTotalTardinessHours(tardinessDeduction);
+        payroll.setTotalTardinessHours(totalTardiness);
         payroll.setTotalVacationDays(vacationDays);
         payroll.setTotalSickDays(sickDays);
 
