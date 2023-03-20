@@ -2,6 +2,7 @@ package com.atabs.atabbe.service;
 
 import com.atabs.atabbe.dao.HolidayDao;
 import com.atabs.atabbe.entity.HolidayEntity;
+import com.atabs.atabbe.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,13 @@ public class HolidayService {
     @Autowired
     private HolidayDao dao;
 
+    public HolidayEntity getByID(Long id) throws NotFoundException {
+        HolidayEntity holiday = dao.findById(id).orElse(null);
+        if (holiday == null) {
+            throw new NotFoundException("Holiday ID not found");
+        }
+        return holiday;
+    }
     public List<HolidayEntity> getAll(LocalDate start, LocalDate end) {
         LocalDate nStart = LocalDate.now().withDayOfYear(1);
         LocalDate nEnd = nStart.plusYears(1);
