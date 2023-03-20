@@ -2,6 +2,7 @@ package com.atabs.atabbe.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "payroll")
@@ -37,6 +38,8 @@ public class PayrollEntity {
     private double otherDeductions;
     private double totalDeductions;
     private double netPay;
+    @Transient
+    private List<PayrollBenefitEntity> benefits;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_id", nullable = false)
     private EmployeeEntity employee;
@@ -231,5 +234,13 @@ public class PayrollEntity {
 
     public void setNetPay(double netPay) {
         this.netPay = netPay;
+    }
+
+    public List<PayrollBenefitEntity> getBenefits() {
+        return benefits;
+    }
+
+    public void setBenefits(List<PayrollBenefitEntity> benefits) {
+        this.benefits = benefits;
     }
 }

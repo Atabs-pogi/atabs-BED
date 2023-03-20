@@ -1,6 +1,7 @@
 package com.atabs.atabbe.service;
 
 import com.atabs.atabbe.dao.*;
+import com.atabs.atabbe.dto.PayrollSummaryDTO;
 import com.atabs.atabbe.entity.*;
 import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.PayrollBenefit;
@@ -13,7 +14,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PayrollService {
@@ -56,7 +58,7 @@ public class PayrollService {
             throw new NotFoundException("Employee not found");
         }
         //check if payroll already exist
-        PayrollEntity entity = payrollDao.getEmployeePayrollByPeriod(
+        PayrollEntity entity = payrollDao.getEmployeePayroll(
                 payroll.getEmployeeId(),
                 payroll.getPeriodStart(),
                 payroll.getPeriodEnd()
@@ -118,12 +120,16 @@ public class PayrollService {
             throw new NotFoundException("Employee Salary not found");
         }
         List<PayrollDetailEntity> details = payrollDetailDao.getByPeriod(payrollId, payroll.getPeriodStart(), payroll.getPeriodEnd());
-        for (PayrollDetailEntity detail: details) {
-            regularWorkHours += detail.getRegular();
-            otHours += detail.getOt();
-            totalTardiness += detail.getTardiness();
-            vacationDays += detail.getVacation();
-            sickDays += detail.getSick();
+        if (details.isEmpty()) {
+            throw new NotFoundException("Employee Details not found, You may be using the wrong period for payroll and items date");
+        }else{
+            for (PayrollDetailEntity detail: details) {
+                regularWorkHours += detail.getRegular();
+                otHours += detail.getOt();
+                totalTardiness += detail.getTardiness();
+                vacationDays += detail.getVacation();
+                sickDays += detail.getSick();
+            }
         }
 
         // Calculate Pays
@@ -137,7 +143,7 @@ public class PayrollService {
         payroll.setTotalWorkHours(regularWorkHours);
         payroll.setOverTimeRate((salary.getDailyBasic() / regularHours) * overTimeRate);
         payroll.setTotalOtHours(otHours);
-        payroll.setTotalTardinessHours(tardinessDeduction);
+        payroll.setTotalTardinessHours(totalTardiness);
         payroll.setTotalVacationDays(vacationDays);
         payroll.setTotalSickDays(sickDays);
 
@@ -194,7 +200,6 @@ public class PayrollService {
             withholdingTax = taxes.getFixTax() + (incomeExcess * taxes.getTaxRateOnExcess());
         }
         payroll.setWithholdingTax(formatDecimal(withholdingTax));
-
         if (withholdingTax == 0) {
             netPay = taxableIncome;
         } else {
@@ -235,23 +240,47 @@ public class PayrollService {
         return payrollDao.save(payroll);
     }
 
-    public  List<PayrollEntity> getEmployeePayrollByPeriod(Long empId, LocalDate periodStart, LocalDate periodEnd) {
-        return getPayroll(empId, periodStart, periodEnd);
+    public  PayrollEntity getEmployeePayrollByPeriod(Long empId, LocalDate periodStart, LocalDate periodEnd) {
+        return payrollDao.getEmployeePayroll(empId, periodStart, periodEnd);
     }
 
     public  List<PayrollEntity> getAllEmployeesPayrollByPeriod(LocalDate periodStart, LocalDate periodEnd) {
-        long empId = 0;
-        return getPayroll(empId, periodStart, periodEnd);
+        return payrollDao.getPayrollByPeriod(periodStart, periodEnd);
     }
 
-    private List<PayrollEntity> getPayroll(Long empId, LocalDate periodStart, LocalDate periodEnd) {
-        List<PayrollEntity> payrolls;
-        if (empId == 0) {
-            payrolls = payrollDao.getPayrollByPeriod(periodStart, periodEnd);
-        }else {
-            payrolls = payrollDao.getEmployeePayroll(empId, periodStart, periodEnd);
+    public PayrollSummaryDTO getPayrollSummary(LocalDate periodStart, LocalDate periodEnd) throws NotFoundException {
+        List<PayrollEntity> payrolls = payrollDao.getAllEmployeePayrollByPeriod(periodStart, periodEnd);
+        if (payrolls.isEmpty()) {
+            throw new NotFoundException("Payrolls for this period has not been all reviewed");
         }
-        return payrolls;
+        PayrollSummaryDTO payrollSummaryDTO = new PayrollSummaryDTO();
+        double withholdingTaxPayable = 0.0;
+        double salariesPayable = 0.0;
+        double salariesExpense = 0.0;
+        Map<String, Double> benefitTotalTypeContributionMap = new HashMap<>();
+        for (PayrollEntity payroll : payrolls) {
+            List<PayrollBenefitEntity> benefits = payrollBenefitDao.getAllBenefits(payroll.getId());
+            payroll.setBenefits(benefits);
+            salariesExpense += payroll.getGrossPay();
+            withholdingTaxPayable += payroll.getWithholdingTax();
+            salariesPayable += payroll.getNetPay();
+            for (PayrollBenefitEntity benefit : payroll.getBenefits()) {
+                String benefitType = benefit.getBenefitType();
+                Double contributionAmount = benefit.getContributionAmount();
+                if (benefitTotalTypeContributionMap.containsKey("total" + benefitType)) {
+                    contributionAmount += benefitTotalTypeContributionMap.get("total" + benefitType);
+                }
+                benefitTotalTypeContributionMap.put("total" + benefitType, contributionAmount);
+            }
+        }
+        payrollSummaryDTO.setPeriodStart(periodStart);
+        payrollSummaryDTO.setPeriodEnd(periodEnd);
+        payrollSummaryDTO.setPayrolls(payrolls);
+        payrollSummaryDTO.setWithholdingTaxPayable(withholdingTaxPayable);
+        payrollSummaryDTO.setSalariesPayable(salariesPayable);
+        payrollSummaryDTO.setSalariesExpense(salariesExpense);
+        payrollSummaryDTO.setTotalBenefitContributions(benefitTotalTypeContributionMap);
+        return payrollSummaryDTO;
     }
 
     private double calculateRegularPay(double hoursWorked, double hourlyRate) {

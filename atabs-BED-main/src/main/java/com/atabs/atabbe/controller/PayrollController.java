@@ -1,6 +1,7 @@
 package com.atabs.atabbe.controller;
 
 
+import com.atabs.atabbe.dto.PayrollSummaryDTO;
 import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.entity.PayrollEntity;
 import com.atabs.atabbe.exception.NotFoundException;
@@ -57,7 +58,7 @@ public class PayrollController {
 //    }
 
     @GetMapping("/employee")
-    public ResponseEntity<List<PayrollEntity>> getEmployeePayrollByPeriod(
+    public ResponseEntity<PayrollEntity> getEmployeePayrollByPeriod(
             @RequestParam("empId") Long empId,
             @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
             @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd)
@@ -71,6 +72,13 @@ public class PayrollController {
             @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd)
     {
         return new ResponseEntity<>(service.getAllEmployeesPayrollByPeriod(periodStart, periodEnd), HttpStatus.OK);
+    }
+
+    @GetMapping("/summary")
+    public ResponseEntity<PayrollSummaryDTO> getPayrollSummary(
+            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd) throws NotFoundException {
+        return new ResponseEntity<>(service.getPayrollSummary(periodStart, periodEnd), HttpStatus.OK);
     }
 
     @GetMapping("/{period}")

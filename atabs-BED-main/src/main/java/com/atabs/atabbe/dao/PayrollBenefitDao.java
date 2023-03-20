@@ -13,4 +13,7 @@ public interface PayrollBenefitDao extends JpaRepository<PayrollBenefitEntity, L
 
     @Query(value = "SELECT * FROM payroll_benefit WHERE payroll_id = :id", nativeQuery = true)
     public List<PayrollBenefitEntity> getAllBenefits(long id);
+
+    @Query(value = "SELECT * FROM payroll_benefit", nativeQuery = true)
+    public List<PayrollBenefitEntity> getBenefits();
 }
