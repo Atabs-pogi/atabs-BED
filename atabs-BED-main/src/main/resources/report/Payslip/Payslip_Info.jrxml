@@ -39,7 +39,7 @@
 		<property name="com.jaspersoft.studio.field.label" value="over_time_rate"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
 	</field>
-	<field name="payment_date" class="java.sql.Date">
+	<field name="payment_date" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="payment_date"/>
 		<property name="com.jaspersoft.studio.field.label" value="payment_date"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
@@ -49,12 +49,12 @@
 		<property name="com.jaspersoft.studio.field.label" value="payment_method"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
 	</field>
-	<field name="period_end" class="java.sql.Date">
+	<field name="period_end" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="period_end"/>
 		<property name="com.jaspersoft.studio.field.label" value="period_end"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
 	</field>
-	<field name="period_start" class="java.sql.Date">
+	<field name="period_start" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="period_start"/>
 		<property name="com.jaspersoft.studio.field.label" value="period_start"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="payroll"/>
