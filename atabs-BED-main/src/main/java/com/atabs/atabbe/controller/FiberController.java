@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("fiber")
+@RequestMapping("fiberX")
 @CrossOrigin
 public class FiberController {
 
     @Autowired
     private FiberService fiberService;
 
-    @GetMapping("/search")
-    public ResponseEntity<FiberEntity> search(@RequestParam("name") String name) {
-        return new ResponseEntity(fiberService.searchByName(name), HttpStatus.OK);
-    }
+//    @GetMapping("/search")
+//    public ResponseEntity<FiberEntity> search(@RequestParam("name") String name) {
+//        return new ResponseEntity(fiberService.searchByName(name), HttpStatus.OK);
+//    }
 
     @GetMapping("/getFiber/{id}")
     public ResponseEntity<FiberEntity> getFiberByID(@PathVariable(value = "id") Long id) {
