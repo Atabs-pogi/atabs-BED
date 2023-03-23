@@ -1,13 +1,7 @@
-package com.atabs.atabbe.entity;
+package com.atabs.atabbe.model;
 
-import javax.persistence.*;
+public class OtherDeduction {
 
-@Entity
-@Table(name = "payroll_deductible")
-public class PayrollDeductibleEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payrollDeductibleId")
     private long id;
     private String description;
     private double value;

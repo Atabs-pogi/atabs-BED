@@ -7,7 +7,7 @@ import com.atabs.atabbe.entity.PayrollEntity;
 import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.Payroll;
 import com.atabs.atabbe.model.MandatoryDeduction;
-import com.atabs.atabbe.model.PayrollDeductible;
+import com.atabs.atabbe.model.OtherDeduction;
 import com.atabs.atabbe.service.PayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -46,15 +46,10 @@ public class PayrollController {
         return new ResponseEntity<>(service.saveMandatoryDeduction(mandatoryDeductions), HttpStatus.OK);
     }
 
-    @PostMapping("/deduction")
-    public ResponseEntity<PayrollEntity> saveDeductible(@RequestBody List<PayrollDeductible> deductibles) throws NotFoundException {
-        return new ResponseEntity<>(service.saveDeductible(deductibles), HttpStatus.OK);
+    @PostMapping("/otherDeduction")
+    public ResponseEntity<PayrollEntity> saveOtherDeduction(@RequestBody List<OtherDeduction> otherDeductions) throws NotFoundException {
+        return new ResponseEntity<>(service.saveOtherDeduction(otherDeductions), HttpStatus.OK);
     }
-
-//    @GetMapping("/getPay/{payrollId}")
-//    public ResponseEntity<PayrollEntity> getPay(@PathVariable(value = "payrollId") Long payrollId) throws NotFoundException {
-//        return new ResponseEntity<>(service.calculatePays(payrollId), HttpStatus.OK);
-//    }
 
     @GetMapping("/employee")
     public ResponseEntity<PayrollEntity> getEmployeePayrollByPeriod(

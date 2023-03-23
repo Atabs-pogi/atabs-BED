@@ -6,7 +6,7 @@ import com.atabs.atabbe.entity.*;
 import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.Payroll;
 import com.atabs.atabbe.model.MandatoryDeduction;
-import com.atabs.atabbe.model.PayrollDeductible;
+import com.atabs.atabbe.model.OtherDeduction;
 import com.atabs.atabbe.model.PayrollDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class PayrollService {
     @Autowired
     private EmployeeSalaryDao salaryDao;
     @Autowired
-    private PayrollDeductibleDao payrollDeductibleDao;
+    private OtherDeductionDao otherDeductionDao;
     @Autowired
     private MandatoryDeductionDao mandatoryDeductionDao;
     @Autowired
@@ -241,19 +241,19 @@ public class PayrollService {
     }
 
     @Transactional
-    public PayrollEntity saveDeductible(List<PayrollDeductible> deductibles) throws NotFoundException {
+    public PayrollEntity saveOtherDeduction(List<OtherDeduction> deductibles) throws NotFoundException {
         Long payrollId = null;
         double totalDeductions = 0;
         double netPay = 0;
-        for (PayrollDeductible deductible : deductibles) {
-            PayrollDeductibleEntity deductibleEntity = payrollDeductibleDao.getExistingDeductible(deductible.getPayrollId(),deductible.getDescription());
+        for (OtherDeduction deductible : deductibles) {
+            OtherDeductionEntity deductibleEntity = otherDeductionDao.getExistingOtherDeduction(deductible.getPayrollId(),deductible.getDescription());
             if(deductibleEntity == null) {
-                deductibleEntity = new PayrollDeductibleEntity();
+                deductibleEntity = new OtherDeductionEntity();
                 deductibleEntity.setPayrollId(deductible.getPayrollId());
             }
             deductibleEntity.setDescription(deductible.getDescription());
             deductibleEntity.setValue(deductible.getValue());
-            payrollDeductibleDao.save(deductibleEntity);
+            otherDeductionDao.save(deductibleEntity);
 
             totalDeductions += deductibleEntity.getValue();
             payrollId = deductible.getPayrollId();
@@ -261,7 +261,7 @@ public class PayrollService {
 
         assert payrollId != null;
         PayrollEntity payroll = payrollDao.findById(payrollId)
-                .orElseThrow(() -> new NotFoundException("Cannot save Deductibles, Payroll not found"));
+                .orElseThrow(() -> new NotFoundException("Cannot save Other Deductibles, Payroll not found"));
         netPay = payroll.getNetPay();
         payroll.setOtherDeductions(formatDecimal(totalDeductions));
         payroll.setTotalDeductions(formatDecimal(totalDeductions + payroll.getTardinessDeduction()));
@@ -286,7 +286,7 @@ public class PayrollService {
         double withholdingTaxPayable = 0.0;
         double salariesPayable = 0.0;
         double salariesExpense = 0.0;
-        Map<String, Double> benefitTotalTypeContributionMap = new HashMap<>();
+        Map<String, Double> totalTypeContributionMap = new HashMap<>();
         for (PayrollEntity payroll : payrolls) {
             List<MandatoryDeductionEntity> benefits = mandatoryDeductionDao.getAllMandatoryDeductionById(payroll.getId());
             payroll.setBenefits(benefits);
@@ -296,10 +296,10 @@ public class PayrollService {
             for (MandatoryDeductionEntity benefit : payroll.getBenefits()) {
                 String benefitType = benefit.getType();
                 Double contributionAmount = benefit.getContributionAmount();
-                if (benefitTotalTypeContributionMap.containsKey("total" + benefitType)) {
-                    contributionAmount += benefitTotalTypeContributionMap.get("total" + benefitType);
+                if (totalTypeContributionMap.containsKey("total" + benefitType)) {
+                    contributionAmount += totalTypeContributionMap.get("total" + benefitType);
                 }
-                benefitTotalTypeContributionMap.put("total" + benefitType, contributionAmount);
+                totalTypeContributionMap.put("total" + benefitType, contributionAmount);
             }
         }
         payrollSummaryDTO.setPeriodStart(periodStart);
@@ -308,7 +308,7 @@ public class PayrollService {
         payrollSummaryDTO.setWithholdingTaxPayable(withholdingTaxPayable);
         payrollSummaryDTO.setSalariesPayable(salariesPayable);
         payrollSummaryDTO.setSalariesExpense(salariesExpense);
-        payrollSummaryDTO.setTotalBenefitContributions(benefitTotalTypeContributionMap);
+        payrollSummaryDTO.setTotalContributions(totalTypeContributionMap);
         return payrollSummaryDTO;
     }
 

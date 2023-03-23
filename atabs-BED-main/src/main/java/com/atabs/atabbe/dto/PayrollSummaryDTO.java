@@ -9,7 +9,7 @@ import java.util.Map;
 public class PayrollSummaryDTO {
     private LocalDate periodStart;
     private LocalDate periodEnd;
-    private Map<String, Double> TotalBenefitContributions;
+    private Map<String, Double> TotalContributions;
     private double salariesExpense;
     private double withholdingTaxPayable;
     private double SalariesPayable;
@@ -31,12 +31,12 @@ public class PayrollSummaryDTO {
         this.periodEnd = periodEnd;
     }
 
-    public Map<String, Double> getTotalBenefitContributions() {
-        return TotalBenefitContributions;
+    public Map<String, Double> getTotalContributions() {
+        return TotalContributions;
     }
 
-    public void setTotalBenefitContributions(Map<String, Double> totalBenefitContributions) {
-        TotalBenefitContributions = totalBenefitContributions;
+    public void setTotalContributions(Map<String, Double> totalContributions) {
+        TotalContributions = totalContributions;
     }
 
     public double getSalariesExpense() {
