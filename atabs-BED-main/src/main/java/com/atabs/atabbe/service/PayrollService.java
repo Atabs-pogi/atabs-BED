@@ -121,6 +121,9 @@ public class PayrollService {
         double vacationDays = 0;
         double sickDays = 0;
 
+        double premiumPay = 0;
+        double nonWorkingSpecialPay = 0;
+
         double regularPay = 0;
         double overTimePay = 0;
         double tardinessDeduction = 0;
@@ -138,14 +141,11 @@ public class PayrollService {
 
                 switch (holiday.getType()) {
                     case 0:
-                        if (hasLeaveTakenOrPresent(detail)) {
-                            regularPay += calculateRegularPay(detail.getRegular(), salary.getDailyBasic() / regularHours);
-                        }
-
+                        premiumPay += calculateRegularPay(detail.getRegular(), salary.getDailyBasic() / regularHours);
                         break;
                     case 1:
                         if (hasLeaveTakenOrPresent(detail)) {
-                            regularPay += calculateRegularPay(detail.getRegular(), salary.getDailyBasic() / regularHours) * 0.30;
+                            nonWorkingSpecialPay += calculateRegularPay(detail.getRegular(), salary.getDailyBasic() / regularHours) * 0.30;
                         }
                         break;
                 }
@@ -180,7 +180,7 @@ public class PayrollService {
         payroll.setTotalVacationDays(vacationDays);
         payroll.setTotalSickDays(sickDays);
 
-        payroll.setRegularPay(formatDecimal(regularPay));
+        payroll.setRegularPay(formatDecimal(regularPay + premiumPay + nonWorkingSpecialPay));
         payroll.setOverTimePay(formatDecimal(overTimePay));
         payroll.setTardinessDeduction(formatDecimal(tardinessDeduction));
         payroll.setVacationPay(formatDecimal(vacationPay));
