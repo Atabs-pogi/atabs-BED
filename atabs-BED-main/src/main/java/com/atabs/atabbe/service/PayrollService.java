@@ -137,12 +137,12 @@ public class PayrollService {
                 HolidayEntity holiday = holidayOptional.get();
 
                 switch (holiday.getType()) {
-                    case "Regular":
+                    case 0:
                         if (hasLeaveTakenOrPresent(detail)) {
                             regularPay += calculateRegularPay(detail.getRegular(), salary.getDailyBasic() / regularHours);
                         }
                         break;
-                    case "Special":
+                    case 1:
                         if (hasLeaveTakenOrPresent(detail)) {
                             regularPay += calculateRegularPay(detail.getRegular(), salary.getDailyBasic() / regularHours) * 0.30;
                         }

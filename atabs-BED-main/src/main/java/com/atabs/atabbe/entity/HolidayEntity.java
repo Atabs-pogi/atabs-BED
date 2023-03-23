@@ -13,7 +13,7 @@ public class HolidayEntity {
     @Column(name = "holidayId")
     private long id;
     private LocalDate date;
-    private String type;
+    private Integer type;
     private String description;
 
 
@@ -33,11 +33,11 @@ public class HolidayEntity {
         this.date = date;
     }
 
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
