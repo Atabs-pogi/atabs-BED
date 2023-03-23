@@ -26,7 +26,7 @@ public class EmployeeEntity {
     private String sex;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-
+    private LocalDate dateHired;
     private String imageLocation;
     private long postalCode;
     @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
@@ -169,6 +169,14 @@ public class EmployeeEntity {
 
     public LocalDateTime getUpdateDate() {
         return updateDate;
+    }
+
+    public LocalDate getDateHired() {
+        return dateHired;
+    }
+
+    public void setDateHired(LocalDate dateHired) {
+        this.dateHired = dateHired;
     }
 
     public long getPostalCode() {

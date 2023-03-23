@@ -16,6 +16,7 @@ public class Employee {
     private String email;
     private Address address;
     private String imageLocation;
+    private LocalDate dateHired;
     private long postalCode;
 
     public String getImageLocation() {
@@ -108,6 +109,14 @@ public class Employee {
         this.sex = sex;
     }
 
+    public LocalDate getDateHired() {
+        return dateHired;
+    }
+
+    public void setDateHired(LocalDate dateHired) {
+        this.dateHired = dateHired;
+    }
+
     public static Employee from(EmployeeEntity entity) {
         Employee employee = new Employee();
         employee.id = entity.getId();
@@ -119,7 +128,8 @@ public class Employee {
         employee.mobileNumber = entity.getMobileNumber();
         employee.email = entity.getEmail();
         employee.sex = entity.getSex();
-        employee.postalCode= entity.getPostalCode();
+        employee.postalCode = entity.getPostalCode();
+        employee.dateHired = entity.getDateHired();
         employee.address = Address.from(entity.getAddress());
         employee.imageLocation= entity.getImageLocation();
         return employee;

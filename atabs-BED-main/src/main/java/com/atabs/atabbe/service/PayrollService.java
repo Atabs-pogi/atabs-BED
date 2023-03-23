@@ -141,6 +141,7 @@ public class PayrollService {
                         if (hasLeaveTakenOrPresent(detail)) {
                             regularPay += calculateRegularPay(detail.getRegular(), salary.getDailyBasic() / regularHours);
                         }
+
                         break;
                     case 1:
                         if (hasLeaveTakenOrPresent(detail)) {
