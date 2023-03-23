@@ -16,10 +16,9 @@ public class FiberEntity {
 
     private String name;
 
-    @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 1")
-    private int status = 1;
+    @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 0")
+    private int status = 0;
     private LocalDateTime createDate;
-
 
     @OneToMany(targetEntity = FiberItemEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "fiberId" ,referencedColumnName ="fiberId" )
