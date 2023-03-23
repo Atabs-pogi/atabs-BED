@@ -4,10 +4,7 @@ import com.atabs.atabbe.dao.*;
 import com.atabs.atabbe.dto.PayrollSummaryDTO;
 import com.atabs.atabbe.entity.*;
 import com.atabs.atabbe.exception.NotFoundException;
-import com.atabs.atabbe.model.Payroll;
-import com.atabs.atabbe.model.MandatoryDeduction;
-import com.atabs.atabbe.model.OtherDeduction;
-import com.atabs.atabbe.model.PayrollDetails;
+import com.atabs.atabbe.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,13 +25,16 @@ public class PayrollService {
     @Autowired
     private EmployeeSalaryDao salaryDao;
     @Autowired
-    private OtherDeductionDao otherDeductionDao;
-    @Autowired
-    private MandatoryDeductionDao mandatoryDeductionDao;
-    @Autowired
     private BirTaxDao birTaxDao;
     @Autowired
     private HolidayDao holidayDao;
+    @Autowired
+    private PayrollBenefitDao benefitDao;
+    @Autowired
+    private MandatoryDeductionDao mandatoryDeductionDao;
+    @Autowired
+    private OtherDeductionDao otherDeductionDao;
+
 
     public List<PayrollEntity> getAllByPeriod(LocalDate period){
         return payrollDao.getPayrollByPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
@@ -191,14 +191,40 @@ public class PayrollService {
     }
 
     @Transactional
-    public PayrollEntity saveMandatoryDeduction(List<MandatoryDeduction> benefits) throws NotFoundException {
+    public PayrollEntity saveBenefits(List<PayrollBenefit> benefits) throws NotFoundException {
+        double totalBenefit = 0;
+        double grossPay = 0;
+        Long payrollId = null;
+        for (PayrollBenefit benefit : benefits) {
+            PayrollBenefitEntity entity = benefitDao.getExistingBenefit(benefit.getPayrollId(), benefit.getDescription());
+            if (entity == null) {
+                entity = new PayrollBenefitEntity();
+                entity.setPayrollId(benefit.getPayrollId());
+            }
+            entity.setDescription(benefit.getDescription());
+            entity.setValue(benefit.getValue());
+            benefitDao.save(entity);
+            totalBenefit += entity.getValue();
+            payrollId = benefit.getPayrollId();
+        }
+        assert payrollId != null;
+        PayrollEntity payroll = payrollDao.findById(payrollId)
+                .orElseThrow(() -> new NotFoundException("Cannot save Benefits, Payroll not found"));
+        grossPay = payroll.getGrossPay();
+        payroll.setTotalBenefit(formatDecimal(totalBenefit));
+        payroll.setGrossPay(formatDecimal(grossPay + totalBenefit));
+        return payrollDao.save(payroll);
+    }
+
+    @Transactional
+    public PayrollEntity saveMandatoryDeduction(List<MandatoryDeduction> mandatoryDeductions) throws NotFoundException {
         Long payrollId = null;
         double totalMandatoryDeduction = 0;
         double taxableIncome = 0;
         double withholdingTax = 0;
         double incomeExcess = 0;
         double netPay = 0;
-        for (MandatoryDeduction mandatoryDeduction : benefits) {
+        for (MandatoryDeduction mandatoryDeduction : mandatoryDeductions) {
             MandatoryDeductionEntity entity = mandatoryDeductionDao.getExistingMandatoryDeduction(mandatoryDeduction.getPayrollId(),mandatoryDeduction.getType());
             if(entity == null) {
                 entity = new MandatoryDeductionEntity();
@@ -288,14 +314,14 @@ public class PayrollService {
         double salariesExpense = 0.0;
         Map<String, Double> totalTypeContributionMap = new HashMap<>();
         for (PayrollEntity payroll : payrolls) {
-            List<MandatoryDeductionEntity> benefits = mandatoryDeductionDao.getAllMandatoryDeductionById(payroll.getId());
-            payroll.setBenefits(benefits);
+            List<MandatoryDeductionEntity> entities = mandatoryDeductionDao.getAllMandatoryDeductionById(payroll.getId());
+            payroll.setMandatoryDeduction(entities);
             salariesExpense += payroll.getGrossPay();
             withholdingTaxPayable += payroll.getWithholdingTax();
             salariesPayable += payroll.getNetPay();
-            for (MandatoryDeductionEntity benefit : payroll.getBenefits()) {
-                String benefitType = benefit.getType();
-                Double contributionAmount = benefit.getContributionAmount();
+            for (MandatoryDeductionEntity mandatoryDeduction : payroll.getMandatoryDeduction()) {
+                String benefitType = mandatoryDeduction.getType();
+                Double contributionAmount = mandatoryDeduction.getContributionAmount();
                 if (totalTypeContributionMap.containsKey("total" + benefitType)) {
                     contributionAmount += totalTypeContributionMap.get("total" + benefitType);
                 }

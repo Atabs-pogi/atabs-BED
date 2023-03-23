@@ -8,6 +8,7 @@ import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.Payroll;
 import com.atabs.atabbe.model.MandatoryDeduction;
 import com.atabs.atabbe.model.OtherDeduction;
+import com.atabs.atabbe.model.PayrollBenefit;
 import com.atabs.atabbe.service.PayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -39,6 +40,11 @@ public class PayrollController {
     @PostMapping("/")
     public ResponseEntity<PayrollEntity> createEmployeePayroll(@RequestBody Payroll payroll) throws NotFoundException {
         return new ResponseEntity<>(service.createPayroll(payroll), HttpStatus.OK);
+    }
+
+    @PostMapping("/benefits")
+    public ResponseEntity<PayrollEntity> saveBenefits(@RequestBody List<PayrollBenefit> payrollBenefits) throws NotFoundException {
+        return new ResponseEntity<>(service.saveBenefits(payrollBenefits), HttpStatus.OK);
     }
 
     @PostMapping("/mandatoryDeduction")

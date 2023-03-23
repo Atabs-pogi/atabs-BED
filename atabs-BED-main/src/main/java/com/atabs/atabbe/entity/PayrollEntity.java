@@ -29,6 +29,7 @@ public class PayrollEntity {
     private double tardinessDeduction;
     private double vacationPay;
     private double sickPay;
+    private double totalBenefit;
     private double grossPay;
 
     private double totalMandatoryDeduction;
@@ -39,7 +40,7 @@ public class PayrollEntity {
     private double totalDeductions;
     private double netPay;
     @Transient
-    private List<MandatoryDeductionEntity> benefits;
+    private List<MandatoryDeductionEntity> mandatoryDeduction;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_id", nullable = false)
     private EmployeeEntity employee;
@@ -180,6 +181,14 @@ public class PayrollEntity {
         this.sickPay = sickPay;
     }
 
+    public double getTotalBenefit() {
+        return totalBenefit;
+    }
+
+    public void setTotalBenefit(double totalBenefit) {
+        this.totalBenefit = totalBenefit;
+    }
+
     public double getGrossPay() {
         return grossPay;
     }
@@ -236,11 +245,11 @@ public class PayrollEntity {
         this.netPay = netPay;
     }
 
-    public List<MandatoryDeductionEntity> getBenefits() {
-        return benefits;
+    public List<MandatoryDeductionEntity> getMandatoryDeduction() {
+        return mandatoryDeduction;
     }
 
-    public void setBenefits(List<MandatoryDeductionEntity> benefits) {
-        this.benefits = benefits;
+    public void setMandatoryDeduction(List<MandatoryDeductionEntity> mandatoryDeduction) {
+        this.mandatoryDeduction = mandatoryDeduction;
     }
 }
