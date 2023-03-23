@@ -4,9 +4,9 @@ import com.atabs.atabbe.dao.*;
 import com.atabs.atabbe.dto.PayrollSummaryDTO;
 import com.atabs.atabbe.entity.*;
 import com.atabs.atabbe.exception.NotFoundException;
+import com.atabs.atabbe.model.Payroll;
 import com.atabs.atabbe.model.PayrollBenefit;
 import com.atabs.atabbe.model.PayrollDeductible;
-import com.atabs.atabbe.model.Payroll;
 import com.atabs.atabbe.model.PayrollDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,6 @@ import javax.transaction.Transactional;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class PayrollService {
@@ -34,6 +33,8 @@ public class PayrollService {
     private PayrollBenefitDao payrollBenefitDao;
     @Autowired
     private BirTaxDao birTaxDao;
+    @Autowired
+    private HolidayDao holidayDao;
 
     public List<PayrollEntity> getAllByPeriod(LocalDate period){
         return payrollDao.getPayrollByPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
@@ -53,10 +54,8 @@ public class PayrollService {
     @Transactional
     public PayrollEntity createPayroll(Payroll payroll) throws NotFoundException {
         //check if employee exist
-        EmployeeEntity employee =  employeeDao.findById(payroll.getEmployeeId()).orElse(null);
-        if(employee == null){
-            throw new NotFoundException("Employee not found");
-        }
+        EmployeeEntity employee =  employeeDao.findById(payroll.getEmployeeId())
+                .orElseThrow(() -> new NotFoundException("Employee not found"));
         //check if payroll already exist
         PayrollEntity entity = payrollDao.getEmployeePayroll(
                 payroll.getEmployeeId(),
@@ -97,9 +96,25 @@ public class PayrollService {
 
     @Transactional
     private PayrollEntity calculatePays(long payrollId) throws NotFoundException {
-        int regularHours = 8;
-        double overTimeRate = 1.25;
+        final int regularHours = 8;
+        final double tardinessRate = 0.8;
 
+        PayrollEntity payroll = payrollDao.findById(payrollId)
+                .orElseThrow(() -> new NotFoundException("Payroll not found"));
+
+        EmployeeSalaryEntity salary = salaryDao.getSalaryByEmployeeId(payroll.getEmployee().getId());
+        if (salary == null) {
+            throw new NotFoundException("Employee Salary not found");
+        }
+
+        List<HolidayEntity> holidays = holidayDao.getHolidaysBetween(payroll.getPeriodStart(), payroll.getPeriodEnd());
+
+        List<PayrollDetailEntity> details = payrollDetailDao.getByPeriod(payrollId, payroll.getPeriodStart(), payroll.getPeriodEnd());
+        if (details.isEmpty()) {
+            throw new NotFoundException("Employee Details not found, You may be using the wrong period for payroll and items date");
+        }
+
+        double overTimeRate = 0;
         double regularWorkHours = 0;
         double otHours = 0;
         double totalTardiness = 0;
@@ -111,33 +126,50 @@ public class PayrollService {
         double tardinessDeduction = 0;
         double vacationPay = 0;
         double sickPay = 0;
-        PayrollEntity payroll = payrollDao.findById(payrollId).orElse(null);
-        if (payroll == null) {
-            throw new NotFoundException("Payroll not found");
-        }
-        EmployeeSalaryEntity salary = salaryDao.getSalaryByEmployeeId(payroll.getEmployee().getId());
-        if (salary == null) {
-            throw new NotFoundException("Employee Salary not found");
-        }
-        List<PayrollDetailEntity> details = payrollDetailDao.getByPeriod(payrollId, payroll.getPeriodStart(), payroll.getPeriodEnd());
-        if (details.isEmpty()) {
-            throw new NotFoundException("Employee Details not found, You may be using the wrong period for payroll and items date");
-        }else{
-            for (PayrollDetailEntity detail: details) {
-                regularWorkHours += detail.getRegular();
-                otHours += detail.getOt();
-                totalTardiness += detail.getTardiness();
-                vacationDays += detail.getVacation();
-                sickDays += detail.getSick();
-            }
-        }
 
-        // Calculate Pays
-        regularPay = calculateRegularPay(regularWorkHours, salary.getDailyBasic() / regularHours);
-        overTimePay = calculateOtPay(otHours, salary.getDailyBasic() / regularHours, overTimeRate);
-        tardinessDeduction = calculateTardiness(totalTardiness, salary.getDailyBasic() / regularHours);
-        vacationPay = calculateVacationPay(vacationDays, salary.getDailyBasic());
-        sickPay = calculateSickPay(sickDays, salary.getDailyBasic());
+        for (PayrollDetailEntity detail: details) {
+
+            Optional<HolidayEntity> holidayOptional = holidays.stream()
+                    .filter(h -> h.getDate().equals(detail.getDate()))
+                    .findFirst();
+
+            if (holidayOptional.isPresent()) {
+                HolidayEntity holiday = holidayOptional.get();
+
+                switch (holiday.getType()) {
+                    case "Regular":
+                        if (hasLeaveTakenOrPresent(detail)) {
+                            regularPay += calculateRegularPay(detail.getRegular(), salary.getDailyBasic() / regularHours);
+                        }
+                        break;
+                    case "Special":
+                        if (hasLeaveTakenOrPresent(detail)) {
+                            regularPay += calculateRegularPay(detail.getRegular(), salary.getDailyBasic() / regularHours) * 0.30;
+                        }
+                        break;
+                }
+                overTimeRate = 0.30;
+            } else {
+                overTimeRate = 0.25;
+            }
+
+            // Calculate Hours
+            regularWorkHours += detail.getRegular();
+            otHours += detail.getOt();
+            totalTardiness += detail.getTardiness();
+            vacationDays += detail.getVacation();
+            sickDays += detail.getSick();
+
+            // Calculate Pays
+            regularPay += calculateRegularPay(detail.getRegular(), salary.getDailyBasic() / regularHours);
+            overTimePay += calculateRegularPay(detail.getOt(), salary.getDailyBasic() / regularHours)
+                    + calculateOtPay(detail.getOt(), salary.getDailyBasic() / regularHours, overTimeRate);
+            tardinessDeduction += calculateTardiness(detail.getTardiness(), salary.getDailyBasic() / regularHours, tardinessRate);
+            vacationPay += calculateVacationPay(detail.getVacation(), salary.getDailyBasic());
+            sickPay += calculateSickPay(detail.getSick(), salary.getDailyBasic());
+
+            overTimeRate = 0.25;
+        }
 
         //update payroll
         payroll.setTotalWorkHours(regularWorkHours);
@@ -181,10 +213,8 @@ public class PayrollService {
         }
 
         assert payrollId != null;
-        PayrollEntity payroll = payrollDao.findById(payrollId).orElse(null);
-        if (payroll == null) {
-            throw new NotFoundException("Cannot save Benefits, Payroll not found");
-        }
+        PayrollEntity payroll = payrollDao.findById(payrollId)
+                .orElseThrow(() -> new NotFoundException("Cannot save Benefits, Payroll not found"));
         taxableIncome = payroll.getGrossPay() - totalBenefits;
 
         payroll.setTotalBenefitContributions(formatDecimal(totalBenefits));
@@ -229,10 +259,8 @@ public class PayrollService {
         }
 
         assert payrollId != null;
-        PayrollEntity payroll = payrollDao.findById(payrollId).orElse(null);
-        if (payroll == null) {
-            throw new NotFoundException("Cannot save Deductibles, Payroll not found");
-        }
+        PayrollEntity payroll = payrollDao.findById(payrollId)
+                .orElseThrow(() -> new NotFoundException("Cannot save Deductibles, Payroll not found"));
         netPay = payroll.getNetPay();
         payroll.setOtherDeductions(formatDecimal(totalDeductions));
         payroll.setTotalDeductions(formatDecimal(totalDeductions + payroll.getTardinessDeduction()));
@@ -284,34 +312,27 @@ public class PayrollService {
     }
 
     private double calculateRegularPay(double hoursWorked, double hourlyRate) {
-        double regularPay;
-        regularPay = hoursWorked * hourlyRate;
-        return regularPay;
+        return hoursWorked * hourlyRate;
     }
 
     private double calculateOtPay(double otHours, double hourlyRate, double overTimeRate) {
-        double overTimePay;
-        overTimePay = otHours * (hourlyRate * overTimeRate);
-        return overTimePay;
+        return otHours * (hourlyRate * overTimeRate);
     }
 
-    private double calculateTardiness(double tardiness, double hourlyRate) {
-        double tardinessDeduction = 0;
-        double tardinessRate = 0.8; // can be change to fix rate
-        tardinessDeduction = tardiness * (hourlyRate * tardinessRate);
-        return tardinessDeduction;
+    private double calculateTardiness(double tardiness, double hourlyRate, double tardinessRate) {
+        return tardiness * (hourlyRate * tardinessRate);
     }
 
     private double calculateVacationPay(double vacation, double dailyRate) {
-        double vacationPay = 0;
-        vacationPay = vacation * dailyRate;
-        return vacationPay;
+        return vacation * dailyRate;
     }
 
     private double calculateSickPay(double sick, double dailyRate) {
-        double sickPay = 0;
-        sickPay = sick * dailyRate;
-        return sickPay;
+        return sick * dailyRate;
+    }
+
+    private boolean hasLeaveTakenOrPresent(PayrollDetailEntity detail) {
+        return detail.getRegular() > 0 || detail.getSick() > 0 || detail.getVacation() > 0;
     }
 
     private double formatDecimal(double value) {

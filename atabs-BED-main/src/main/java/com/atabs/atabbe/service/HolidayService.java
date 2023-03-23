@@ -18,11 +18,8 @@ public class HolidayService {
     private HolidayDao dao;
 
     public HolidayEntity getByID(Long id) throws NotFoundException {
-        HolidayEntity holiday = dao.findById(id).orElse(null);
-        if (holiday == null) {
-            throw new NotFoundException("Holiday ID not found");
-        }
-        return holiday;
+        return dao.findById(id)
+                .orElseThrow(() -> new NotFoundException("Holiday ID not found"));
     }
     public List<HolidayEntity> getAll(LocalDate start, LocalDate end) {
         LocalDate nStart = LocalDate.now().withDayOfYear(1);
@@ -53,11 +50,9 @@ public class HolidayService {
         return "Successful";
     }
 
-    public String delete(Long id) {
-        HolidayEntity entity = dao.findById(id).orElse(null);
-        if (entity == null) {
-            return "Id does not exist";
-        }
+    public String delete(Long id) throws NotFoundException {
+        HolidayEntity entity = dao.findById(id)
+                .orElseThrow(() -> new NotFoundException("Id does not exist"));
         dao.delete(entity);
         return "Successful";
     }

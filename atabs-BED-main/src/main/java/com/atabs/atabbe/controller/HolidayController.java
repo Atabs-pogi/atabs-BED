@@ -47,7 +47,7 @@ public class HolidayController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HolidayEntity> delete(@PathVariable(name = "id")Long id) {
+    public ResponseEntity<HolidayEntity> delete(@PathVariable(name = "id")Long id) throws NotFoundException {
         return new ResponseEntity(holidayService.delete(id), HttpStatus.OK);
     }
 
