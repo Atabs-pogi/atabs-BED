@@ -25,6 +25,9 @@ public class FiberNewService {
     @Autowired
     private FiberNewDao fiberNewDao;
 
+    @Autowired
+    private FiberDao fiberDao;
+
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
     LocalDateTime now = LocalDateTime.now();
 
@@ -56,6 +59,7 @@ public class FiberNewService {
         fiberNewEntity.setGoodFiberAmount(fiberNew.getGoodFiberAmount());
         fiberNewEntity.setResecoFiberAmount(fiberNew.getResecoFiberAmount());
         fiberNewEntity.setFiberTotalAmount(fiberNew.totalAmount());
+        fiberNewEntity.setStatus(1);
         fiberNewDao.save(fiberNewEntity);
         return "Update Successfully";
     }
