@@ -3,13 +3,13 @@ package com.atabs.atabbe.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "payroll_benefit")
-public class PayrollBenefitEntity {
+@Table(name = "mandatory_deduction")
+public class MandatoryDeductionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payrollBenefitId")
+    @Column(name = "mandatoryDeductionId")
     private long id;
-    private String benefitType; // (e.g., SSS, Philhealth, Pag-IBIG Fund)
+    private String type; // (e.g., SSS, Philhealth, Pag-IBIG Fund)
     private double contributionAmount;
     private long payrollId;
 
@@ -21,12 +21,12 @@ public class PayrollBenefitEntity {
         this.id = id;
     }
 
-    public String getBenefitType() {
-        return benefitType;
+    public String getType() {
+        return type;
     }
 
-    public void setBenefitType(String benefitType) {
-        this.benefitType = benefitType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public double getContributionAmount() {

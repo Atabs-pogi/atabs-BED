@@ -1,8 +1,8 @@
 package com.atabs.atabbe.model;
 
-public class PayrollBenefit {
+public class MandatoryDeduction {
     private long id;
-    private String benefitType; // (e.g., SSS, Philhealth, Pag-IBIG Fund)
+    private String type; // (e.g., SSS, Philhealth, Pag-IBIG Fund)
     private double contributionAmount;
     private long payrollId;
 
@@ -14,12 +14,12 @@ public class PayrollBenefit {
         this.id = id;
     }
 
-    public String getBenefitType() {
-        return benefitType;
+    public String getType() {
+        return type;
     }
 
-    public void setBenefitType(String benefitType) {
-        this.benefitType = benefitType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public double getContributionAmount() {
