@@ -18,6 +18,7 @@ public class Employee {
     private String imageLocation;
     private LocalDate dateHired;
     private long postalCode;
+    private boolean reviewed;
 
     public String getImageLocation() {
         return imageLocation;
@@ -117,6 +118,14 @@ public class Employee {
         this.dateHired = dateHired;
     }
 
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
+    }
+
     public static Employee from(EmployeeEntity entity) {
         Employee employee = new Employee();
         employee.id = entity.getId();
@@ -129,6 +138,7 @@ public class Employee {
         employee.email = entity.getEmail();
         employee.sex = entity.getSex();
         employee.postalCode = entity.getPostalCode();
+        employee.reviewed = entity.isReviewed();
         employee.dateHired = entity.getDateHired();
         employee.address = Address.from(entity.getAddress());
         employee.imageLocation= entity.getImageLocation();

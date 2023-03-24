@@ -27,7 +27,6 @@ public class PayrollController {
     @Autowired
     private PayrollService service;
 
-
     @GetMapping("/review")
     public ResponseEntity search(
             @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
