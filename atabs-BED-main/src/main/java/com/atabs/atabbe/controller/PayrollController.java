@@ -27,11 +27,13 @@ public class PayrollController {
     @Autowired
     private PayrollService service;
 
+
     @GetMapping("/review")
-    public ResponseEntity<List<EmployeeEntity>> getEmployeePayrollStatus(
+    public ResponseEntity search(
             @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodStart,
-            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd){
-        return new ResponseEntity<>(service.getEmployeePayrollStatus(periodStart, periodEnd), HttpStatus.OK);
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate periodEnd,
+            @RequestParam("name") String name) {
+        return new ResponseEntity(service.getEmployeePayrollStatus(periodStart, periodEnd, name), HttpStatus.OK);
     }
 
     @PostMapping("/")

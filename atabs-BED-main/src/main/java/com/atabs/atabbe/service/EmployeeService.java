@@ -21,7 +21,7 @@ public class EmployeeService {
     private EmployeeDao employeeDao;
 
     public List<Employee> searchEmployeeByName(String name) {
-        List<EmployeeEntity> entityEmployees = (List<EmployeeEntity>) employeeDao.searchEmployeeByName(name);
+        List<EmployeeEntity> entityEmployees = employeeDao.searchEmployeeByName(name);
         List<Employee> employees = new ArrayList<>();
         for (EmployeeEntity employee : entityEmployees) {
             employees.add(Employee.from(employee));

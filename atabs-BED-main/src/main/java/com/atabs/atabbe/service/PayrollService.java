@@ -40,11 +40,13 @@ public class PayrollService {
         return payrollDao.getPayrollByPeriod(this.getPeriodStart(period), this.getPeriodEnd(period));
     }
 
-    public List<EmployeeEntity> getEmployeePayrollStatus(LocalDate periodStart, LocalDate periodEnd){
-        List<EmployeeEntity> employees = employeeDao.findAll();
-        for (EmployeeEntity employee : employees) {
+    public List<Employee> getEmployeePayrollStatus(LocalDate periodStart, LocalDate periodEnd, String name) {
+        List<EmployeeEntity> entityEmployees = employeeDao.searchEmployeeByName(name);
+        List<Employee> employees = new ArrayList<>();
+        for (EmployeeEntity employee : entityEmployees) {
+            employees.add(Employee.from(employee));
             PayrollEntity payroll = payrollDao.getEmployeePayrollByPeriod(employee.getId(), periodStart, periodEnd);
-            if (payroll != null){
+            if (payroll != null) {
                 employee.setReviewed(true);
             }
         }
@@ -217,7 +219,7 @@ public class PayrollService {
     }
 
     @Transactional
-    private PayrollEntity saveMandatoryDeduction(List<MandatoryDeduction> mandatoryDeductions, PayrollEntity payroll) throws NotFoundException {
+    private void saveMandatoryDeduction(List<MandatoryDeduction> mandatoryDeductions, PayrollEntity payroll) throws NotFoundException {
         double totalMandatoryDeduction = 0;
         double taxableIncome = 0;
         double withholdingTax = 0;
@@ -257,11 +259,11 @@ public class PayrollService {
             netPay = taxableIncome - withholdingTax;
         }
         payroll.setNetPay(formatDecimal(netPay));
-        return payrollDao.save(payroll);
+        payrollDao.save(payroll);
     }
 
     @Transactional
-    private PayrollEntity saveOtherDeduction(List<OtherDeduction> deductibles, PayrollEntity payroll) throws NotFoundException {
+    private void saveOtherDeduction(List<OtherDeduction> deductibles, PayrollEntity payroll) throws NotFoundException {
         double otherDeductions = 0;
         double netPay = payroll.getNetPay();
         for (OtherDeduction deductible : deductibles) {
@@ -279,7 +281,7 @@ public class PayrollService {
         payroll.setOtherDeductions(formatDecimal(otherDeductions));
         payroll.setTotalDeductions(formatDecimal(otherDeductions + payroll.getTardinessDeduction() + payroll.getMandatoryDeductions()));
         payroll.setNetPay(formatDecimal(netPay - otherDeductions));
-        return payrollDao.save(payroll);
+        payrollDao.save(payroll);
     }
 
     public  PayrollEntity getEmployeePayrollByPeriod(Long empId, LocalDate periodStart, LocalDate periodEnd) {
