@@ -13,8 +13,7 @@ public class EmployeeSalaryEntity {
     private LocalDate effDate;
     private LocalDate expDate;
     private String position;
-    private double dailyBasic; // For minimum wager
-    private double monthlyBasic; // For above minimum wager
+    private double dailyBasic;
     private String bankAccountInfo; //  (e.g., account number, routing number) for direct deposit
     private String taxInfo; // (e.g., BIR account number, routing number) for direct deposit
 
@@ -68,14 +67,6 @@ public class EmployeeSalaryEntity {
 
     public void setDailyBasic(double dailyBasic) {
         this.dailyBasic = dailyBasic;
-    }
-
-    public double getMonthlyBasic() {
-        return monthlyBasic;
-    }
-
-    public void setMonthlyBasic(double monthlyBasic) {
-        this.monthlyBasic = monthlyBasic;
     }
 
     public String getBankAccountInfo() {

@@ -45,7 +45,6 @@ public class EmployeeSalaryService {
         entity.setExpDate(salary.getExpDate());
         entity.setPosition(salary.getPosition());
         entity.setDailyBasic(salary.getDailyBasic());
-        entity.setMonthlyBasic(salary.getMonthlyBasic());
         entity.setBankAccountInfo(salary.getBankAccountInfo());
         entity.setTaxInfo(salary.getTaxInfo());
         entity.setEmployee(employee);
@@ -66,7 +65,6 @@ public class EmployeeSalaryService {
         entity.setExpDate(salary.getExpDate());
         entity.setPosition(salary.getPosition());
         entity.setDailyBasic(salary.getDailyBasic());
-        entity.setMonthlyBasic(salary.getMonthlyBasic());
         entity.setBankAccountInfo(salary.getBankAccountInfo());
         entity.setTaxInfo(salary.getTaxInfo());
         entity.setEmployee(employee);
