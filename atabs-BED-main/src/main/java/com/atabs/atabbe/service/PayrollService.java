@@ -44,11 +44,11 @@ public class PayrollService {
         List<EmployeeEntity> entityEmployees = employeeDao.searchEmployeeByName(name);
         List<Employee> employees = new ArrayList<>();
         for (EmployeeEntity employee : entityEmployees) {
-            employees.add(Employee.from(employee));
             PayrollEntity payroll = payrollDao.getEmployeePayrollByPeriod(employee.getId(), periodStart, periodEnd);
             if (payroll != null) {
                 employee.setReviewed(true);
             }
+            employees.add(Employee.from(employee));
         }
         return employees;
     }
