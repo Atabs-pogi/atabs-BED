@@ -11,10 +11,10 @@ import java.util.List;
 public interface PayrollDao extends JpaRepository<PayrollEntity, Long> {
 
 
-    @Query(value = "SELECT * FROM payroll WHERE emp_id = :empId AND period_start = :start AND period_end = :end AND total_deductions > 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM payroll WHERE emp_id = :empId AND period_start = :start AND period_end = :end AND net_pay > 0", nativeQuery = true)
     public PayrollEntity getEmployeePayrollByPeriod(long empId, LocalDate start, LocalDate end);
 
-    @Query(value = "SELECT * FROM payroll WHERE period_start = :start AND period_end = :end AND total_deductions > 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM payroll WHERE period_start = :start AND period_end = :end AND net_pay > 0", nativeQuery = true)
     public List<PayrollEntity> getAllEmployeePayrollByPeriod(LocalDate start, LocalDate end);
 
     @Query(value = "SELECT * FROM payroll WHERE emp_id = :empId AND period_start = :start AND period_end = :end", nativeQuery = true)

@@ -5,10 +5,7 @@ import com.atabs.atabbe.dto.PayrollSummaryDTO;
 import com.atabs.atabbe.entity.EmployeeEntity;
 import com.atabs.atabbe.entity.PayrollEntity;
 import com.atabs.atabbe.exception.NotFoundException;
-import com.atabs.atabbe.model.Payroll;
-import com.atabs.atabbe.model.MandatoryDeduction;
-import com.atabs.atabbe.model.OtherDeduction;
-import com.atabs.atabbe.model.PayrollBenefit;
+import com.atabs.atabbe.model.*;
 import com.atabs.atabbe.service.PayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -42,19 +39,9 @@ public class PayrollController {
         return new ResponseEntity<>(service.createPayroll(payroll), HttpStatus.OK);
     }
 
-    @PostMapping("/benefits")
-    public ResponseEntity<PayrollEntity> saveBenefits(@RequestBody List<PayrollBenefit> payrollBenefits) throws NotFoundException {
-        return new ResponseEntity<>(service.saveBenefits(payrollBenefits), HttpStatus.OK);
-    }
-
-    @PostMapping("/mandatoryDeduction")
-    public ResponseEntity<PayrollEntity> saveMandatoryDeduction(@RequestBody List<MandatoryDeduction> mandatoryDeductions) throws NotFoundException {
-        return new ResponseEntity<>(service.saveMandatoryDeduction(mandatoryDeductions), HttpStatus.OK);
-    }
-
-    @PostMapping("/otherDeduction")
-    public ResponseEntity<PayrollEntity> saveOtherDeduction(@RequestBody List<OtherDeduction> otherDeductions) throws NotFoundException {
-        return new ResponseEntity<>(service.saveOtherDeduction(otherDeductions), HttpStatus.OK);
+    @PostMapping("/deductibles")
+    public ResponseEntity<PayrollEntity> saveDeductibles(@RequestBody PayrollDeductible deductible) throws NotFoundException {
+        return new ResponseEntity<>(service.saveDeductibles(deductible), HttpStatus.OK);
     }
 
     @GetMapping("/employee")

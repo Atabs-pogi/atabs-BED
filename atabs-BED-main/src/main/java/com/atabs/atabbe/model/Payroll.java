@@ -16,6 +16,7 @@ public class Payroll {
     private LocalDate paymentDate;
     private long employeeId;
     private List<PayrollDetails> items;
+    private List<PayrollBenefit> benefits;
 
     public long getId() {
         return id;
@@ -74,5 +75,13 @@ public class Payroll {
 
     public void setItems(List<PayrollDetails> items) {
         this.items = items;
+    }
+
+    public List<PayrollBenefit> getBenefits() {
+        return benefits;
+    }
+
+    public void setBenefits(List<PayrollBenefit> benefits) {
+        this.benefits = benefits;
     }
 }

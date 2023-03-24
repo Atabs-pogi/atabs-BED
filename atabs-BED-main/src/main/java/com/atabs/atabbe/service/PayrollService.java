@@ -57,29 +57,29 @@ public class PayrollService {
         EmployeeEntity employee =  employeeDao.findById(payroll.getEmployeeId())
                 .orElseThrow(() -> new NotFoundException("Employee not found"));
         //check if payroll already exist
-        PayrollEntity entity = payrollDao.getEmployeePayroll(
+        PayrollEntity PayrollEntity = payrollDao.getEmployeePayroll(
                 payroll.getEmployeeId(),
                 payroll.getPeriodStart(),
                 payroll.getPeriodEnd()
         );
-        if(entity == null) {
-            entity = new PayrollEntity();
+        if(PayrollEntity == null) {
+            PayrollEntity = new PayrollEntity();
         }
-        //Save payroll
-        entity.setPeriodStart(payroll.getPeriodStart());
-        entity.setPeriodEnd(payroll.getPeriodEnd());
-        entity.setPaymentMethod(payroll.getPaymentMethod());
-        entity.setPaymentDate(payroll.getPaymentDate());
-        entity.setEmployee(employee);
-        payrollDao.save(entity);
-        payroll.setId(entity.getId());
+        //Create payroll
+        PayrollEntity.setPeriodStart(payroll.getPeriodStart());
+        PayrollEntity.setPeriodEnd(payroll.getPeriodEnd());
+        PayrollEntity.setPaymentMethod(payroll.getPaymentMethod());
+        PayrollEntity.setPaymentDate(payroll.getPaymentDate());
+        PayrollEntity.setEmployee(employee);
+        payrollDao.save(PayrollEntity);
+        payroll.setId(PayrollEntity.getId());
         //Save items
         List<PayrollDetails> items = payroll.getItems();
         for (PayrollDetails item: items) {
-            PayrollDetailEntity detailEntity = payrollDetailDao.getByDate(entity.getId(), item.getDate());
+            PayrollDetailEntity detailEntity = payrollDetailDao.getByDate(PayrollEntity.getId(), item.getDate());
             if(detailEntity == null){
                 detailEntity = new PayrollDetailEntity();
-                detailEntity.setPayrollId(entity.getId());
+                detailEntity.setPayrollId(PayrollEntity.getId());
             }
             detailEntity.setDate(item.getDate());
             detailEntity.setRegular(item.getRegular());
@@ -88,10 +88,29 @@ public class PayrollService {
             detailEntity.setVacation(item.getVacation());
             detailEntity.setSick(item.getSick());
             payrollDetailDao.save(detailEntity);
-            item.setId(detailEntity.getId());
-            item.setPayrollId(entity.getId());
         }
-        return calculatePays(entity.getId());
+        //Save benefits
+        List<PayrollBenefit> benefits = payroll.getBenefits();
+        for (PayrollBenefit benefit : benefits) {
+            PayrollBenefitEntity benefitEntity = benefitDao.getExistingBenefit(PayrollEntity.getId(), benefit.getDescription());
+            if (benefitEntity == null) {
+                benefitEntity = new PayrollBenefitEntity();
+                benefitEntity.setPayrollId(PayrollEntity.getId());
+            }
+            benefitEntity.setDescription(benefit.getDescription());
+            benefitEntity.setValue(benefit.getValue());
+            benefitDao.save(benefitEntity);
+        }
+        return calculatePays(PayrollEntity.getId());
+    }
+
+    @Transactional
+    public PayrollEntity saveDeductibles(PayrollDeductible deductible) throws NotFoundException {
+        PayrollEntity payroll = payrollDao.findById(deductible.getPayrollId())
+                .orElseThrow(() -> new NotFoundException("Cannot save, Payroll not found"));
+        saveMandatoryDeduction(deductible.getMandatoryDeductions(), payroll);
+        saveOtherDeduction(deductible.getOtherDeductions(), payroll);
+        return  payroll;
     }
 
     @Transactional
@@ -129,6 +148,7 @@ public class PayrollService {
         double tardinessDeduction = 0;
         double vacationPay = 0;
         double sickPay = 0;
+        double totalBenefit = 0;
 
         for (PayrollDetailEntity detail: details) {
 
@@ -141,7 +161,7 @@ public class PayrollService {
 
                 switch (holiday.getType()) {
                     case 0:
-                        premiumPay += calculateRegularPay(detail.getRegular(), salary.getDailyBasic() / regularHours);
+                        premiumPay += calculateRegularPay(regularHours, salary.getDailyBasic() / regularHours);
                         break;
                     case 1:
                         if (hasLeaveTakenOrPresent(detail)) {
@@ -172,6 +192,11 @@ public class PayrollService {
             overTimeRate = 0.25;
         }
 
+        List<PayrollBenefitEntity> benefits = benefitDao.getBenefitById(payrollId);
+        for (PayrollBenefitEntity benefit : benefits) {
+            totalBenefit += benefit.getValue();
+        }
+
         //update payroll
         payroll.setTotalWorkHours(regularWorkHours);
         payroll.setOverTimeRate((salary.getDailyBasic() / regularHours) * overTimeRate);
@@ -185,66 +210,35 @@ public class PayrollService {
         payroll.setTardinessDeduction(formatDecimal(tardinessDeduction));
         payroll.setVacationPay(formatDecimal(vacationPay));
         payroll.setSickPay(formatDecimal(sickPay));
-        payroll.setGrossPay(formatDecimal(regularPay + overTimePay + vacationPay + sickPay - tardinessDeduction));
+        payroll.setTotalBenefit(formatDecimal(totalBenefit));
+        payroll.setGrossPay(formatDecimal(regularPay + overTimePay + vacationPay + sickPay + totalBenefit - tardinessDeduction));
         payrollDao.save(payroll);
         return payroll;
     }
 
     @Transactional
-    public PayrollEntity saveBenefits(List<PayrollBenefit> benefits) throws NotFoundException {
-        double totalBenefit = 0;
-        double grossPay = 0;
-        Long payrollId = null;
-        for (PayrollBenefit benefit : benefits) {
-            PayrollBenefitEntity entity = benefitDao.getExistingBenefit(benefit.getPayrollId(), benefit.getDescription());
-            if (entity == null) {
-                entity = new PayrollBenefitEntity();
-                entity.setPayrollId(benefit.getPayrollId());
-            }
-            entity.setDescription(benefit.getDescription());
-            entity.setValue(benefit.getValue());
-            benefitDao.save(entity);
-            totalBenefit += entity.getValue();
-            payrollId = benefit.getPayrollId();
-        }
-        assert payrollId != null;
-        PayrollEntity payroll = payrollDao.findById(payrollId)
-                .orElseThrow(() -> new NotFoundException("Cannot save Benefits, Payroll not found"));
-        grossPay = payroll.getGrossPay();
-        payroll.setTotalBenefit(formatDecimal(totalBenefit));
-        payroll.setGrossPay(formatDecimal(grossPay + totalBenefit));
-        return payrollDao.save(payroll);
-    }
-
-    @Transactional
-    public PayrollEntity saveMandatoryDeduction(List<MandatoryDeduction> mandatoryDeductions) throws NotFoundException {
-        Long payrollId = null;
+    private PayrollEntity saveMandatoryDeduction(List<MandatoryDeduction> mandatoryDeductions, PayrollEntity payroll) throws NotFoundException {
         double totalMandatoryDeduction = 0;
         double taxableIncome = 0;
         double withholdingTax = 0;
         double incomeExcess = 0;
         double netPay = 0;
         for (MandatoryDeduction mandatoryDeduction : mandatoryDeductions) {
-            MandatoryDeductionEntity entity = mandatoryDeductionDao.getExistingMandatoryDeduction(mandatoryDeduction.getPayrollId(),mandatoryDeduction.getType());
+            MandatoryDeductionEntity entity = mandatoryDeductionDao.getExistingMandatoryDeduction(payroll.getId(), mandatoryDeduction.getType());
             if(entity == null) {
                 entity = new MandatoryDeductionEntity();
-                entity.setPayrollId(mandatoryDeduction.getPayrollId());
+                entity.setPayrollId(payroll.getId());
             }
             entity.setType(mandatoryDeduction.getType());
             entity.setContributionAmount(mandatoryDeduction.getContributionAmount());
             mandatoryDeductionDao.save(entity);
-            mandatoryDeduction.setId(entity.getId());
 
             totalMandatoryDeduction += entity.getContributionAmount();
-            payrollId = mandatoryDeduction.getPayrollId();
         }
 
-        assert payrollId != null;
-        PayrollEntity payroll = payrollDao.findById(payrollId)
-                .orElseThrow(() -> new NotFoundException("Cannot save Benefits, Payroll not found"));
         taxableIncome = payroll.getGrossPay() - totalMandatoryDeduction;
 
-        payroll.setTotalMandatoryDeduction(formatDecimal(totalMandatoryDeduction));
+        payroll.setMandatoryDeductions(formatDecimal(totalMandatoryDeduction));
         payroll.setTaxableIncome(formatDecimal(taxableIncome));
 
         BirTaxEntity taxes = birTaxDao.getTaxBySalaryRange(payroll.getGrossPay());
@@ -267,31 +261,24 @@ public class PayrollService {
     }
 
     @Transactional
-    public PayrollEntity saveOtherDeduction(List<OtherDeduction> deductibles) throws NotFoundException {
-        Long payrollId = null;
-        double totalDeductions = 0;
-        double netPay = 0;
+    private PayrollEntity saveOtherDeduction(List<OtherDeduction> deductibles, PayrollEntity payroll) throws NotFoundException {
+        double otherDeductions = 0;
+        double netPay = payroll.getNetPay();
         for (OtherDeduction deductible : deductibles) {
-            OtherDeductionEntity deductibleEntity = otherDeductionDao.getExistingOtherDeduction(deductible.getPayrollId(),deductible.getDescription());
+            OtherDeductionEntity deductibleEntity = otherDeductionDao.getExistingOtherDeduction(payroll.getId(), deductible.getDescription());
             if(deductibleEntity == null) {
                 deductibleEntity = new OtherDeductionEntity();
-                deductibleEntity.setPayrollId(deductible.getPayrollId());
+                deductibleEntity.setPayrollId(payroll.getId());
             }
             deductibleEntity.setDescription(deductible.getDescription());
             deductibleEntity.setValue(deductible.getValue());
             otherDeductionDao.save(deductibleEntity);
 
-            totalDeductions += deductibleEntity.getValue();
-            payrollId = deductible.getPayrollId();
+            otherDeductions += deductibleEntity.getValue();
         }
-
-        assert payrollId != null;
-        PayrollEntity payroll = payrollDao.findById(payrollId)
-                .orElseThrow(() -> new NotFoundException("Cannot save Other Deductibles, Payroll not found"));
-        netPay = payroll.getNetPay();
-        payroll.setOtherDeductions(formatDecimal(totalDeductions));
-        payroll.setTotalDeductions(formatDecimal(totalDeductions + payroll.getTardinessDeduction()));
-        payroll.setNetPay(formatDecimal(netPay - totalDeductions));
+        payroll.setOtherDeductions(formatDecimal(otherDeductions));
+        payroll.setTotalDeductions(formatDecimal(otherDeductions + payroll.getTardinessDeduction() + payroll.getMandatoryDeductions()));
+        payroll.setNetPay(formatDecimal(netPay - otherDeductions));
         return payrollDao.save(payroll);
     }
 
@@ -315,11 +302,11 @@ public class PayrollService {
         Map<String, Double> totalTypeContributionMap = new HashMap<>();
         for (PayrollEntity payroll : payrolls) {
             List<MandatoryDeductionEntity> entities = mandatoryDeductionDao.getAllMandatoryDeductionById(payroll.getId());
-            payroll.setMandatoryDeduction(entities);
+            payroll.setMandatory(entities);
             salariesExpense += payroll.getGrossPay();
             withholdingTaxPayable += payroll.getWithholdingTax();
             salariesPayable += payroll.getNetPay();
-            for (MandatoryDeductionEntity mandatoryDeduction : payroll.getMandatoryDeduction()) {
+            for (MandatoryDeductionEntity mandatoryDeduction : payroll.getMandatory()) {
                 String benefitType = mandatoryDeduction.getType();
                 Double contributionAmount = mandatoryDeduction.getContributionAmount();
                 if (totalTypeContributionMap.containsKey("total" + benefitType)) {
