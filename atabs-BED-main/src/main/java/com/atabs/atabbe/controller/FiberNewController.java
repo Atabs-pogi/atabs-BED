@@ -23,9 +23,14 @@ public class FiberNewController {
         return new ResponseEntity(fiberNewService.generateFiber(fiberNew), HttpStatus.OK);
     }
 
-    @PostMapping("/UpdateFiber")
+    @PutMapping("/UpdateFiber")
     private ResponseEntity UpdateFiber(@RequestBody FiberNew fiberNew) {
         return new ResponseEntity(fiberNewService.updateFiber(fiberNew), HttpStatus.OK);
+    }
+
+    @GetMapping("/price")
+    public ResponseEntity getLastestPrices(){
+        return new ResponseEntity(fiberNewService.getLastestPrices(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

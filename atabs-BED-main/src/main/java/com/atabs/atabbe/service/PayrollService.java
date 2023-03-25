@@ -198,6 +198,7 @@ public class PayrollService {
         for (PayrollBenefitEntity benefit : benefits) {
             totalBenefit += benefit.getValue();
         }
+        regularPay += premiumPay + nonWorkingSpecialPay;
 
         //update payroll
         payroll.setTotalWorkHours(regularWorkHours);
@@ -207,7 +208,7 @@ public class PayrollService {
         payroll.setTotalVacationDays(vacationDays);
         payroll.setTotalSickDays(sickDays);
 
-        payroll.setRegularPay(formatDecimal(regularPay + premiumPay + nonWorkingSpecialPay));
+        payroll.setRegularPay(formatDecimal(regularPay));
         payroll.setOverTimePay(formatDecimal(overTimePay));
         payroll.setTardinessDeduction(formatDecimal(tardinessDeduction));
         payroll.setVacationPay(formatDecimal(vacationPay));
@@ -353,6 +354,8 @@ public class PayrollService {
 
     private double formatDecimal(double value) {
         DecimalFormat df = new DecimalFormat("#.##");
+        df.setMinimumFractionDigits(2);
+        df.setMaximumFractionDigits(2);
         String formattedValue = df.format(value);
         return Double.parseDouble(formattedValue);
     }

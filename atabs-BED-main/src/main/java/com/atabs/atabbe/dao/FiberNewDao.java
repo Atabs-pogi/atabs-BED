@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface FiberNewDao extends JpaRepository<FiberNewEntity, Long> {
 
-    @Query(value = "SELECT * FROM fibernew WHERE fiber_id like %:match% OR reference_code like %:match%", nativeQuery = true)
+    @Query(value = "SELECT * FROM fibernew WHERE fiber_id like %:match% OR reference_code like %:match% OR date_time like %:match%", nativeQuery = true)
     List<FiberNewEntity> searchFiberByName(String match);
 
     @Query(value = "SELECT * FROM fibernew WHERE reference_code =:refCode", nativeQuery = true)

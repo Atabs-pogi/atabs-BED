@@ -11,30 +11,12 @@ public class FiberNew {
     private double excellentFiberKg;
     private double goodFiberKg;
     private double resecoFiberKg;
-    private double excellentFiberAmount;
-    private double goodFiberAmount;
-    private double resecoFiberAmount;
-    private double fiberTotalAmount;
+    private double excellentFiberPrice;
+    private double goodFiberPrice;
+    private double resecoFiberPrice;
+    //private double fiberTotalAmount;
     private LocalDateTime dateTime;
     private int status;
-
-    public static FiberNew from(FiberNewEntity fiber) {
-        FiberNew fiberNew=new FiberNew();
-        fiberNew.fiberId=fiber.getFiberId();
-        fiberNew.referenceCode=fiber.getReferenceCode();
-        fiberNew.excellentFiberKg=fiber.getExcellentFiberKg();
-        fiberNew.excellentFiberAmount=fiber.getExcellentFiberAmount();
-        fiberNew.goodFiberKg=fiber.getGoodFiberKg();
-        fiberNew.goodFiberAmount=fiber.getGoodFiberAmount();
-        fiberNew.resecoFiberKg=fiber.getResecoFiberKg();
-        fiberNew.resecoFiberAmount=fiber.getResecoFiberAmount();
-        fiberNew.status=fiber.getStatus();
-        fiberNew.dateTime=fiber.getDateTime();
-        fiberNew.fiberTotalAmount=fiber.getFiberTotalAmount();
-
-        return fiberNew;
-
-    }
 
     public long getFiberId() {
         return fiberId;
@@ -76,36 +58,28 @@ public class FiberNew {
         this.resecoFiberKg = resecoFiberKg;
     }
 
-    public double getExcellentFiberAmount() {
-        return excellentFiberAmount;
+    public double getExcellentFiberPrice() {
+        return excellentFiberPrice;
     }
 
-    public void setExcellentFiberAmount(double excellentFiberAmount) {
-        this.excellentFiberAmount = excellentFiberAmount;
+    public void setExcellentFiberPrice(double excellentFiberPrice) {
+        this.excellentFiberPrice = excellentFiberPrice;
     }
 
-    public double getGoodFiberAmount() {
-        return goodFiberAmount;
+    public double getGoodFiberPrice() {
+        return goodFiberPrice;
     }
 
-    public void setGoodFiberAmount(double goodFiberAmount) {
-        this.goodFiberAmount = goodFiberAmount;
+    public void setGoodFiberPrice(double goodFiberPrice) {
+        this.goodFiberPrice = goodFiberPrice;
     }
 
-    public double getResecoFiberAmount() {
-        return resecoFiberAmount;
+    public double getResecoFiberPrice() {
+        return resecoFiberPrice;
     }
 
-    public void setResecoFiberAmount(double resecoFiberAmount) {
-        this.resecoFiberAmount = resecoFiberAmount;
-    }
-
-    public double getFiberTotalAmount() {
-        return fiberTotalAmount;
-    }
-
-    public void setFiberTotalAmount(double fiberTotalAmount) {
-        this.fiberTotalAmount = fiberTotalAmount;
+    public void setResecoFiberPrice(double resecoFiberPrice) {
+        this.resecoFiberPrice = resecoFiberPrice;
     }
 
     public int getStatus() {
@@ -124,8 +98,4 @@ public class FiberNew {
         this.dateTime = dateTime;
     }
 
-
-    public double totalAmount(){
-        return getExcellentFiberAmount()+getGoodFiberAmount()+getResecoFiberAmount();
-    }
 }
