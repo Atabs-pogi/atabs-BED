@@ -26,7 +26,6 @@ public class FiberNewService {
     private FiberPriceDao fiberPriceDao;
 
 
-
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
     LocalDateTime now = LocalDateTime.now();
 
@@ -59,27 +58,23 @@ public class FiberNewService {
     @Transactional
     public FiberNewEntity updateFiber(FiberNew fiberNew) {
 
-        double excellentAmount = 0;
-        double goodAmount = 0;
-        double resecoAmount = 0;
-        double totalAmount = 0;
         FiberNewEntity fiberNewEntity= fiberNewDao.getRefCode(fiberNew.getReferenceCode());
         FiberPricesEntity prices = new FiberPricesEntity();
-
-        excellentAmount = fiberNewEntity.getExcellentFiberKg() * fiberNew.getExcellentFiberPrice();
-        goodAmount = fiberNewEntity.getGoodFiberKg() * fiberNew.getGoodFiberPrice();
-        resecoAmount = fiberNewEntity.getResecoFiberKg() * fiberNew.getResecoFiberPrice();
-        totalAmount = excellentAmount + goodAmount + resecoAmount;
 
         prices.setExcellentFiberPrice(fiberNew.getExcellentFiberPrice());
         prices.setGoodFiberPrice(fiberNew.getGoodFiberPrice());
         prices.setResecoFiberPrice(fiberNew.getResecoFiberPrice());
         fiberPriceDao.save(prices);
 
-        fiberNewEntity.setExcellentFiberAmount(formatDecimal(excellentAmount));
-        fiberNewEntity.setGoodFiberAmount(formatDecimal(goodAmount));
-        fiberNewEntity.setResecoFiberAmount(formatDecimal(resecoAmount));
-        fiberNewEntity.setFiberTotalAmount(formatDecimal(totalAmount));
+        fiberNewEntity.setExcellentFiberAmount(formatDecimal(fiberNew.getExcellentFiberAmount()));
+        fiberNewEntity.setGoodFiberAmount(formatDecimal(fiberNew.getGoodFiberAmount()));
+        fiberNewEntity.setResecoFiberAmount(formatDecimal(fiberNew.getResecoFiberAmount()));
+        fiberNewEntity.setFiberTotalAmount(formatDecimal(fiberNew.getFiberTotalAmount()));
+
+        fiberNewEntity.setExcellentOrCode(fiberNew.getExcellentOrCode());
+        fiberNewEntity.setGoodOrCode(fiberNew.getGoodOrCode());
+        fiberNewEntity.setResecoOrCode(fiberNew.getResecoOrCode());
+
         fiberNewEntity.setStatus(1);
         fiberNewDao.save(fiberNewEntity);
         return fiberNewEntity;

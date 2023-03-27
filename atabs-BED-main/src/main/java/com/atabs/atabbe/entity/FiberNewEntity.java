@@ -15,10 +15,15 @@ public class FiberNewEntity {
     private double excellentFiberKg;
     private double goodFiberKg;
     private double resecoFiberKg;
+
     private double excellentFiberAmount;
     private double goodFiberAmount;
     private double resecoFiberAmount;
     private double fiberTotalAmount;
+
+    private double excellentOrCode;
+    private double goodOrCode;
+    private double resecoOrCode;
 
     @Column(name="status", nullable = false, columnDefinition="INT NOT NULL DEFAULT 0")
     private int status = 0;
@@ -100,6 +105,30 @@ public class FiberNewEntity {
 
     public void setFiberTotalAmount(double fiberTotalAmount) {
         this.fiberTotalAmount = fiberTotalAmount;
+    }
+
+    public double getExcellentOrCode() {
+        return excellentOrCode;
+    }
+
+    public void setExcellentOrCode(double excellentOrCode) {
+        this.excellentOrCode = excellentOrCode;
+    }
+
+    public double getGoodOrCode() {
+        return goodOrCode;
+    }
+
+    public void setGoodOrCode(double goodOrCode) {
+        this.goodOrCode = goodOrCode;
+    }
+
+    public double getResecoOrCode() {
+        return resecoOrCode;
+    }
+
+    public void setResecoOrCode(double resecoOrCode) {
+        this.resecoOrCode = resecoOrCode;
     }
 
     public int getStatus() {

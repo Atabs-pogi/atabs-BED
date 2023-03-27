@@ -8,13 +8,23 @@ public class FiberNew {
 
     private long fiberId;
     private String referenceCode;
+
     private double excellentFiberKg;
     private double goodFiberKg;
     private double resecoFiberKg;
+
     private double excellentFiberPrice;
     private double goodFiberPrice;
     private double resecoFiberPrice;
-    //private double fiberTotalAmount;
+
+    private double excellentFiberAmount;
+    private double goodFiberAmount;
+    private double resecoFiberAmount;
+    private double fiberTotalAmount;
+
+    private double excellentOrCode;
+    private double goodOrCode;
+    private double resecoOrCode;
     private LocalDateTime dateTime;
     private int status;
 
@@ -80,6 +90,62 @@ public class FiberNew {
 
     public void setResecoFiberPrice(double resecoFiberPrice) {
         this.resecoFiberPrice = resecoFiberPrice;
+    }
+
+    public double getExcellentFiberAmount() {
+        return excellentFiberAmount;
+    }
+
+    public void setExcellentFiberAmount(double excellentFiberAmount) {
+        this.excellentFiberAmount = excellentFiberAmount;
+    }
+
+    public double getGoodFiberAmount() {
+        return goodFiberAmount;
+    }
+
+    public void setGoodFiberAmount(double goodFiberAmount) {
+        this.goodFiberAmount = goodFiberAmount;
+    }
+
+    public double getResecoFiberAmount() {
+        return resecoFiberAmount;
+    }
+
+    public void setResecoFiberAmount(double resecoFiberAmount) {
+        this.resecoFiberAmount = resecoFiberAmount;
+    }
+
+    public double getFiberTotalAmount() {
+        return fiberTotalAmount;
+    }
+
+    public void setFiberTotalAmount(double fiberTotalAmount) {
+        this.fiberTotalAmount = fiberTotalAmount;
+    }
+
+    public double getExcellentOrCode() {
+        return excellentOrCode;
+    }
+
+    public void setExcellentOrCode(double excellentOrCode) {
+        this.excellentOrCode = excellentOrCode;
+    }
+
+    public double getGoodOrCode() {
+        return goodOrCode;
+    }
+
+    public void setGoodOrCode(double goodOrCode) {
+        this.goodOrCode = goodOrCode;
+    }
+
+    public double getResecoOrCode() {
+        return resecoOrCode;
+    }
+
+    public void setResecoOrCode(double resecoOrCode) {
+        this.resecoOrCode = resecoOrCode;
     }
 
     public int getStatus() {
