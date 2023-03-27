@@ -6,7 +6,7 @@
 	<parameter name="Date_From" class="java.lang.String"/>
 	<parameter name="Date_End" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[select * from fibernew WHERE Date(date_time) BETWEEN $P{Date_From} AND $P{Date_End}]]>
+		<![CDATA[select * from fibernew WHERE Date(date_time) BETWEEN $P{Date_From} AND $P{Date_End} AND fiber_total_amount!=0]]>
 	</queryString>
 	<field name="fiber_id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="fiber_id"/>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FiberReceipt" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aea083a0-779a-4e5d-a592-86d88fae1eb7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="coop.jrdax"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM coop.fibernew WHERE date_time=(SELECT MAX(date_time) FROM coop.fibernew)]]>
+	</queryString>
+	<field name="fiber_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="fiber_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="fiber_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibernew"/>
+	</field>
+	<field name="date_time" class="java.time.LocalDateTime">
+		<property name="com.jaspersoft.studio.field.name" value="date_time"/>
+		<property name="com.jaspersoft.studio.field.label" value="date_time"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibernew"/>
+	</field>
+	<field name="excellent_fiber_amount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="excellent_fiber_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="excellent_fiber_amount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibernew"/>
+	</field>
+	<field name="excellent_fiber_kg" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="excellent_fiber_kg"/>
+		<property name="com.jaspersoft.studio.field.label" value="excellent_fiber_kg"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibernew"/>
+	</field>
+	<field name="fiber_total_amount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="fiber_total_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="fiber_total_amount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibernew"/>
+	</field>
+	<field name="good_fiber_amount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="good_fiber_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="good_fiber_amount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibernew"/>
+	</field>
+	<field name="good_fiber_kg" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="good_fiber_kg"/>
+		<property name="com.jaspersoft.studio.field.label" value="good_fiber_kg"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibernew"/>
+	</field>
+	<field name="reference_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="reference_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="reference_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibernew"/>
+	</field>
+	<field name="reseco_fiber_amount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="reseco_fiber_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="reseco_fiber_amount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibernew"/>
+	</field>
+	<field name="reseco_fiber_kg" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="reseco_fiber_kg"/>
+		<property name="com.jaspersoft.studio.field.label" value="reseco_fiber_kg"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibernew"/>
+	</field>
+	<field name="status" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="status"/>
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fibernew"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="123">
+			<image>
+				<reportElement mode="Opaque" x="40" y="10" width="70" height="69" uuid="f4f6f034-5f3c-4312-8400-720afc9b5e78"/>
+				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="120" y="34" width="330" height="20" uuid="395e3590-7871-482d-b29f-cfe2c961f349"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARAMORAN ABACA FARMERS - PRODUCERS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="54" width="250" height="15" uuid="ca5e5a30-a06f-4269-b692-b8dd4e0bb820"/>
+				<text><![CDATA[ABACA TUXY BUYING SPECIAL PROJECT (ATBSP)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="84" width="176" height="18" uuid="8e257964-5146-45d7-a14a-02567a06a962"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIBER RECEIPT]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="280" y="6" width="100" height="30" uuid="a4b125e1-3243-4c70-a692-f0b3ee3c032f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{reference_code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="6" width="130" height="30" uuid="48e6acca-6103-43e2-88a1-d55f14920dda">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6baf8fd4-375e-41af-a779-5716b45b08e6"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[REFERENCE CODE:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="185" height="30" backcolor="#16F54E" uuid="cb0f79d3-b090-4775-8256-7cafbbec93a6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="524c2f3b-27d0-46db-be9d-c8351ee9ad3b"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXCELLENT FIBER KG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="185" y="0" width="185" height="30" backcolor="#16F54E" uuid="83a021c6-90ee-4abe-858c-74828e4facd1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8680cd58-cc7b-44c1-8922-fdb82739b978"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOOD FIBER KG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="370" y="0" width="185" height="30" backcolor="#16F54E" uuid="661b4750-5847-4219-8c4e-ccbea456feef">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="26f47b65-caf3-47fe-a9a3-513d79a1664d"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESECO FIBER KG]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="72" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="185" height="30" uuid="0bf90927-4425-4a57-bf92-6b98f43edbfa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="524c2f3b-27d0-46db-be9d-c8351ee9ad3b"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{excellent_fiber_kg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="0" width="185" height="30" uuid="6c7dd2cc-a19f-44a0-bb1c-c98263bc1ec7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8680cd58-cc7b-44c1-8922-fdb82739b978"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{good_fiber_kg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="185" height="30" uuid="6f61a871-ddc4-4c54-bf21-e1df4280268f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="26f47b65-caf3-47fe-a9a3-513d79a1664d"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{reseco_fiber_kg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="42" width="100" height="30" uuid="5dc78592-f022-4dea-a955-e3a8ed1386e5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{date_time}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="42" width="130" height="30" uuid="3dbcb6fd-4eeb-4a19-8bf6-c76ed1f25fa1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6baf8fd4-375e-41af-a779-5716b45b08e6"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATE AND TIME:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
