@@ -246,9 +246,9 @@ public class PayrollService {
 
         BirTaxEntity taxes = birTaxDao.getTaxBySalaryRange(payroll.getGrossPay());
         if(taxes == null){
-            payroll.setWithholdingTax(withholdingTax);
+//            payroll.setWithholdingTax(withholdingTax);
 //            uncomment below code if they will use the BIR taxes table and remove the line above
-//            throw new NotFoundException("Tax table not found");
+            throw new NotFoundException("Tax table not found");
         } else {
             incomeExcess = taxableIncome - taxes.getMinimum();
             withholdingTax = taxes.getFixTax() + (incomeExcess * taxes.getTaxRateOnExcess());
