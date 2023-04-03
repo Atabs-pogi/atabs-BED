@@ -21,7 +21,7 @@ public class CashierController {
     }
     @GetMapping("/search")
     public ResponseEntity<java.util.List<Cashier>> search(@RequestParam("name") String name) {
-        return new ResponseEntity<>(cashierService.searchCashierByName(name), HttpStatus.OK);
+        return new ResponseEntity(cashierService.searchCashierByName(name), HttpStatus.OK);
     }
     @GetMapping("/getCashier/{id}")
     public ResponseEntity<CashierEntity> getAccountByID(@PathVariable(value = "id") Long id) {

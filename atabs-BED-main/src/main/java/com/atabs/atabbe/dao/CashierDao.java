@@ -11,9 +11,7 @@ import java.util.List;
 @Repository
 public interface CashierDao extends JpaRepository<CashierEntity, Long> {
 
-    @Query(value = "SELECT * FROM cashier WHERE cashier_balance like %:match% " +
-            "OR cashier_total like %:match% OR farmer_id like %:match% OR transaction_id like %:match%" +
-            " OR merchandise_price like %:match%", nativeQuery = true)
+    @Query(value = "SELECT * FROM cashier WHERE cashier_total like %:match% OR farmer_id like %:match% OR transaction_id like %:match% OR merchandise_price like %:match%", nativeQuery = true)
     List<CashierEntity> searchCashierByName(String match);
 
     @Query(value = "Select * from cashier where cashier_id =:cashier_id", nativeQuery = true)
