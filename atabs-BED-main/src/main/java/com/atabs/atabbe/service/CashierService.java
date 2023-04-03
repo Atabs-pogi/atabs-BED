@@ -2,14 +2,10 @@ package com.atabs.atabbe.service;
 
 import com.atabs.atabbe.dao.CashierDao;
 import com.atabs.atabbe.entity.CashierEntity;
-import com.atabs.atabbe.entity.PosEntity;
-import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.Cashier;
-import com.atabs.atabbe.model.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,13 +31,8 @@ public class CashierService {
         }
     }
 
-    public List<Cashier> searchCashierByName(String name) {
-        List<CashierEntity> entityPos = (List<CashierEntity>) cashierDao.searchCashierByName(name);
-        List<Cashier> cashiers = new ArrayList<>();
-        for (CashierEntity cashier : entityPos) {
-            cashiers.add(Cashier.from(cashier));
-        }
-        return cashiers;
+    public List<CashierEntity> searchCashierByName(String name) {
+        return cashierDao.searchCashierByName(name);
     }
 
     public CashierEntity getCashierInfo(long cashier_id) {
