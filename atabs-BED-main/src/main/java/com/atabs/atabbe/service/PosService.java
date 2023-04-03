@@ -124,9 +124,9 @@ public class PosService {
                             transactionItem.setPrice(price);
                             transactionItemEntities.add(transactionItem);
                         }else if(transaction_items.getQuality().equalsIgnoreCase("GOOD")){
-                            price = tuxyEntity.getDiscartePrice() * transaction_items.getQuantity();
+                            price = tuxyEntity.getDiscardedPrice() * transaction_items.getQuantity();
                             totalAmount += price;
-                            transactionItem.setValue(tuxyEntity.getDiscartePrice());
+                            transactionItem.setValue(tuxyEntity.getDiscardedPrice());
                             transactionItem.setPrice(price);
                             transactionItemEntities.add(transactionItem);
                         }else if(transaction_items.getQuality().equalsIgnoreCase("RESECO")){

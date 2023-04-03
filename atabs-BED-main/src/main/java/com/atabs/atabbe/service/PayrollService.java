@@ -132,7 +132,7 @@ public class PayrollService {
 
         List<PayrollDetailEntity> details = payrollDetailDao.getByPeriod(payrollId, payroll.getPeriodStart(), payroll.getPeriodEnd());
         if (details.isEmpty()) {
-            throw new NotFoundException("Employee Details not found, You may be using the wrong period for payroll and items date");
+            throw new NotFoundException("Payroll Details not found, You may be using the wrong period for payroll and items date");
         }
 
         double overTimeRate = 0;

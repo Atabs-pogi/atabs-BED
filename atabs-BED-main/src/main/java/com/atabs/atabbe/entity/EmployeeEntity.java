@@ -11,7 +11,7 @@ public class EmployeeEntity {
 
     @Id
     @GeneratedValue(generator = "emp_seq", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "emp_seq", sequenceName = "employee_sequence", initialValue = 101, allocationSize = 50)
+    @SequenceGenerator(name = "emp_seq", sequenceName = "employee_sequence", initialValue = 20230001, allocationSize = 3)
     @Column(name = "empId")
     private long empId;
     private String firstName;

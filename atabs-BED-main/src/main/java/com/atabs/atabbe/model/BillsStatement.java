@@ -19,7 +19,7 @@ public class BillsStatement {
         billsStatement.id=billing.getId();
         billsStatement.name=billing.getName();
         billsStatement.type=billing.getType();
-        billsStatement.dueDate= billsStatement.getDueDate();
+        billsStatement.dueDate=billing.getDueDate();
         billsStatement.importDate=billing.getImportDate();
         billsStatement.paymentDate=billing.getPaymentDate();
         billsStatement.referenceCode=billing.getReferenceCode();

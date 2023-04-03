@@ -16,7 +16,7 @@ public class TuxyEntity {
     private String name;
 
     private double goodPrice;
-    private double discartePrice;
+    private double discardedPrice;
     private double resecoPrice;
 
 
@@ -74,12 +74,12 @@ public class TuxyEntity {
         this.goodPrice = goodPrice;
     }
 
-    public double getDiscartePrice() {
-        return discartePrice;
+    public double getDiscardedPrice() {
+        return discardedPrice;
     }
 
-    public void setDiscartePrice(double discartePrice) {
-        this.discartePrice = discartePrice;
+    public void setDiscardedPrice(double discardedPrice) {
+        this.discardedPrice = discardedPrice;
     }
 
     public double getResecoPrice() {

@@ -10,9 +10,7 @@ public class BillsItemEntity {
     @SequenceGenerator(name = "bills_trans_item_seq", sequenceName = "bills_trans_item_sequence", initialValue = 800, allocationSize = 10000000)
     @Column(name = "item_id")
     private long id;
-
     private String  category;
-
     private double  amount;
 
     public long getId() {

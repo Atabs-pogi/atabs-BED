@@ -3,6 +3,7 @@ package com.atabs.atabbe.service;
 import com.atabs.atabbe.dao.CashierDao;
 import com.atabs.atabbe.entity.CashierEntity;
 import com.atabs.atabbe.entity.PosEntity;
+import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.model.Cashier;
 import com.atabs.atabbe.model.Pos;
 import org.springframework.beans.factory.annotation.Autowired;

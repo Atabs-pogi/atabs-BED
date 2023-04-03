@@ -9,7 +9,7 @@ public class Tuxy {
     private long tuxyId;
     private String name;
     private double goodPrice;
-    private double discartePrice;
+    private double discardedPrice;
     private double resecoPrice;
 
     public long getTuxyId() {
@@ -36,12 +36,12 @@ public class Tuxy {
         this.goodPrice = goodPrice;
     }
 
-    public double getDiscartePrice() {
-        return discartePrice;
+    public double getDiscardedPrice() {
+        return discardedPrice;
     }
 
-    public void setDiscartePrice(double discartePrice) {
-        this.discartePrice = discartePrice;
+    public void setDiscardedPrice(double discardedPrice) {
+        this.discardedPrice = discardedPrice;
     }
 
     public double getResecoPrice() {
