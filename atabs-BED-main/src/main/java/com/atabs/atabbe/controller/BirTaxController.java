@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,6 +21,12 @@ public class BirTaxController {
     public ResponseEntity<List<BirTaxEntity>> getAll(){
         return new ResponseEntity<>(birTaxService.getAll(), HttpStatus.OK);
     }
+
+    @PostMapping("/upload")
+    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
+        return new ResponseEntity<>(birTaxService.upload(), HttpStatus.OK);
+    }
+
 
     @PostMapping("/")
     public ResponseEntity<List<BirTaxEntity>> save(@RequestBody List<BirTaxEntity> birTax) {
