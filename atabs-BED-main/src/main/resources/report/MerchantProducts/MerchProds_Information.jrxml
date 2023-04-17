@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MerchProds_Information" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e46409a-d725-48e1-a137-32a588fb5e1c">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="coop.jrdax"/>
@@ -48,10 +48,6 @@
 	</background>
 	<pageHeader>
 		<band height="112" splitType="Stretch">
-			<image>
-				<reportElement mode="Opaque" x="170" y="6" width="70" height="69" uuid="4801571d-761a-4476-9442-d7a0730a0d15"/>
-				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="250" y="30" width="330" height="20" uuid="1d5137bb-ae9c-4be2-9823-1db960e43e3d"/>
 				<textElement>
@@ -70,6 +66,10 @@
 				</textElement>
 				<text><![CDATA[MERCHANT PRODUCTS]]></text>
 			</staticText>
+			<image>
+				<reportElement mode="Opaque" x="170" y="6" width="70" height="69" uuid="19f479a7-9298-41a3-89fb-86cb045cc7dc"/>
+				<imageExpression><![CDATA["C:/Users/PhilFIDA/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>

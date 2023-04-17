@@ -68,10 +68,10 @@ public class TuxyService {
                 }
 
                 if(entity.getDiscardedPrice() != tuxyEntity.getDiscardedPrice()){
-                    System.out.println( "getDiscartePrice " + entity.getDiscardedPrice());
-                    System.out.println("getDiscartePrice " + tuxyEntity.getDiscardedPrice());
+                    System.out.println( "getDiscardedPrice " + entity.getDiscardedPrice());
+                    System.out.println("getDiscardedPrice " + tuxyEntity.getDiscardedPrice());
                     UpdateTuxy updateTuxy = new UpdateTuxy();
-                    updateTuxy.setType("Discarted");
+                    updateTuxy.setType("Discarded");
                     updateTuxy.setTuxyId(entity.getTuxyId());
                     updateTuxy.setOldPrice(entity.getDiscardedPrice());
                     updateTuxy.setNewPrice(tuxyEntity.getDiscardedPrice());

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Payslip" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c74bce07-1b67-4567-a59a-4caa8663f17c">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="coop.jrdax"/>
@@ -112,10 +112,6 @@
 	</background>
 	<pageHeader>
 		<band height="123" splitType="Stretch">
-			<image>
-				<reportElement mode="Opaque" x="170" y="6" width="70" height="69" uuid="ecd61928-ddb0-42b0-a7ee-70807f0b1bb5"/>
-				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="250" y="30" width="330" height="20" uuid="3c5345d4-3c87-499a-aefc-88bff4b87652"/>
 				<textElement>
@@ -134,6 +130,10 @@
 				</textElement>
 				<text><![CDATA[PAYSLIP]]></text>
 			</staticText>
+			<image>
+				<reportElement mode="Opaque" x="170" y="6" width="70" height="69" uuid="b5882886-5c0b-4861-922f-6cb0525438bd"/>
+				<imageExpression><![CDATA["C:/Users/PhilFIDA/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 	<detail>

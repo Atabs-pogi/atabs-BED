@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FiberReceipt" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aea083a0-779a-4e5d-a592-86d88fae1eb7">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="coop.jrdax"/>
@@ -66,10 +66,6 @@
 	</background>
 	<title>
 		<band height="123">
-			<image>
-				<reportElement mode="Opaque" x="40" y="10" width="70" height="69" uuid="f4f6f034-5f3c-4312-8400-720afc9b5e78"/>
-				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="120" y="34" width="330" height="20" uuid="395e3590-7871-482d-b29f-cfe2c961f349"/>
 				<textElement>
@@ -88,6 +84,10 @@
 				</textElement>
 				<text><![CDATA[FIBER RECEIPT]]></text>
 			</staticText>
+			<image>
+				<reportElement mode="Opaque" x="40" y="10" width="70" height="69" uuid="3f0ca62c-2150-4c3a-abd5-345b5470cba4"/>
+				<imageExpression><![CDATA["C:/Users/PhilFIDA/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -111,7 +111,7 @@
 	<columnHeader>
 		<band height="30" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="185" height="30" backcolor="#16F54E" uuid="cb0f79d3-b090-4775-8256-7cafbbec93a6">
+				<reportElement mode="Opaque" x="93" y="0" width="125" height="30" backcolor="#16F54E" uuid="cb0f79d3-b090-4775-8256-7cafbbec93a6">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="524c2f3b-27d0-46db-be9d-c8351ee9ad3b"/>
 				</reportElement>
 				<box>
@@ -121,12 +121,12 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[EXCELLENT FIBER KG]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="185" y="0" width="185" height="30" backcolor="#16F54E" uuid="83a021c6-90ee-4abe-858c-74828e4facd1">
+				<reportElement mode="Opaque" x="218" y="0" width="125" height="30" backcolor="#16F54E" uuid="83a021c6-90ee-4abe-858c-74828e4facd1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8680cd58-cc7b-44c1-8922-fdb82739b978"/>
 				</reportElement>
 				<box>
@@ -136,12 +136,12 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[GOOD FIBER KG]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="370" y="0" width="185" height="30" backcolor="#16F54E" uuid="661b4750-5847-4219-8c4e-ccbea456feef">
+				<reportElement mode="Opaque" x="343" y="0" width="125" height="30" backcolor="#16F54E" uuid="661b4750-5847-4219-8c4e-ccbea456feef">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="26f47b65-caf3-47fe-a9a3-513d79a1664d"/>
 				</reportElement>
 				<box>
@@ -151,7 +151,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[RESECO FIBER KG]]></text>
 			</staticText>
@@ -160,7 +160,7 @@
 	<detail>
 		<band height="72" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="185" height="30" uuid="0bf90927-4425-4a57-bf92-6b98f43edbfa">
+				<reportElement x="93" y="0" width="125" height="30" uuid="0bf90927-4425-4a57-bf92-6b98f43edbfa">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="524c2f3b-27d0-46db-be9d-c8351ee9ad3b"/>
 				</reportElement>
 				<box>
@@ -169,11 +169,13 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{excellent_fiber_kg}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="185" y="0" width="185" height="30" uuid="6c7dd2cc-a19f-44a0-bb1c-c98263bc1ec7">
+				<reportElement x="218" y="0" width="125" height="30" uuid="6c7dd2cc-a19f-44a0-bb1c-c98263bc1ec7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8680cd58-cc7b-44c1-8922-fdb82739b978"/>
 				</reportElement>
 				<box>
@@ -182,11 +184,13 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{good_fiber_kg}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="370" y="0" width="185" height="30" uuid="6f61a871-ddc4-4c54-bf21-e1df4280268f">
+				<reportElement x="343" y="0" width="125" height="30" uuid="6f61a871-ddc4-4c54-bf21-e1df4280268f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="26f47b65-caf3-47fe-a9a3-513d79a1664d"/>
 				</reportElement>
 				<box>
@@ -195,7 +199,9 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{reseco_fiber_kg}]]></textFieldExpression>
 			</textField>
 			<textField>
