@@ -107,15 +107,6 @@ public class PayrollService {
     }
 
     @Transactional
-    public PayrollEntity saveDeductibles(PayrollDeductible deductible) throws NotFoundException {
-        PayrollEntity payroll = payrollDao.findById(deductible.getPayrollId())
-                .orElseThrow(() -> new NotFoundException("Cannot save, Payroll not found"));
-        saveMandatoryDeduction(deductible.getMandatoryDeductions(), payroll);
-        saveOtherDeduction(deductible.getOtherDeductions(), payroll);
-        return  payroll;
-    }
-
-    @Transactional
     private PayrollEntity calculatePays(long payrollId) throws NotFoundException {
         final int regularHours = 8;
         final double tardinessRate = 0.8;
@@ -220,7 +211,16 @@ public class PayrollService {
     }
 
     @Transactional
-    private void saveMandatoryDeduction(List<MandatoryDeduction> mandatoryDeductions, PayrollEntity payroll) throws NotFoundException {
+    public PayrollEntity saveDeductibles(PayrollDeductible deductible) throws NotFoundException {
+        PayrollEntity payroll = payrollDao.findById(deductible.getPayrollId())
+                .orElseThrow(() -> new NotFoundException("Cannot save, Payroll not found"));
+        saveMandatoryDeduction(deductible.getMandatoryDeductions(), payroll, deductible);
+        saveOtherDeduction(deductible.getOtherDeductions(), payroll);
+        return  payroll;
+    }
+
+    @Transactional
+    private void saveMandatoryDeduction(List<MandatoryDeduction> mandatoryDeductions, PayrollEntity payroll, PayrollDeductible deductible) throws NotFoundException {
         double totalMandatoryDeduction = 0;
         double taxableIncome = 0;
         double withholdingTax = 0;
@@ -244,7 +244,7 @@ public class PayrollService {
         payroll.setMandatoryDeductions(formatDecimal(totalMandatoryDeduction));
         payroll.setTaxableIncome(formatDecimal(taxableIncome));
 
-        BirTaxEntity taxes = birTaxDao.getTaxBySalaryRange(payroll.getGrossPay());
+        BirTaxEntity taxes = birTaxDao.getTaxBySalaryRange(payroll.getGrossPay(), deductible.getFrequency());
         if(taxes == null){
 //            payroll.setWithholdingTax(withholdingTax);
 //            uncomment below code if they will use the BIR taxes table and remove the line above

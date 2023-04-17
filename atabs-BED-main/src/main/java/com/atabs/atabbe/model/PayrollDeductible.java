@@ -4,6 +4,7 @@ import java.util.List;
 
 public class PayrollDeductible {
     private long payrollId;
+    private String frequency;
     private List<MandatoryDeduction> mandatoryDeductions;
     private List<OtherDeduction> otherDeductions;
 
@@ -13,6 +14,14 @@ public class PayrollDeductible {
 
     public void setPayrollId(long payrollId) {
         this.payrollId = payrollId;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
     }
 
     public List<MandatoryDeduction> getMandatoryDeductions() {
