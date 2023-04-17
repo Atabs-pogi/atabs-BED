@@ -13,6 +13,7 @@ public class BirTaxEntity {
     private double maximum;
     private double fixTax;
     private double taxRateOnExcess;
+    private String frequency;
 
     public long getId() {
         return id;
@@ -52,5 +53,13 @@ public class BirTaxEntity {
 
     public void setTaxRateOnExcess(double taxRateOnExcess) {
         this.taxRateOnExcess = taxRateOnExcess;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
     }
 }
