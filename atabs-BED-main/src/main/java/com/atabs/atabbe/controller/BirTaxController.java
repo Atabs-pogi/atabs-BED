@@ -21,6 +21,14 @@ public class BirTaxController {
         return new ResponseEntity<>(birTaxService.getAll(), HttpStatus.OK);
     }
 
+<<<<<<< Updated upstream
+=======
+//    @PostMapping("/upload")
+//    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
+//        return new ResponseEntity<>(birTaxService.upload(), HttpStatus.OK);
+//    }
+
+>>>>>>> Stashed changes
 
     @PostMapping("/")
     public ResponseEntity<List<BirTaxEntity>> save(@RequestBody List<BirTaxEntity> birTax) {

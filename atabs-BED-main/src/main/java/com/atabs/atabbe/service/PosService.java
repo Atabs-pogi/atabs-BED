@@ -95,8 +95,8 @@ public class PosService {
 
     public String insertTransaction(Transaction transactions) throws Exception {
         try{
-            Gson gson = new Gson();
-            LoggerHelper.info("POSSERVICE",gson.toJson(transactions));
+//            Gson gson = new Gson();
+//            LoggerHelper.info("POSSERVICE",gson.toJson(transactions));
             boolean isExist = farmerDao.existsById(transactions.getFarmerId());
 
             ArrayList<TransactionItemEntity> transactionItemEntities = new ArrayList<>();
@@ -104,7 +104,7 @@ public class PosService {
                 double price = 0;
                 double totalAmount = 0;
                 for(Transaction.Items transaction_items : transactions.getItems()){
-                    LoggerHelper.info("POSSERVICE",gson.toJson(transaction_items.getTuxyId()));
+                    //LoggerHelper.info("POSSERVICE",gson.toJson(transaction_items.getTuxyId()));
 
                     boolean isTuxyExist = tuxyDao.existsById(transaction_items.getTuxyId());
 
@@ -137,15 +137,14 @@ public class PosService {
                             transactionItemEntities.add(transactionItem);
                         }
 
-
-                        LoggerHelper.info("POSSERVICE",gson.toJson(tuxyEntity));
+                        //LoggerHelper.info("POSSERVICE",gson.toJson(tuxyEntity));
 
                     }else{
                         throw new NotFoundException(Message.ERROR_MESSAGE_FOR_NOT_EXIST.replace("<object>","tuxy"));
                     }
                 }
 
-                LoggerHelper.info("POSSERVICE",gson.toJson(transactionItemEntities));
+                //LoggerHelper.info("POSSERVICE",gson.toJson(transactionItemEntities));
                 TransactionEntity transaction = new TransactionEntity();
                 transaction.setFarmerId(transactions.getFarmerId());
                 transaction.setTotalAmount(totalAmount);
@@ -165,16 +164,11 @@ public class PosService {
         } catch (Exception e){
             throw new Exception("Exception "  + e.getMessage());
         }
-
     }
-
-
-
 
     public ArrayList<TransactionEntity> getAll(int status) throws Exception {
         try{
             return (ArrayList<TransactionEntity>) transactionDao.transactionList(status);
-
         } catch (Exception e){
             throw new Exception("Exception "  + e.getMessage());
         }

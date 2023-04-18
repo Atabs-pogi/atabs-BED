@@ -19,6 +19,34 @@ public class BirTaxService {
         return (ArrayList<BirTaxEntity>) dao.findAll();
     }
 
+<<<<<<< Updated upstream
+=======
+//    public String upload() {
+//        try {
+//            InputStream inputStream = file.getInputStream();
+//            Workbook workbook = new XSSFWorkbook(inputStream);
+//            Sheet sheet = workbook.getSheetAt(0);
+//            Iterator<Row> rowIterator = sheet.iterator();
+//
+//            while (rowIterator.hasNext()) {
+//                Row row = rowIterator.next();
+//                SecurityProperties.User user = new SecurityProperties.User();
+//                user.setName(row.getCell(0).getStringCellValue());
+//                user.setEmail(row.getCell(1).getStringCellValue());
+//                user.setPhone(row.getCell(2).getStringCellValue());
+//                userRepository.save(user);
+//            }
+//
+//            return "File uploaded successfully!";
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return "Error uploading file.";
+//        }
+//    }
+
+
+
+>>>>>>> Stashed changes
     @Transactional
     public List<BirTaxEntity> save(List<BirTaxEntity> birTax) {
         return dao.saveAll(birTax);

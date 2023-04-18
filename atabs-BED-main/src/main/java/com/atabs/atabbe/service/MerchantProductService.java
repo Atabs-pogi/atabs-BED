@@ -97,7 +97,6 @@ public class MerchantProductService {
                 }else{
                     throw new NotFoundException(Message.ERROR_MESSAGE_FOR_NOT_EXIST.replace("<object>","product id"));
                 }
-
             }
 
             transactionMerchantEntity.setTotalAmount(totalAmount);
@@ -105,63 +104,51 @@ public class MerchantProductService {
             transactionMerchantEntity.setChanged(transactions.getPayment() - totalAmount);
             transactionMerchantEntity.setItems(transactionMerchantItemEntities);
             merchantTransactionProductDao.save(transactionMerchantEntity);
-            LoggerHelper.info("insertTransaction", gson.toJson( updateTransactionQTY(transactions)));
+           // LoggerHelper.info("insertTransaction", gson.toJson( updateTransactionQTY(transactions)));
 
             merchantTransactionProductDao.flush();
-//            updateTransactionQTY(transactions);
+            updateTransactionQTY(transactions);
 //            LoggerHelper.info("insertTransaction", gson.toJson( updateTransactionQTY(transactions)));
 
             return transactionMerchantEntity;
-
-
-
 
         }catch (NotFoundException e){
             throw new NotFoundException(e.getMessage());
         } catch (Exception e){
             throw new Exception("Exception "  + e.getMessage());
         }
-
     }
 
 
-    public TransactionMerchantEntity updateTransactionQTY(TransactionMerchant transactions) throws Exception {
+    private TransactionMerchantEntity updateTransactionQTY(TransactionMerchant transactions) throws Exception {
         try {
-            Gson gson = new Gson();
-            LoggerHelper.info("updateTransactionQTY", gson.toJson(transactions));
+//            Gson gson = new Gson();
+//            LoggerHelper.info("updateTransactionQTY", gson.toJson(transactions));
 
             TransactionMerchantEntity transactionMerchantEntity = new TransactionMerchantEntity();
             transactionMerchantEntity.setTotalItem(transactions.getItems().size());
-
 
             double totalAmount = 0;
             ArrayList<MerchantProductEntity> transactionMerchantItemEntities = new ArrayList<>();
 
             for(TransactionMerchant.Items items : transactions.getItems()){
-                LoggerHelper.info("TransactionMerchant for loop",gson.toJson(items));
+                //LoggerHelper.info("TransactionMerchant for loop",gson.toJson(items));
                 boolean isExist = merchantProductDao.existsById(items.getProductId());
 
                 if(isExist){
                     MerchantProductEntity merchantProductEntity = merchantProductDao.findById(items.getProductId()).get();
-                    merchantProductEntity.setQuantity(String.valueOf((Double.valueOf(merchantProductEntity.getQuantity() )- items.getQuantity())));
-                    LoggerHelper.info("TransactionMerchant is exist", gson.toJson( merchantProductEntity));
-
+                    merchantProductEntity.setQuantity(merchantProductEntity.getQuantity() - items.getQuantity());
+                    //LoggerHelper.info("TransactionMerchant is exist", gson.toJson( merchantProductEntity));
                     transactionMerchantItemEntities.add(merchantProductEntity);
                 }else{
                     throw new NotFoundException(Message.ERROR_MESSAGE_FOR_NOT_EXIST.replace("<object>","product id"));
                 }
-
             }
-
 
             merchantProductDao.saveAll(transactionMerchantItemEntities);
             merchantProductDao.flush();
 
-
             return transactionMerchantEntity;
-
-
-
 
         }catch (NotFoundException e){
             throw new NotFoundException(e.getMessage());
@@ -170,7 +157,6 @@ public class MerchantProductService {
         }
 
     }
-
 
     public ArrayList<TransactionMerchantEntity> getAll() throws Exception {
         try {

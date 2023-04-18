@@ -13,7 +13,7 @@ public class MerchantProductEntity {
 
     private long productId;
     private String item;
-    private String quantity;
+    private int quantity;
 
 //    private String price;
     private double originalPrice;
@@ -47,11 +47,11 @@ public class MerchantProductEntity {
         this.item = item;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

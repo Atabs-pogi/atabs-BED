@@ -50,6 +50,7 @@ public class MerchantProductController {
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping("/getAll")
     public ResponseEntity addPosBulk() {
         try {
@@ -60,6 +61,4 @@ public class MerchantProductController {
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 }
