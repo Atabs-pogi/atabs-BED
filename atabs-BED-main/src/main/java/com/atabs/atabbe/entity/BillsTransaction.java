@@ -21,7 +21,6 @@ public class BillsTransaction {
     @JoinColumn(name = "billsTranId" ,referencedColumnName ="id" )
     private List<BillsItemEntity> items;
 
-
     @PrePersist
     protected void onCreate() {
         encodeDate = LocalDateTime.now();
@@ -66,6 +65,4 @@ public class BillsTransaction {
     public void setItems(List<BillsItemEntity> items) {
         this.items = items;
     }
-
-
 }

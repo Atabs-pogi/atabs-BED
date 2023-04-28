@@ -24,7 +24,6 @@ public class BillsStatement {
         billsStatement.referenceCode=billing.getReferenceCode();
         billsStatement.importDate=billing.getImportDate();
         return billsStatement;
-
     }
 
     public long getId() {

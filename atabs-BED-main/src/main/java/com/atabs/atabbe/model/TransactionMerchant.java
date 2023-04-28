@@ -89,7 +89,7 @@ public class TransactionMerchant {
 
         private long productId;
         private String  name;
-        private double quantity;
+        private int quantity;
         private double price;
         private double subAmount;
 
@@ -118,11 +118,11 @@ public class TransactionMerchant {
             this.name = name;
         }
 
-        public double getQuantity() {
+        public int getQuantity() {
             return quantity;
         }
 
-        public void setQuantity(double quantity) {
+        public void setQuantity(int quantity) {
             this.quantity = quantity;
         }
 

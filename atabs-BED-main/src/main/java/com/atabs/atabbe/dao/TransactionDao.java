@@ -17,18 +17,11 @@ import java.util.List;
 @Repository
 public interface TransactionDao extends JpaRepository<TransactionEntity, Long> {
 
-
     @Transactional
     @Modifying
     @Query(value = "Update transactions set status=:status, merchant_payment=:merchantPayment, release_date=:time where id=:transactionsId", nativeQuery = true)
     Integer updateTransaction(int status,double merchantPayment, long transactionsId, LocalDateTime time);
 
-
-
-
     @Query(value = "Select * from transactions where status=:status order by transactionDate DESC", nativeQuery = true)
     ArrayList<TransactionEntity> transactionList(int status);
-
-
-
 }

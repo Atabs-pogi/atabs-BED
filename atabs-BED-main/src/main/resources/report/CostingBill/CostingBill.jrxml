@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CostingBill" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b03940e-221a-4b8d-aea0-a0009170d291">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="coop.jrdax"/>
 	<parameter name="Date_From" class="java.lang.String"/>
 	<parameter name="Date_End" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[select * from bills WHERE Date(payment_date) BETWEEN $P{Date_From} AND $P{Date_End}]]>
+		<![CDATA[select * from bills WHERE Date(import_date) BETWEEN $P{Date_From} AND $P{Date_End}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -28,11 +28,6 @@
 		<property name="com.jaspersoft.studio.field.label" value="name"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="bills"/>
 	</field>
-	<field name="type" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="type"/>
-		<property name="com.jaspersoft.studio.field.label" value="type"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="bills"/>
-	</field>
 	<field name="payment_date" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="payment_date"/>
 		<property name="com.jaspersoft.studio.field.label" value="payment_date"/>
@@ -43,15 +38,16 @@
 		<property name="com.jaspersoft.studio.field.label" value="reference_code"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="bills"/>
 	</field>
+	<field name="type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="type"/>
+		<property name="com.jaspersoft.studio.field.label" value="type"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="bills"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
 		<band height="134" splitType="Stretch">
-			<image>
-				<reportElement x="170" y="6" width="70" height="69" uuid="eefdad74-608d-4f83-84ae-fe6519e37082"/>
-				<imageExpression><![CDATA["D:/Users/Matthew/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="250" y="30" width="330" height="20" uuid="35a17fac-ce6c-41f4-9dbc-8f83ddd86e58"/>
 				<textElement>
@@ -70,6 +66,10 @@
 				</textElement>
 				<text><![CDATA[COSTING BILL INFORMATION]]></text>
 			</staticText>
+			<image>
+				<reportElement mode="Opaque" x="170" y="6" width="70" height="69" uuid="59355ee1-8eb0-48c3-9889-b132bd5fb72a"/>
+				<imageExpression><![CDATA["C:/Users/PhilFIDA/Documents/GitHub/atabs-BED/atabs-BED-main/src/main/resources/report/atbsp_logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>

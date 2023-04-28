@@ -21,7 +21,6 @@ public class BirTaxController {
         return new ResponseEntity<>(birTaxService.getAll(), HttpStatus.OK);
     }
 
-
     @PostMapping("/")
     public ResponseEntity<List<BirTaxEntity>> save(@RequestBody List<BirTaxEntity> birTax) {
         return new ResponseEntity<>(birTaxService.save(birTax), HttpStatus.CREATED);
