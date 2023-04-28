@@ -20,7 +20,6 @@ public class BillsStatement {
         billsStatement.accountNumber=billing.getAccountNumber();
         billsStatement.billType=billing.getBillType();
         billsStatement.referenceCode=billing.getReferenceCode();
-        billsStatement.timeCreated=billing.getTimeCreated();
         return billsStatement;
     }
 
