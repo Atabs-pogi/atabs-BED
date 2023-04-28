@@ -13,7 +13,7 @@ import java.util.List;
 public interface BillsStatementDao extends JpaRepository<BillsStatementEntity, Long> {
     @Query(value = "Select * from bills where id =:bills_id", nativeQuery = true)
     BillsStatementEntity getBillsInfo(Long bills_id);
-    @Query(value = "SELECT * FROM bills WHERE vendor_name like %:match% OR billType like %:match% ", nativeQuery = true)
+    @Query(value = "SELECT * FROM bills WHERE vendor_name like %:match% OR bill_type like %:match% ", nativeQuery = true)
     List<BillsStatementEntity> searchBillsByName(String match);
 
 
