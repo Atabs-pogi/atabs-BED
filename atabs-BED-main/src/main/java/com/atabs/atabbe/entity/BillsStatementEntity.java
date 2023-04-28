@@ -15,13 +15,12 @@ public class BillsStatementEntity {
     private String vendorName;
     private String accountNumber;
     private String billType;
-    private LocalDateTime timeCreated;
     private String referenceCode;
-    private LocalDateTime importDate;
+    private LocalDateTime timeCreated;
 
     @PrePersist
     protected void onCreate() {
-        importDate = LocalDateTime.now();
+        timeCreated = LocalDateTime.now();
     }
 
     public long getId() {
@@ -56,14 +55,6 @@ public class BillsStatementEntity {
         this.billType = billType;
     }
 
-    public LocalDateTime getTimeCreated() {
-        return timeCreated;
-    }
-
-    public void setTimeCreated(LocalDateTime timeCreated) {
-        this.timeCreated = timeCreated;
-    }
-
     public String getReferenceCode() {
         return referenceCode;
     }
@@ -72,11 +63,11 @@ public class BillsStatementEntity {
         this.referenceCode = referenceCode;
     }
 
-    public LocalDateTime getImportDate() {
-        return importDate;
+    public LocalDateTime getTimeCreated() {
+        return timeCreated;
     }
 
-    public void setImportDate(LocalDateTime importDate) {
-        this.importDate = importDate;
+    public void setTimeCreated(LocalDateTime timeCreated) {
+        this.timeCreated = timeCreated;
     }
 }

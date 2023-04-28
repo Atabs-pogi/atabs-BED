@@ -10,9 +10,8 @@ public class BillsStatement {
     private String vendorName;
     private String accountNumber;
     private String billType;
-    private LocalDateTime timeCreated;
     private String referenceCode;
-    private LocalDateTime importDate;
+    private LocalDateTime timeCreated;
 
     public static BillsStatement from(BillsStatementEntity billing) {
         BillsStatement billsStatement = new BillsStatement();
@@ -20,9 +19,8 @@ public class BillsStatement {
         billsStatement.vendorName=billing.getVendorName();
         billsStatement.accountNumber=billing.getAccountNumber();
         billsStatement.billType=billing.getBillType();
-        billsStatement.timeCreated=billing.getTimeCreated();
         billsStatement.referenceCode=billing.getReferenceCode();
-        billsStatement.importDate=billing.getImportDate();
+        billsStatement.timeCreated=billing.getTimeCreated();
         return billsStatement;
     }
 
@@ -58,14 +56,6 @@ public class BillsStatement {
         this.billType = billType;
     }
 
-    public LocalDateTime getTimeCreated() {
-        return timeCreated;
-    }
-
-    public void setTimeCreated(LocalDateTime timeCreated) {
-        this.timeCreated = timeCreated;
-    }
-
     public String getReferenceCode() {
         return referenceCode;
     }
@@ -74,11 +64,11 @@ public class BillsStatement {
         this.referenceCode = referenceCode;
     }
 
-    public LocalDateTime getImportDate() {
-        return importDate;
+    public LocalDateTime getTimeCreated() {
+        return timeCreated;
     }
 
-    public void setImportDate(LocalDateTime importDate) {
-        this.importDate = importDate;
+    public void setTimeCreated(LocalDateTime timeCreated) {
+        this.timeCreated = timeCreated;
     }
 }
