@@ -28,9 +28,4 @@ public class UpdateLogsController {
         return new ResponseEntity(tuxyService.searchByName(name), HttpStatus.CREATED);
     }
 
-
-
-
-
-
 }

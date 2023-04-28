@@ -13,12 +13,9 @@ public class BillsTransaction {
     @SequenceGenerator(name = "bills_trans_seq", sequenceName = "bills_trans_sequence", initialValue = 201, allocationSize = 50)
     @Column(name = "id")
     private long id;
-
-
-    private String monthYear;
-    private double totalAmount;
-    private LocalDateTime dateTime;
-
+    private LocalDateTime paymentDate;
+    private double totalBillAmount;
+    private LocalDateTime encodeDate;
 
     @OneToMany(targetEntity = BillsItemEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "billsTranId" ,referencedColumnName ="id" )
@@ -27,7 +24,7 @@ public class BillsTransaction {
 
     @PrePersist
     protected void onCreate() {
-        dateTime = LocalDateTime.now();
+        encodeDate = LocalDateTime.now();
     }
 
     public long getId() {
@@ -38,31 +35,29 @@ public class BillsTransaction {
         this.id = id;
     }
 
-    public String getMonthYear() {
-        return monthYear;
+    public LocalDateTime getPaymentDate() {
+        return paymentDate;
     }
 
-    public void setMonthYear(String monthYear) {
-        this.monthYear = monthYear;
+    public void setPaymentDate(LocalDateTime paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public double getTotalBillAmount() {
+        return totalBillAmount;
     }
 
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setTotalBillAmount(double totalBillAmount) {
+        this.totalBillAmount = totalBillAmount;
     }
 
-    public LocalDateTime getImportDate() {
-        return dateTime;
+    public LocalDateTime getEncodeDate() {
+        return encodeDate;
     }
 
-    public void setImportDate(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setEncodeDate(LocalDateTime encodeDate) {
+        this.encodeDate = encodeDate;
     }
-
-
 
     public List<BillsItemEntity> getItems() {
         return items;

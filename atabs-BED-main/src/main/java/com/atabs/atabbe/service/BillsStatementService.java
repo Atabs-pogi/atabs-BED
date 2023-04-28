@@ -23,10 +23,10 @@ public class BillsStatementService {
 
     public String addBills(BillsStatement billsStatement) {
         BillsStatementEntity billsStatementEntity= new BillsStatementEntity();
-        billsStatementEntity.setName(billsStatement.getName());
-        billsStatementEntity.setType(billsStatement.getType());
-        billsStatementEntity.setDueDate(billsStatement.getDueDate());
-        billsStatementEntity.setPaymentDate(billsStatement.getPaymentDate());
+        billsStatementEntity.setVendorName(billsStatement.getVendorName());
+        billsStatementEntity.setAccountNumber(billsStatement.getAccountNumber());
+        billsStatementEntity.setBillType(billsStatement.getBillType());
+        billsStatementEntity.setTimeCreated(billsStatement.getTimeCreated());
         billsStatementEntity.setReferenceCode(billsStatement.getReferenceCode());
         billsStatementDao.save(billsStatementEntity);
         return "Bills added successfully";
@@ -39,9 +39,9 @@ public class BillsStatementService {
     public String updateBills(BillsStatement billsStatement) {
         BillsStatementEntity billsStatementEntity= billsStatementDao.findById(billsStatement.getId()).orElse(null);
         assert billsStatementEntity != null;
-        billsStatementEntity.setName(billsStatement.getName());
-        billsStatementEntity.setType(billsStatement.getType());
-        billsStatementEntity.setDueDate(billsStatement.getDueDate());
+        billsStatementEntity.setVendorName(billsStatement.getVendorName());
+        billsStatementEntity.setAccountNumber(billsStatement.getAccountNumber());
+        billsStatementEntity.setBillType(billsStatement.getBillType());
         billsStatementEntity.setReferenceCode(billsStatement.getReferenceCode());
         billsStatementDao.save(billsStatementEntity);
         return "Update Successfully";
@@ -54,14 +54,11 @@ public class BillsStatementService {
             bills.add(BillsStatement.from(billing));
         }
         return bills;
-
     }
     public List<String> getListName() {
         List<String> entityBills = billsStatementDao.listName();
         return entityBills;
-
     }
-
 
     public String addReleaseTransaction(BillsTransaction billsTransaction) {
         billTransactionDao.save(billsTransaction);

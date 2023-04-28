@@ -112,16 +112,11 @@ public class MerchantProductService {
 //            LoggerHelper.info("insertTransaction", gson.toJson( updateTransactionQTY(transactions)));
 
             return transactionMerchantEntity;
-
-
-
-
         }catch (NotFoundException e){
             throw new NotFoundException(e.getMessage());
         } catch (Exception e){
             throw new Exception("Exception "  + e.getMessage());
         }
-
     }
 
 

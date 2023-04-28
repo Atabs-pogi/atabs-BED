@@ -22,7 +22,6 @@ public class BillsStatementController {
     @PostMapping("/addBills")
     public ResponseEntity<String> addAccount(@RequestBody BillsStatement billsStatement) {
         return new ResponseEntity<>(billsStatementService.addBills(billsStatement), HttpStatus.CREATED);
-
     }
 
     @GetMapping("/getAllBills")

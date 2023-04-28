@@ -12,10 +12,10 @@ public class BillsStatementEntity {
     @SequenceGenerator(name = "bills_seq", sequenceName = "bills_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "id")
     private long id;
-    private String type;
-    private String name;
-    private String dueDate;
-    private String paymentDate;
+    private String vendorName;
+    private String accountNumber;
+    private String billType;
+    private LocalDateTime timeCreated;
     private String referenceCode;
     private LocalDateTime importDate;
 
@@ -32,33 +32,36 @@ public class BillsStatementEntity {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getVendorName() {
+        return vendorName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
     }
 
-    public String getName() {
-        return name;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
-
-    public String getDueDate() {
-        return dueDate;
+    public String getBillType() {
+        return billType;
     }
 
-    public String getPaymentDate() {
-        return paymentDate;
+    public void setBillType(String billType) {
+        this.billType = billType;
     }
 
-    public void setPaymentDate(String paymentDate) {
-        this.paymentDate = paymentDate;
+    public LocalDateTime getTimeCreated() {
+        return timeCreated;
+    }
+
+    public void setTimeCreated(LocalDateTime timeCreated) {
+        this.timeCreated = timeCreated;
     }
 
     public String getReferenceCode() {
@@ -67,10 +70,6 @@ public class BillsStatementEntity {
 
     public void setReferenceCode(String referenceCode) {
         this.referenceCode = referenceCode;
-    }
-
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
     }
 
     public LocalDateTime getImportDate() {

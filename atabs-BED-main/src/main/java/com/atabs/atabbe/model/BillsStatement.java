@@ -7,22 +7,22 @@ import java.time.LocalDateTime;
 public class BillsStatement {
 
     private long id;
-    private String type;
-    private String name;
-    private String dueDate;
-    private String paymentDate;
+    private String vendorName;
+    private String accountNumber;
+    private String billType;
+    private LocalDateTime timeCreated;
     private String referenceCode;
     private LocalDateTime importDate;
 
     public static BillsStatement from(BillsStatementEntity billing) {
         BillsStatement billsStatement = new BillsStatement();
         billsStatement.id=billing.getId();
-        billsStatement.name=billing.getName();
-        billsStatement.type=billing.getType();
-        billsStatement.dueDate=billing.getDueDate();
-        billsStatement.importDate=billing.getImportDate();
-        billsStatement.paymentDate=billing.getPaymentDate();
+        billsStatement.vendorName=billing.getVendorName();
+        billsStatement.accountNumber=billing.getAccountNumber();
+        billsStatement.billType=billing.getBillType();
+        billsStatement.timeCreated=billing.getTimeCreated();
         billsStatement.referenceCode=billing.getReferenceCode();
+        billsStatement.importDate=billing.getImportDate();
         return billsStatement;
 
     }
@@ -35,36 +35,36 @@ public class BillsStatement {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getVendorName() {
+        return vendorName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
     }
 
-    public String getName() {
-        return name;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
-    public String getDueDate() {
-        return dueDate;
+    public String getBillType() {
+        return billType;
     }
 
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
+    public void setBillType(String billType) {
+        this.billType = billType;
     }
 
-    public String getPaymentDate() {
-        return paymentDate;
+    public LocalDateTime getTimeCreated() {
+        return timeCreated;
     }
 
-    public void setPaymentDate(String paymentDate) {
-        this.paymentDate = paymentDate;
+    public void setTimeCreated(LocalDateTime timeCreated) {
+        this.timeCreated = timeCreated;
     }
 
     public String getReferenceCode() {
