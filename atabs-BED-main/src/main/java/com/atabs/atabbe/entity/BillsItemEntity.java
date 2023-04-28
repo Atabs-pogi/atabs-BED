@@ -1,7 +1,5 @@
 package com.atabs.atabbe.entity;
 
-import jdk.vm.ci.meta.Local;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
