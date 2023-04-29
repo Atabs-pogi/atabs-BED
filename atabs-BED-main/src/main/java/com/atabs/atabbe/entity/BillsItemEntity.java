@@ -11,6 +11,7 @@ public class BillsItemEntity {
     @SequenceGenerator(name = "bills_trans_item_seq", sequenceName = "bills_trans_item_sequence", initialValue = 800, allocationSize = 10000000)
     @Column(name = "item_id")
     private long id;
+    private String vendorName;
     private LocalDate issuanceDate;
     private LocalDate dueDate;
     private LocalDate receiptDate;
@@ -23,6 +24,14 @@ public class BillsItemEntity {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
     }
 
     public LocalDate getIssuanceDate() {
