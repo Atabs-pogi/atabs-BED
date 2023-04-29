@@ -67,7 +67,7 @@ public class BillsStatementService {
 
     public ArrayList<BillsTransaction> getAll() throws Exception {
         try{
-            return (ArrayList<BillsTransaction>) billTransactionDao.findAll(Sort.by(Sort.Direction.DESC, "timeCreated"));
+            return (ArrayList<BillsTransaction>) billTransactionDao.findAll(Sort.by(Sort.Direction.DESC, "encodeDate"));
 
         } catch (Exception e){
             throw new Exception("Exception "  + e.getMessage());
