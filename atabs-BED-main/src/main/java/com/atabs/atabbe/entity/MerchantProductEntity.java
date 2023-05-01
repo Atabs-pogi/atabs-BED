@@ -11,15 +11,15 @@ public class MerchantProductEntity {
     @SequenceGenerator(name = "mrc_seq", sequenceName = "mrc_sequence", initialValue = 101, allocationSize = 50)
     @Column(name = "productId")
 
-    private long productId;
-    private String item;
-    private int quantity;
-
-//    private String price;
+    private long id;
+    private String productCategory;
+    private String productName;
+    private String unit;
+    private double unitPrice;
+    private double costPrice;
     private double originalPrice;
-    private double price;
-
-
+    private int quantity;
+    private int minimumStock;
     private LocalDateTime importDate;
 
     @PrePersist
@@ -27,40 +27,55 @@ public class MerchantProductEntity {
         importDate = LocalDateTime.now();
     }
 
-
     @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
     private int status = 1;
 
-    public long getProductId() {
-        return productId;
+    public long getId() {
+        return id;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getItem() {
-        return item;
+    public String getProductCategory() {
+        return productCategory;
     }
 
-    public void setItem(String item) {
-        this.item = item;
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public double getPrice() {
-        return price;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public double getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(double costPrice) {
+        this.costPrice = costPrice;
     }
 
     public double getOriginalPrice() {
@@ -71,12 +86,20 @@ public class MerchantProductEntity {
         this.originalPrice = originalPrice;
     }
 
-    public int getStatus() {
-        return status;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getMinimumStock() {
+        return minimumStock;
+    }
+
+    public void setMinimumStock(int minimumStock) {
+        this.minimumStock = minimumStock;
     }
 
     public LocalDateTime getImportDate() {
@@ -85,5 +108,13 @@ public class MerchantProductEntity {
 
     public void setImportDate(LocalDateTime importDate) {
         this.importDate = importDate;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

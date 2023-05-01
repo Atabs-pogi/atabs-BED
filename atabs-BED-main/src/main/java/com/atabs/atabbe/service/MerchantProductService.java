@@ -6,7 +6,6 @@ import com.atabs.atabbe.entity.*;
 import com.atabs.atabbe.exception.NotFoundException;
 import com.atabs.atabbe.helper.LoggerHelper;
 import com.atabs.atabbe.helper.Message;
-import com.atabs.atabbe.model.MerchantProduct;
 import com.atabs.atabbe.model.TransactionMerchant;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +24,21 @@ public class MerchantProductService {
     private MerchantTransactionProductDao merchantTransactionProductDao;
 
 
-    public String addProduct(MerchantProduct merchantProduct) {
+    public String addProduct(MerchantProductEntity merchantProduct) {
 
         MerchantProductEntity merchantProductEntity = new MerchantProductEntity();
-        int itemExist = merchantProductDao.findProductByItem(merchantProduct.getItem());
+        int itemExist = merchantProductDao.findProductByItem(merchantProduct.getProductName());
         if (itemExist > 0){
             throw new IllegalStateException("This item is already exist");
         }
-            merchantProductEntity.setItem(merchantProduct.getItem());
-        merchantProductEntity.setQuantity(merchantProduct.getQuantity());
-        merchantProductEntity.setPrice(merchantProduct.getPrice());
+        merchantProductEntity.setProductCategory(merchantProduct.getProductCategory());
+        merchantProductEntity.setProductName(merchantProduct.getProductName());
+        merchantProductEntity.setUnit(merchantProduct.getUnit());
+        merchantProductEntity.setUnitPrice(merchantProduct.getUnitPrice());
+        merchantProductEntity.setCostPrice(merchantProduct.getCostPrice());
         merchantProductEntity.setOriginalPrice(merchantProduct.getOriginalPrice());
+        merchantProductEntity.setQuantity(merchantProduct.getQuantity());
+        merchantProductEntity.setMinimumStock(merchantProduct.getMinimumStock());
         merchantProductDao.save(merchantProductEntity);
         return "Product added successfully";
     }
@@ -45,26 +48,30 @@ public class MerchantProductService {
         return merchantProductDao.findAll();
     }
 
-    public String updateProduct(MerchantProduct merchantProduct) {
-        MerchantProductEntity merchantProductEntity = merchantProductDao.findById(merchantProduct.getProductId()).orElse(null);
+    public String updateProduct(MerchantProductEntity merchantProduct) {
+        MerchantProductEntity merchantProductEntity = merchantProductDao.findById(merchantProduct.getId()).orElse(null);
         assert merchantProductEntity != null;
-        merchantProductEntity.setItem(merchantProduct.getItem());
-        merchantProductEntity.setQuantity(merchantProduct.getQuantity());
-        merchantProductEntity.setPrice(merchantProduct.getPrice());
+        merchantProductEntity.setProductCategory(merchantProduct.getProductCategory());
+        merchantProductEntity.setProductName(merchantProduct.getProductName());
+        merchantProductEntity.setUnit(merchantProduct.getUnit());
+        merchantProductEntity.setUnitPrice(merchantProduct.getUnitPrice());
+        merchantProductEntity.setCostPrice(merchantProduct.getCostPrice());
         merchantProductEntity.setOriginalPrice(merchantProduct.getOriginalPrice());
+        merchantProductEntity.setQuantity(merchantProduct.getQuantity());
+        merchantProductEntity.setMinimumStock(merchantProduct.getMinimumStock());
         merchantProductDao.save(merchantProductEntity);
         return "Update Successfully";
     }
 
-    public List<MerchantProduct> searchProductByName(String name) {
-        List<MerchantProductEntity> entityProducts = merchantProductDao.searchProductByName(name);
-        List<MerchantProduct> products = new ArrayList<>();
-        for (MerchantProductEntity product : entityProducts) {
-            products.add(MerchantProduct.from(product));
-            System.out.println(product.getProductId());
-        }
-        return products;
-    }
+//    public List<MerchantProduct> searchProductByName(String name) {
+//        List<MerchantProductEntity> entityProducts = merchantProductDao.searchProductByName(name);
+//        List<MerchantProduct> products = new ArrayList<>();
+//        for (MerchantProductEntity product : entityProducts) {
+//            products.add(MerchantProduct.from(product));
+//            System.out.println(product.getProductId());
+//        }
+//        return products;
+//    }
 
 
     public TransactionMerchantEntity insertTransaction(TransactionMerchant transactions) throws Exception {
@@ -85,13 +92,13 @@ public class MerchantProductService {
 
                 if(isExist){
                     MerchantProductEntity merchantProductEntity = merchantProductDao.findById(items.getProductId()).get();
-                    double subAmount  = (merchantProductEntity.getPrice() * items.getQuantity());
+                    double subAmount  = (merchantProductEntity.getUnitPrice() * items.getQuantity());
                     totalAmount += subAmount;
                     TransactionMerchantItemEntity transactionMerchantItemEntity = new TransactionMerchantItemEntity();
                     transactionMerchantItemEntity.setProductId(items.getProductId());
-                    transactionMerchantItemEntity.setName(merchantProductEntity.getItem());
+                    transactionMerchantItemEntity.setName(merchantProductEntity.getProductName());
                     transactionMerchantItemEntity.setQuantity(items.getQuantity());
-                    transactionMerchantItemEntity.setPrice(merchantProductEntity.getPrice());
+                    transactionMerchantItemEntity.setPrice(merchantProductEntity.getUnitPrice());
                     transactionMerchantItemEntity.setSubAmount(subAmount);
                     transactionMerchantItemEntities.add(transactionMerchantItemEntity);
                 }else{

@@ -2,7 +2,6 @@ package com.atabs.atabbe.controller;
 
 import com.atabs.atabbe.entity.MerchantProductEntity;
 import com.atabs.atabbe.exception.NotFoundException;
-import com.atabs.atabbe.model.MerchantProduct;
 import com.atabs.atabbe.model.TransactionMerchant;
 import com.atabs.atabbe.service.MerchantProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class MerchantProductController {
     MerchantProductService merchantProductService;
 
     @PostMapping("/addProduct")
-    public ResponseEntity addProduct(@RequestBody MerchantProduct merchantProduct) {
+    public ResponseEntity addProduct(@RequestBody MerchantProductEntity merchantProduct) {
         return new ResponseEntity(merchantProductService.addProduct(merchantProduct), HttpStatus.CREATED);
     }
 
@@ -31,14 +30,14 @@ public class MerchantProductController {
     }
 
     @PutMapping("/updateProduct")
-    public ResponseEntity updateProduct(@RequestBody MerchantProduct merchantProduct){
+    public ResponseEntity updateProduct(@RequestBody MerchantProductEntity merchantProduct){
         return new ResponseEntity(merchantProductService.updateProduct(merchantProduct), HttpStatus.OK);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity search(@RequestParam("name") String name) {
-        return new ResponseEntity(merchantProductService.searchProductByName(name), HttpStatus.OK);
-    }
+//    @GetMapping("/search")
+//    public ResponseEntity search(@RequestParam("name") String name) {
+//        return new ResponseEntity(merchantProductService.searchProductByName(name), HttpStatus.OK);
+//    }
 
     @PostMapping("/saveTransaction")
     public ResponseEntity addPosBulk(@RequestBody TransactionMerchant transactions) {

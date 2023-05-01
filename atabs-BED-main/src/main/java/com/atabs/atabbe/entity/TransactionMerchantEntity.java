@@ -10,15 +10,14 @@ public class TransactionMerchantEntity {
 
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long transMerchantId;
+    @Column(name = "transMerchantId")
+    private long id;
     private long farmerId;
     private long cashierId;
     private double totalItem;
     private double totalAmount;
     private double paid;
     private double changed;
-
 
     @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
     private int status = 1;
@@ -29,12 +28,12 @@ public class TransactionMerchantEntity {
     private List<TransactionMerchantItemEntity> items;
 
 
-    public long getTransMerchantId() {
-        return transMerchantId;
+    public long getId() {
+        return id;
     }
 
-    public void setTransMerchantId(long transMerchantId) {
-        this.transMerchantId = transMerchantId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getFarmerId() {
