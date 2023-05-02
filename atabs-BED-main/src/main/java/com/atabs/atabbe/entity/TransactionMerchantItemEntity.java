@@ -8,9 +8,8 @@ public class TransactionMerchantItemEntity {
     @Id
     @GeneratedValue(generator = "merchant_item_seq", strategy = GenerationType.AUTO)
     @SequenceGenerator(name = "merchant_item_seq", sequenceName = "merchant_item_sequence", initialValue = 500, allocationSize = 10000000)
-    @Column(name = "item_id")
+    @Column(name = "itemId")
     private long id;
-
 
     private long productId;
 

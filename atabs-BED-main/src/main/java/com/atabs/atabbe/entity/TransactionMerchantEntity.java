@@ -24,7 +24,7 @@ public class TransactionMerchantEntity {
 
 
     @OneToMany(targetEntity = TransactionMerchantItemEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "transMerchantId" ,referencedColumnName ="id" )
+    @JoinColumn(name = "transMerchantId" ,referencedColumnName ="transMerchantId" )
     private List<TransactionMerchantItemEntity> items;
 
 
