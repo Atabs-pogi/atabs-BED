@@ -15,7 +15,7 @@ public interface MerchantProductDao extends JpaRepository<MerchantProductEntity,
     @Query(value = "Select * from merchant_product where product_id =:mrc_id", nativeQuery = true)
     MerchantProductEntity getProductInfo(Long mrc_id);
 
-    @Query(value = "SELECT * FROM merchant_product WHERE item like %:match% OR price like %:match%", nativeQuery = true)
+    @Query(value = "SELECT * FROM merchant_product WHERE product_name like %:match% OR unit_price like %:match%", nativeQuery = true)
     List<MerchantProductEntity> searchProductByName(String match);
 
     @Query(value = "SELECT COUNT(product_name) FROM merchant_product WHERE product_name =:productName", nativeQuery = true)
