@@ -36,7 +36,7 @@ public class MerchantProductService {
         merchantProductEntity.setUnit(merchantProduct.getUnit());
         merchantProductEntity.setUnitPrice(merchantProduct.getUnitPrice());
         merchantProductEntity.setCostPrice(merchantProduct.getCostPrice());
-        merchantProductEntity.setOriginalPrice(merchantProduct.getOriginalPrice()); //mamaya
+        merchantProductEntity.setOriginalPrice(merchantProduct.getUnitPrice());
         merchantProductEntity.setQuantity(merchantProduct.getQuantity());
         merchantProductEntity.setMinimumStock(merchantProduct.getMinimumStock());
         merchantProductDao.save(merchantProductEntity);
@@ -56,22 +56,11 @@ public class MerchantProductService {
         merchantProductEntity.setUnit(merchantProduct.getUnit());
         merchantProductEntity.setUnitPrice(merchantProduct.getUnitPrice());
         merchantProductEntity.setCostPrice(merchantProduct.getCostPrice());
-        merchantProductEntity.setOriginalPrice(merchantProduct.getOriginalPrice());
         merchantProductEntity.setQuantity(merchantProduct.getQuantity());
         merchantProductEntity.setMinimumStock(merchantProduct.getMinimumStock());
         merchantProductDao.save(merchantProductEntity);
         return "Update Successfully";
     }
-
-//    public List<MerchantProduct> searchProductByName(String name) {
-//        List<MerchantProductEntity> entityProducts = merchantProductDao.searchProductByName(name);
-//        List<MerchantProduct> products = new ArrayList<>();
-//        for (MerchantProductEntity product : entityProducts) {
-//            products.add(MerchantProduct.from(product));
-//            System.out.println(product.getProductId());
-//        }
-//        return products;
-//    }
 
     public List<MerchantProductEntity> searchProductByName(String name) {
         return  merchantProductDao.searchProductByName(name);

@@ -20,4 +20,5 @@ public interface MerchantProductDao extends JpaRepository<MerchantProductEntity,
 
     @Query(value = "SELECT COUNT(product_name) FROM merchant_product WHERE product_name =:productName", nativeQuery = true)
     int findProductByItem(String productName);
+
 }
