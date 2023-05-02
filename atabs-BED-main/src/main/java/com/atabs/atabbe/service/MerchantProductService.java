@@ -29,14 +29,14 @@ public class MerchantProductService {
         MerchantProductEntity merchantProductEntity = new MerchantProductEntity();
         int itemExist = merchantProductDao.findProductByItem(merchantProduct.getProductName());
         if (itemExist > 0){
-            throw new IllegalStateException("This item is already exist");
+            throw new IllegalStateException("This item is already exist"); //mamaya
         }
         merchantProductEntity.setProductCategory(merchantProduct.getProductCategory());
         merchantProductEntity.setProductName(merchantProduct.getProductName());
         merchantProductEntity.setUnit(merchantProduct.getUnit());
         merchantProductEntity.setUnitPrice(merchantProduct.getUnitPrice());
         merchantProductEntity.setCostPrice(merchantProduct.getCostPrice());
-        merchantProductEntity.setOriginalPrice(merchantProduct.getOriginalPrice());
+        merchantProductEntity.setOriginalPrice(merchantProduct.getOriginalPrice()); //mamaya
         merchantProductEntity.setQuantity(merchantProduct.getQuantity());
         merchantProductEntity.setMinimumStock(merchantProduct.getMinimumStock());
         merchantProductDao.save(merchantProductEntity);
@@ -72,6 +72,10 @@ public class MerchantProductService {
 //        }
 //        return products;
 //    }
+
+    public List<MerchantProductEntity> searchProductByName(String name) {
+        return  merchantProductDao.searchProductByName(name);
+    }
 
 
     public TransactionMerchantEntity insertTransaction(TransactionMerchant transactions) throws Exception {
@@ -172,6 +176,5 @@ public class MerchantProductService {
         } catch (Exception e) {
             throw new Exception("Exception " + e.getMessage());
         }
-
     }
 }
