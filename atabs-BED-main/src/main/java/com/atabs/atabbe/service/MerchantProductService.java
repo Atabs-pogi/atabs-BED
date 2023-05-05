@@ -43,7 +43,6 @@ public class MerchantProductService {
         return "Product added successfully";
     }
 
-
     public List<MerchantProductEntity> getProduct() {
         return merchantProductDao.findAll();
     }
