@@ -12,11 +12,8 @@ public class TransactionMerchantItemEntity {
     private long id;
 
     private long productId;
-
     private String  name;
-
     private double quantity;
-
     private double price;
     private double subAmount;
 

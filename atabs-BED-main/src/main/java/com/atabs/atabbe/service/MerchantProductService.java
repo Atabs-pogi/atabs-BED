@@ -97,10 +97,10 @@ public class MerchantProductService {
                     throw new NotFoundException(Message.ERROR_MESSAGE_FOR_NOT_EXIST.replace("<object>","product id"));
                 }
             }
-
+            transactionMerchantEntity.setFarmerId(transactions.getFarmerId());
             transactionMerchantEntity.setTotalAmount(totalAmount);
-            transactionMerchantEntity.setPaid(transactions.getPayment());
-            transactionMerchantEntity.setChanged(transactions.getPayment() - totalAmount);
+            transactionMerchantEntity.setPayment(transactions.getPayment());
+            transactionMerchantEntity.setAmountChange(transactions.getPayment() - totalAmount);
             transactionMerchantEntity.setItems(transactionMerchantItemEntities);
             merchantTransactionProductDao.save(transactionMerchantEntity);
            // LoggerHelper.info("insertTransaction", gson.toJson( updateTransactionQTY(transactions)));

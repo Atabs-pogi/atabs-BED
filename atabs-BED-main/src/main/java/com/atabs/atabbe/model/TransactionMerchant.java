@@ -10,10 +10,8 @@ public class TransactionMerchant {
     private long cashierId;
     private double totalItem;
     private double totalAmount;
-
-
     private double payment;
-    private double changed;
+    private double amountChange;
 
     private ArrayList<Items> items;
 
@@ -75,12 +73,12 @@ public class TransactionMerchant {
         this.payment = payment;
     }
 
-    public double getChanged() {
-        return changed;
+    public double getAmountChange() {
+        return amountChange;
     }
 
-    public void setChanged(double changed) {
-        this.changed = changed;
+    public void setAmountChange(double amountChange) {
+        this.amountChange = amountChange;
     }
 
     public static class Items {

@@ -16,8 +16,8 @@ public class TransactionMerchantEntity {
     private long cashierId;
     private double totalItem;
     private double totalAmount;
-    private double paid;
-    private double changed;
+    private double payment;
+    private double amountChange;
 
     @Column(name = "status", nullable = false, columnDefinition = "INT NOT NULL DEFAULT 1")
     private int status = 1;
@@ -68,20 +68,20 @@ public class TransactionMerchantEntity {
         this.totalAmount = totalAmount;
     }
 
-    public double getPaid() {
-        return paid;
+    public double getPayment() {
+        return payment;
     }
 
-    public void setPaid(double paid) {
-        this.paid = paid;
+    public void setPayment(double payment) {
+        this.payment = payment;
     }
 
-    public double getChanged() {
-        return changed;
+    public double getAmountChange() {
+        return amountChange;
     }
 
-    public void setChanged(double changed) {
-        this.changed = changed;
+    public void setAmountChange(double amountChange) {
+        this.amountChange = amountChange;
     }
 
     public int getStatus() {
